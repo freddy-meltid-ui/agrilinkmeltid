@@ -55,7 +55,7 @@ const item = {
 
 const StakeholderSection = () => {
   return (
-    <section className="py-24 px-4">
+    <section id="stakeholders" className="py-24 px-4">
       <div className="container mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
