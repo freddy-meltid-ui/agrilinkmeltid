@@ -168,7 +168,8 @@
     "sellerRating": "Note vendeur min.",
     "anyRating": "Toute note",
     "stars": "{{count}}+ Étoiles",
-    "activeFilters": "{{count}} actif(s)"
+    "activeFilters": "{{count}} actif(s)",
+    "premium": "Premium"
   },
   "messages": {
     "title": "Conversations",
@@ -199,7 +200,13 @@
     "submit": "Créer l'annonce",
     "submitting": "Création...",
     "success": "Annonce créée !",
-    "error": "Échec de la création de l'annonce"
+    "error": "Échec de la création de l'annonce",
+    "image": "Photo",
+    "addImage": "Ajouter une photo (max 5 Mo)",
+    "imageTooLarge": "L'image doit faire moins de 5 Mo",
+    "imageUploadError": "Échec du téléchargement de l'image",
+    "premium": "Annonce Premium",
+    "premiumDesc": "Boostez la visibilité avec un badge et un placement prioritaire"
   },
   "notFound": {
     "title": "404",

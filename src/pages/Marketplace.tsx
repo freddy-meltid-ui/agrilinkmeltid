@@ -5,7 +5,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Sprout, Search, Filter, MapPin, MessageSquare, Star, SlidersHorizontal, X } from "lucide-react";
+import { Sprout, Search, Filter, MapPin, MessageSquare, Star, SlidersHorizontal, X, Crown } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -123,7 +123,7 @@ const Marketplace = () => {
   };
 
   const filtered = useMemo(() => {
-    return listings.filter((l) => {
+    const results = listings.filter((l) => {
       // Text search
       const matchesSearch =
         l.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -154,6 +154,14 @@ const Marketplace = () => {
       }
 
       return true;
+    });
+    // Sort: premium listings first
+    return results.sort((a, b) => {
+      const aPrem = a.is_premium && (!a.premium_until || new Date(a.premium_until) > new Date());
+      const bPrem = b.is_premium && (!b.premium_until || new Date(b.premium_until) > new Date());
+      if (aPrem && !bPrem) return -1;
+      if (!aPrem && bPrem) return 1;
+      return 0;
     });
   }, [listings, search, countryFilter, cityFilter, minPrice, maxPrice, minRating, profiles, sellerRatings]);
 
@@ -329,46 +337,68 @@ const Marketplace = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map((listing) => (
-              <div key={listing.id} className="bg-card rounded-xl border border-border p-6 hover:shadow-[var(--card-hover-shadow)] transition-shadow">
-                <div className="flex items-center justify-between mb-3">
-                  <Badge variant="outline" className="capitalize text-xs">{listing.type}</Badge>
-                  <div className="flex items-center gap-2">
-                    {sellerRatings[listing.user_id] && (
-                      <span className="flex items-center gap-0.5 text-xs text-muted-foreground">
-                        <Star className="w-3 h-3 text-primary fill-primary" />
-                        {sellerRatings[listing.user_id].toFixed(1)}
-                      </span>
-                    )}
-                    {listing.location && (
-                      <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                        <MapPin className="w-3 h-3" /> {listing.location}
-                      </span>
+            {filtered.map((listing) => {
+              const isPremiumActive = listing.is_premium && (!listing.premium_until || new Date(listing.premium_until) > new Date());
+              return (
+                <div key={listing.id} className={`bg-card rounded-xl border p-6 hover:shadow-[var(--card-hover-shadow)] transition-shadow ${isPremiumActive ? "border-primary/40 ring-1 ring-primary/20" : "border-border"}`}>
+                  {listing.image_url && (
+                    <div className="relative -mx-6 -mt-6 mb-4 rounded-t-xl overflow-hidden">
+                      <img src={listing.image_url} alt={listing.title} className="w-full h-40 object-cover" />
+                      {isPremiumActive && (
+                        <div className="absolute top-2 left-2">
+                          <Badge className="bg-primary text-primary-foreground gap-1">
+                            <Crown className="w-3 h-3" /> {t("marketplace.premium")}
+                          </Badge>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      <Badge variant="outline" className="capitalize text-xs">{listing.type}</Badge>
+                      {isPremiumActive && !listing.image_url && (
+                        <Badge className="bg-primary text-primary-foreground gap-1 text-xs">
+                          <Crown className="w-3 h-3" /> {t("marketplace.premium")}
+                        </Badge>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {sellerRatings[listing.user_id] && (
+                        <span className="flex items-center gap-0.5 text-xs text-muted-foreground">
+                          <Star className="w-3 h-3 text-primary fill-primary" />
+                          {sellerRatings[listing.user_id].toFixed(1)}
+                        </span>
+                      )}
+                      {listing.location && (
+                        <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                          <MapPin className="w-3 h-3" /> {listing.location}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <h3 className="font-serif text-lg mb-2">{listing.title}</h3>
+                  <p className="text-muted-foreground text-sm line-clamp-3 mb-4">{listing.description}</p>
+                  {listing.price && (
+                    <p className="text-primary font-bold text-lg mb-4">
+                      ₦{listing.price.toLocaleString()}
+                      <span className="text-muted-foreground font-normal text-xs ml-1">{listing.price_unit}</span>
+                    </p>
+                  )}
+                  <div className="flex items-center justify-between">
+                    <Link to={`/reputation?user=${listing.user_id}`} className="text-xs text-muted-foreground hover:text-primary transition-colors">
+                      {t("dashboard.by")} {profiles[listing.user_id]?.full_name || t("marketplace.anonymous")}
+                    </Link>
+                    {user && user.id !== listing.user_id && (
+                      <Link to={`/messages?to=${listing.user_id}&listing=${listing.id}`}>
+                        <Button variant="outline" size="sm">
+                          <MessageSquare className="w-4 h-4 mr-1" /> {t("marketplace.contact")}
+                        </Button>
+                      </Link>
                     )}
                   </div>
                 </div>
-                <h3 className="font-serif text-lg mb-2">{listing.title}</h3>
-                <p className="text-muted-foreground text-sm line-clamp-3 mb-4">{listing.description}</p>
-                {listing.price && (
-                  <p className="text-primary font-bold text-lg mb-4">
-                    ₦{listing.price.toLocaleString()}
-                    <span className="text-muted-foreground font-normal text-xs ml-1">{listing.price_unit}</span>
-                  </p>
-                )}
-                <div className="flex items-center justify-between">
-                  <Link to={`/reputation?user=${listing.user_id}`} className="text-xs text-muted-foreground hover:text-primary transition-colors">
-                    {t("dashboard.by")} {profiles[listing.user_id]?.full_name || t("marketplace.anonymous")}
-                  </Link>
-                  {user && user.id !== listing.user_id && (
-                    <Link to={`/messages?to=${listing.user_id}&listing=${listing.id}`}>
-                      <Button variant="outline" size="sm">
-                        <MessageSquare className="w-4 h-4 mr-1" /> {t("marketplace.contact")}
-                      </Button>
-                    </Link>
-                  )}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </main>
