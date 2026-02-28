@@ -98,8 +98,10 @@ export type Database = {
           description: string | null
           id: string
           image_url: string | null
+          is_premium: boolean
           location: string | null
           metadata: Json | null
+          premium_until: string | null
           price: number | null
           price_unit: string | null
           status: Database["public"]["Enums"]["listing_status"]
@@ -113,8 +115,10 @@ export type Database = {
           description?: string | null
           id?: string
           image_url?: string | null
+          is_premium?: boolean
           location?: string | null
           metadata?: Json | null
+          premium_until?: string | null
           price?: number | null
           price_unit?: string | null
           status?: Database["public"]["Enums"]["listing_status"]
@@ -128,8 +132,10 @@ export type Database = {
           description?: string | null
           id?: string
           image_url?: string | null
+          is_premium?: boolean
           location?: string | null
           metadata?: Json | null
+          premium_until?: string | null
           price?: number | null
           price_unit?: string | null
           status?: Database["public"]["Enums"]["listing_status"]
