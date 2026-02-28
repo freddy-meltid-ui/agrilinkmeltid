@@ -155,7 +155,20 @@
     "noListings": "Aucune annonce trouvée.",
     "postFirst": "Publiez la première",
     "contact": "Contacter",
-    "anonymous": "Anonyme"
+    "anonymous": "Anonyme",
+    "filters": "Filtres",
+    "clearFilters": "Effacer les filtres",
+    "country": "Pays",
+    "allCountries": "Tous les pays",
+    "city": "Ville",
+    "allCities": "Toutes les villes",
+    "priceRange": "Fourchette de prix",
+    "minPrice": "Min",
+    "maxPrice": "Max",
+    "sellerRating": "Note vendeur min.",
+    "anyRating": "Toute note",
+    "stars": "{{count}}+ Étoiles",
+    "activeFilters": "{{count}} actif(s)"
   },
   "messages": {
     "title": "Conversations",
