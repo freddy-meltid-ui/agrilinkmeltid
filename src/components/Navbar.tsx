@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Sprout, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import logo from "@/assets/logo.png";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -15,8 +16,7 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
       <div className="container mx-auto max-w-6xl flex items-center justify-between h-16 px-4">
         <Link to="/" className="flex items-center gap-2">
-          <Sprout className="w-6 h-6 text-primary" />
-          <span className="font-serif text-xl">Agri Grid</span>
+          <img src={logo} alt="Agri Grid logo" className="h-9 w-auto" />
         </Link>
 
         <div className="hidden md:flex items-center gap-8 text-sm font-medium">

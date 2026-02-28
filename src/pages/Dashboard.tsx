@@ -4,7 +4,8 @@ import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Sprout, Plus, Package, MessageSquare, LogOut, User, Edit, Trash2, Star, MapPin, BarChart3 } from "lucide-react";
+import { Plus, Package, MessageSquare, LogOut, User, Edit, Trash2, Star, MapPin, BarChart3 } from "lucide-react";
+import logo from "@/assets/logo.png";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 
@@ -80,8 +81,7 @@ const Dashboard = () => {
       <header className="border-b border-border bg-card">
         <div className="container mx-auto max-w-6xl flex items-center justify-between h-16 px-4">
           <Link to="/" className="flex items-center gap-2">
-            <Sprout className="w-6 h-6 text-primary" />
-            <span className="font-serif text-xl">Agri Grid</span>
+            <img src={logo} alt="Agri Grid logo" className="h-9 w-auto" />
           </Link>
           <nav className="flex items-center gap-4">
             <Link to="/marketplace">
