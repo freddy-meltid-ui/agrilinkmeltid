@@ -13,6 +13,7 @@ import Messages from "./pages/Messages";
 import Profile from "./pages/Profile";
 import Reputation from "./pages/Reputation";
 import NearbyMatches from "./pages/NearbyMatches";
+import CropPrices from "./pages/CropPrices";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/profile" element={<Profile />} />
             <Route path="/reputation" element={<Reputation />} />
             <Route path="/nearby" element={<NearbyMatches />} />
+            <Route path="/crop-prices" element={<CropPrices />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>

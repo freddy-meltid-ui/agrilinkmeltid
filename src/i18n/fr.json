@@ -229,6 +229,32 @@
     "backToMarketplace": "Retour au marché",
     "viewReputation": "Voir la réputation"
   },
+  "cropPrices": {
+    "title": "Intelligence des Prix Agricoles",
+    "subtitle": "Suivez les prix du marché local, les tendances historiques et les signaux de demande à travers l'Afrique.",
+    "searchPlaceholder": "Rechercher des cultures ou marchés...",
+    "loading": "Chargement des données de prix...",
+    "noData": "Aucune donnée de prix disponible",
+    "noDataDesc": "Les données de prix apparaîtront ici au fur et à mesure de la croissance du marché.",
+    "marketPrices": "Prix du Marché Local",
+    "noPrices": "Aucune donnée de prix pour ces filtres.",
+    "crop": "Culture",
+    "market": "Marché",
+    "price": "Prix",
+    "trend": "Tendance",
+    "date": "Date",
+    "history": "Historique",
+    "historicalTrends": "Tendances Historiques",
+    "demandSignals": "Signaux de Demande",
+    "noDemand": "Aucun signal de demande disponible.",
+    "buyers": "Acheteurs",
+    "listings": "Annonces",
+    "demand": {
+      "high": "Forte Demande",
+      "medium": "Moyenne",
+      "low": "Faible Demande"
+    }
+  },
   "language": {
     "en": "English",
     "fr": "Français"

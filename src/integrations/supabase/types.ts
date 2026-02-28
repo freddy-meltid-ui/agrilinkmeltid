@@ -14,6 +14,84 @@ export type Database = {
   }
   public: {
     Tables: {
+      crop_prices: {
+        Row: {
+          city: string | null
+          country: string
+          created_at: string
+          crop_name: string
+          currency: string
+          id: string
+          market_name: string
+          price: number
+          recorded_at: string
+          source: string | null
+          unit: string
+        }
+        Insert: {
+          city?: string | null
+          country: string
+          created_at?: string
+          crop_name: string
+          currency?: string
+          id?: string
+          market_name: string
+          price: number
+          recorded_at?: string
+          source?: string | null
+          unit?: string
+        }
+        Update: {
+          city?: string | null
+          country?: string
+          created_at?: string
+          crop_name?: string
+          currency?: string
+          id?: string
+          market_name?: string
+          price?: number
+          recorded_at?: string
+          source?: string | null
+          unit?: string
+        }
+        Relationships: []
+      }
+      demand_signals: {
+        Row: {
+          buyer_count: number
+          city: string | null
+          country: string
+          created_at: string
+          crop_name: string
+          demand_level: string
+          id: string
+          listing_count: number
+          recorded_at: string
+        }
+        Insert: {
+          buyer_count?: number
+          city?: string | null
+          country: string
+          created_at?: string
+          crop_name: string
+          demand_level?: string
+          id?: string
+          listing_count?: number
+          recorded_at?: string
+        }
+        Update: {
+          buyer_count?: number
+          city?: string | null
+          country?: string
+          created_at?: string
+          crop_name?: string
+          demand_level?: string
+          id?: string
+          listing_count?: number
+          recorded_at?: string
+        }
+        Relationships: []
+      }
       listings: {
         Row: {
           created_at: string

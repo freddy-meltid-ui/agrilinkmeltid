@@ -229,6 +229,32 @@
     "backToMarketplace": "Back to marketplace",
     "viewReputation": "View Reputation"
   },
+  "cropPrices": {
+    "title": "Crop Price Intelligence",
+    "subtitle": "Track local market prices, historical trends, and demand signals across Africa.",
+    "searchPlaceholder": "Search crops or markets...",
+    "loading": "Loading price data...",
+    "noData": "No price data available yet",
+    "noDataDesc": "Crop price data will appear here as the market grows.",
+    "marketPrices": "Local Market Prices",
+    "noPrices": "No price data found for these filters.",
+    "crop": "Crop",
+    "market": "Market",
+    "price": "Price",
+    "trend": "Trend",
+    "date": "Date",
+    "history": "History",
+    "historicalTrends": "Historical Trends",
+    "demandSignals": "Demand Signals",
+    "noDemand": "No demand signals available.",
+    "buyers": "Buyers",
+    "listings": "Listings",
+    "demand": {
+      "high": "High Demand",
+      "medium": "Medium",
+      "low": "Low Demand"
+    }
+  },
   "language": {
     "en": "English",
     "fr": "Français"
