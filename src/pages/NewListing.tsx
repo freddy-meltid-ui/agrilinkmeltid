@@ -104,9 +104,8 @@ const NewListing = () => {
       toast.error(t("newListing.error"));
     } else {
       toast.success(t("newListing.success"));
-      // If produce listing, redirect to harvest suggestions
-      if (form.type === "produce" && data) {
-        navigate(`/harvest-suggestions?listing=${data.id}&title=${encodeURIComponent(form.title)}`);
+      if (data) {
+        navigate(`/listing-suggestions?listing=${data.id}&title=${encodeURIComponent(form.title)}&type=${form.type}`);
       } else {
         navigate("/dashboard");
       }
