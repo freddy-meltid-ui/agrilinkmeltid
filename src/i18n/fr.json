@@ -113,6 +113,14 @@
     "buyer": "Acheteur",
     "currency": "Devise"
   },
+  "profile": {
+    "title": "Modifier le profil",
+    "backToDashboard": "Retour au tableau de bord",
+    "bio": "Bio",
+    "bioPlaceholder": "Parlez-nous de vous...",
+    "save": "Enregistrer",
+    "saved": "Profil mis à jour avec succès !"
+  },
   "language": {
     "en": "English",
     "fr": "Français"

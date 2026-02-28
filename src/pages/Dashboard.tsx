@@ -111,7 +111,7 @@ const Dashboard = () => {
             <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
               <User className="w-8 h-8 text-primary" />
             </div>
-            <div>
+            <div className="flex-1">
               <h1 className="font-serif text-2xl">{profile?.full_name || "Welcome!"}</h1>
               <p className="text-muted-foreground text-sm">{user?.email}</p>
               <div className="flex gap-2 mt-2">
@@ -122,6 +122,9 @@ const Dashboard = () => {
                 ))}
               </div>
             </div>
+            <Link to="/profile">
+              <Button variant="outline" size="sm"><Edit className="w-4 h-4 mr-2" /> Edit Profile</Button>
+            </Link>
           </div>
         </div>
 

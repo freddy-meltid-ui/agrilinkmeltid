@@ -113,6 +113,14 @@
     "buyer": "Buyer",
     "currency": "Currency"
   },
+  "profile": {
+    "title": "Edit Profile",
+    "backToDashboard": "Back to dashboard",
+    "bio": "Bio",
+    "bioPlaceholder": "Tell us about yourself...",
+    "save": "Save Changes",
+    "saved": "Profile updated successfully!"
+  },
   "language": {
     "en": "English",
     "fr": "Français"
