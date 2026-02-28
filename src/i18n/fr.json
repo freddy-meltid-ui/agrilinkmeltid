@@ -262,6 +262,18 @@
       "low": "Faible Demande"
     }
   },
+  "harvestSuggestions": {
+    "posted": "Votre récolte est publiée !",
+    "title": "Suggestions intelligentes pour votre récolte",
+    "storage": "Options de stockage à proximité",
+    "transporters": "Transporteurs disponibles",
+    "buyers": "Acheteurs intéressés",
+    "noStorage": "Aucun entrepôt disponible dans votre zone pour le moment.",
+    "noTransporters": "Aucun transporteur trouvé dans votre zone pour le moment.",
+    "noBuyers": "Aucun acheteur trouvé dans votre zone pour le moment.",
+    "goToDashboard": "Aller au tableau de bord",
+    "browseMarketplace": "Parcourir le marché"
+  },
   "language": {
     "en": "English",
     "fr": "Français"
