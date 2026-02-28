@@ -148,9 +148,9 @@ const Marketplace = () => {
                   </p>
                 )}
                 <div className="flex items-center justify-between">
-                  <span className="text-xs text-muted-foreground">
+                  <Link to={`/reputation?user=${listing.user_id}`} className="text-xs text-muted-foreground hover:text-primary transition-colors">
                     {t("dashboard.by")} {profiles[listing.user_id]?.full_name || t("marketplace.anonymous")}
-                  </span>
+                  </Link>
                   {user && user.id !== listing.user_id && (
                     <Link to={`/messages?to=${listing.user_id}&listing=${listing.id}`}>
                       <Button variant="outline" size="sm">

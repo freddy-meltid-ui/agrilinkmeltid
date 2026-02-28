@@ -193,6 +193,19 @@
     "message": "Oops! Page not found",
     "backHome": "Return to Home"
   },
+  "reputation": {
+    "loading": "Loading...",
+    "avgRating": "Avg Rating",
+    "reviews": "reviews",
+    "transactions": "Transactions",
+    "completionRate": "Completion Rate",
+    "onTimeDelivery": "On-Time Delivery",
+    "recentReviews": "Recent Reviews",
+    "noReviews": "No reviews yet.",
+    "noUser": "User not found.",
+    "backToMarketplace": "Back to marketplace",
+    "viewReputation": "View Reputation"
+  },
   "language": {
     "en": "English",
     "fr": "Français"

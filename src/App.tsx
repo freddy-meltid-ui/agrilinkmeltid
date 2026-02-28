@@ -11,6 +11,7 @@ import Marketplace from "./pages/Marketplace";
 import NewListing from "./pages/NewListing";
 import Messages from "./pages/Messages";
 import Profile from "./pages/Profile";
+import Reputation from "./pages/Reputation";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
             <Route path="/marketplace/new" element={<NewListing />} />
             <Route path="/messages" element={<Messages />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/reputation" element={<Reputation />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
