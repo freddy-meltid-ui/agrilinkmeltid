@@ -110,7 +110,7 @@ const Auth = () => {
 
         <div className="flex items-center gap-2 mb-8">
           <Sprout className="w-8 h-8 text-primary" />
-          <span className="font-serif text-2xl">AgriLink</span>
+          <span className="font-serif text-2xl">Agri Grid</span>
         </div>
 
         <div className="bg-card rounded-xl border border-border p-8">

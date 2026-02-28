@@ -66,7 +66,7 @@ const NewListing = () => {
         <div className="container mx-auto max-w-6xl flex items-center h-16 px-4">
           <Link to="/" className="flex items-center gap-2">
             <Sprout className="w-6 h-6 text-primary" />
-            <span className="font-serif text-xl">AgriLink</span>
+            <span className="font-serif text-xl">Agri Grid</span>
           </Link>
         </div>
       </header>

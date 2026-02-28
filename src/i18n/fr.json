@@ -13,7 +13,7 @@
     "title1": "De la Ferme au",
     "title2": "Marché,",
     "title3": "Sans Effort",
-    "subtitle": "AgriLink connecte agriculteurs, ouvriers, propriétaires d'équipements, entrepôts, transporteurs et acheteurs sur une plateforme intelligente — réduisant le gaspillage, les coûts et favorisant la prospérité.",
+    "subtitle": "Agri Grid connecte agriculteurs, ouvriers, propriétaires d'équipements, entrepôts, transporteurs et acheteurs sur une plateforme intelligente — réduisant le gaspillage, les coûts et favorisant la prospérité.",
     "cta": "Rejoindre le Réseau",
     "ctaSecondary": "Explorer le Marché",
     "trusted": "Approuvé par les acteurs agricoles à travers l'Afrique"
@@ -21,7 +21,7 @@
   "stakeholders": {
     "title": "Une Plateforme,",
     "titleHighlight": "Tous les Acteurs",
-    "subtitle": "AgriLink sert chaque participant de la chaîne de valeur agricole avec des outils et connexions adaptés.",
+    "subtitle": "Agri Grid sert chaque participant de la chaîne de valeur agricole avec des outils et connexions adaptés.",
     "farmers": "Agriculteurs",
     "farmersDesc": "Listez vos produits, trouvez des ouvriers, louez du matériel et connectez-vous aux acheteurs — tout depuis un seul tableau de bord.",
     "workers": "Ouvriers",
@@ -37,7 +37,7 @@
   },
   "howItWorks": {
     "title": "Comment",
-    "titleHighlight": "AgriLink Fonctionne",
+    "titleHighlight": "Agri Grid Fonctionne",
     "subtitle": "Commencez en quatre étapes simples et exploitez toute la puissance du réseau agricole africain.",
     "step1Title": "Créez Votre Profil",
     "step1Desc": "Inscrivez-vous et indiquez votre rôle — agriculteur, acheteur, transporteur ou toute combinaison.",
@@ -57,7 +57,7 @@
   "cta": {
     "title": "Prêt à Transformer Votre",
     "titleHighlight": "Activité Agricole ?",
-    "subtitle": "Rejoignez des milliers d'agriculteurs, d'ouvriers et d'acheteurs qui grandissent déjà ensemble sur AgriLink.",
+    "subtitle": "Rejoignez des milliers d'agriculteurs, d'ouvriers et d'acheteurs qui grandissent déjà ensemble sur Agri Grid.",
     "button": "Créer un Compte Gratuit",
     "secondary": "En Savoir Plus"
   },
