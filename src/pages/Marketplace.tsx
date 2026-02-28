@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Sprout, Search, Filter, MapPin, MessageSquare, Star, SlidersHorizontal, X, Crown } from "lucide-react";
+import VerifiedBadge from "@/components/VerifiedBadge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -385,8 +386,9 @@ const Marketplace = () => {
                     </p>
                   )}
                   <div className="flex items-center justify-between">
-                    <Link to={`/reputation?user=${listing.user_id}`} className="text-xs text-muted-foreground hover:text-primary transition-colors">
+                    <Link to={`/reputation?user=${listing.user_id}`} className="text-xs text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
                       {t("dashboard.by")} {profiles[listing.user_id]?.full_name || t("marketplace.anonymous")}
+                      {profiles[listing.user_id]?.is_verified && <VerifiedBadge />}
                     </Link>
                     {user && user.id !== listing.user_id && (
                       <Link to={`/messages?to=${listing.user_id}&listing=${listing.id}`}>

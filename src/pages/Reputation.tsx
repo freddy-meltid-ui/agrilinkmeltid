@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Sprout, ArrowLeft, User } from "lucide-react";
+import VerifiedBadge from "@/components/VerifiedBadge";
 import { Badge } from "@/components/ui/badge";
 import UserReputation from "@/components/UserReputation";
 import { useTranslation } from "react-i18next";
@@ -61,7 +62,10 @@ const Reputation = () => {
               <User className="w-8 h-8 text-primary" />
             </div>
             <div>
-              <h1 className="font-serif text-2xl">{profile?.full_name || t("marketplace.anonymous")}</h1>
+              <h1 className="font-serif text-2xl flex items-center gap-2">
+                {profile?.full_name || t("marketplace.anonymous")}
+                {profile?.is_verified && <VerifiedBadge className="w-5 h-5" />}
+              </h1>
               {profile?.city && profile?.country && (
                 <p className="text-muted-foreground text-sm">{profile.city}, {profile.country}</p>
               )}

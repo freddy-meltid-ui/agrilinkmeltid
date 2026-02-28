@@ -281,6 +281,10 @@
     "goToDashboard": "Aller au tableau de bord",
     "browseMarketplace": "Parcourir le marché"
   },
+  "verified": {
+    "badge": "Professionnel Vérifié",
+    "status": "Vérifié"
+  },
   "language": {
     "en": "English",
     "fr": "Français"

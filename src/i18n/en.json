@@ -281,6 +281,10 @@
     "goToDashboard": "Go to Dashboard",
     "browseMarketplace": "Browse Marketplace"
   },
+  "verified": {
+    "badge": "Verified Professional",
+    "status": "Verified"
+  },
   "language": {
     "en": "English",
     "fr": "Français"
