@@ -193,6 +193,16 @@
     "message": "Oops! Page not found",
     "backHome": "Return to Home"
   },
+  "nearby": {
+    "title": "Nearby Matches",
+    "subtitle": "Stakeholders near {{location}}",
+    "storage": "Storage",
+    "transporters": "Transporters",
+    "buyers": "Buyers",
+    "noResults": "No nearby {{type}} found.",
+    "signInRequired": "Please sign in to see nearby matches.",
+    "findNearby": "Find Nearby"
+  },
   "reputation": {
     "loading": "Loading...",
     "avgRating": "Avg Rating",

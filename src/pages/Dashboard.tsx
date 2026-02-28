@@ -4,7 +4,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Sprout, Plus, Package, MessageSquare, LogOut, User, Edit, Trash2, Star } from "lucide-react";
+import { Sprout, Plus, Package, MessageSquare, LogOut, User, Edit, Trash2, Star, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 
@@ -122,6 +122,9 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="flex gap-2">
+              <Link to="/nearby">
+                <Button variant="outline" size="sm"><MapPin className="w-4 h-4 mr-2" /> {t("nearby.findNearby")}</Button>
+              </Link>
               <Link to={`/reputation?user=${user?.id}`}>
                 <Button variant="outline" size="sm"><Star className="w-4 h-4 mr-2" /> {t("reputation.viewReputation")}</Button>
               </Link>
