@@ -193,6 +193,19 @@
     "message": "Oups ! Page introuvable",
     "backHome": "Retour à l'accueil"
   },
+  "reputation": {
+    "loading": "Chargement...",
+    "avgRating": "Note moyenne",
+    "reviews": "avis",
+    "transactions": "Transactions",
+    "completionRate": "Taux de complétion",
+    "onTimeDelivery": "Livraison à temps",
+    "recentReviews": "Avis récents",
+    "noReviews": "Aucun avis pour le moment.",
+    "noUser": "Utilisateur introuvable.",
+    "backToMarketplace": "Retour au marché",
+    "viewReputation": "Voir la réputation"
+  },
   "language": {
     "en": "English",
     "fr": "Français"

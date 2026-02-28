@@ -4,7 +4,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Sprout, Plus, Package, MessageSquare, LogOut, User, Edit, Trash2 } from "lucide-react";
+import { Sprout, Plus, Package, MessageSquare, LogOut, User, Edit, Trash2, Star } from "lucide-react";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 
@@ -121,9 +121,14 @@ const Dashboard = () => {
                 ))}
               </div>
             </div>
-            <Link to="/profile">
-              <Button variant="outline" size="sm"><Edit className="w-4 h-4 mr-2" /> {t("dashboard.editProfile")}</Button>
-            </Link>
+            <div className="flex gap-2">
+              <Link to={`/reputation?user=${user?.id}`}>
+                <Button variant="outline" size="sm"><Star className="w-4 h-4 mr-2" /> {t("reputation.viewReputation")}</Button>
+              </Link>
+              <Link to="/profile">
+                <Button variant="outline" size="sm"><Edit className="w-4 h-4 mr-2" /> {t("dashboard.editProfile")}</Button>
+              </Link>
+            </div>
           </div>
         </div>
 
