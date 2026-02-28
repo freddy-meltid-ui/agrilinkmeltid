@@ -4,7 +4,8 @@ import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Sprout, Send, ArrowLeft } from "lucide-react";
+import { Sprout, Send } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 type Conversation = {
   user_id: string;
@@ -17,6 +18,7 @@ type Conversation = {
 const Messages = () => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [activeChat, setActiveChat] = useState<string | null>(searchParams.get("to"));
@@ -34,7 +36,6 @@ const Messages = () => {
   useEffect(() => {
     if (!user) return;
     const fetchConversations = async () => {
-      // Get all messages involving the user
       const { data } = await supabase
         .from("messages")
         .select("*")
@@ -43,7 +44,6 @@ const Messages = () => {
 
       if (!data) return;
 
-      // Group by other user
       const convMap = new Map<string, { messages: any[] }>();
       data.forEach((msg: any) => {
         const otherId = msg.sender_id === user.id ? msg.receiver_id : msg.sender_id;
@@ -51,7 +51,6 @@ const Messages = () => {
         convMap.get(otherId)!.messages.push(msg);
       });
 
-      // Fetch profiles
       const otherIds = [...convMap.keys()];
       if (searchParams.get("to") && !otherIds.includes(searchParams.get("to")!)) {
         otherIds.push(searchParams.get("to")!);
@@ -79,7 +78,6 @@ const Messages = () => {
         });
       });
 
-      // Add "to" user if not in conversations
       const toId = searchParams.get("to");
       if (toId && !convMap.has(toId)) {
         convs.unshift({
@@ -114,7 +112,6 @@ const Messages = () => {
         .order("created_at", { ascending: true });
       setMessages(data || []);
 
-      // Mark as read
       await supabase
         .from("messages")
         .update({ read: true })
@@ -124,11 +121,9 @@ const Messages = () => {
     };
     fetchMessages();
 
-    // Update name
     const conv = conversations.find((c) => c.user_id === activeChat);
     if (conv) setActiveName(conv.full_name);
 
-    // Realtime
     const channel = supabase
       .channel(`chat-${activeChat}`)
       .on("postgres_changes", {
@@ -170,7 +165,7 @@ const Messages = () => {
     setSending(false);
   };
 
-  if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  if (loading) return <div className="min-h-screen flex items-center justify-center">{t("messages.loading")}</div>;
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -180,18 +175,17 @@ const Messages = () => {
             <Sprout className="w-6 h-6 text-primary" />
             <span className="font-serif text-xl">Agri Grid</span>
           </Link>
-          <Link to="/dashboard"><Button variant="ghost" size="sm">Dashboard</Button></Link>
+          <Link to="/dashboard"><Button variant="ghost" size="sm">{t("nav.dashboard")}</Button></Link>
         </div>
       </header>
 
       <div className="flex-1 flex container mx-auto max-w-6xl">
-        {/* Sidebar */}
         <div className="w-80 border-r border-border bg-card overflow-y-auto hidden md:block">
           <div className="p-4 border-b border-border">
-            <h2 className="font-serif text-lg">Conversations</h2>
+            <h2 className="font-serif text-lg">{t("messages.title")}</h2>
           </div>
           {conversations.length === 0 ? (
-            <div className="p-4 text-muted-foreground text-sm">No conversations yet</div>
+            <div className="p-4 text-muted-foreground text-sm">{t("messages.noConversations")}</div>
           ) : (
             conversations.map((conv) => (
               <button
@@ -213,7 +207,6 @@ const Messages = () => {
           )}
         </div>
 
-        {/* Chat area */}
         <div className="flex-1 flex flex-col">
           {activeChat ? (
             <>
@@ -243,7 +236,7 @@ const Messages = () => {
                 <Input
                   value={newMsg}
                   onChange={(e) => setNewMsg(e.target.value)}
-                  placeholder="Type a message..."
+                  placeholder={t("messages.typePlaceholder")}
                   onKeyDown={(e) => e.key === "Enter" && sendMessage()}
                 />
                 <Button onClick={sendMessage} disabled={sending || !newMsg.trim()}>
@@ -253,7 +246,7 @@ const Messages = () => {
             </>
           ) : (
             <div className="flex-1 flex items-center justify-center text-muted-foreground">
-              Select a conversation or contact a seller from the marketplace
+              {t("messages.selectConversation")}
             </div>
           )}
         </div>

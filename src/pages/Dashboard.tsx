@@ -6,10 +6,12 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Sprout, Plus, Package, MessageSquare, LogOut, User, Edit, Trash2 } from "lucide-react";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const Dashboard = () => {
   const { user, profile, roles, loading, signOut } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [listings, setListings] = useState<any[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
 
@@ -40,7 +42,6 @@ const Dashboard = () => {
 
     fetchData();
 
-    // Realtime messages
     const channel = supabase
       .channel("dashboard-messages")
       .on("postgres_changes", { event: "INSERT", schema: "public", table: "messages", filter: `receiver_id=eq.${user.id}` }, () => {
@@ -54,29 +55,28 @@ const Dashboard = () => {
   const deleteListing = async (id: string) => {
     const { error } = await supabase.from("listings").delete().eq("id", id);
     if (error) {
-      toast.error("Failed to delete listing");
+      toast.error(t("dashboard.deleteFailed"));
     } else {
       setListings((prev) => prev.filter((l) => l.id !== id));
-      toast.success("Listing deleted");
+      toast.success(t("dashboard.deleteSuccess"));
     }
   };
 
   if (loading) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    return <div className="min-h-screen flex items-center justify-center">{t("dashboard.loading")}</div>;
   }
 
   const roleLabels: Record<string, string> = {
-    farmer: "Farmer",
-    worker: "Worker",
-    equipment_renter: "Equipment Renter",
-    warehouse_owner: "Warehouse Owner",
-    transporter: "Transporter",
-    buyer: "Buyer",
+    farmer: t("auth.farmer"),
+    worker: t("auth.worker"),
+    equipment_renter: t("auth.equipmentRenter"),
+    warehouse_owner: t("auth.warehouseOwner"),
+    transporter: t("auth.transporter"),
+    buyer: t("auth.buyer"),
   };
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Top bar */}
       <header className="border-b border-border bg-card">
         <div className="container mx-auto max-w-6xl flex items-center justify-between h-16 px-4">
           <Link to="/" className="flex items-center gap-2">
@@ -85,11 +85,11 @@ const Dashboard = () => {
           </Link>
           <nav className="flex items-center gap-4">
             <Link to="/marketplace">
-              <Button variant="ghost" size="sm"><Package className="w-4 h-4 mr-2" /> Marketplace</Button>
+              <Button variant="ghost" size="sm"><Package className="w-4 h-4 mr-2" /> {t("dashboard.marketplace")}</Button>
             </Link>
             <Link to="/messages">
               <Button variant="ghost" size="sm" className="relative">
-                <MessageSquare className="w-4 h-4 mr-2" /> Messages
+                <MessageSquare className="w-4 h-4 mr-2" /> {t("dashboard.messages")}
                 {unreadCount > 0 && (
                   <span className="absolute -top-1 -right-1 bg-destructive text-destructive-foreground text-xs rounded-full w-5 h-5 flex items-center justify-center">
                     {unreadCount}
@@ -98,21 +98,20 @@ const Dashboard = () => {
               </Button>
             </Link>
             <Button variant="ghost" size="sm" onClick={() => { signOut(); navigate("/"); }}>
-              <LogOut className="w-4 h-4 mr-2" /> Sign Out
+              <LogOut className="w-4 h-4 mr-2" /> {t("dashboard.signOut")}
             </Button>
           </nav>
         </div>
       </header>
 
       <main className="container mx-auto max-w-6xl px-4 py-8">
-        {/* Profile card */}
         <div className="bg-card rounded-xl border border-border p-6 mb-8">
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
               <User className="w-8 h-8 text-primary" />
             </div>
             <div className="flex-1">
-              <h1 className="font-serif text-2xl">{profile?.full_name || "Welcome!"}</h1>
+              <h1 className="font-serif text-2xl">{profile?.full_name || t("dashboard.welcome")}</h1>
               <p className="text-muted-foreground text-sm">{user?.email}</p>
               <div className="flex gap-2 mt-2">
                 {roles.map((role) => (
@@ -123,41 +122,39 @@ const Dashboard = () => {
               </div>
             </div>
             <Link to="/profile">
-              <Button variant="outline" size="sm"><Edit className="w-4 h-4 mr-2" /> Edit Profile</Button>
+              <Button variant="outline" size="sm"><Edit className="w-4 h-4 mr-2" /> {t("dashboard.editProfile")}</Button>
             </Link>
           </div>
         </div>
 
-        {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           <div className="bg-card rounded-xl border border-border p-6 text-center">
             <p className="text-3xl font-bold text-primary">{listings.length}</p>
-            <p className="text-muted-foreground text-sm mt-1">Active Listings</p>
+            <p className="text-muted-foreground text-sm mt-1">{t("dashboard.activeListings")}</p>
           </div>
           <div className="bg-card rounded-xl border border-border p-6 text-center">
             <p className="text-3xl font-bold text-primary">{unreadCount}</p>
-            <p className="text-muted-foreground text-sm mt-1">Unread Messages</p>
+            <p className="text-muted-foreground text-sm mt-1">{t("dashboard.unreadMessages")}</p>
           </div>
           <div className="bg-card rounded-xl border border-border p-6 text-center">
             <p className="text-3xl font-bold text-primary">{roles.length}</p>
-            <p className="text-muted-foreground text-sm mt-1">Active Roles</p>
+            <p className="text-muted-foreground text-sm mt-1">{t("dashboard.activeRoles")}</p>
           </div>
         </div>
 
-        {/* Listings */}
         <div className="flex items-center justify-between mb-4">
-          <h2 className="font-serif text-xl">My Listings</h2>
+          <h2 className="font-serif text-xl">{t("dashboard.myListings")}</h2>
           <Link to="/marketplace/new">
-            <Button size="sm"><Plus className="w-4 h-4 mr-2" /> New Listing</Button>
+            <Button size="sm"><Plus className="w-4 h-4 mr-2" /> {t("dashboard.newListing")}</Button>
           </Link>
         </div>
 
         {listings.length === 0 ? (
           <div className="bg-card rounded-xl border border-border p-12 text-center">
             <Package className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-            <p className="text-muted-foreground">No listings yet. Create your first one!</p>
+            <p className="text-muted-foreground">{t("dashboard.noListings")}</p>
             <Link to="/marketplace/new">
-              <Button className="mt-4" size="sm"><Plus className="w-4 h-4 mr-2" /> Create Listing</Button>
+              <Button className="mt-4" size="sm"><Plus className="w-4 h-4 mr-2" /> {t("dashboard.createListing")}</Button>
             </Link>
           </div>
         ) : (
