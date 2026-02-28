@@ -42,7 +42,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="border-t border-border mt-10 pt-6 text-center text-sm text-muted-foreground">
-          © 2026 Agri Grid. {t("footer.rights")}
+          © 2026 MELTID. Agri Grid. {t("footer.rights")}
         </div>
       </div>
     </footer>
