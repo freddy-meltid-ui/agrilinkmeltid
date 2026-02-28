@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
               <Sprout className="w-6 h-6 text-primary" />
-              <span className="font-serif text-xl">AgriLink</span>
+              <span className="font-serif text-xl">Agri Grid</span>
             </div>
             <p className="text-muted-foreground text-sm">{t("footer.description")}</p>
           </div>
@@ -43,7 +43,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="border-t border-border mt-10 pt-6 text-center text-sm text-muted-foreground">
-          © 2026 AgriLink. {t("footer.rights")}
+          © 2026 Agri Grid. {t("footer.rights")}
         </div>
       </div>
     </footer>

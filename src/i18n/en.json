@@ -13,7 +13,7 @@
     "title1": "From Farm to",
     "title2": "Market,",
     "title3": "Seamlessly",
-    "subtitle": "AgriLink connects farmers, workers, equipment owners, warehouses, transporters, and buyers on one intelligent platform — reducing waste, cutting costs, and growing prosperity.",
+    "subtitle": "Agri Grid connects farmers, workers, equipment owners, warehouses, transporters, and buyers on one intelligent platform — reducing waste, cutting costs, and growing prosperity.",
     "cta": "Join the Network",
     "ctaSecondary": "Explore Marketplace",
     "trusted": "Trusted by agricultural stakeholders across Africa"
@@ -21,7 +21,7 @@
   "stakeholders": {
     "title": "One Platform,",
     "titleHighlight": "Every Stakeholder",
-    "subtitle": "AgriLink serves every participant in the agricultural value chain with tailored tools and connections.",
+    "subtitle": "Agri Grid serves every participant in the agricultural value chain with tailored tools and connections.",
     "farmers": "Farmers",
     "farmersDesc": "List your produce, find workers, rent equipment, and connect with buyers — all from one dashboard.",
     "workers": "Workers",
@@ -37,7 +37,7 @@
   },
   "howItWorks": {
     "title": "How",
-    "titleHighlight": "AgriLink Works",
+    "titleHighlight": "Agri Grid Works",
     "subtitle": "Get started in four simple steps and unlock the full power of Africa's agricultural network.",
     "step1Title": "Create Your Profile",
     "step1Desc": "Sign up and tell us your role — farmer, buyer, transporter, or any combination.",
@@ -57,7 +57,7 @@
   "cta": {
     "title": "Ready to Transform Your",
     "titleHighlight": "Agricultural Business?",
-    "subtitle": "Join thousands of farmers, workers, and buyers already growing together on AgriLink.",
+    "subtitle": "Join thousands of farmers, workers, and buyers already growing together on Agri Grid.",
     "button": "Create Free Account",
     "secondary": "Learn More"
   },
