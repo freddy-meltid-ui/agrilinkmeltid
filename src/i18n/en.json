@@ -262,15 +262,22 @@
       "low": "Low Demand"
     }
   },
-  "harvestSuggestions": {
-    "posted": "Your harvest is listed!",
-    "title": "Smart suggestions for your harvest",
-    "storage": "Storage Options Nearby",
-    "transporters": "Available Transporters",
+  "suggestions": {
+    "posted": "Your listing is live!",
+    "title": "Smart suggestions for you",
+    "produceListings": "Available Produce",
+    "equipmentListings": "Equipment for Rent",
+    "warehouseListings": "Storage Options",
+    "transportListings": "Transport Services",
+    "jobListings": "Job Opportunities",
+    "farmers": "Farmers Nearby",
+    "workers": "Available Workers",
     "buyers": "Interested Buyers",
-    "noStorage": "No warehouse listings available yet in your area.",
-    "noTransporters": "No transporters found in your area yet.",
-    "noBuyers": "No buyers found in your area yet.",
+    "transporters": "Available Transporters",
+    "warehouseOwners": "Warehouse Owners",
+    "equipmentRenters": "Equipment Renters",
+    "noListings": "No listings available in this category yet.",
+    "noProfiles": "No matching users found in your area yet.",
     "goToDashboard": "Go to Dashboard",
     "browseMarketplace": "Browse Marketplace"
   },

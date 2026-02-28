@@ -262,15 +262,22 @@
       "low": "Faible Demande"
     }
   },
-  "harvestSuggestions": {
-    "posted": "Votre récolte est publiée !",
-    "title": "Suggestions intelligentes pour votre récolte",
-    "storage": "Options de stockage à proximité",
-    "transporters": "Transporteurs disponibles",
+  "suggestions": {
+    "posted": "Votre annonce est en ligne !",
+    "title": "Suggestions intelligentes pour vous",
+    "produceListings": "Produits disponibles",
+    "equipmentListings": "Équipements à louer",
+    "warehouseListings": "Options de stockage",
+    "transportListings": "Services de transport",
+    "jobListings": "Offres d'emploi",
+    "farmers": "Agriculteurs à proximité",
+    "workers": "Ouvriers disponibles",
     "buyers": "Acheteurs intéressés",
-    "noStorage": "Aucun entrepôt disponible dans votre zone pour le moment.",
-    "noTransporters": "Aucun transporteur trouvé dans votre zone pour le moment.",
-    "noBuyers": "Aucun acheteur trouvé dans votre zone pour le moment.",
+    "transporters": "Transporteurs disponibles",
+    "warehouseOwners": "Propriétaires d'entrepôts",
+    "equipmentRenters": "Loueurs d'équipements",
+    "noListings": "Aucune annonce disponible dans cette catégorie pour le moment.",
+    "noProfiles": "Aucun utilisateur correspondant trouvé dans votre zone.",
     "goToDashboard": "Aller au tableau de bord",
     "browseMarketplace": "Parcourir le marché"
   },
