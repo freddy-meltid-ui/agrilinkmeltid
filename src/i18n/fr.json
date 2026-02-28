@@ -193,6 +193,16 @@
     "message": "Oups ! Page introuvable",
     "backHome": "Retour à l'accueil"
   },
+  "nearby": {
+    "title": "Correspondances à proximité",
+    "subtitle": "Acteurs près de {{location}}",
+    "storage": "Stockage",
+    "transporters": "Transporteurs",
+    "buyers": "Acheteurs",
+    "noResults": "Aucun(e) {{type}} à proximité.",
+    "signInRequired": "Veuillez vous connecter pour voir les correspondances.",
+    "findNearby": "Trouver à proximité"
+  },
   "reputation": {
     "loading": "Chargement...",
     "avgRating": "Note moyenne",
