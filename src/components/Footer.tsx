@@ -1,6 +1,9 @@
 import { Sprout } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <footer className="border-t border-border py-12 px-4 bg-card">
       <div className="container mx-auto max-w-6xl">
@@ -10,38 +13,37 @@ const Footer = () => {
               <Sprout className="w-6 h-6 text-primary" />
               <span className="font-serif text-xl">AgriLink</span>
             </div>
-            <p className="text-muted-foreground text-sm">
-              Connecting every link in the agricultural supply chain.
-            </p>
+            <p className="text-muted-foreground text-sm">{t("footer.description")}</p>
           </div>
           <div>
-            <h4 className="font-semibold mb-3 text-sm">Platform</h4>
+            <h4 className="font-semibold mb-3 text-sm">{t("footer.platform")}</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li className="hover:text-foreground cursor-pointer transition-colors">For Farmers</li>
-              <li className="hover:text-foreground cursor-pointer transition-colors">For Workers</li>
-              <li className="hover:text-foreground cursor-pointer transition-colors">For Transporters</li>
-              <li className="hover:text-foreground cursor-pointer transition-colors">For Buyers</li>
+              <li className="hover:text-foreground cursor-pointer transition-colors">{t("footer.forFarmers")}</li>
+              <li className="hover:text-foreground cursor-pointer transition-colors">{t("footer.forBuyers")}</li>
+              <li className="hover:text-foreground cursor-pointer transition-colors">{t("footer.forTransporters")}</li>
+              <li className="hover:text-foreground cursor-pointer transition-colors">{t("footer.marketplace")}</li>
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold mb-3 text-sm">Company</h4>
+            <h4 className="font-semibold mb-3 text-sm">{t("footer.company")}</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li className="hover:text-foreground cursor-pointer transition-colors">About</li>
-              <li className="hover:text-foreground cursor-pointer transition-colors">Careers</li>
-              <li className="hover:text-foreground cursor-pointer transition-colors">Blog</li>
-              <li className="hover:text-foreground cursor-pointer transition-colors">Contact</li>
+              <li className="hover:text-foreground cursor-pointer transition-colors">{t("footer.aboutUs")}</li>
+              <li className="hover:text-foreground cursor-pointer transition-colors">{t("footer.careers")}</li>
+              <li className="hover:text-foreground cursor-pointer transition-colors">{t("footer.blog")}</li>
+              <li className="hover:text-foreground cursor-pointer transition-colors">{t("footer.contact")}</li>
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold mb-3 text-sm">Legal</h4>
+            <h4 className="font-semibold mb-3 text-sm">{t("footer.support")}</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li className="hover:text-foreground cursor-pointer transition-colors">Privacy Policy</li>
-              <li className="hover:text-foreground cursor-pointer transition-colors">Terms of Service</li>
+              <li className="hover:text-foreground cursor-pointer transition-colors">{t("footer.helpCenter")}</li>
+              <li className="hover:text-foreground cursor-pointer transition-colors">{t("footer.terms")}</li>
+              <li className="hover:text-foreground cursor-pointer transition-colors">{t("footer.privacy")}</li>
             </ul>
           </div>
         </div>
         <div className="border-t border-border mt-10 pt-6 text-center text-sm text-muted-foreground">
-          © 2026 AgriLink. All rights reserved.
+          © 2026 AgriLink. {t("footer.rights")}
         </div>
       </div>
     </footer>

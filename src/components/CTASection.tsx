@@ -2,28 +2,27 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const CTASection = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="py-24 px-4">
       <div className="container mx-auto max-w-4xl text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <h2 className="font-serif text-4xl md:text-5xl mb-6">
-            Ready to Transform Your{" "}<span className="text-primary">Agricultural Business?</span>
+            {t("cta.title")}{" "}<span className="text-primary">{t("cta.titleHighlight")}</span>
           </h2>
-          <p className="text-muted-foreground text-lg mb-10 max-w-2xl mx-auto">
-            Join thousands of farmers, workers, and logistics partners already growing together on our platform.
-          </p>
+          <p className="text-muted-foreground text-lg mb-10 max-w-2xl mx-auto">{t("cta.subtitle")}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/auth">
               <Button size="lg" className="text-base px-8">
-                Get Started Free <ArrowRight className="ml-2 w-5 h-5" />
+                {t("cta.button")} <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
             <Link to="/marketplace">
-              <Button variant="outline" size="lg" className="text-base px-8">
-                Browse Marketplace
-              </Button>
+              <Button variant="outline" size="lg" className="text-base px-8">{t("cta.secondary")}</Button>
             </Link>
           </div>
         </motion.div>
