@@ -262,6 +262,18 @@
       "low": "Low Demand"
     }
   },
+  "harvestSuggestions": {
+    "posted": "Your harvest is listed!",
+    "title": "Smart suggestions for your harvest",
+    "storage": "Storage Options Nearby",
+    "transporters": "Available Transporters",
+    "buyers": "Interested Buyers",
+    "noStorage": "No warehouse listings available yet in your area.",
+    "noTransporters": "No transporters found in your area yet.",
+    "noBuyers": "No buyers found in your area yet.",
+    "goToDashboard": "Go to Dashboard",
+    "browseMarketplace": "Browse Marketplace"
+  },
   "language": {
     "en": "English",
     "fr": "Français"

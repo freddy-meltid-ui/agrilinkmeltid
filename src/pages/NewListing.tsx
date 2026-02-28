@@ -87,7 +87,7 @@ const NewListing = () => {
       }
     }
 
-    const { error } = await supabase.from("listings").insert({
+    const { data, error } = await supabase.from("listings").insert({
       user_id: user.id,
       type: form.type as any,
       title: form.title,
@@ -98,13 +98,18 @@ const NewListing = () => {
       image_url,
       is_premium: form.is_premium,
       premium_until: form.is_premium ? new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString() : null,
-    });
+    }).select("id").single();
 
     if (error) {
       toast.error(t("newListing.error"));
     } else {
       toast.success(t("newListing.success"));
-      navigate("/dashboard");
+      // If produce listing, redirect to harvest suggestions
+      if (form.type === "produce" && data) {
+        navigate(`/harvest-suggestions?listing=${data.id}&title=${encodeURIComponent(form.title)}`);
+      } else {
+        navigate("/dashboard");
+      }
     }
     setSubmitting(false);
   };
