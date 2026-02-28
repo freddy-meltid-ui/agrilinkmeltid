@@ -5,25 +5,27 @@ import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Sprout, Search, Filter, MapPin, ArrowLeft, MessageSquare } from "lucide-react";
+import { Sprout, Search, Filter, MapPin, MessageSquare } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-
-const TYPES = [
-  { value: "all", label: "All Types" },
-  { value: "produce", label: "Produce" },
-  { value: "equipment", label: "Equipment" },
-  { value: "warehouse", label: "Warehouse" },
-  { value: "transport", label: "Transport" },
-  { value: "job", label: "Jobs" },
-];
+import { useTranslation } from "react-i18next";
 
 const Marketplace = () => {
   const { user } = useAuth();
+  const { t } = useTranslation();
   const [listings, setListings] = useState<any[]>([]);
   const [profiles, setProfiles] = useState<Record<string, any>>({});
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("all");
   const [loading, setLoading] = useState(true);
+
+  const TYPES = [
+    { value: "all", label: t("marketplace.allTypes") },
+    { value: "produce", label: t("marketplace.produce") },
+    { value: "equipment", label: t("marketplace.equipment") },
+    { value: "warehouse", label: t("marketplace.warehouse") },
+    { value: "transport", label: t("marketplace.transport") },
+    { value: "job", label: t("marketplace.jobs") },
+  ];
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -41,7 +43,6 @@ const Marketplace = () => {
       const { data } = await query;
       setListings(data || []);
 
-      // Fetch profiles for listing owners
       if (data && data.length > 0) {
         const userIds = [...new Set(data.map((l: any) => l.user_id))];
         const { data: profilesData } = await supabase
@@ -76,11 +77,11 @@ const Marketplace = () => {
           <nav className="flex items-center gap-3">
             {user ? (
               <>
-                <Link to="/dashboard"><Button variant="ghost" size="sm">Dashboard</Button></Link>
-                <Link to="/marketplace/new"><Button size="sm">Post Listing</Button></Link>
+                <Link to="/dashboard"><Button variant="ghost" size="sm">{t("nav.dashboard")}</Button></Link>
+                <Link to="/marketplace/new"><Button size="sm">{t("marketplace.postListing")}</Button></Link>
               </>
             ) : (
-              <Link to="/auth"><Button size="sm">Sign In</Button></Link>
+              <Link to="/auth"><Button size="sm">{t("marketplace.signIn")}</Button></Link>
             )}
           </nav>
         </div>
@@ -88,16 +89,15 @@ const Marketplace = () => {
 
       <main className="container mx-auto max-w-6xl px-4 py-8">
         <div className="mb-8">
-          <h1 className="font-serif text-3xl mb-2">Marketplace</h1>
-          <p className="text-muted-foreground">Browse produce, equipment, warehouses, transport, and job listings.</p>
+          <h1 className="font-serif text-3xl mb-2">{t("marketplace.title")}</h1>
+          <p className="text-muted-foreground">{t("marketplace.subtitle")}</p>
         </div>
 
-        {/* Filters */}
         <div className="flex flex-col sm:flex-row gap-3 mb-8">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
-              placeholder="Search listings..."
+              placeholder={t("marketplace.searchPlaceholder")}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="pl-10"
@@ -109,21 +109,21 @@ const Marketplace = () => {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              {TYPES.map((t) => (
-                <SelectItem key={t.value} value={t.value}>{t.label}</SelectItem>
+              {TYPES.map((tp) => (
+                <SelectItem key={tp.value} value={tp.value}>{tp.label}</SelectItem>
               ))}
             </SelectContent>
           </Select>
         </div>
 
         {loading ? (
-          <div className="text-center py-12 text-muted-foreground">Loading listings...</div>
+          <div className="text-center py-12 text-muted-foreground">{t("marketplace.loadingListings")}</div>
         ) : filtered.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-muted-foreground mb-4">No listings found.</p>
+            <p className="text-muted-foreground mb-4">{t("marketplace.noListings")}</p>
             {user && (
               <Link to="/marketplace/new">
-                <Button>Post the first one</Button>
+                <Button>{t("marketplace.postFirst")}</Button>
               </Link>
             )}
           </div>
@@ -149,12 +149,12 @@ const Marketplace = () => {
                 )}
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-muted-foreground">
-                    by {profiles[listing.user_id]?.full_name || "Anonymous"}
+                    {t("dashboard.by")} {profiles[listing.user_id]?.full_name || t("marketplace.anonymous")}
                   </span>
                   {user && user.id !== listing.user_id && (
                     <Link to={`/messages?to=${listing.user_id}&listing=${listing.id}`}>
                       <Button variant="outline" size="sm">
-                        <MessageSquare className="w-4 h-4 mr-1" /> Contact
+                        <MessageSquare className="w-4 h-4 mr-1" /> {t("marketplace.contact")}
                       </Button>
                     </Link>
                   )}
