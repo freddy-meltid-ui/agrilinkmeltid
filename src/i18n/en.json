@@ -155,7 +155,20 @@
     "noListings": "No listings found.",
     "postFirst": "Post the first one",
     "contact": "Contact",
-    "anonymous": "Anonymous"
+    "anonymous": "Anonymous",
+    "filters": "Filters",
+    "clearFilters": "Clear Filters",
+    "country": "Country",
+    "allCountries": "All Countries",
+    "city": "City",
+    "allCities": "All Cities",
+    "priceRange": "Price Range",
+    "minPrice": "Min",
+    "maxPrice": "Max",
+    "sellerRating": "Min Seller Rating",
+    "anyRating": "Any Rating",
+    "stars": "{{count}}+ Stars",
+    "activeFilters": "{{count}} active"
   },
   "messages": {
     "title": "Conversations",
