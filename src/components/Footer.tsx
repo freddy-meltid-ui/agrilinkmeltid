@@ -1,5 +1,5 @@
-import { Sprout } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import logo from "@/assets/logo.png";
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -10,8 +10,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <Sprout className="w-6 h-6 text-primary" />
-              <span className="font-serif text-xl">Agri Grid</span>
+              <img src={logo} alt="Agri Grid logo" className="h-9 w-auto" />
             </div>
             <p className="text-muted-foreground text-sm">{t("footer.description")}</p>
           </div>

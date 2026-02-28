@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Sprout, Users, Tractor, Warehouse, Truck, ShoppingCart, ArrowRight } from "lucide-react";
+import { Cpu, Users, Tractor, Warehouse, Truck, BarChart3, ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const container = {
@@ -16,12 +16,12 @@ const StakeholderSection = () => {
   const { t } = useTranslation();
 
   const stakeholders = [
-    { icon: Users, titleKey: "stakeholders.workers", descKey: "stakeholders.workersDesc", color: "bg-primary/10 text-primary" },
-    { icon: Sprout, titleKey: "stakeholders.farmers", descKey: "stakeholders.farmersDesc", color: "bg-accent/20 text-accent-foreground" },
+    { icon: Cpu, titleKey: "stakeholders.farmers", descKey: "stakeholders.farmersDesc", color: "bg-primary/10 text-primary" },
+    { icon: Users, titleKey: "stakeholders.workers", descKey: "stakeholders.workersDesc", color: "bg-accent/20 text-accent-foreground" },
     { icon: Tractor, titleKey: "stakeholders.renters", descKey: "stakeholders.rentersDesc", color: "bg-secondary/20 text-secondary" },
     { icon: Warehouse, titleKey: "stakeholders.warehouse", descKey: "stakeholders.warehouseDesc", color: "bg-primary/10 text-primary" },
     { icon: Truck, titleKey: "stakeholders.transporters", descKey: "stakeholders.transportersDesc", color: "bg-accent/20 text-accent-foreground" },
-    { icon: ShoppingCart, titleKey: "stakeholders.buyers", descKey: "stakeholders.buyersDesc", color: "bg-secondary/20 text-secondary" },
+    { icon: BarChart3, titleKey: "stakeholders.buyers", descKey: "stakeholders.buyersDesc", color: "bg-secondary/20 text-secondary" },
   ];
 
   return (
