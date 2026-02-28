@@ -168,7 +168,8 @@
     "sellerRating": "Min Seller Rating",
     "anyRating": "Any Rating",
     "stars": "{{count}}+ Stars",
-    "activeFilters": "{{count}} active"
+    "activeFilters": "{{count}} active",
+    "premium": "Premium"
   },
   "messages": {
     "title": "Conversations",
@@ -199,7 +200,13 @@
     "submit": "Create Listing",
     "submitting": "Creating...",
     "success": "Listing created!",
-    "error": "Failed to create listing"
+    "error": "Failed to create listing",
+    "image": "Photo",
+    "addImage": "Add a photo (max 5MB)",
+    "imageTooLarge": "Image must be under 5MB",
+    "imageUploadError": "Failed to upload image",
+    "premium": "Premium Listing",
+    "premiumDesc": "Boost visibility with a highlighted badge and top placement"
   },
   "notFound": {
     "title": "404",
