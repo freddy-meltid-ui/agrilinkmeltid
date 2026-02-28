@@ -341,7 +341,7 @@ const Marketplace = () => {
             {filtered.map((listing) => {
               const isPremiumActive = listing.is_premium && (!listing.premium_until || new Date(listing.premium_until) > new Date());
               return (
-                <div key={listing.id} className={`bg-card rounded-xl border p-6 hover:shadow-[var(--card-hover-shadow)] transition-shadow ${isPremiumActive ? "border-primary/40 ring-1 ring-primary/20" : "border-border"}`}>
+                <Link key={listing.id} to={`/marketplace/${listing.id}`} className={`block bg-card rounded-xl border p-6 hover:shadow-[var(--card-hover-shadow)] transition-shadow cursor-pointer ${isPremiumActive ? "border-primary/40 ring-1 ring-primary/20" : "border-border"}`}>
                   {listing.image_url && (
                     <div className="relative -mx-6 -mt-6 mb-4 rounded-t-xl overflow-hidden">
                       <img src={listing.image_url} alt={listing.title} className="w-full h-40 object-cover" />
@@ -386,19 +386,19 @@ const Marketplace = () => {
                     </p>
                   )}
                   <div className="flex items-center justify-between">
-                    <Link to={`/reputation?user=${listing.user_id}`} className="text-xs text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
+                    <span onClick={(e) => { e.preventDefault(); window.location.href = `/reputation?user=${listing.user_id}`; }} className="text-xs text-muted-foreground hover:text-primary transition-colors flex items-center gap-1 cursor-pointer">
                       {t("dashboard.by")} {profiles[listing.user_id]?.full_name || t("marketplace.anonymous")}
                       {profiles[listing.user_id]?.is_verified && <VerifiedBadge />}
-                    </Link>
+                    </span>
                     {user && user.id !== listing.user_id && (
-                      <Link to={`/messages?to=${listing.user_id}&listing=${listing.id}`}>
+                      <span onClick={(e) => { e.preventDefault(); window.location.href = `/messages?to=${listing.user_id}&listing=${listing.id}`; }}>
                         <Button variant="outline" size="sm">
                           <MessageSquare className="w-4 h-4 mr-1" /> {t("marketplace.contact")}
                         </Button>
-                      </Link>
+                      </span>
                     )}
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>

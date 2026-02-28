@@ -281,6 +281,15 @@
     "goToDashboard": "Aller au tableau de bord",
     "browseMarketplace": "Parcourir le marché"
   },
+  "listingDetail": {
+    "backToMarketplace": "Retour au marché",
+    "description": "Description",
+    "noDescription": "Aucune description fournie.",
+    "seller": "Informations sur le vendeur",
+    "contactSeller": "Contacter le vendeur",
+    "signInToContact": "Connectez-vous pour contacter le vendeur",
+    "notFound": "Annonce introuvable."
+  },
   "verified": {
     "badge": "Professionnel Vérifié",
     "status": "Vérifié"

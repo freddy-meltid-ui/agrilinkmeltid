@@ -281,6 +281,15 @@
     "goToDashboard": "Go to Dashboard",
     "browseMarketplace": "Browse Marketplace"
   },
+  "listingDetail": {
+    "backToMarketplace": "Back to marketplace",
+    "description": "Description",
+    "noDescription": "No description provided.",
+    "seller": "Seller Information",
+    "contactSeller": "Contact Seller",
+    "signInToContact": "Sign in to contact seller",
+    "notFound": "Listing not found."
+  },
   "verified": {
     "badge": "Verified Professional",
     "status": "Verified"
