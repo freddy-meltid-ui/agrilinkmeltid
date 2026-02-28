@@ -194,6 +194,7 @@ export type Database = {
           currency: string | null
           full_name: string | null
           id: string
+          is_verified: boolean
           location: string | null
           phone: string | null
           updated_at: string
@@ -208,6 +209,7 @@ export type Database = {
           currency?: string | null
           full_name?: string | null
           id?: string
+          is_verified?: boolean
           location?: string | null
           phone?: string | null
           updated_at?: string
@@ -222,6 +224,7 @@ export type Database = {
           currency?: string | null
           full_name?: string | null
           id?: string
+          is_verified?: boolean
           location?: string | null
           phone?: string | null
           updated_at?: string

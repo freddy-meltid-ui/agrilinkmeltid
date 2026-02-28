@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Package, MessageSquare, LogOut, User, Edit, Trash2, Star, MapPin, BarChart3 } from "lucide-react";
+import VerifiedBadge from "@/components/VerifiedBadge";
 import logo from "@/assets/logo.png";
 import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
@@ -111,7 +112,10 @@ const Dashboard = () => {
               <User className="w-8 h-8 text-primary" />
             </div>
             <div className="flex-1">
-              <h1 className="font-serif text-2xl">{profile?.full_name || t("dashboard.welcome")}</h1>
+              <h1 className="font-serif text-2xl flex items-center gap-2">
+                {profile?.full_name || t("dashboard.welcome")}
+                {profile?.is_verified && <VerifiedBadge className="w-5 h-5" />}
+              </h1>
               <p className="text-muted-foreground text-sm">{user?.email}</p>
               <div className="flex gap-2 mt-2">
                 {roles.map((role) => (
