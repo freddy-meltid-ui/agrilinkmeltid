@@ -111,7 +111,22 @@
     "warehouseOwner": "Storage Provider",
     "transporter": "Logistics Provider",
     "buyer": "Buyer",
-    "currency": "Currency"
+    "currency": "Currency",
+    "forgotPassword": "Forgot your password?",
+    "resetPassword": "Reset Password",
+    "resetPasswordSubtitle": "Enter your email and we'll send you a link to reset your password.",
+    "sendResetLink": "Send Reset Link",
+    "resetEmailSent": "Check your email for a password reset link.",
+    "setNewPassword": "Set New Password",
+    "setNewPasswordSubtitle": "Enter your new password below.",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "updatePassword": "Update Password",
+    "passwordUpdated": "Password updated successfully!",
+    "passwordsMismatch": "Passwords do not match.",
+    "passwordTooShort": "Password must be at least 6 characters.",
+    "invalidResetLink": "This password reset link is invalid or has expired.",
+    "backToLogin": "Back to login"
   },
   "profile": {
     "title": "Edit Profile",

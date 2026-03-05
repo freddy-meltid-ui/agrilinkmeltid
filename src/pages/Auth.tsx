@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Sprout, ArrowLeft } from "lucide-react";
+import ForgotPasswordLink from "@/components/ForgotPasswordLink";
 import { toast } from "sonner";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -238,6 +239,10 @@ const Auth = () => {
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? t("auth.pleaseWait") : isLogin ? t("auth.signIn") : t("auth.createAccountBtn")}
             </Button>
+
+            {isLogin && (
+              <ForgotPasswordLink />
+            )}
           </form>
 
           <div className="mt-6 text-center text-sm text-muted-foreground">

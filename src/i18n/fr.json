@@ -111,7 +111,22 @@
     "warehouseOwner": "Fournisseur de Stockage",
     "transporter": "Prestataire Logistique",
     "buyer": "Acheteur",
-    "currency": "Devise"
+    "currency": "Devise",
+    "forgotPassword": "Mot de passe oublié ?",
+    "resetPassword": "Réinitialiser le mot de passe",
+    "resetPasswordSubtitle": "Entrez votre e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.",
+    "sendResetLink": "Envoyer le lien",
+    "resetEmailSent": "Vérifiez votre e-mail pour un lien de réinitialisation.",
+    "setNewPassword": "Définir un nouveau mot de passe",
+    "setNewPasswordSubtitle": "Entrez votre nouveau mot de passe ci-dessous.",
+    "newPassword": "Nouveau mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "updatePassword": "Mettre à jour le mot de passe",
+    "passwordUpdated": "Mot de passe mis à jour avec succès !",
+    "passwordsMismatch": "Les mots de passe ne correspondent pas.",
+    "passwordTooShort": "Le mot de passe doit contenir au moins 6 caractères.",
+    "invalidResetLink": "Ce lien de réinitialisation est invalide ou a expiré.",
+    "backToLogin": "Retour à la connexion"
   },
   "profile": {
     "title": "Modifier le profil",
