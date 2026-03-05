@@ -17,6 +17,7 @@ import NearbyMatches from "./pages/NearbyMatches";
 import CropPrices from "./pages/CropPrices";
 import ListingSuggestions from "./pages/ListingSuggestions";
 import NotFound from "./pages/NotFound";
+import ResetPassword from "./pages/ResetPassword";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/marketplace" element={<Marketplace />} />
             <Route path="/marketplace/new" element={<NewListing />} />
