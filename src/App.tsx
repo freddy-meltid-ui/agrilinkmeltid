@@ -20,6 +20,7 @@ import NotFound from "./pages/NotFound";
 import ResetPassword from "./pages/ResetPassword";
 import AtlasDashboard from "./pages/AtlasDashboard";
 import RegionProfile from "./pages/RegionProfile";
+import AgriculturalAtlasPage from "./pages/AgriculturalAtlasPage";
 
 const queryClient = new QueryClient();
 
@@ -45,7 +46,8 @@ const App = () => (
             <Route path="/crop-prices" element={<CropPrices />} />
             <Route path="/harvest-suggestions" element={<ListingSuggestions />} />
             <Route path="/listing-suggestions" element={<ListingSuggestions />} />
-            <Route path="/atlas" element={<AtlasDashboard />} />
+            <Route path="/atlas" element={<AgriculturalAtlasPage />} />
+            <Route path="/atlas/explorer" element={<AtlasDashboard />} />
             <Route path="/atlas/region/:regionId" element={<RegionProfile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
