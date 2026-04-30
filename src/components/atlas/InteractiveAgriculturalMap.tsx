@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from "react-leaflet";
+import L from "leaflet";
 import type { BeninRegion, Level } from "@/lib/beninRegions";
 import { BENIN_CENTER } from "@/lib/beninRegions";
 import MapLegend from "./MapLegend";
@@ -19,6 +20,26 @@ const FlyToSelected = ({ region }: { region: BeninRegion | null }) => {
   }, [region, map]);
   return null;
 };
+
+// Auto-fit bounds when filters change (only if no region is actively selected)
+const FitToRegions = ({ regions, selected }: { regions: BeninRegion[]; selected: BeninRegion | null }) => {
+  const map = useMap();
+  useEffect(() => {
+    if (selected) return;
+    if (regions.length === 0) {
+      map.flyTo(BENIN_CENTER, 7, { duration: 0.8 });
+      return;
+    }
+    if (regions.length === 1) {
+      map.flyTo(regions[0].coordinates, 9, { duration: 0.8 });
+      return;
+    }
+    const bounds = L.latLngBounds(regions.map((r) => r.coordinates));
+    map.flyToBounds(bounds, { padding: [40, 40], duration: 0.8, maxZoom: 9 });
+  }, [regions, selected, map]);
+  return null;
+};
+
 
 type Props = {
   regions: BeninRegion[];
