@@ -94,6 +94,7 @@ const InteractiveAgriculturalMap = ({ regions, selected, onSelect }: Props) => {
           );
         })}
         <FlyToSelected region={selected} />
+        <FitToRegions regions={regions} selected={selected} />
       </MapContainer>
       <MapLegend />
     </div>
