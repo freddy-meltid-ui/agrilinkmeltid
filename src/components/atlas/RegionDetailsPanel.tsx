@@ -1,9 +1,12 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Droplets, Layers, Sprout } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { MapPin, Droplets, Layers, Sprout, FileDown } from "lucide-react";
 import type { BeninRegion } from "@/lib/beninRegions";
 import CropRecommendationCard from "./CropRecommendationCard";
 import YieldPotentialCard from "./YieldPotentialCard";
+import { exportRegionPdf } from "@/lib/exportRegionPdf";
+import { toast } from "sonner";
 
 const levelClass = (lvl: string) => {
   if (lvl === "élevée" || lvl === "élevé") return "bg-emerald-100 text-emerald-800";
@@ -23,15 +26,36 @@ const RegionDetailsPanel = ({ region }: { region: BeninRegion | null }) => {
     );
   }
 
+  const handleExport = () => {
+    try {
+      exportRegionPdf(region);
+      toast.success(`Fiche PDF de ${region.name} générée`);
+    } catch (e) {
+      toast.error("Échec de l'export PDF");
+    }
+  };
+
   return (
     <div className="space-y-4">
       <Card className="border-emerald-100">
         <CardContent className="pt-5 space-y-3">
-          <div>
-            <p className="text-xs uppercase tracking-wide text-stone-500">{region.country}</p>
-            <h2 className="text-xl font-semibold text-emerald-950">{region.name}</h2>
-            <p className="text-sm text-stone-600 mt-0.5">{region.agroecological_zone}</p>
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <p className="text-xs uppercase tracking-wide text-stone-500">{region.country}</p>
+              <h2 className="text-xl font-semibold text-emerald-950">{region.name}</h2>
+              <p className="text-sm text-stone-600 mt-0.5">{region.agroecological_zone}</p>
+            </div>
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={handleExport}
+              className="border-emerald-300 text-emerald-800 hover:bg-emerald-50 flex-shrink-0"
+            >
+              <FileDown className="h-4 w-4 mr-1.5" />
+              PDF
+            </Button>
           </div>
+
           <div className="grid grid-cols-2 gap-3 text-sm">
             <Stat icon={Droplets} label="Pluviométrie" value={region.rainfall_mm} />
             <Stat icon={Layers} label="Sol dominant" value={region.dominant_soil} />
