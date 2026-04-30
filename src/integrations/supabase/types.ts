@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      countries: {
+        Row: {
+          code: string
+          created_at: string
+          id: string
+          name_en: string
+          name_fr: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          id?: string
+          name_en: string
+          name_fr: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          id?: string
+          name_en?: string
+          name_fr?: string
+        }
+        Relationships: []
+      }
       crop_prices: {
         Row: {
           city: string | null
@@ -55,6 +79,87 @@ export type Database = {
           unit?: string
         }
         Relationships: []
+      }
+      crop_profiles: {
+        Row: {
+          created_at: string
+          crop_name: string
+          cycle_days: number | null
+          id: string
+          name_fr: string
+          preferred_soil: string[] | null
+          risk_factors: string[] | null
+          water_need_mm_max: number | null
+          water_need_mm_min: number | null
+        }
+        Insert: {
+          created_at?: string
+          crop_name: string
+          cycle_days?: number | null
+          id?: string
+          name_fr: string
+          preferred_soil?: string[] | null
+          risk_factors?: string[] | null
+          water_need_mm_max?: number | null
+          water_need_mm_min?: number | null
+        }
+        Update: {
+          created_at?: string
+          crop_name?: string
+          cycle_days?: number | null
+          id?: string
+          name_fr?: string
+          preferred_soil?: string[] | null
+          risk_factors?: string[] | null
+          water_need_mm_max?: number | null
+          water_need_mm_min?: number | null
+        }
+        Relationships: []
+      }
+      crop_recommendations: {
+        Row: {
+          constraints: string[] | null
+          created_at: string
+          crop_id: string
+          id: string
+          recommendation_text: string | null
+          region_id: string
+          suitability: string
+        }
+        Insert: {
+          constraints?: string[] | null
+          created_at?: string
+          crop_id: string
+          id?: string
+          recommendation_text?: string | null
+          region_id: string
+          suitability: string
+        }
+        Update: {
+          constraints?: string[] | null
+          created_at?: string
+          crop_id?: string
+          id?: string
+          recommendation_text?: string | null
+          region_id?: string
+          suitability?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crop_recommendations_crop_id_fkey"
+            columns: ["crop_id"]
+            isOneToOne: false
+            referencedRelation: "crop_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crop_recommendations_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       demand_signals: {
         Row: {
@@ -232,6 +337,65 @@ export type Database = {
         }
         Relationships: []
       }
+      regions: {
+        Row: {
+          agroecological_zone: string | null
+          centroid_lat: number | null
+          centroid_lng: number | null
+          country_id: string
+          created_at: string
+          dominant_soil_type: string | null
+          geojson: Json | null
+          id: string
+          irrigation_potential: string | null
+          main_constraints: string[] | null
+          name: string
+          rainfall_max_mm: number | null
+          rainfall_min_mm: number | null
+          soil_fertility_level: string | null
+        }
+        Insert: {
+          agroecological_zone?: string | null
+          centroid_lat?: number | null
+          centroid_lng?: number | null
+          country_id: string
+          created_at?: string
+          dominant_soil_type?: string | null
+          geojson?: Json | null
+          id?: string
+          irrigation_potential?: string | null
+          main_constraints?: string[] | null
+          name: string
+          rainfall_max_mm?: number | null
+          rainfall_min_mm?: number | null
+          soil_fertility_level?: string | null
+        }
+        Update: {
+          agroecological_zone?: string | null
+          centroid_lat?: number | null
+          centroid_lng?: number | null
+          country_id?: string
+          created_at?: string
+          dominant_soil_type?: string | null
+          geojson?: Json | null
+          id?: string
+          irrigation_potential?: string | null
+          main_constraints?: string[] | null
+          name?: string
+          rainfall_max_mm?: number | null
+          rainfall_min_mm?: number | null
+          soil_fertility_level?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "regions_country_id_fkey"
+            columns: ["country_id"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       reviews: {
         Row: {
           comment: string | null
@@ -269,6 +433,75 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      saved_recommendations: {
+        Row: {
+          created_at: string
+          crop_id: string
+          id: string
+          region_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          crop_id: string
+          id?: string
+          region_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          crop_id?: string
+          id?: string
+          region_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "saved_recommendations_crop_id_fkey"
+            columns: ["crop_id"]
+            isOneToOne: false
+            referencedRelation: "crop_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "saved_recommendations_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      soil_profiles: {
+        Row: {
+          created_at: string
+          description: string | null
+          fertility_notes: string | null
+          id: string
+          ph_range: string | null
+          soil_type: string
+          texture: string | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          fertility_notes?: string | null
+          id?: string
+          ph_range?: string | null
+          soil_type: string
+          texture?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          fertility_notes?: string | null
+          id?: string
+          ph_range?: string | null
+          soil_type?: string
+          texture?: string | null
+        }
+        Relationships: []
       }
       transactions: {
         Row: {
@@ -331,6 +564,54 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      yield_estimates: {
+        Row: {
+          assumptions: string[] | null
+          confidence: string | null
+          created_at: string
+          crop_id: string
+          id: string
+          region_id: string
+          yield_max_t_ha: number | null
+          yield_min_t_ha: number | null
+        }
+        Insert: {
+          assumptions?: string[] | null
+          confidence?: string | null
+          created_at?: string
+          crop_id: string
+          id?: string
+          region_id: string
+          yield_max_t_ha?: number | null
+          yield_min_t_ha?: number | null
+        }
+        Update: {
+          assumptions?: string[] | null
+          confidence?: string | null
+          created_at?: string
+          crop_id?: string
+          id?: string
+          region_id?: string
+          yield_max_t_ha?: number | null
+          yield_min_t_ha?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "yield_estimates_crop_id_fkey"
+            columns: ["crop_id"]
+            isOneToOne: false
+            referencedRelation: "crop_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "yield_estimates_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
