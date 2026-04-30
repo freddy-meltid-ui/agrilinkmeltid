@@ -21,6 +21,7 @@ const Navbar = () => {
 
         <div className="hidden md:flex items-center gap-8 text-sm font-medium">
           <Link to="/marketplace" className="text-muted-foreground hover:text-foreground transition-colors">{t("nav.marketplace")}</Link>
+          <Link to="/atlas" className="text-muted-foreground hover:text-foreground transition-colors">Atlas Agricole</Link>
           <a href="#how-it-works" className="text-muted-foreground hover:text-foreground transition-colors">{t("nav.howItWorks")}</a>
           <a href="#stakeholders" className="text-muted-foreground hover:text-foreground transition-colors">{t("nav.about")}</a>
           <Link to="/messages" className="text-muted-foreground hover:text-foreground transition-colors">{t("nav.contact")}</Link>
@@ -46,6 +47,7 @@ const Navbar = () => {
       {open && (
         <div className="md:hidden bg-background border-b border-border px-4 py-4 space-y-3">
           <Link to="/marketplace" className="block text-sm text-muted-foreground" onClick={() => setOpen(false)}>{t("nav.marketplace")}</Link>
+          <Link to="/atlas" className="block text-sm text-muted-foreground" onClick={() => setOpen(false)}>Atlas Agricole</Link>
           <a href="#how-it-works" className="block text-sm text-muted-foreground" onClick={() => setOpen(false)}>{t("nav.howItWorks")}</a>
           <a href="#stakeholders" className="block text-sm text-muted-foreground" onClick={() => setOpen(false)}>{t("nav.about")}</a>
           <Link to="/messages" className="block text-sm text-muted-foreground" onClick={() => setOpen(false)}>{t("nav.contact")}</Link>
