@@ -46,10 +46,9 @@ const RegionDetailsPanel = ({ region }: { region: BeninRegion | null }) => {
               <p className="text-sm text-stone-600 mt-0.5">{region.agroecological_zone}</p>
             </div>
             <Button
-              size="sm"
               variant="outline"
               onClick={handleExport}
-              className="border-emerald-300 text-emerald-800 hover:bg-emerald-50 flex-shrink-0"
+              className="border-emerald-300 text-emerald-800 hover:bg-emerald-50 flex-shrink-0 min-h-[44px]"
             >
               <FileDown className="h-4 w-4 mr-1.5" />
               PDF
