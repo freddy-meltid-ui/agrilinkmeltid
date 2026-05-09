@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Layers, List, Map as MapIcon } from "lucide-react";
+import { ArrowLeft, Layers, List, Map as MapIcon, Download } from "lucide-react";
+import OfflineStatusBanner from "@/components/atlas/OfflineStatusBanner";
 import InteractiveAgriculturalMap from "@/components/atlas/InteractiveAgriculturalMap";
 import RegionDetailsPanel from "@/components/atlas/RegionDetailsPanel";
 import RegionFilterBar, { defaultFilters, type AtlasFilters } from "@/components/atlas/RegionFilterBar";
@@ -66,17 +67,26 @@ const AgriculturalAtlasPage = () => {
                 </p>
               </div>
             </div>
-            <Link
-              to="/atlas/explorer"
-              className="text-xs font-medium text-emerald-700 hover:text-emerald-900 underline hidden sm:inline"
-            >
-              Vue explorateur multi-pays →
-            </Link>
+            <div className="flex items-center gap-3 text-xs">
+              <Link
+                to="/atlas/offline"
+                className="font-medium text-emerald-700 hover:text-emerald-900 underline inline-flex items-center gap-1"
+              >
+                <Download className="h-3.5 w-3.5" /> Hors-ligne
+              </Link>
+              <Link
+                to="/atlas/explorer"
+                className="font-medium text-emerald-700 hover:text-emerald-900 underline hidden sm:inline"
+              >
+                Vue explorateur multi-pays →
+              </Link>
+            </div>
           </div>
         </div>
       </header>
 
       <main className="container mx-auto max-w-7xl px-4 py-4 lg:py-6 space-y-4">
+        <OfflineStatusBanner />
         <DisclaimerBanner />
 
         {/* Mobile: list-first with tab toggle to map */}
