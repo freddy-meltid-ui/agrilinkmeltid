@@ -32,7 +32,7 @@ const HeroSection = () => {
           </motion.p>
 
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }} className="flex flex-col sm:flex-row gap-4">
-            <Link to="/auth">
+            <Link to="/atlas">
               <Button variant="hero" size="lg" className="text-base px-8">
                 {t("hero.cta")} <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
