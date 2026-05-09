@@ -67,7 +67,7 @@ const InteractiveAgriculturalMap = ({ regions, selected, onSelect }: Props) => {
             <CircleMarker
               key={r.id}
               center={r.coordinates}
-              radius={isSelected ? 16 : 11}
+              radius={isSelected ? 20 : 14}
               pathOptions={{
                 color: isSelected ? "#064e3b" : color,
                 weight: isSelected ? 3 : 2,
