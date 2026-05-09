@@ -75,6 +75,12 @@ const AgriculturalAtlasPage = () => {
                 <Download className="h-3.5 w-3.5" /> Hors-ligne
               </Link>
               <Link
+                to="/atlas/sync"
+                className="font-medium text-emerald-700 hover:text-emerald-900 underline inline-flex items-center gap-1"
+              >
+                Synchronisation
+              </Link>
+              <Link
                 to="/atlas/explorer"
                 className="font-medium text-emerald-700 hover:text-emerald-900 underline hidden sm:inline"
               >
