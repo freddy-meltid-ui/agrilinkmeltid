@@ -322,4 +322,94 @@ const FarmerRow = ({
   </div>
 );
 
+const FieldActions = ({
+  crop,
+  regionId,
+  regionName,
+  cropId,
+}: {
+  crop: RecommendedCrop;
+  regionId: string | null;
+  regionName: string | null;
+  cropId: string | null;
+}) => {
+  const [busy, setBusy] = useState<"interest" | "resources" | null>(null);
+
+  const enqueueAndTrySync = async (
+    type: "farmer_interest",
+    payload: Record<string, unknown>,
+    successMsg: string
+  ) => {
+    const action = await enqueueAction(type, payload);
+    if (typeof navigator !== "undefined" && navigator.onLine) {
+      const r = await syncAction(action);
+      if (r.status === "synced") toast.success(`${successMsg} envoyé`);
+      else toast.warning(`${successMsg} enregistré — sera synchronisé plus tard`);
+    } else {
+      toast.success(`${successMsg} enregistré hors-ligne`);
+    }
+  };
+
+  const handleSaveInterest = async () => {
+    setBusy("interest");
+    try {
+      await enqueueAndTrySync(
+        "farmer_interest",
+        {
+          region_id: regionId,
+          crop_id: cropId,
+          interest_type: "cultivate",
+          notes: `Culture: ${crop.crop_name}${regionName ? ` (${regionName})` : ""}`,
+        },
+        "Intérêt"
+      );
+    } finally {
+      setBusy(null);
+    }
+  };
+
+  const handleRequestResources = async () => {
+    setBusy("resources");
+    try {
+      await enqueueAndTrySync(
+        "farmer_interest",
+        {
+          region_id: regionId,
+          crop_id: cropId,
+          interest_type: "find_resources",
+          notes: `Demande de ressources pour ${crop.crop_name}${
+            regionName ? ` à ${regionName}` : ""
+          }`,
+        },
+        "Demande"
+      );
+    } finally {
+      setBusy(null);
+    }
+  };
+
+  return (
+    <div className="pt-2 border-t border-stone-100 grid grid-cols-2 gap-2">
+      <button
+        type="button"
+        onClick={handleSaveInterest}
+        disabled={busy !== null}
+        className="inline-flex items-center justify-center gap-1.5 rounded-md border border-emerald-300 bg-white hover:bg-emerald-50 active:bg-emerald-100 text-emerald-800 text-xs font-medium px-3 py-2 min-h-[40px] transition-colors disabled:opacity-50"
+      >
+        <HeartHandshake className="h-4 w-4" />
+        {busy === "interest" ? "…" : "Intérêt agriculteur"}
+      </button>
+      <button
+        type="button"
+        onClick={handleRequestResources}
+        disabled={busy !== null}
+        className="inline-flex items-center justify-center gap-1.5 rounded-md border border-amber-300 bg-white hover:bg-amber-50 active:bg-amber-100 text-amber-800 text-xs font-medium px-3 py-2 min-h-[40px] transition-colors disabled:opacity-50"
+      >
+        <PackageSearch className="h-4 w-4" />
+        {busy === "resources" ? "…" : "Demander ressources"}
+      </button>
+    </div>
+  );
+};
+
 export default CropRecommendationCard;
