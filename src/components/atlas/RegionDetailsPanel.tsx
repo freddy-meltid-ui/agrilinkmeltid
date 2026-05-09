@@ -1,12 +1,18 @@
+import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MapPin, Droplets, Layers, Sprout, FileDown } from "lucide-react";
+import { MapPin, Droplets, Layers, Sprout, FileDown, Download, CheckCircle2 } from "lucide-react";
 import type { BeninRegion } from "@/lib/beninRegions";
 import CropRecommendationCard from "./CropRecommendationCard";
 import YieldPotentialCard from "./YieldPotentialCard";
 import { exportRegionPdf } from "@/lib/exportRegionPdf";
 import { toast } from "sonner";
+import {
+  buildPayloadFromStatic,
+  isRegionOffline,
+  saveOfflineRegion,
+} from "@/lib/offlineAtlas";
 
 const levelClass = (lvl: string) => {
   if (lvl === "élevée" || lvl === "élevé") return "bg-emerald-100 text-emerald-800";
@@ -15,6 +21,23 @@ const levelClass = (lvl: string) => {
 };
 
 const RegionDetailsPanel = ({ region }: { region: BeninRegion | null }) => {
+  const [downloaded, setDownloaded] = useState(false);
+  const [downloading, setDownloading] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    if (!region) {
+      setDownloaded(false);
+      return;
+    }
+    isRegionOffline(region.id).then((v) => {
+      if (active) setDownloaded(v);
+    });
+    return () => {
+      active = false;
+    };
+  }, [region]);
+
   if (!region) {
     return (
       <Card className="border-dashed border-stone-300">
@@ -32,6 +55,19 @@ const RegionDetailsPanel = ({ region }: { region: BeninRegion | null }) => {
       toast.success(`Fiche PDF de ${region.name} générée`);
     } catch (e) {
       toast.error("Échec de l'export PDF");
+    }
+  };
+
+  const handleDownloadOffline = async () => {
+    setDownloading(true);
+    try {
+      await saveOfflineRegion(buildPayloadFromStatic(region));
+      setDownloaded(true);
+      toast.success(`${region.name} disponible hors-ligne`);
+    } catch {
+      toast.error("Échec du téléchargement hors-ligne");
+    } finally {
+      setDownloading(false);
     }
   };
 
