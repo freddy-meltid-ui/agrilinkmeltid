@@ -54,8 +54,10 @@ const App = () => (
             <Route path="/atlas/explorer" element={<AtlasDashboard />} />
             <Route path="/atlas/region/:regionId" element={<RegionProfile />} />
             <Route path="/atlas/offline" element={<OfflineAtlas />} />
+            <Route path="/atlas/sync" element={<PendingSync />} />
             <Route path="*" element={<NotFound />} />
-          </Routes>
+            </Routes>
+          </SyncQueueProvider>
         </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
