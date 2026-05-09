@@ -1,6 +1,11 @@
 {
   "nav": {
-    "marketplace": "Marketplace",
+    "atlas": "Atlas",
+    "recommendations": "Recommendations",
+    "resources": "Resources",
+    "marketDemand": "Market Demand",
+    "profile": "Profile",
+    "marketplace": "Resources",
     "howItWorks": "How It Works",
     "about": "Solutions",
     "contact": "Contact",
@@ -9,13 +14,13 @@
     "dashboard": "Dashboard"
   },
   "hero": {
-    "badge": "Digital Infrastructure for Agriculture",
-    "title1": "The Operating System for",
-    "title2": "Africa's",
-    "title3": "Agriculture",
-    "subtitle": "Agri Grid is the digital backbone powering Africa's agricultural economy — connecting data, logistics, markets, and people into one seamless infrastructure layer.",
-    "cta": "Get Started",
-    "ctaSecondary": "Explore the Platform",
+    "badge": "AgriGrid Atlas",
+    "title1": "Agricultural intelligence and",
+    "title2": "resource coordination",
+    "title3": "for Africa",
+    "subtitle": "Open the Atlas to explore soils, rainfall, crop suitability and yield estimates by region — then coordinate the equipment, workers, storage, transport and buyers you need.",
+    "cta": "Open the Atlas",
+    "ctaSecondary": "Browse Resources",
     "trusted": "Powering agricultural operations across Africa"
   },
   "stakeholders": {
@@ -55,11 +60,11 @@
     "reduction": "in Waste Reduced"
   },
   "cta": {
-    "title": "Ready to Build on",
-    "titleHighlight": "Africa's Agri Infrastructure?",
-    "subtitle": "Join the network of producers, processors, logistics providers, and buyers building the future of African agriculture.",
-    "button": "Create Free Account",
-    "secondary": "Learn More"
+    "title": "Start with the",
+    "titleHighlight": "AgriGrid Atlas",
+    "subtitle": "Pick a region, get crop recommendations and yield estimates, then coordinate the resources you need to act on them.",
+    "button": "Open the Atlas",
+    "secondary": "Browse Resources"
   },
   "footer": {
     "description": "Digital infrastructure powering Africa's agricultural economy — connecting data, logistics, and markets.",
@@ -155,8 +160,8 @@
     "by": "by"
   },
   "marketplace": {
-    "title": "Marketplace",
-    "subtitle": "Browse produce, equipment, storage, transport, and workforce listings across the network.",
+    "title": "Resources",
+    "subtitle": "Resource Coordination — find equipment, workers, storage, transport and buyers across the network.",
     "searchPlaceholder": "Search listings...",
     "allTypes": "All Types",
     "produce": "Produce",

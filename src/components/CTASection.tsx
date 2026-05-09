@@ -16,7 +16,7 @@ const CTASection = () => {
           </h2>
           <p className="text-muted-foreground text-lg mb-10 max-w-2xl mx-auto">{t("cta.subtitle")}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/auth">
+            <Link to="/atlas">
               <Button size="lg" className="text-base px-8">
                 {t("cta.button")} <ArrowRight className="ml-2 w-5 h-5" />
               </Button>

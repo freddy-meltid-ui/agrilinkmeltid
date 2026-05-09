@@ -1,6 +1,11 @@
 {
   "nav": {
-    "marketplace": "Marché",
+    "atlas": "Atlas",
+    "recommendations": "Recommandations",
+    "resources": "Ressources",
+    "marketDemand": "Demande du marché",
+    "profile": "Profil",
+    "marketplace": "Ressources",
     "howItWorks": "Comment ça marche",
     "about": "Solutions",
     "contact": "Contact",
@@ -9,13 +14,13 @@
     "dashboard": "Tableau de bord"
   },
   "hero": {
-    "badge": "Infrastructure Numérique pour l'Agriculture",
-    "title1": "Le Système d'Exploitation de",
-    "title2": "l'Agriculture",
-    "title3": "Africaine",
-    "subtitle": "Agri Grid est l'infrastructure numérique qui alimente l'économie agricole africaine — connectant données, logistique, marchés et acteurs en une couche unifiée.",
-    "cta": "Commencer",
-    "ctaSecondary": "Explorer la Plateforme",
+    "badge": "AgriGrid Atlas",
+    "title1": "Intelligence agricole et",
+    "title2": "coordination des ressources",
+    "title3": "pour l'Afrique",
+    "subtitle": "Ouvrez l'Atlas pour explorer les sols, la pluviométrie, l'aptitude des cultures et les rendements par région — puis coordonnez équipements, main-d'œuvre, stockage, transport et acheteurs.",
+    "cta": "Ouvrir l'Atlas",
+    "ctaSecondary": "Voir les Ressources",
     "trusted": "Alimentant les opérations agricoles à travers l'Afrique"
   },
   "stakeholders": {
@@ -55,11 +60,11 @@
     "reduction": "de Gaspillage Réduit"
   },
   "cta": {
-    "title": "Prêt à Construire sur",
-    "titleHighlight": "l'Infrastructure Agri Africaine ?",
-    "subtitle": "Rejoignez le réseau de producteurs, transformateurs, logisticiens et acheteurs qui construisent l'avenir de l'agriculture africaine.",
-    "button": "Créer un Compte Gratuit",
-    "secondary": "En Savoir Plus"
+    "title": "Commencez avec",
+    "titleHighlight": "l'AgriGrid Atlas",
+    "subtitle": "Choisissez une région, obtenez recommandations et estimations de rendement, puis coordonnez les ressources nécessaires pour passer à l'action.",
+    "button": "Ouvrir l'Atlas",
+    "secondary": "Voir les Ressources"
   },
   "footer": {
     "description": "Infrastructure numérique alimentant l'économie agricole africaine — connectant données, logistique et marchés.",
@@ -155,8 +160,8 @@
     "by": "par"
   },
   "marketplace": {
-    "title": "Marché",
-    "subtitle": "Parcourez les produits, équipements, stockage, transport et offres de main-d'œuvre à travers le réseau.",
+    "title": "Ressources",
+    "subtitle": "Coordination des ressources — trouvez équipements, main-d'œuvre, stockage, transport et acheteurs à travers le réseau.",
     "searchPlaceholder": "Rechercher des annonces...",
     "allTypes": "Tous les types",
     "produce": "Produits",

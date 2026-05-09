@@ -1,119 +1,63 @@
-## Atlas Agricole — Real Interactive Map (Bénin)
+## Atlas-First Repositioning Plan
 
-Replace the current `MapPlaceholder` with a real Leaflet + OpenStreetMap map at `/atlas`. The map becomes the centerpiece: clicking a region highlights it, opens a popup, and updates a side panel with full agronomic details. All 12 Bénin departments are seeded as mock data, structured to be swappable with Supabase + GeoJSON later.
+Reframe AgriGrid around the Atlas as the entry point, while preserving all marketplace functionality and existing routes.
 
-### 1. Dependencies
+### 1. Navigation (`src/components/Navbar.tsx`)
+Replace the current 5 links with the new primary nav (desktop + mobile):
+- **Atlas** → `/atlas`
+- **Recommendations** → `/atlas` (anchors recommendation panel) — or `/listing-suggestions` if user prefers; default to `/atlas#recommendations`
+- **Resources** → `/marketplace` (renamed label only)
+- **Market Demand** → `/crop-prices`
+- **Profile** → `/profile` (or `/dashboard` when logged in)
 
-Install:
-- `leaflet`
-- `react-leaflet`
-- `@types/leaflet` (dev)
+Keep "How it works" / "About" out of the primary nav to stay focused. Footer keeps full links.
 
-Import Leaflet's CSS once globally in `src/main.tsx`:
-```ts
-import "leaflet/dist/leaflet.css";
-```
+### 2. Homepage (`src/pages/Index.tsx`, `HeroSection.tsx`, `CTASection.tsx`)
+- Update hero copy and badge to: **"AgriGrid Atlas — Agricultural intelligence and resource coordination for Africa."**
+- Primary CTA button: **"Open the Atlas"** → `/atlas` (replaces current `/auth` primary).
+- Secondary CTA: **"Browse Resources"** → `/marketplace`.
+- Update `CTASection` to mirror Atlas-first language with the same primary `/atlas` CTA.
+- Update i18n keys in `src/i18n/en.json` and `src/i18n/fr.json` (hero, cta, nav, footer marketplace → "Resources" label).
 
-### 2. Mock data — 12 Bénin departments
+### 3. Atlas page (`src/pages/AgriculturalAtlasPage.tsx`)
+- Update header title/subtitle to "AgriGrid Atlas — Agricultural intelligence and resource coordination for Africa."
+- Add a "Recommendations" anchor section so the nav link scrolls into the panel.
+- Keep map + filters + region details unchanged.
 
-New file `src/lib/beninRegions.ts` exporting a typed `BeninRegion[]` matching the spec exactly:
+### 4. Crop recommendation cards — Next Actions
+In `src/components/atlas/CropRecommendationCard.tsx`, append a "Prochaines actions" row with 5 compact buttons that link to `/marketplace` with the appropriate query param and crop context:
 
-```ts
-export type Suitability = "élevée" | "moyenne" | "faible";
-export type BeninRegion = {
-  id: string;
-  name: string;
-  country: "Bénin";
-  coordinates: [number, number];      // [lat, lng]
-  agroecological_zone: string;
-  rainfall_mm: string;
-  dominant_soil: string;
-  fertility_level: "faible" | "moyenne" | "élevée";
-  irrigation_potential: "faible" | "moyen" | "élevé";
-  potential_level: "faible" | "moyenne" | "élevée"; // for legend/filter
-  recommended_crops: {
-    crop_name: string;
-    suitability: Suitability;
-    expected_yield_range: string;
-    key_constraints: string;
-    recommendation: string;
-  }[];
-};
-```
+| Button | Route |
+|---|---|
+| Find equipment | `/marketplace?type=equipment&crop=<name>` |
+| Find workers | `/marketplace?type=job&crop=<name>` |
+| Find storage | `/marketplace?type=warehouse&crop=<name>` |
+| Find transport | `/marketplace?type=transport&crop=<name>` |
+| Find buyers | `/marketplace?type=produce&crop=<name>` |
 
-Seed all 12 departments with realistic centroids and 3–5 recommended crops each:
-Alibori, Borgou, Atacora, Donga, Collines, Zou, Atlantique, Ouémé, Mono, Couffo, Plateau, Littoral.
+Use small icon buttons (Wrench, Users, Warehouse, Truck, ShoppingCart) wrapped as `Link`s. No backend or business logic changes.
 
-Crops vary by zone (cotton/maize/sorghum north; cassava/maize/yam centre; pineapple/oil-palm/vegetables south).
+### 5. Marketplace reframing (`src/pages/Marketplace.tsx`)
+- Rename page heading and breadcrumbs to **"Resources"** / **"Resource Coordination"** (i18n).
+- Read `?type=` and `?crop=` from URL on mount and pre-populate `typeFilter` + `search` so next-action links land on a pre-filtered view.
+- Keep route `/marketplace` and all data fetching, RLS, and listing logic **unchanged**.
 
-### 3. New components (`src/components/atlas/`)
+### 6. i18n updates
+Add/update keys in both `en.json` and `fr.json`:
+- `nav.atlas`, `nav.recommendations`, `nav.resources`, `nav.marketDemand`, `nav.profile`
+- `hero.*` rewritten Atlas-first
+- `cta.*` rewritten with "Open the Atlas"
+- `marketplace.pageTitle` → "Resources" / "Ressources"
+- `crop.nextActions.*` (equipment, workers, storage, transport, buyers)
 
-- **InteractiveAgriculturalMap.tsx** — `react-leaflet` `<MapContainer>` centered on Bénin (`[9.3, 2.3]`, zoom 7), `<TileLayer>` using OSM tiles (`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`, attribution required). Renders a `<CircleMarker>` per region, color-coded by `potential_level` (emerald = élevée, amber = moyenne, stone = faible), radius enlarged + ring when selected. `<Popup>` shows region name and top 3 crops. `onClick` calls `onSelect(region)`. Uses `useMap()` helper to `flyTo` selected region.
-- **RegionDetailsPanel.tsx** — shows everything for the selected region: name, agroecological zone, rainfall, soil, fertility, irrigation, top crops list, expected yield ranges, main constraints, recommendation summary. Empty state: "Cliquez sur une région de la carte pour afficher ses détails."
-- **RegionFilterBar.tsx** — filters: crop type (select from union of all crops), potential level (élevée/moyenne/faible/all), rainfall range (slider or select buckets), soil fertility (select). Returns filter state to parent.
-- **CropRecommendationCard.tsx** — one crop entry with suitability badge.
-- **YieldPotentialCard.tsx** — yield range + constraints highlight.
-- **MapLegend.tsx** — overlay (bottom-right of map) with three color dots: potentiel élevé / moyen / faible.
-- Reuse existing **DisclaimerBanner.tsx** (text already matches the required disclaimer).
+### Acceptance check
+- `/atlas` is the homepage primary CTA. ✓
+- Marketplace still works at `/marketplace` and all listing/detail/new routes intact. ✓
+- "Resources" label visible across nav, footer, marketplace heading. ✓
+- Crop recommendation cards show 5 next-action buttons routing to `/marketplace?type=...`. ✓
+- No routes removed; `/atlas/explorer`, `/atlas/region/:id`, `/marketplace/new`, `/marketplace/:id` untouched. ✓
 
-### 4. New page
-
-`src/pages/AgriculturalAtlasPage.tsx` mounted at `/atlas` (replaces current `AtlasDashboard` route). Layout:
-
-```text
-+--------------------------------------------------+
-| Header: "Atlas Agricole"  + DisclaimerBanner     |
-+----------------+---------------------------------+
-| RegionFilter   |                                 |
-| Bar            |   InteractiveAgriculturalMap    |
-| RegionDetails  |   (with MapLegend overlay)      |
-| Panel          |                                 |
-+----------------+---------------------------------+
-```
-
-- Desktop (`lg:`): two columns — left panel `lg:col-span-4`, map `lg:col-span-8`, map height `h-[70vh]`.
-- Mobile: filters first, then map (`h-[50vh]`), then details panel below.
-- The old `AtlasDashboard` is kept accessible at `/atlas/explorer` (optional) so the Supabase-backed multi-country dashboard isn't lost; or simply removed from routing. **Decision:** keep old dashboard at `/atlas/explorer`, make `/atlas` the new map-first page.
-
-### 5. Routing & navigation
-
-- `src/App.tsx`: change `/atlas` → `AgriculturalAtlasPage`; add `/atlas/explorer` → existing `AtlasDashboard`.
-- `src/components/Navbar.tsx`: existing "Atlas" link continues to point to `/atlas` (now the map page).
-
-### 6. Leaflet marker icon fix
-
-Default Leaflet marker icons break under Vite bundling. Since we use `CircleMarker` (no image asset), this is avoided. If we later switch to `<Marker>`, configure `L.Icon.Default` with `import iconUrl from "leaflet/dist/images/marker-icon.png?url"` etc.
-
-### 7. Filter logic
-
-Filters narrow the markers shown on the map and the list in the side panel:
-- crop type → keep regions whose `recommended_crops` includes that crop with suitability ≥ filter.
-- potential level → equality on `potential_level`.
-- rainfall bucket (`<800`, `800–1100`, `1100–1400`, `>1400` mm) → parse `rainfall_mm`.
-- soil fertility → equality.
-
-### 8. Out of scope
-
-- No real GeoJSON polygons (CircleMarkers only; structure ready for `<GeoJSON>` later).
-- No Supabase changes — `beninRegions.ts` is pure mock.
-- No legal/cadastral data.
-- No weather/satellite API.
-
-### Files
-
-**Create**
-- `src/lib/beninRegions.ts`
-- `src/pages/AgriculturalAtlasPage.tsx`
-- `src/components/atlas/InteractiveAgriculturalMap.tsx`
-- `src/components/atlas/RegionDetailsPanel.tsx`
-- `src/components/atlas/RegionFilterBar.tsx`
-- `src/components/atlas/CropRecommendationCard.tsx`
-- `src/components/atlas/YieldPotentialCard.tsx`
-- `src/components/atlas/MapLegend.tsx`
-
-**Modify**
-- `src/App.tsx` (route swap)
-- `src/main.tsx` (Leaflet CSS import)
-- `package.json` (add leaflet, react-leaflet, @types/leaflet)
-
-Approve to implement.
+### Out of scope
+- No backend/Supabase changes.
+- No marketplace business logic, RLS, or schema changes.
+- Dashboard/messages/reputation flows unchanged.
