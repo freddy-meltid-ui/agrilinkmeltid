@@ -28,8 +28,12 @@ import {
   Activity,
   ChevronDown,
   Lightbulb,
+  HeartHandshake,
+  PackageSearch,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { enqueueAction, syncAction } from "@/lib/offlineQueue";
+import { toast } from "sonner";
 
 const suitabilityClass = (s: RecommendedCrop["suitability"]) => {
   if (s === "élevée") return "bg-emerald-100 text-emerald-800 border-emerald-200";
@@ -92,9 +96,15 @@ const ScoreBar = ({ label, value }: { label: string; value: number | null | unde
 const CropRecommendationCard = ({
   crop,
   intelligence,
+  regionId,
+  regionName,
+  cropId,
 }: {
   crop: RecommendedCrop;
   intelligence?: CropIntelligence;
+  regionId?: string | null;
+  regionName?: string | null;
+  cropId?: string | null;
 }) => {
   const [advancedOpen, setAdvancedOpen] = useState(false);
   const cropParam = encodeURIComponent(crop.crop_name);
