@@ -272,6 +272,14 @@ const CropRecommendationCard = ({
         </Collapsible>
       )}
 
+      {/* Field-agent actions: queued offline, synced when online */}
+      <FieldActions
+        crop={crop}
+        regionId={regionId ?? null}
+        regionName={regionName ?? null}
+        cropId={cropId ?? null}
+      />
+
       {/* Next actions — thumb friendly */}
       <div className="pt-2 border-t border-stone-100">
         <p className="text-[11px] uppercase tracking-wide font-semibold text-stone-500 mb-2">
