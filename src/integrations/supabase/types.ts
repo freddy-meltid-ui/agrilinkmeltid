@@ -881,6 +881,42 @@ export type Database = {
         }
         Relationships: []
       }
+      whatsapp_sessions: {
+        Row: {
+          created_at: string
+          current_state: string
+          id: string
+          metadata: Json
+          phone_number: string
+          selected_country: string | null
+          selected_crop_id: string | null
+          selected_region_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          current_state?: string
+          id?: string
+          metadata?: Json
+          phone_number: string
+          selected_country?: string | null
+          selected_crop_id?: string | null
+          selected_region_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          current_state?: string
+          id?: string
+          metadata?: Json
+          phone_number?: string
+          selected_country?: string | null
+          selected_crop_id?: string | null
+          selected_region_id?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       yield_estimates: {
         Row: {
           assumptions: string[] | null
