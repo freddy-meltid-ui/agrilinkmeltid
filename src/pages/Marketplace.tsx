@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
@@ -16,17 +16,26 @@ import { COUNTRIES } from "@/lib/countries";
 const Marketplace = () => {
   const { user } = useAuth();
   const { t, i18n } = useTranslation();
+  const [searchParams] = useSearchParams();
   const [listings, setListings] = useState<any[]>([]);
   const [profiles, setProfiles] = useState<Record<string, any>>({});
   const [sellerRatings, setSellerRatings] = useState<Record<string, number>>({});
-  const [search, setSearch] = useState("");
-  const [typeFilter, setTypeFilter] = useState("all");
+  const [search, setSearch] = useState(searchParams.get("crop") || "");
+  const [typeFilter, setTypeFilter] = useState(searchParams.get("type") || "all");
   const [countryFilter, setCountryFilter] = useState("all");
   const [cityFilter, setCityFilter] = useState("all");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [minRating, setMinRating] = useState(0);
   const [loading, setLoading] = useState(true);
+
+  // React to URL param changes (e.g., when navigating between Atlas next-action links)
+  useEffect(() => {
+    const t = searchParams.get("type");
+    const c = searchParams.get("crop");
+    if (t) setTypeFilter(t);
+    if (c !== null) setSearch(c);
+  }, [searchParams]);
 
   const TYPES = [
     { value: "all", label: t("marketplace.allTypes") },
