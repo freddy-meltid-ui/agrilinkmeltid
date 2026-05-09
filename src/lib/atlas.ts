@@ -177,3 +177,208 @@ export const saveRecommendation = async (regionId: string, cropId: string) => {
     .insert({ user_id: userRes.user.id, region_id: regionId, crop_id: cropId });
   if (error && !error.message.includes("duplicate")) throw error;
 };
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Atlas intelligence types
+// ─────────────────────────────────────────────────────────────────────────────
+
+export type RainfallProfile = {
+  id: string;
+  region_id: string;
+  annual_avg_mm: number | null;
+  monthly_avg_json: Record<string, number> | null;
+  rainy_season_start: string | null;
+  rainy_season_end: string | null;
+  dry_months: string[] | null;
+  source: string | null;
+  confidence: "low" | "medium" | "high" | null;
+};
+
+export type SeasonalityProfile = {
+  id: string;
+  region_id: string;
+  crop_id: string;
+  planting_window_start: string | null;
+  planting_window_end: string | null;
+  harvest_window_start: string | null;
+  harvest_window_end: string | null;
+  season_fit_score: number | null;
+  notes: string | null;
+  source: string | null;
+};
+
+export type RecommendationScore = {
+  id: string;
+  region_id: string;
+  crop_id: string;
+  soil_score: number | null;
+  rainfall_score: number | null;
+  seasonality_score: number | null;
+  yield_score: number | null;
+  market_score: number | null;
+  risk_score: number | null;
+  final_score: number | null;
+  confidence: "low" | "medium" | "high" | null;
+  explanation_json: {
+    why_crop?: string;
+    why_region?: string;
+    why_season?: string;
+    uncertainties?: string[];
+    [k: string]: unknown;
+  } | null;
+  source_version: string | null;
+};
+
+export type CropPrice = {
+  id: string;
+  crop_name: string;
+  price: number;
+  currency: string;
+  unit: string;
+  market_name: string;
+  country: string;
+  city: string | null;
+  recorded_at: string;
+  source: string | null;
+};
+
+export type DemandSignal = {
+  id: string;
+  crop_name: string;
+  country: string;
+  city: string | null;
+  listing_count: number;
+  buyer_count: number;
+  demand_level: "low" | "medium" | "high" | string;
+  recorded_at: string;
+};
+
+export type RegionAtlasIntelligence = {
+  region: Region | null;
+  rainfall: RainfallProfile | null;
+  recommendations: CropRecommendation[];
+  yields: YieldEstimate[];
+  scores: RecommendationScore[];
+  seasonality: SeasonalityProfile[];
+};
+
+export type MarketContext = {
+  latest_price: CropPrice | null;
+  prices: CropPrice[];
+  demand: DemandSignal | null;
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// New fetchers
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const getRainfallProfile = async (regionId: string): Promise<RainfallProfile | null> => {
+  const { data, error } = await supabase
+    .from("rainfall_profiles")
+    .select("*")
+    .eq("region_id", regionId)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (error) throw error;
+  return (data as unknown as RainfallProfile) ?? null;
+};
+
+export const getSeasonalityProfile = async (
+  regionId: string,
+  cropId: string
+): Promise<SeasonalityProfile | null> => {
+  const { data, error } = await supabase
+    .from("seasonality_profiles")
+    .select("*")
+    .eq("region_id", regionId)
+    .eq("crop_id", cropId)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (error) throw error;
+  return (data as unknown as SeasonalityProfile) ?? null;
+};
+
+export const getRecommendationScore = async (
+  regionId: string,
+  cropId: string
+): Promise<RecommendationScore | null> => {
+  const { data, error } = await supabase
+    .from("recommendation_scores")
+    .select("*")
+    .eq("region_id", regionId)
+    .eq("crop_id", cropId)
+    .order("updated_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (error) throw error;
+  return (data as unknown as RecommendationScore) ?? null;
+};
+
+export const getRegionAtlasIntelligence = async (
+  regionId: string
+): Promise<RegionAtlasIntelligence> => {
+  const [region, rainfallRes, recsRes, yieldsRes, scoresRes, seasonRes] = await Promise.all([
+    getRegion(regionId),
+    supabase
+      .from("rainfall_profiles")
+      .select("*")
+      .eq("region_id", regionId)
+      .order("created_at", { ascending: false })
+      .limit(1),
+    supabase.from("crop_recommendations").select("*").eq("region_id", regionId),
+    supabase.from("yield_estimates").select("*").eq("region_id", regionId),
+    supabase.from("recommendation_scores").select("*").eq("region_id", regionId),
+    supabase.from("seasonality_profiles").select("*").eq("region_id", regionId),
+  ]);
+
+  if (rainfallRes.error) throw rainfallRes.error;
+  if (recsRes.error) throw recsRes.error;
+  if (yieldsRes.error) throw yieldsRes.error;
+  if (scoresRes.error) throw scoresRes.error;
+  if (seasonRes.error) throw seasonRes.error;
+
+  return {
+    region,
+    rainfall: ((rainfallRes.data ?? [])[0] as unknown as RainfallProfile) ?? null,
+    recommendations: (recsRes.data as CropRecommendation[]) ?? [],
+    yields: (yieldsRes.data as YieldEstimate[]) ?? [],
+    scores: (scoresRes.data as unknown as RecommendationScore[]) ?? [],
+    seasonality: (seasonRes.data as unknown as SeasonalityProfile[]) ?? [],
+  };
+};
+
+export const getMarketContext = async (
+  cropName: string,
+  country?: string
+): Promise<MarketContext> => {
+  let priceQ = supabase
+    .from("crop_prices")
+    .select("*")
+    .ilike("crop_name", cropName)
+    .order("recorded_at", { ascending: false })
+    .limit(20);
+  if (country) priceQ = priceQ.eq("country", country);
+
+  let demandQ = supabase
+    .from("demand_signals")
+    .select("*")
+    .ilike("crop_name", cropName)
+    .order("recorded_at", { ascending: false })
+    .limit(1);
+  if (country) demandQ = demandQ.eq("country", country);
+
+  const [priceRes, demandRes] = await Promise.all([priceQ, demandQ]);
+  if (priceRes.error) throw priceRes.error;
+  if (demandRes.error) throw demandRes.error;
+
+  const prices = (priceRes.data as CropPrice[]) ?? [];
+  const demandRows = (demandRes.data as unknown as DemandSignal[]) ?? [];
+
+  return {
+    latest_price: prices[0] ?? null,
+    prices,
+    demand: demandRows[0] ?? null,
+  };
+};
