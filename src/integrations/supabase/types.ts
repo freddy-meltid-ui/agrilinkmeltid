@@ -14,6 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
+      atlas_feedback: {
+        Row: {
+          actor_type: string | null
+          comment: string | null
+          created_at: string
+          crop_id: string | null
+          feedback_type: string
+          id: string
+          region_id: string | null
+          user_id: string
+        }
+        Insert: {
+          actor_type?: string | null
+          comment?: string | null
+          created_at?: string
+          crop_id?: string | null
+          feedback_type: string
+          id?: string
+          region_id?: string | null
+          user_id: string
+        }
+        Update: {
+          actor_type?: string | null
+          comment?: string | null
+          created_at?: string
+          crop_id?: string | null
+          feedback_type?: string
+          id?: string
+          region_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "atlas_feedback_crop_id_fkey"
+            columns: ["crop_id"]
+            isOneToOne: false
+            referencedRelation: "crop_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "atlas_feedback_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       countries: {
         Row: {
           code: string
@@ -337,6 +385,122 @@ export type Database = {
         }
         Relationships: []
       }
+      rainfall_profiles: {
+        Row: {
+          annual_avg_mm: number | null
+          confidence: string | null
+          created_at: string
+          dry_months: string[] | null
+          id: string
+          monthly_avg_json: Json | null
+          rainy_season_end: string | null
+          rainy_season_start: string | null
+          region_id: string
+          source: string | null
+        }
+        Insert: {
+          annual_avg_mm?: number | null
+          confidence?: string | null
+          created_at?: string
+          dry_months?: string[] | null
+          id?: string
+          monthly_avg_json?: Json | null
+          rainy_season_end?: string | null
+          rainy_season_start?: string | null
+          region_id: string
+          source?: string | null
+        }
+        Update: {
+          annual_avg_mm?: number | null
+          confidence?: string | null
+          created_at?: string
+          dry_months?: string[] | null
+          id?: string
+          monthly_avg_json?: Json | null
+          rainy_season_end?: string | null
+          rainy_season_start?: string | null
+          region_id?: string
+          source?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rainfall_profiles_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recommendation_scores: {
+        Row: {
+          confidence: string | null
+          created_at: string
+          crop_id: string
+          explanation_json: Json | null
+          final_score: number | null
+          id: string
+          market_score: number | null
+          rainfall_score: number | null
+          region_id: string
+          risk_score: number | null
+          seasonality_score: number | null
+          soil_score: number | null
+          source_version: string | null
+          updated_at: string
+          yield_score: number | null
+        }
+        Insert: {
+          confidence?: string | null
+          created_at?: string
+          crop_id: string
+          explanation_json?: Json | null
+          final_score?: number | null
+          id?: string
+          market_score?: number | null
+          rainfall_score?: number | null
+          region_id: string
+          risk_score?: number | null
+          seasonality_score?: number | null
+          soil_score?: number | null
+          source_version?: string | null
+          updated_at?: string
+          yield_score?: number | null
+        }
+        Update: {
+          confidence?: string | null
+          created_at?: string
+          crop_id?: string
+          explanation_json?: Json | null
+          final_score?: number | null
+          id?: string
+          market_score?: number | null
+          rainfall_score?: number | null
+          region_id?: string
+          risk_score?: number | null
+          seasonality_score?: number | null
+          soil_score?: number | null
+          source_version?: string | null
+          updated_at?: string
+          yield_score?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recommendation_scores_crop_id_fkey"
+            columns: ["crop_id"]
+            isOneToOne: false
+            referencedRelation: "crop_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recommendation_scores_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       regions: {
         Row: {
           agroecological_zone: string | null
@@ -466,6 +630,63 @@ export type Database = {
           },
           {
             foreignKeyName: "saved_recommendations_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      seasonality_profiles: {
+        Row: {
+          created_at: string
+          crop_id: string
+          harvest_window_end: string | null
+          harvest_window_start: string | null
+          id: string
+          notes: string | null
+          planting_window_end: string | null
+          planting_window_start: string | null
+          region_id: string
+          season_fit_score: number | null
+          source: string | null
+        }
+        Insert: {
+          created_at?: string
+          crop_id: string
+          harvest_window_end?: string | null
+          harvest_window_start?: string | null
+          id?: string
+          notes?: string | null
+          planting_window_end?: string | null
+          planting_window_start?: string | null
+          region_id: string
+          season_fit_score?: number | null
+          source?: string | null
+        }
+        Update: {
+          created_at?: string
+          crop_id?: string
+          harvest_window_end?: string | null
+          harvest_window_start?: string | null
+          id?: string
+          notes?: string | null
+          planting_window_end?: string | null
+          planting_window_start?: string | null
+          region_id?: string
+          season_fit_score?: number | null
+          source?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "seasonality_profiles_crop_id_fkey"
+            columns: ["crop_id"]
+            isOneToOne: false
+            referencedRelation: "crop_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "seasonality_profiles_region_id_fkey"
             columns: ["region_id"]
             isOneToOne: false
             referencedRelation: "regions"
