@@ -65,7 +65,7 @@ const AgriculturalAtlasPage = () => {
         <DisclaimerBanner />
 
         <div className="grid gap-4 lg:grid-cols-12">
-          <aside className="lg:col-span-4 space-y-4 lg:max-h-[calc(100vh-12rem)] lg:overflow-y-auto lg:pr-2">
+          <aside id="recommendations" className="lg:col-span-4 space-y-4 lg:max-h-[calc(100vh-12rem)] lg:overflow-y-auto lg:pr-2 scroll-mt-20">
             <RegionFilterBar crops={crops} filters={filters} onChange={setFilters} />
             <RegionDetailsPanel region={selected} />
           </aside>
