@@ -1,12 +1,18 @@
+import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MapPin, Droplets, Layers, Sprout, FileDown } from "lucide-react";
+import { MapPin, Droplets, Layers, Sprout, FileDown, Download, CheckCircle2 } from "lucide-react";
 import type { BeninRegion } from "@/lib/beninRegions";
 import CropRecommendationCard from "./CropRecommendationCard";
 import YieldPotentialCard from "./YieldPotentialCard";
 import { exportRegionPdf } from "@/lib/exportRegionPdf";
 import { toast } from "sonner";
+import {
+  buildPayloadFromStatic,
+  isRegionOffline,
+  saveOfflineRegion,
+} from "@/lib/offlineAtlas";
 
 const levelClass = (lvl: string) => {
   if (lvl === "élevée" || lvl === "élevé") return "bg-emerald-100 text-emerald-800";
@@ -15,6 +21,23 @@ const levelClass = (lvl: string) => {
 };
 
 const RegionDetailsPanel = ({ region }: { region: BeninRegion | null }) => {
+  const [downloaded, setDownloaded] = useState(false);
+  const [downloading, setDownloading] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    if (!region) {
+      setDownloaded(false);
+      return;
+    }
+    isRegionOffline(region.id).then((v) => {
+      if (active) setDownloaded(v);
+    });
+    return () => {
+      active = false;
+    };
+  }, [region]);
+
   if (!region) {
     return (
       <Card className="border-dashed border-stone-300">
@@ -35,6 +58,19 @@ const RegionDetailsPanel = ({ region }: { region: BeninRegion | null }) => {
     }
   };
 
+  const handleDownloadOffline = async () => {
+    setDownloading(true);
+    try {
+      await saveOfflineRegion(buildPayloadFromStatic(region));
+      setDownloaded(true);
+      toast.success(`${region.name} disponible hors-ligne`);
+    } catch {
+      toast.error("Échec du téléchargement hors-ligne");
+    } finally {
+      setDownloading(false);
+    }
+  };
+
   return (
     <div className="space-y-4">
       <Card className="border-emerald-100">
@@ -45,14 +81,38 @@ const RegionDetailsPanel = ({ region }: { region: BeninRegion | null }) => {
               <h2 className="text-xl font-semibold text-emerald-950">{region.name}</h2>
               <p className="text-sm text-stone-600 mt-0.5">{region.agroecological_zone}</p>
             </div>
-            <Button
-              variant="outline"
-              onClick={handleExport}
-              className="border-emerald-300 text-emerald-800 hover:bg-emerald-50 flex-shrink-0 min-h-[44px]"
-            >
-              <FileDown className="h-4 w-4 mr-1.5" />
-              PDF
-            </Button>
+            <div className="flex flex-col gap-2 flex-shrink-0">
+              <Button
+                variant="outline"
+                onClick={handleExport}
+                className="border-emerald-300 text-emerald-800 hover:bg-emerald-50 min-h-[44px]"
+              >
+                <FileDown className="h-4 w-4 mr-1.5" />
+                PDF
+              </Button>
+              <Button
+                variant={downloaded ? "secondary" : "default"}
+                onClick={handleDownloadOffline}
+                disabled={downloading}
+                className={`min-h-[44px] ${
+                  downloaded
+                    ? "bg-emerald-100 text-emerald-800 hover:bg-emerald-200"
+                    : "bg-emerald-700 hover:bg-emerald-800 text-white"
+                }`}
+              >
+                {downloaded ? (
+                  <>
+                    <CheckCircle2 className="h-4 w-4 mr-1.5" />
+                    Hors-ligne
+                  </>
+                ) : (
+                  <>
+                    <Download className="h-4 w-4 mr-1.5" />
+                    {downloading ? "…" : "Télécharger"}
+                  </>
+                )}
+              </Button>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3 text-sm">

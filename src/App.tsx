@@ -21,6 +21,7 @@ import ResetPassword from "./pages/ResetPassword";
 import AtlasDashboard from "./pages/AtlasDashboard";
 import RegionProfile from "./pages/RegionProfile";
 import AgriculturalAtlasPage from "./pages/AgriculturalAtlasPage";
+import OfflineAtlas from "./pages/OfflineAtlas";
 
 const queryClient = new QueryClient();
 
@@ -49,6 +50,7 @@ const App = () => (
             <Route path="/atlas" element={<AgriculturalAtlasPage />} />
             <Route path="/atlas/explorer" element={<AtlasDashboard />} />
             <Route path="/atlas/region/:regionId" element={<RegionProfile />} />
+            <Route path="/atlas/offline" element={<OfflineAtlas />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
