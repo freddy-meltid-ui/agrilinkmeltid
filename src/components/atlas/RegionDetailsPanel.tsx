@@ -141,7 +141,12 @@ const RegionDetailsPanel = ({ region }: { region: BeninRegion | null }) => {
         </div>
         <div className="space-y-2">
           {region.recommended_crops.map((c) => (
-            <CropRecommendationCard key={c.crop_name} crop={c} />
+            <CropRecommendationCard
+              key={c.crop_name}
+              crop={c}
+              regionId={region.id}
+              regionName={region.name}
+            />
           ))}
         </div>
       </div>

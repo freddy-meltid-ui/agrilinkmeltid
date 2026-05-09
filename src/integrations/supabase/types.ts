@@ -245,6 +245,101 @@ export type Database = {
         }
         Relationships: []
       }
+      farmer_interests: {
+        Row: {
+          created_at: string
+          crop_id: string | null
+          farm_size_ha: number | null
+          id: string
+          interest_type: string
+          notes: string | null
+          phone_number: string | null
+          region_id: string | null
+          synced_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          crop_id?: string | null
+          farm_size_ha?: number | null
+          id?: string
+          interest_type: string
+          notes?: string | null
+          phone_number?: string | null
+          region_id?: string | null
+          synced_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          crop_id?: string | null
+          farm_size_ha?: number | null
+          id?: string
+          interest_type?: string
+          notes?: string | null
+          phone_number?: string | null
+          region_id?: string | null
+          synced_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "farmer_interests_crop_id_fkey"
+            columns: ["crop_id"]
+            isOneToOne: false
+            referencedRelation: "crop_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "farmer_interests_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      field_sessions: {
+        Row: {
+          created_at: string
+          id: string
+          notes: string | null
+          region_id: string | null
+          session_type: string
+          status: string
+          synced_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          region_id?: string | null
+          session_type: string
+          status?: string
+          synced_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          region_id?: string | null
+          session_type?: string
+          status?: string
+          synced_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "field_sessions_region_id_fkey"
+            columns: ["region_id"]
+            isOneToOne: false
+            referencedRelation: "regions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       listings: {
         Row: {
           created_at: string

@@ -28,8 +28,12 @@ import {
   Activity,
   ChevronDown,
   Lightbulb,
+  HeartHandshake,
+  PackageSearch,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { enqueueAction, syncAction } from "@/lib/offlineQueue";
+import { toast } from "sonner";
 
 const suitabilityClass = (s: RecommendedCrop["suitability"]) => {
   if (s === "élevée") return "bg-emerald-100 text-emerald-800 border-emerald-200";
@@ -92,9 +96,15 @@ const ScoreBar = ({ label, value }: { label: string; value: number | null | unde
 const CropRecommendationCard = ({
   crop,
   intelligence,
+  regionId,
+  regionName,
+  cropId,
 }: {
   crop: RecommendedCrop;
   intelligence?: CropIntelligence;
+  regionId?: string | null;
+  regionName?: string | null;
+  cropId?: string | null;
 }) => {
   const [advancedOpen, setAdvancedOpen] = useState(false);
   const cropParam = encodeURIComponent(crop.crop_name);
@@ -262,6 +272,14 @@ const CropRecommendationCard = ({
         </Collapsible>
       )}
 
+      {/* Field-agent actions: queued offline, synced when online */}
+      <FieldActions
+        crop={crop}
+        regionId={regionId ?? null}
+        regionName={regionName ?? null}
+        cropId={cropId ?? null}
+      />
+
       {/* Next actions — thumb friendly */}
       <div className="pt-2 border-t border-stone-100">
         <p className="text-[11px] uppercase tracking-wide font-semibold text-stone-500 mb-2">
@@ -303,5 +321,95 @@ const FarmerRow = ({
     </div>
   </div>
 );
+
+const FieldActions = ({
+  crop,
+  regionId,
+  regionName,
+  cropId,
+}: {
+  crop: RecommendedCrop;
+  regionId: string | null;
+  regionName: string | null;
+  cropId: string | null;
+}) => {
+  const [busy, setBusy] = useState<"interest" | "resources" | null>(null);
+
+  const enqueueAndTrySync = async (
+    type: "farmer_interest",
+    payload: Record<string, unknown>,
+    successMsg: string
+  ) => {
+    const action = await enqueueAction(type, payload);
+    if (typeof navigator !== "undefined" && navigator.onLine) {
+      const r = await syncAction(action);
+      if (r.status === "synced") toast.success(`${successMsg} envoyé`);
+      else toast.warning(`${successMsg} enregistré — sera synchronisé plus tard`);
+    } else {
+      toast.success(`${successMsg} enregistré hors-ligne`);
+    }
+  };
+
+  const handleSaveInterest = async () => {
+    setBusy("interest");
+    try {
+      await enqueueAndTrySync(
+        "farmer_interest",
+        {
+          region_id: regionId,
+          crop_id: cropId,
+          interest_type: "cultivate",
+          notes: `Culture: ${crop.crop_name}${regionName ? ` (${regionName})` : ""}`,
+        },
+        "Intérêt"
+      );
+    } finally {
+      setBusy(null);
+    }
+  };
+
+  const handleRequestResources = async () => {
+    setBusy("resources");
+    try {
+      await enqueueAndTrySync(
+        "farmer_interest",
+        {
+          region_id: regionId,
+          crop_id: cropId,
+          interest_type: "find_resources",
+          notes: `Demande de ressources pour ${crop.crop_name}${
+            regionName ? ` à ${regionName}` : ""
+          }`,
+        },
+        "Demande"
+      );
+    } finally {
+      setBusy(null);
+    }
+  };
+
+  return (
+    <div className="pt-2 border-t border-stone-100 grid grid-cols-2 gap-2">
+      <button
+        type="button"
+        onClick={handleSaveInterest}
+        disabled={busy !== null}
+        className="inline-flex items-center justify-center gap-1.5 rounded-md border border-emerald-300 bg-white hover:bg-emerald-50 active:bg-emerald-100 text-emerald-800 text-xs font-medium px-3 py-2 min-h-[40px] transition-colors disabled:opacity-50"
+      >
+        <HeartHandshake className="h-4 w-4" />
+        {busy === "interest" ? "…" : "Intérêt agriculteur"}
+      </button>
+      <button
+        type="button"
+        onClick={handleRequestResources}
+        disabled={busy !== null}
+        className="inline-flex items-center justify-center gap-1.5 rounded-md border border-amber-300 bg-white hover:bg-amber-50 active:bg-amber-100 text-amber-800 text-xs font-medium px-3 py-2 min-h-[40px] transition-colors disabled:opacity-50"
+      >
+        <PackageSearch className="h-4 w-4" />
+        {busy === "resources" ? "…" : "Demander ressources"}
+      </button>
+    </div>
+  );
+};
 
 export default CropRecommendationCard;

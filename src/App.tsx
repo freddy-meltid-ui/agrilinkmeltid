@@ -22,6 +22,8 @@ import AtlasDashboard from "./pages/AtlasDashboard";
 import RegionProfile from "./pages/RegionProfile";
 import AgriculturalAtlasPage from "./pages/AgriculturalAtlasPage";
 import OfflineAtlas from "./pages/OfflineAtlas";
+import PendingSync from "./pages/PendingSync";
+import SyncQueueProvider from "./components/SyncQueueProvider";
 
 const queryClient = new QueryClient();
 
@@ -32,7 +34,8 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AuthProvider>
-          <Routes>
+          <SyncQueueProvider>
+            <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/reset-password" element={<ResetPassword />} />
@@ -51,8 +54,10 @@ const App = () => (
             <Route path="/atlas/explorer" element={<AtlasDashboard />} />
             <Route path="/atlas/region/:regionId" element={<RegionProfile />} />
             <Route path="/atlas/offline" element={<OfflineAtlas />} />
+            <Route path="/atlas/sync" element={<PendingSync />} />
             <Route path="*" element={<NotFound />} />
-          </Routes>
+            </Routes>
+          </SyncQueueProvider>
         </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
