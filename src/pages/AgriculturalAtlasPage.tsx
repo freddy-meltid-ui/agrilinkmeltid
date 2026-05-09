@@ -44,10 +44,10 @@ const AgriculturalAtlasPage = () => {
                 <Layers className="h-6 w-6 text-emerald-700" />
               </div>
               <div>
-                <h1 className="text-2xl sm:text-3xl font-semibold text-emerald-950">Atlas Agricole</h1>
+                <h1 className="text-2xl sm:text-3xl font-semibold text-emerald-950">AgriGrid Atlas</h1>
                 <p className="text-stone-600 mt-1 text-sm">
-                  Carte d'aide à la décision agricole — Bénin. Cliquez sur une région pour voir
-                  ses sols, cultures recommandées et rendements indicatifs.
+                  Agricultural intelligence and resource coordination for Africa. Sélectionnez une région
+                  pour voir sols, pluviométrie, aptitude des cultures, rendements indicatifs et opportunités de marché.
                 </p>
               </div>
             </div>
