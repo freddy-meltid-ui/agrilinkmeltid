@@ -19,7 +19,7 @@ import { computeFreshness } from "@/lib/v2/freshness";
 import { runFieldMutation } from "@/lib/v2/fieldSync";
 import type { FieldAgent } from "@/lib/v2/supply";
 
-type Assignment = { id: string; supplier_id: string; field_agent_id: string; status: string };
+type Assignment = { id: string; supplier_id: string; field_agent_id: string; is_primary: boolean };
 
 const V2FieldAdmin = () => {
   const { t } = useTranslation();
@@ -31,14 +31,14 @@ const V2FieldAdmin = () => {
   const [busy, setBusy] = useState(false);
   const [assignOpen, setAssignOpen] = useState(false);
   const [assignForm, setAssignForm] = useState({ supplierId: "", agentId: "" });
-  const [agentForm, setAgentForm] = useState({ email: "", display_name: "", phone: "", coverage: "" });
+  const [agentForm, setAgentForm] = useState({ user_id: "", full_name: "", phone: "", coverage: "" });
   const [agentOpen, setAgentOpen] = useState(false);
 
   const load = useCallback(async () => {
     setLoading(true);
     const [agentRes, assignRes] = await Promise.all([
-      supabase.from("v2_field_agents").select("*").order("display_name"),
-      supabase.from("v2_supplier_assignments").select("id, supplier_id, field_agent_id, status"),
+      supabase.from("v2_field_agents").select("*").order("full_name"),
+      supabase.from("v2_supplier_assignments").select("id, supplier_id, field_agent_id, is_primary"),
     ]);
     setAgents((agentRes.data as FieldAgent[]) ?? []);
     setAssignments((assignRes.data as Assignment[]) ?? []);
@@ -70,11 +70,13 @@ const V2FieldAdmin = () => {
       "supplier.update",
       async () => {
         const { error } = await supabase.from("v2_field_agents").insert({
-          display_name: agentForm.display_name,
-          contact_email: agentForm.email || null,
+          user_id: agentForm.user_id.trim(),
+          full_name: agentForm.full_name.trim(),
           phone: agentForm.phone || null,
-          coverage_area: agentForm.coverage || null,
-          status: "pending_activation",
+          assigned_areas: agentForm.coverage
+            ? agentForm.coverage.split(",").map((a) => a.trim()).filter(Boolean)
+            : [],
+          status: "active",
         });
         if (error) throw error;
       },
@@ -82,7 +84,7 @@ const V2FieldAdmin = () => {
     );
     setBusy(false);
     setAgentOpen(false);
-    setAgentForm({ email: "", display_name: "", phone: "", coverage: "" });
+    setAgentForm({ user_id: "", full_name: "", phone: "", coverage: "" });
     load();
   };
 
@@ -128,14 +130,14 @@ const V2FieldAdmin = () => {
           <DialogContent>
             <DialogHeader><DialogTitle>{t("v2.field.admin.newAgent")}</DialogTitle></DialogHeader>
             <div className="space-y-3">
-              <div className="space-y-1.5"><Label>{t("v2.field.admin.agentName")}</Label><Input className="h-12" value={agentForm.display_name} onChange={(e) => setAgentForm({ ...agentForm, display_name: e.target.value })} /></div>
-              <div className="space-y-1.5"><Label>{t("v2.field.admin.agentEmail")}</Label><Input className="h-12" type="email" value={agentForm.email} onChange={(e) => setAgentForm({ ...agentForm, email: e.target.value })} /></div>
+              <div className="space-y-1.5"><Label>{t("v2.field.admin.agentName")}</Label><Input className="h-12" value={agentForm.full_name} onChange={(e) => setAgentForm({ ...agentForm, full_name: e.target.value })} /></div>
+              <div className="space-y-1.5"><Label>{t("v2.field.admin.agentUserId")}</Label><Input className="h-12" value={agentForm.user_id} onChange={(e) => setAgentForm({ ...agentForm, user_id: e.target.value })} placeholder="uuid" /></div>
               <div className="space-y-1.5"><Label>{t("v2.field.register.phone")}</Label><Input className="h-12" value={agentForm.phone} onChange={(e) => setAgentForm({ ...agentForm, phone: e.target.value })} /></div>
               <div className="space-y-1.5"><Label>{t("v2.field.admin.coverage")}</Label><Input className="h-12" value={agentForm.coverage} onChange={(e) => setAgentForm({ ...agentForm, coverage: e.target.value })} /></div>
               <p className="text-xs text-muted-foreground">{t("v2.field.admin.agentLinkHint")}</p>
             </div>
             <DialogFooter>
-              <Button className="h-12 w-full" disabled={busy || !agentForm.display_name} onClick={createAgent}>
+              <Button className="h-12 w-full" disabled={busy || !agentForm.full_name || !agentForm.user_id} onClick={createAgent}>
                 {busy && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}{t("v2.common.save")}
               </Button>
             </DialogFooter>
@@ -166,7 +168,7 @@ const V2FieldAdmin = () => {
                   <SelectTrigger className="h-12"><SelectValue /></SelectTrigger>
                   <SelectContent>
                     {agents.map((a) => (
-                      <SelectItem key={a.id} value={a.id}>{a.display_name}</SelectItem>
+                      <SelectItem key={a.id} value={a.id}>{a.full_name}</SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -189,8 +191,8 @@ const V2FieldAdmin = () => {
             {agents.map((a) => (
               <div key={a.id} className="flex items-center justify-between gap-3 rounded-lg border border-border p-3">
                 <div>
-                  <p className="text-sm font-medium">{a.display_name}</p>
-                  <p className="text-xs text-muted-foreground">{a.coverage_area ?? "—"} · {t("v2.field.admin.assignedCount", { count: assignedCount(a.id) })}</p>
+                  <p className="text-sm font-medium">{a.full_name}</p>
+                  <p className="text-xs text-muted-foreground">{a.assigned_areas?.join(", ") || "—"} · {t("v2.field.admin.assignedCount", { count: assignedCount(a.id) })}</p>
                 </div>
                 <StatusBadge tone={a.status === "active" ? "success" : "warning"} label={a.status} />
               </div>
