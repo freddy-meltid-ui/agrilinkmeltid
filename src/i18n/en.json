@@ -338,7 +338,8 @@
       "finance": "Finance",
       "documents": "Documents",
       "marketplace": "Marketplace",
-      "settings": "Settings"
+      "settings": "Settings",
+      "processor": "Processor profile"
     },
     "shell": {
       "openMenu": "Open menu",
@@ -364,7 +365,33 @@
     },
     "dashboard": {
       "title": "Command center",
-      "description": "Supply, sourcing, operations, compliance and finance at a glance."
+      "description": "Supply, sourcing, operations, compliance and finance at a glance.",
+      "processorSubtitle": "Overview of your processing activity.",
+      "viewProfile": "View profile",
+      "noOrgTitle": "Welcome to Agri-Grid V2",
+      "noOrgDescription": "Create your processor profile to get started.",
+      "ctaOnboarding": "Start onboarding",
+      "facilities": "Facilities",
+      "products": "Processed products",
+      "rawMaterials": "Raw materials",
+      "monthlyNeed": "Monthly need",
+      "monthlyNeedHint": "Estimated from your recurring needs",
+      "activities": "Processing activities",
+      "rawMaterialsTitle": "Raw materials required",
+      "completeness": "Profile completeness",
+      "completenessHint": "Complete your profile for better matching.",
+      "ctaComplete": "Complete my profile",
+      "noNeedsTitle": "No raw-material needs yet",
+      "noNeedsDescription": "Add your recurring needs to prepare your sourcing.",
+      "ctaAddNeeds": "Add my raw-material needs",
+      "operationsTitle": "Operations",
+      "empty": {
+        "purchases": "Purchases",
+        "suppliers": "Suppliers",
+        "deliveries": "Deliveries",
+        "none": "No data yet",
+        "sourcingSoon": "\"Create a sourcing request\" will be available in the next phase."
+      }
     },
     "supply": {
       "title": "Supply",
@@ -429,6 +456,136 @@
       "agrigrid_admin": "Agri-Grid admin",
       "compliance_advisor": "Compliance advisor",
       "financial_partner": "Financial partner"
+    },
+    "common": {
+      "back": "Back",
+      "next": "Next",
+      "save": "Save",
+      "remove": "Remove"
+    },
+    "units": {
+      "kg": "kg",
+      "tonnes": "tonnes",
+      "sacs": "bags",
+      "litres": "litres"
+    },
+    "periods": {
+      "day": "day",
+      "week": "week",
+      "month": "month",
+      "year": "year"
+    },
+    "frequencies": {
+      "weekly": "weekly",
+      "biweekly": "biweekly",
+      "monthly": "monthly",
+      "quarterly": "quarterly",
+      "seasonal": "seasonal"
+    },
+    "valueChains": {
+      "ananas": "Pineapple",
+      "anacarde": "Cashew",
+      "manioc": "Cassava",
+      "mais": "Maize",
+      "soja": "Soybean",
+      "karite": "Shea",
+      "riz": "Rice",
+      "tomate": "Tomato",
+      "palmier": "Oil palm",
+      "autre": "Other"
+    },
+    "challenges": {
+      "raw_material_sourcing": "Finding raw materials",
+      "unstable_supply": "Unstable supply",
+      "high_prices": "High raw-material prices",
+      "quality_inconsistency": "Quality inconsistency",
+      "inventory_management": "Inventory management",
+      "production_tracking": "Production tracking",
+      "financial_management": "Financial management",
+      "access_to_finance": "Access to finance",
+      "certification": "Certification",
+      "market_access": "Market access"
+    },
+    "onboarding": {
+      "title": "Processor onboarding",
+      "description": "Tell us about your business, facility, products and raw-material needs.",
+      "saved": "Processor profile saved",
+      "error": "Could not save",
+      "finish": "Finish",
+      "step1": {
+        "label": "Business",
+        "title": "Business information"
+      },
+      "step2": {
+        "label": "Main facility",
+        "title": "Main processing facility"
+      },
+      "step3": {
+        "label": "Activities",
+        "title": "Value chains and processed products"
+      },
+      "step4": {
+        "label": "Raw materials",
+        "title": "Raw material requirements",
+        "hint": "Add each raw material separately. Finished products are captured in the previous step."
+      },
+      "step5": {
+        "label": "Challenges",
+        "title": "Current challenges"
+      },
+      "fields": {
+        "select": "Select",
+        "legalName": "Legal name",
+        "tradeName": "Trade name",
+        "legalForm": "Legal form",
+        "rccm": "RCCM (if available)",
+        "ifu": "IFU (if available)",
+        "year": "Year established",
+        "phone": "Business phone",
+        "email": "Business email",
+        "facilityName": "Facility name",
+        "department": "Department",
+        "commune": "Commune",
+        "arrondissement": "Arrondissement / village",
+        "address": "Address",
+        "latitude": "Latitude (GPS)",
+        "longitude": "Longitude (GPS)",
+        "capacity": "Processing capacity",
+        "unit": "Unit",
+        "period": "Period",
+        "valueChains": "Agricultural value chains",
+        "processedProducts": "Processed products",
+        "productName": "Product name",
+        "valueChain": "Value chain",
+        "productionCapacity": "Production capacity",
+        "addProduct": "Add a product",
+        "employees": "Number of employees",
+        "crop": "Crop",
+        "variety": "Variety",
+        "quality": "Preferred quality",
+        "quantity": "Typical quantity",
+        "frequency": "Frequency",
+        "season": "Sourcing season",
+        "radius": "Sourcing radius (km)",
+        "addNeed": "Add a raw material"
+      }
+    },
+    "processor": {
+      "title": "Processor profile",
+      "description": "Review and update your company information.",
+      "emptyTitle": "No processor profile yet",
+      "emptyDescription": "Complete onboarding to create your processor profile.",
+      "editOnboarding": "Continue onboarding",
+      "facilities": "Processing facilities",
+      "mainFacility": "Main",
+      "products": "Processed products",
+      "rawMaterials": "Raw materials required",
+      "noFacilities": "No facility recorded yet.",
+      "noProducts": "No processed product recorded yet.",
+      "noRawMaterials": "No raw material recorded yet.",
+      "noChallenges": "No challenge selected.",
+      "saved": "Profile updated",
+      "saveError": "Could not update"
     }
   },
   "language": {
