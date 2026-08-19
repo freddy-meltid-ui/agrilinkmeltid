@@ -326,6 +326,111 @@
     "badge": "Professionnel Vérifié",
     "status": "Vérifié"
   },
+  "v2": {
+    "nav": {
+      "dashboard": "Tableau de bord",
+      "supply": "Offre",
+      "sourcing": "Approvisionnement",
+      "suppliers": "Fournisseurs",
+      "operations": "Opérations",
+      "atlas": "Atlas",
+      "compliance": "Conformité",
+      "finance": "Finance",
+      "documents": "Documents",
+      "marketplace": "Place de marché",
+      "settings": "Paramètres"
+    },
+    "shell": {
+      "openMenu": "Ouvrir le menu",
+      "closeMenu": "Fermer le menu",
+      "backToV1": "Revenir à la V1",
+      "signOut": "Déconnexion",
+      "signIn": "Connexion"
+    },
+    "org": {
+      "none": "Aucune organisation",
+      "select": "Choisir une organisation",
+      "yourOrganizations": "Vos organisations"
+    },
+    "phase": {
+      "p1": "Phase 1",
+      "p2": "Phase 2",
+      "p3": "Phase 3",
+      "p4": "Phase 4"
+    },
+    "placeholder": {
+      "title": "Bientôt disponible",
+      "description": "Ce module fait partie de la feuille de route Agri-Grid V2. Les fondations sont en place ; le parcours sera construit à la phase indiquée ci-dessus."
+    },
+    "dashboard": {
+      "title": "Centre de pilotage",
+      "description": "Offre, approvisionnement, opérations, conformité et finance en un coup d'œil."
+    },
+    "supply": {
+      "title": "Offre disponible",
+      "description": "Identifier les matières premières agricoles disponibles par culture, localisation et période de récolte."
+    },
+    "sourcing": {
+      "title": "Approvisionnement",
+      "description": "Créer des demandes d'approvisionnement et consulter les fournisseurs correspondants."
+    },
+    "suppliers": {
+      "title": "Fournisseurs",
+      "description": "Profils des producteurs et coopératives, statut de vérification et historique de livraison."
+    },
+    "operations": {
+      "title": "Opérations",
+      "description": "Achats, stocks, lots de production, ventes et dépenses."
+    },
+    "atlas": {
+      "title": "Atlas",
+      "description": "Intelligence environnementale et intelligence d'offre sur vos zones d'approvisionnement."
+    },
+    "compliance": {
+      "title": "Conformité",
+      "description": "Préparer votre entreprise aux inspections et à la certification. Agri-Grid ne délivre aucune certification."
+    },
+    "finance": {
+      "title": "Finance",
+      "description": "Vue financière opérationnelle et Indicateur Agri-Grid de préparation au financement."
+    },
+    "documents": {
+      "title": "Documents",
+      "description": "Documents d'entreprise, de conformité et de financement au même endroit."
+    },
+    "marketplace": {
+      "title": "Place de marché",
+      "description": "La place de marché de l'écosystème Agri-Grid reste disponible comme module secondaire.",
+      "legacyBadge": "Module hérité (V1)",
+      "emptyTitle": "Place de marché (V1)",
+      "emptyDescription": "Toutes les annonces, messages et fonctions de réputation existantes sont préservés et inchangés.",
+      "open": "Ouvrir la place de marché"
+    },
+    "settings": {
+      "title": "Paramètres",
+      "description": "Gérer votre organisation et vos accès.",
+      "currentOrg": "Organisation active",
+      "createOrg": "Créer une organisation",
+      "orgName": "Nom de l'organisation",
+      "orgNamePlaceholder": "ex. Tropic Foods Bénin",
+      "createHint": "Vous devenez administrateur de l'organisation que vous créez.",
+      "createSuccess": "Organisation créée",
+      "createError": "Impossible de créer l'organisation",
+      "noOrg": "Vous n'appartenez encore à aucune organisation.",
+      "orgCount": "{{count}} organisation(s) liée(s) à votre compte",
+      "signInRequired": "Connectez-vous pour gérer votre organisation"
+    },
+    "roles": {
+      "processor_admin": "Administrateur transformateur",
+      "processor_employee": "Employé transformateur",
+      "field_agent": "Agent de terrain",
+      "farmer": "Producteur",
+      "cooperative_manager": "Responsable de coopérative",
+      "agrigrid_admin": "Administrateur Agri-Grid",
+      "compliance_advisor": "Conseiller conformité",
+      "financial_partner": "Partenaire financier"
+    }
+  },
   "language": {
     "en": "English",
     "fr": "Français"
