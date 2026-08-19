@@ -69,6 +69,18 @@ const V2Dashboard = () => {
       </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
+        <CoveragePanel rows={coverage} />
+        <PipelineSummary rows={pipeline} />
+      </div>
+      <div className="mt-3">
+        <Link to="/app/supply">
+          <Button variant="outline" size="sm">{t("v2.supplyIntel.title")}</Button>
+        </Link>
+      </div>
+
+
+
+      <div className="mt-6 grid gap-6 lg:grid-cols-2">
         <section className="rounded-lg border border-border bg-card p-5">
           <h2 className="mb-3 font-medium">{t("v2.dashboard.activities")}</h2>
           {bundle.products.length ? (
