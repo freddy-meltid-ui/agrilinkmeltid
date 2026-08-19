@@ -881,6 +881,541 @@ export type Database = {
         }
         Relationships: []
       }
+      v2_crop_cycles: {
+        Row: {
+          area_unit: string
+          client_ref: string | null
+          created_at: string
+          created_by: string
+          crop_id: string
+          cultivated_area: number | null
+          estimated_yield: number | null
+          expected_harvest_end: string | null
+          expected_harvest_start: string | null
+          id: string
+          notes: string | null
+          parcel_id: string
+          planting_date: string | null
+          production_practice: string | null
+          status: Database["public"]["Enums"]["v2_crop_cycle_status"]
+          supplier_id: string
+          updated_at: string
+          variety_id: string | null
+          yield_unit: string
+        }
+        Insert: {
+          area_unit?: string
+          client_ref?: string | null
+          created_at?: string
+          created_by?: string
+          crop_id: string
+          cultivated_area?: number | null
+          estimated_yield?: number | null
+          expected_harvest_end?: string | null
+          expected_harvest_start?: string | null
+          id?: string
+          notes?: string | null
+          parcel_id: string
+          planting_date?: string | null
+          production_practice?: string | null
+          status?: Database["public"]["Enums"]["v2_crop_cycle_status"]
+          supplier_id: string
+          updated_at?: string
+          variety_id?: string | null
+          yield_unit?: string
+        }
+        Update: {
+          area_unit?: string
+          client_ref?: string | null
+          created_at?: string
+          created_by?: string
+          crop_id?: string
+          cultivated_area?: number | null
+          estimated_yield?: number | null
+          expected_harvest_end?: string | null
+          expected_harvest_start?: string | null
+          id?: string
+          notes?: string | null
+          parcel_id?: string
+          planting_date?: string | null
+          production_practice?: string | null
+          status?: Database["public"]["Enums"]["v2_crop_cycle_status"]
+          supplier_id?: string
+          updated_at?: string
+          variety_id?: string | null
+          yield_unit?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_crop_cycles_crop_id_fkey"
+            columns: ["crop_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crops"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_crop_cycles_parcel_id_fkey"
+            columns: ["parcel_id"]
+            isOneToOne: false
+            referencedRelation: "v2_farm_parcels"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_crop_cycles_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "v2_suppliers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_crop_cycles_variety_id_fkey"
+            columns: ["variety_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crop_varieties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_crop_varieties: {
+        Row: {
+          code: string
+          created_at: string
+          crop_id: string
+          id: string
+          is_active: boolean
+          name_en: string
+          name_fr: string
+          notes: string | null
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          crop_id: string
+          id?: string
+          is_active?: boolean
+          name_en: string
+          name_fr: string
+          notes?: string | null
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          crop_id?: string
+          id?: string
+          is_active?: boolean
+          name_en?: string
+          name_fr?: string
+          notes?: string | null
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_crop_varieties_crop_id_fkey"
+            columns: ["crop_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crops"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_crops: {
+        Row: {
+          code: string
+          created_at: string
+          default_unit_code: string | null
+          id: string
+          is_active: boolean
+          name_en: string
+          name_fr: string
+          sort_order: number
+          updated_at: string
+          value_chain_id: string | null
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          default_unit_code?: string | null
+          id?: string
+          is_active?: boolean
+          name_en: string
+          name_fr: string
+          sort_order?: number
+          updated_at?: string
+          value_chain_id?: string | null
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          default_unit_code?: string | null
+          id?: string
+          is_active?: boolean
+          name_en?: string
+          name_fr?: string
+          sort_order?: number
+          updated_at?: string
+          value_chain_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_crops_value_chain_id_fkey"
+            columns: ["value_chain_id"]
+            isOneToOne: false
+            referencedRelation: "v2_value_chains"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_farm_parcels: {
+        Row: {
+          area: number | null
+          area_unit: string
+          boundary_geojson: Json | null
+          client_ref: string | null
+          created_at: string
+          created_by: string
+          farm_id: string
+          id: string
+          irrigation_status: string | null
+          is_active: boolean
+          latitude: number | null
+          longitude: number | null
+          notes: string | null
+          reference: string
+          supplier_id: string
+          updated_at: string
+        }
+        Insert: {
+          area?: number | null
+          area_unit?: string
+          boundary_geojson?: Json | null
+          client_ref?: string | null
+          created_at?: string
+          created_by?: string
+          farm_id: string
+          id?: string
+          irrigation_status?: string | null
+          is_active?: boolean
+          latitude?: number | null
+          longitude?: number | null
+          notes?: string | null
+          reference: string
+          supplier_id: string
+          updated_at?: string
+        }
+        Update: {
+          area?: number | null
+          area_unit?: string
+          boundary_geojson?: Json | null
+          client_ref?: string | null
+          created_at?: string
+          created_by?: string
+          farm_id?: string
+          id?: string
+          irrigation_status?: string | null
+          is_active?: boolean
+          latitude?: number | null
+          longitude?: number | null
+          notes?: string | null
+          reference?: string
+          supplier_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_farm_parcels_farm_id_fkey"
+            columns: ["farm_id"]
+            isOneToOne: false
+            referencedRelation: "v2_farms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_farm_parcels_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "v2_suppliers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_farms: {
+        Row: {
+          accessibility_notes: string | null
+          area_unit: string
+          arrondissement: string | null
+          client_ref: string | null
+          commune: string | null
+          country: string
+          created_at: string
+          created_by: string
+          department: string | null
+          id: string
+          is_active: boolean
+          latitude: number | null
+          longitude: number | null
+          name: string
+          supplier_id: string
+          total_area: number | null
+          updated_at: string
+          village: string | null
+        }
+        Insert: {
+          accessibility_notes?: string | null
+          area_unit?: string
+          arrondissement?: string | null
+          client_ref?: string | null
+          commune?: string | null
+          country?: string
+          created_at?: string
+          created_by?: string
+          department?: string | null
+          id?: string
+          is_active?: boolean
+          latitude?: number | null
+          longitude?: number | null
+          name: string
+          supplier_id: string
+          total_area?: number | null
+          updated_at?: string
+          village?: string | null
+        }
+        Update: {
+          accessibility_notes?: string | null
+          area_unit?: string
+          arrondissement?: string | null
+          client_ref?: string | null
+          commune?: string | null
+          country?: string
+          created_at?: string
+          created_by?: string
+          department?: string | null
+          id?: string
+          is_active?: boolean
+          latitude?: number | null
+          longitude?: number | null
+          name?: string
+          supplier_id?: string
+          total_area?: number | null
+          updated_at?: string
+          village?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_farms_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "v2_suppliers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_field_agents: {
+        Row: {
+          assigned_areas: string[]
+          country: string
+          created_at: string
+          created_by: string
+          email: string | null
+          full_name: string
+          id: string
+          notes: string | null
+          phone: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          assigned_areas?: string[]
+          country?: string
+          created_at?: string
+          created_by?: string
+          email?: string | null
+          full_name: string
+          id?: string
+          notes?: string | null
+          phone?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          assigned_areas?: string[]
+          country?: string
+          created_at?: string
+          created_by?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          notes?: string | null
+          phone?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      v2_field_visits: {
+        Row: {
+          actions_performed: string[]
+          client_ref: string | null
+          created_at: string
+          created_by: string
+          farm_id: string | null
+          field_agent_id: string | null
+          id: string
+          latitude: number | null
+          longitude: number | null
+          next_visit_date: string | null
+          notes: string | null
+          photos: Json
+          supplier_id: string
+          updated_at: string
+          visit_date: string
+          visit_type: Database["public"]["Enums"]["v2_visit_type"]
+        }
+        Insert: {
+          actions_performed?: string[]
+          client_ref?: string | null
+          created_at?: string
+          created_by?: string
+          farm_id?: string | null
+          field_agent_id?: string | null
+          id?: string
+          latitude?: number | null
+          longitude?: number | null
+          next_visit_date?: string | null
+          notes?: string | null
+          photos?: Json
+          supplier_id: string
+          updated_at?: string
+          visit_date?: string
+          visit_type?: Database["public"]["Enums"]["v2_visit_type"]
+        }
+        Update: {
+          actions_performed?: string[]
+          client_ref?: string | null
+          created_at?: string
+          created_by?: string
+          farm_id?: string | null
+          field_agent_id?: string | null
+          id?: string
+          latitude?: number | null
+          longitude?: number | null
+          next_visit_date?: string | null
+          notes?: string | null
+          photos?: Json
+          supplier_id?: string
+          updated_at?: string
+          visit_date?: string
+          visit_type?: Database["public"]["Enums"]["v2_visit_type"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_field_visits_farm_id_fkey"
+            columns: ["farm_id"]
+            isOneToOne: false
+            referencedRelation: "v2_farms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_field_visits_field_agent_id_fkey"
+            columns: ["field_agent_id"]
+            isOneToOne: false
+            referencedRelation: "v2_field_agents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_field_visits_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "v2_suppliers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_harvest_forecasts: {
+        Row: {
+          captured_by: string
+          client_ref: string | null
+          confidence: Database["public"]["Enums"]["v2_confidence"]
+          created_at: string
+          crop_cycle_id: string
+          estimated_quantity: number
+          expected_harvest_end: string | null
+          expected_harvest_start: string | null
+          field_visit_id: string | null
+          forecast_date: string
+          id: string
+          observation: string | null
+          source: string
+          supplier_id: string
+          unit_code: string
+          updated_at: string
+        }
+        Insert: {
+          captured_by?: string
+          client_ref?: string | null
+          confidence?: Database["public"]["Enums"]["v2_confidence"]
+          created_at?: string
+          crop_cycle_id: string
+          estimated_quantity: number
+          expected_harvest_end?: string | null
+          expected_harvest_start?: string | null
+          field_visit_id?: string | null
+          forecast_date?: string
+          id?: string
+          observation?: string | null
+          source?: string
+          supplier_id: string
+          unit_code?: string
+          updated_at?: string
+        }
+        Update: {
+          captured_by?: string
+          client_ref?: string | null
+          confidence?: Database["public"]["Enums"]["v2_confidence"]
+          created_at?: string
+          crop_cycle_id?: string
+          estimated_quantity?: number
+          expected_harvest_end?: string | null
+          expected_harvest_start?: string | null
+          field_visit_id?: string | null
+          forecast_date?: string
+          id?: string
+          observation?: string | null
+          source?: string
+          supplier_id?: string
+          unit_code?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_harvest_forecasts_crop_cycle_id_fkey"
+            columns: ["crop_cycle_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crop_cycles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_harvest_forecasts_field_visit_id_fkey"
+            columns: ["field_visit_id"]
+            isOneToOne: false
+            referencedRelation: "v2_field_visits"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_harvest_forecasts_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "v2_suppliers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       v2_organization_members: {
         Row: {
           created_at: string
@@ -1162,6 +1697,7 @@ export type Database = {
           created_at: string
           created_by: string
           crop: string
+          crop_id: string | null
           delivery_area: string | null
           facility_id: string | null
           frequency: string
@@ -1176,13 +1712,16 @@ export type Database = {
           sourcing_season: string | null
           status: string
           unit: string
+          unit_code: string | null
           updated_at: string
           variety: string | null
+          variety_id: string | null
         }
         Insert: {
           created_at?: string
           created_by?: string
           crop: string
+          crop_id?: string | null
           delivery_area?: string | null
           facility_id?: string | null
           frequency?: string
@@ -1197,13 +1736,16 @@ export type Database = {
           sourcing_season?: string | null
           status?: string
           unit?: string
+          unit_code?: string | null
           updated_at?: string
           variety?: string | null
+          variety_id?: string | null
         }
         Update: {
           created_at?: string
           created_by?: string
           crop?: string
+          crop_id?: string | null
           delivery_area?: string | null
           facility_id?: string | null
           frequency?: string
@@ -1218,10 +1760,19 @@ export type Database = {
           sourcing_season?: string | null
           status?: string
           unit?: string
+          unit_code?: string | null
           updated_at?: string
           variety?: string | null
+          variety_id?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "v2_raw_material_needs_crop_id_fkey"
+            columns: ["crop_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crops"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "v2_raw_material_needs_facility_id_fkey"
             columns: ["facility_id"]
@@ -1236,7 +1787,357 @@ export type Database = {
             referencedRelation: "v2_organizations"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "v2_raw_material_needs_variety_id_fkey"
+            columns: ["variety_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crop_varieties"
+            referencedColumns: ["id"]
+          },
         ]
+      }
+      v2_settings: {
+        Row: {
+          created_at: string
+          description: string | null
+          key: string
+          updated_at: string
+          value: Json
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          key: string
+          updated_at?: string
+          value: Json
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          key?: string
+          updated_at?: string
+          value?: Json
+        }
+        Relationships: []
+      }
+      v2_supplier_assignments: {
+        Row: {
+          assigned_by: string | null
+          created_at: string
+          field_agent_id: string
+          id: string
+          is_primary: boolean
+          supplier_id: string
+          updated_at: string
+        }
+        Insert: {
+          assigned_by?: string | null
+          created_at?: string
+          field_agent_id: string
+          id?: string
+          is_primary?: boolean
+          supplier_id: string
+          updated_at?: string
+        }
+        Update: {
+          assigned_by?: string | null
+          created_at?: string
+          field_agent_id?: string
+          id?: string
+          is_primary?: boolean
+          supplier_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_supplier_assignments_field_agent_id_fkey"
+            columns: ["field_agent_id"]
+            isOneToOne: false
+            referencedRelation: "v2_field_agents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_supplier_assignments_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "v2_suppliers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_suppliers: {
+        Row: {
+          affiliation: string | null
+          arrondissement: string | null
+          client_ref: string | null
+          commune: string | null
+          cooperative_supplier_id: string | null
+          country: string
+          created_at: string
+          created_by: string
+          department: string | null
+          display_name: string
+          first_name: string | null
+          id: string
+          is_active: boolean
+          last_name: string | null
+          last_verified_at: string | null
+          latitude: number | null
+          longitude: number | null
+          notes: string | null
+          phone: string | null
+          phone_secondary: string | null
+          preferred_language: string
+          status: Database["public"]["Enums"]["v2_supplier_status"]
+          supplier_code: string
+          supplier_type: Database["public"]["Enums"]["v2_supplier_type"]
+          updated_at: string
+          user_id: string | null
+          village: string | null
+        }
+        Insert: {
+          affiliation?: string | null
+          arrondissement?: string | null
+          client_ref?: string | null
+          commune?: string | null
+          cooperative_supplier_id?: string | null
+          country?: string
+          created_at?: string
+          created_by?: string
+          department?: string | null
+          display_name: string
+          first_name?: string | null
+          id?: string
+          is_active?: boolean
+          last_name?: string | null
+          last_verified_at?: string | null
+          latitude?: number | null
+          longitude?: number | null
+          notes?: string | null
+          phone?: string | null
+          phone_secondary?: string | null
+          preferred_language?: string
+          status?: Database["public"]["Enums"]["v2_supplier_status"]
+          supplier_code?: string
+          supplier_type?: Database["public"]["Enums"]["v2_supplier_type"]
+          updated_at?: string
+          user_id?: string | null
+          village?: string | null
+        }
+        Update: {
+          affiliation?: string | null
+          arrondissement?: string | null
+          client_ref?: string | null
+          commune?: string | null
+          cooperative_supplier_id?: string | null
+          country?: string
+          created_at?: string
+          created_by?: string
+          department?: string | null
+          display_name?: string
+          first_name?: string | null
+          id?: string
+          is_active?: boolean
+          last_name?: string | null
+          last_verified_at?: string | null
+          latitude?: number | null
+          longitude?: number | null
+          notes?: string | null
+          phone?: string | null
+          phone_secondary?: string | null
+          preferred_language?: string
+          status?: Database["public"]["Enums"]["v2_supplier_status"]
+          supplier_code?: string
+          supplier_type?: Database["public"]["Enums"]["v2_supplier_type"]
+          updated_at?: string
+          user_id?: string | null
+          village?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_suppliers_cooperative_supplier_id_fkey"
+            columns: ["cooperative_supplier_id"]
+            isOneToOne: false
+            referencedRelation: "v2_suppliers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_supply_availability: {
+        Row: {
+          asking_price: number | null
+          availability_end: string | null
+          availability_start: string | null
+          certification_status: string | null
+          client_ref: string | null
+          confirmed_by: string | null
+          created_at: string
+          created_by: string
+          crop_cycle_id: string | null
+          crop_id: string
+          id: string
+          last_confirmed_at: string | null
+          notes: string | null
+          price_unit: string | null
+          quality_grade: string | null
+          quantity_available: number
+          source: string
+          status: Database["public"]["Enums"]["v2_supply_status"]
+          supplier_id: string
+          unit_code: string
+          updated_at: string
+          variety_id: string | null
+        }
+        Insert: {
+          asking_price?: number | null
+          availability_end?: string | null
+          availability_start?: string | null
+          certification_status?: string | null
+          client_ref?: string | null
+          confirmed_by?: string | null
+          created_at?: string
+          created_by?: string
+          crop_cycle_id?: string | null
+          crop_id: string
+          id?: string
+          last_confirmed_at?: string | null
+          notes?: string | null
+          price_unit?: string | null
+          quality_grade?: string | null
+          quantity_available: number
+          source?: string
+          status?: Database["public"]["Enums"]["v2_supply_status"]
+          supplier_id: string
+          unit_code?: string
+          updated_at?: string
+          variety_id?: string | null
+        }
+        Update: {
+          asking_price?: number | null
+          availability_end?: string | null
+          availability_start?: string | null
+          certification_status?: string | null
+          client_ref?: string | null
+          confirmed_by?: string | null
+          created_at?: string
+          created_by?: string
+          crop_cycle_id?: string | null
+          crop_id?: string
+          id?: string
+          last_confirmed_at?: string | null
+          notes?: string | null
+          price_unit?: string | null
+          quality_grade?: string | null
+          quantity_available?: number
+          source?: string
+          status?: Database["public"]["Enums"]["v2_supply_status"]
+          supplier_id?: string
+          unit_code?: string
+          updated_at?: string
+          variety_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_supply_availability_crop_cycle_id_fkey"
+            columns: ["crop_cycle_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crop_cycles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_supply_availability_crop_id_fkey"
+            columns: ["crop_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crops"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_supply_availability_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "v2_suppliers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_supply_availability_variety_id_fkey"
+            columns: ["variety_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crop_varieties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_units: {
+        Row: {
+          code: string
+          created_at: string
+          dimension: string
+          id: string
+          is_active: boolean
+          name_en: string
+          name_fr: string
+          sort_order: number
+          to_base_factor: number | null
+          updated_at: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          dimension?: string
+          id?: string
+          is_active?: boolean
+          name_en: string
+          name_fr: string
+          sort_order?: number
+          to_base_factor?: number | null
+          updated_at?: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          dimension?: string
+          id?: string
+          is_active?: boolean
+          name_en?: string
+          name_fr?: string
+          sort_order?: number
+          to_base_factor?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      v2_value_chains: {
+        Row: {
+          code: string
+          created_at: string
+          id: string
+          is_active: boolean
+          name_en: string
+          name_fr: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name_en: string
+          name_fr: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name_en?: string
+          name_fr?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
       }
       whatsapp_sessions: {
         Row: {
@@ -1334,6 +2235,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      v2_can_access_supplier: {
+        Args: { _supplier_id: string; _user_id: string }
+        Returns: boolean
+      }
       v2_has_org_role: {
         Args: {
           _org_id: string
@@ -1342,6 +2247,8 @@ export type Database = {
         }
         Returns: boolean
       }
+      v2_is_agrigrid_admin: { Args: { _user_id: string }; Returns: boolean }
+      v2_is_field_agent: { Args: { _user_id: string }; Returns: boolean }
       v2_is_org_admin: {
         Args: { _org_id: string; _user_id: string }
         Returns: boolean
@@ -1370,6 +2277,14 @@ export type Database = {
         | "transport"
         | "job"
         | "processing"
+      v2_confidence: "low" | "medium" | "high"
+      v2_crop_cycle_status:
+        | "planned"
+        | "growing"
+        | "harvest_approaching"
+        | "harvesting"
+        | "completed"
+        | "cancelled"
       v2_org_role:
         | "processor_admin"
         | "processor_employee"
@@ -1380,6 +2295,32 @@ export type Database = {
         | "compliance_advisor"
         | "financial_partner"
       v2_org_type: "processor" | "cooperative" | "field_network" | "agrigrid"
+      v2_supplier_status:
+        | "unverified"
+        | "field_verified"
+        | "update_required"
+        | "inactive"
+      v2_supplier_type:
+        | "individual_farmer"
+        | "cooperative"
+        | "producer_group"
+        | "aggregator"
+      v2_supply_status:
+        | "forecast"
+        | "expected"
+        | "available"
+        | "reserved"
+        | "sold"
+        | "expired"
+        | "withdrawn"
+      v2_visit_type:
+        | "registration"
+        | "data_update"
+        | "crop_monitoring"
+        | "harvest_forecast"
+        | "supply_confirmation"
+        | "quality_check"
+        | "other"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1527,6 +2468,15 @@ export const Constants = {
         "job",
         "processing",
       ],
+      v2_confidence: ["low", "medium", "high"],
+      v2_crop_cycle_status: [
+        "planned",
+        "growing",
+        "harvest_approaching",
+        "harvesting",
+        "completed",
+        "cancelled",
+      ],
       v2_org_role: [
         "processor_admin",
         "processor_employee",
@@ -1538,6 +2488,36 @@ export const Constants = {
         "financial_partner",
       ],
       v2_org_type: ["processor", "cooperative", "field_network", "agrigrid"],
+      v2_supplier_status: [
+        "unverified",
+        "field_verified",
+        "update_required",
+        "inactive",
+      ],
+      v2_supplier_type: [
+        "individual_farmer",
+        "cooperative",
+        "producer_group",
+        "aggregator",
+      ],
+      v2_supply_status: [
+        "forecast",
+        "expected",
+        "available",
+        "reserved",
+        "sold",
+        "expired",
+        "withdrawn",
+      ],
+      v2_visit_type: [
+        "registration",
+        "data_update",
+        "crop_monitoring",
+        "harvest_forecast",
+        "supply_confirmation",
+        "quality_check",
+        "other",
+      ],
     },
   },
 } as const
