@@ -855,10 +855,10 @@
         "suppliers": "{{count}} producteurs",
         "note": "Une disponibilité confirmée remplace la prévision du même cycle cultural : les volumes ne sont jamais comptés deux fois.",
         "bucket": {
-          "0_30": "0–30 jours",
-          "31_60": "31–60 jours",
-          "61_90": "61–90 jours",
-          "90_plus": "90 jours et +"
+          "available_now": "Disponible maintenant",
+          "within_30_days": "Sous 30 jours",
+          "days_31_90": "31–90 jours",
+          "beyond_90_days": "Au-delà de 90 jours"
         }
       },
       "coverage": {
