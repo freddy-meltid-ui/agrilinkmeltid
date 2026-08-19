@@ -26,6 +26,7 @@ export type V2NavItem = {
 export const V2_NAV_ITEMS: V2NavItem[] = [
   { to: "/app/dashboard", labelKey: "v2.nav.dashboard", icon: LayoutDashboard },
   { to: "/app/processor", labelKey: "v2.nav.processor", icon: Factory },
+  { to: "/app/field", labelKey: "v2.nav.field", icon: Users },
   { to: "/app/supply", labelKey: "v2.nav.supply", icon: Sprout, comingSoon: true },
   { to: "/app/sourcing", labelKey: "v2.nav.sourcing", icon: ClipboardList, comingSoon: true },
   { to: "/app/suppliers", labelKey: "v2.nav.suppliers", icon: Users, comingSoon: true },
