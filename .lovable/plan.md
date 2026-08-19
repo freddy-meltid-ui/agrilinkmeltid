@@ -1,63 +1,31 @@
-## Atlas-First Repositioning Plan
+# Nouveaux acteurs : transformateurs, grossistes et semi-grossistes
 
-Reframe AgriGrid around the Atlas as the entry point, while preserving all marketplace functionality and existing routes.
+## Objectif
 
-### 1. Navigation (`src/components/Navbar.tsx`)
-Replace the current 5 links with the new primary nav (desktop + mobile):
-- **Atlas** → `/atlas`
-- **Recommendations** → `/atlas` (anchors recommendation panel) — or `/listing-suggestions` if user prefers; default to `/atlas#recommendations`
-- **Resources** → `/marketplace` (renamed label only)
-- **Market Demand** → `/crop-prices`
-- **Profile** → `/profile` (or `/dashboard` when logged in)
+Élargir les acteurs de la chaîne de valeur : ajouter le rôle **Transformateur**, et remplacer le rôle générique **Acheteur** par deux rôles distincts, **Grossiste** et **Semi-grossiste**. Les transformateurs obtiennent aussi une nouvelle catégorie d'annonces « Transformation » dans les Ressources.
 
-Keep "How it works" / "About" out of the primary nav to stay focused. Footer keeps full links.
+## Ce qui change pour l'utilisateur
 
-### 2. Homepage (`src/pages/Index.tsx`, `HeroSection.tsx`, `CTASection.tsx`)
-- Update hero copy and badge to: **"AgriGrid Atlas — Agricultural intelligence and resource coordination for Africa."**
-- Primary CTA button: **"Open the Atlas"** → `/atlas` (replaces current `/auth` primary).
-- Secondary CTA: **"Browse Resources"** → `/marketplace`.
-- Update `CTASection` to mirror Atlas-first language with the same primary `/atlas` CTA.
-- Update i18n keys in `src/i18n/en.json` and `src/i18n/fr.json` (hero, cta, nav, footer marketplace → "Resources" label).
+- À l'inscription et dans le profil, la liste des rôles devient : Agriculteur, Ouvrier agricole, Loueur d'équipement, Propriétaire d'entrepôt, Transporteur, **Transformateur**, **Grossiste**, **Semi-grossiste**.
+- Les comptes existants marqués « Acheteur » deviennent automatiquement « Grossiste ».
+- La page « À proximité » propose des onglets Stockage, Transport, **Transformation**, Acheteurs (grossistes + semi-grossistes regroupés, avec badge distinguant les deux).
+- Les Ressources (marketplace) gagnent une catégorie **Transformation** : unités et services de transformation, filtrable comme les autres types.
+- Les recommandations de l'Atlas ajoutent une action « Trouver un transformateur » à côté de « Trouver un acheteur ».
+- La section acteurs de la page d'accueil affiche une carte Transformateurs et distingue grossistes / semi-grossistes.
+- Tous les libellés sont ajoutés en français et en anglais.
 
-### 3. Atlas page (`src/pages/AgriculturalAtlasPage.tsx`)
-- Update header title/subtitle to "AgriGrid Atlas — Agricultural intelligence and resource coordination for Africa."
-- Add a "Recommendations" anchor section so the nav link scrolls into the panel.
-- Keep map + filters + region details unchanged.
+## Détails techniques
 
-### 4. Crop recommendation cards — Next Actions
-In `src/components/atlas/CropRecommendationCard.tsx`, append a "Prochaines actions" row with 5 compact buttons that link to `/marketplace` with the appropriate query param and crop context:
+Migration base de données (une seule migration) :
+- Ajouter aux types énumérés : `app_role` → `processor`, `wholesaler`, `semi_wholesaler` ; `listing_type` → `processing`.
+- Migrer les données : `UPDATE public.user_roles SET role = 'wholesaler' WHERE role = 'buyer'` (les valeurs d'énumération Postgres ne pouvant pas être supprimées, `buyer` reste dans le type mais n'est plus utilisée ni proposée dans l'interface).
+- Aucune nouvelle table, donc aucune modification de RLS ou de GRANT.
 
-| Button | Route |
-|---|---|
-| Find equipment | `/marketplace?type=equipment&crop=<name>` |
-| Find workers | `/marketplace?type=job&crop=<name>` |
-| Find storage | `/marketplace?type=warehouse&crop=<name>` |
-| Find transport | `/marketplace?type=transport&crop=<name>` |
-| Find buyers | `/marketplace?type=produce&crop=<name>` |
-
-Use small icon buttons (Wrench, Users, Warehouse, Truck, ShoppingCart) wrapped as `Link`s. No backend or business logic changes.
-
-### 5. Marketplace reframing (`src/pages/Marketplace.tsx`)
-- Rename page heading and breadcrumbs to **"Resources"** / **"Resource Coordination"** (i18n).
-- Read `?type=` and `?crop=` from URL on mount and pre-populate `typeFilter` + `search` so next-action links land on a pre-filtered view.
-- Keep route `/marketplace` and all data fetching, RLS, and listing logic **unchanged**.
-
-### 6. i18n updates
-Add/update keys in both `en.json` and `fr.json`:
-- `nav.atlas`, `nav.recommendations`, `nav.resources`, `nav.marketDemand`, `nav.profile`
-- `hero.*` rewritten Atlas-first
-- `cta.*` rewritten with "Open the Atlas"
-- `marketplace.pageTitle` → "Resources" / "Ressources"
-- `crop.nextActions.*` (equipment, workers, storage, transport, buyers)
-
-### Acceptance check
-- `/atlas` is the homepage primary CTA. ✓
-- Marketplace still works at `/marketplace` and all listing/detail/new routes intact. ✓
-- "Resources" label visible across nav, footer, marketplace heading. ✓
-- Crop recommendation cards show 5 next-action buttons routing to `/marketplace?type=...`. ✓
-- No routes removed; `/atlas/explorer`, `/atlas/region/:id`, `/marketplace/new`, `/marketplace/:id` untouched. ✓
-
-### Out of scope
-- No backend/Supabase changes.
-- No marketplace business logic, RLS, or schema changes.
-- Dashboard/messages/reputation flows unchanged.
+Code (après régénération des types) :
+- `src/pages/Auth.tsx`, `src/pages/Profile.tsx` : liste `ROLES` mise à jour (retrait de `buyer`, ajout des trois nouveaux).
+- `src/pages/Dashboard.tsx`, `src/pages/NearbyMatches.tsx`, `src/pages/ListingSuggestions.tsx`, `src/components/UserReputation.tsx` : libellés de rôles et regroupements (`wholesaler`/`semi_wholesaler` traités comme acheteurs, nouvel onglet/filtre transformateurs).
+- `src/pages/NewListing.tsx`, `src/pages/Marketplace.tsx`, `src/pages/ListingDetail.tsx` : type d'annonce `processing` ajouté aux sélecteurs et filtres.
+- `src/components/atlas/CropRecommendationCard.tsx` : action suivante « Transformation » pointant vers `/marketplace?type=processing&crop=...`.
+- `src/components/StakeholderSection.tsx` : carte Transformateurs + libellés acheteurs affinés.
+- `supabase/functions/whatsapp-webhook/index.ts` : menu ressources enrichi de l'option transformation.
+- `src/i18n/en.json` / `src/i18n/fr.json` : nouvelles clés `auth.processor`, `auth.wholesaler`, `auth.semiWholesaler`, `marketplace.processing`, libellés de section.
