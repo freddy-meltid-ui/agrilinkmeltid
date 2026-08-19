@@ -48,13 +48,9 @@ const V2Atlas = () => {
             <p className="text-xs text-muted-foreground">
               {loading
                 ? t("v2.supplyIntel.loading")
-                : t("v2.supplyIntel.coverage.detail", {
-                    pct: 100,
-                    suppliers: stats.suppliers,
-                    radius: 0,
-                    confirmed: stats.confirmedTonnes,
-                  }).split("·").slice(1).join("·").trim()}
+                : `${stats.tonnes} t · ${t("v2.supplyIntel.pipeline.suppliers", { count: stats.suppliers })}`}
             </p>
+
           </div>
           <Link to="/app/supply">
             <Button variant="outline" size="sm">{t("v2.supplyIntel.viewDetail")}</Button>
