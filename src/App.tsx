@@ -86,6 +86,7 @@ const App = () => (
                 <Route path="suppliers/new" element={<V2RegisterSupplier />} />
                 <Route path="suppliers/:id" element={<V2SupplierDetail />} />
                 <Route path="admin" element={<V2FieldAdmin />} />
+                <Route path="quality" element={<V2DataQuality />} />
               </Route>
               <Route path="supply" element={<V2SupplyDiscovery />} />
               <Route path="supply/:id" element={<V2SupplyDetail />} />
