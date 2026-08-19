@@ -1,6 +1,7 @@
 // AGRI-GRID V2 — field network admin console (agents, assignments, data quality)
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { Loader2, ShieldAlert, UserPlus, Users } from "lucide-react";
 import PageHeader from "@/components/v2/ui-kit/PageHeader";
 import KpiCard from "@/components/v2/ui-kit/KpiCard";
