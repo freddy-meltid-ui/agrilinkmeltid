@@ -77,6 +77,13 @@ const App = () => (
               <Route path="dashboard" element={<V2Dashboard />} />
               <Route path="onboarding" element={<V2Onboarding />} />
               <Route path="processor" element={<V2ProcessorProfile />} />
+              <Route path="field" element={<V2FieldLayout />}>
+                <Route index element={<V2FieldDashboard />} />
+                <Route path="suppliers" element={<V2FieldSuppliers />} />
+                <Route path="suppliers/new" element={<V2RegisterSupplier />} />
+                <Route path="suppliers/:id" element={<V2SupplierDetail />} />
+                <Route path="admin" element={<V2FieldAdmin />} />
+              </Route>
               <Route
                 path="supply"
                 element={<ModulePlaceholder titleKey="v2.supply.title" descriptionKey="v2.supply.description" phaseKey="v2.phase.p1" />}
