@@ -272,7 +272,7 @@ async function handleMessage(supabase: any, phone: string, raw: string): Promise
       await saveSession(supabase, session);
       return (
         `🛠️ De quelle ressource avez-vous besoin pour ${crop.name_fr || crop.crop_name} ?\n` +
-        `1. Équipement\n2. Main d'œuvre\n3. Stockage\n4. Transport\n5. Acheteurs`
+        `1. Équipement\n2. Main d'œuvre\n3. Stockage\n4. Transport\n5. Acheteurs (grossistes)\n6. Transformation`
       );
     }
 
@@ -283,9 +283,10 @@ async function handleMessage(supabase: any, phone: string, raw: string): Promise
         "3": "storage",
         "4": "transport",
         "5": "find_buyer",
+        "6": "find_processor",
       };
       const need = map[msg];
-      if (!need) return `Veuillez répondre avec un numéro entre 1 et 5.`;
+      if (!need) return `Veuillez répondre avec un numéro entre 1 et 6.`;
 
       const interestType = need === "find_buyer" ? "find_buyer" : "find_resources";
 
