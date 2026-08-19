@@ -396,7 +396,22 @@
     },
     "supply": {
       "title": "Offre disponible",
-      "description": "Identifier les matières premières agricoles disponibles par culture, localisation et période de récolte."
+      "description": "Identifier les matières premières agricoles disponibles par culture, localisation et période de récolte.",
+      "status": {
+        "forecast": "Prévision",
+        "expected": "Attendu",
+        "available": "Disponible",
+        "reserved": "Réservé",
+        "sold": "Vendu",
+        "expired": "Expiré",
+        "withdrawn": "Retiré"
+      },
+      "verification": {
+        "unverified": "Non vérifié",
+        "field_verified": "Vérifié sur le terrain",
+        "update_required": "Mise à jour requise",
+        "inactive": "Inactif"
+      }
     },
     "sourcing": {
       "title": "Approvisionnement",
@@ -774,6 +789,128 @@
         "assignedCount": "{{count}} producteur(s)",
         "noAgents": "Aucun agent terrain",
         "dataQuality": "Qualité des données"
+      }
+    },
+    "supplyIntel": {
+      "title": "Intelligence de l'offre",
+      "description": "Offre agricole agrégée et vérifiée autour de vos sites. L'identité des producteurs reste protégée tant qu'aucune demande d'approvisionnement n'est ouverte.",
+      "loading": "Chargement des données d'offre…",
+      "errorTitle": "Données d'offre indisponibles",
+      "emptyTitle": "Aucune offre ne correspond à ces filtres",
+      "emptyDescription": "Élargissez le rayon, la fenêtre de récolte ou le niveau de confiance pour voir plus de résultats.",
+      "loadMore": "Afficher plus",
+      "resultCount": "{{shown}} sur {{total}} enregistrements",
+      "fieldVerified": "Vérifié sur le terrain",
+      "approxLocation": "Zone approximative (±2 km)",
+      "viewDetail": "Voir le détail",
+      "mapPrivacyNote": "Les localisations sont volontairement approximatives. Les coordonnées exactes des parcelles ne sont jamais partagées avec les acheteurs.",
+      "privacyNote": "Ce flux présente uniquement l'offre vérifiée agrégée : aucun nom de producteur, numéro de téléphone, position GPS exacte ou note de terrain n'est exposé.",
+      "tabs": {
+        "list": "Liste",
+        "map": "Carte"
+      },
+      "kpi": {
+        "volume": "Volume identifié",
+        "volumeHint": "Normalisé en tonnes",
+        "confirmed": "Volume confirmé",
+        "confirmedHint": "Confirmé sur le terrain",
+        "suppliers": "Producteurs",
+        "suppliersHint": "Références anonymes distinctes",
+        "nearest": "Offre la plus proche",
+        "nearestHint": "Sélectionnez un site"
+      },
+      "confidence": {
+        "high": "Confiance élevée",
+        "medium": "Confiance moyenne",
+        "low": "Confiance faible"
+      },
+      "freshness": {
+        "fresh": "Donnée fraîche",
+        "aging": "Donnée vieillissante",
+        "stale": "Donnée obsolète"
+      },
+      "filters": {
+        "searchPlaceholder": "Rechercher par culture, variété ou zone",
+        "facility": "Site de référence",
+        "allFacilities": "Tous les sites",
+        "crop": "Culture",
+        "allCrops": "Toutes les cultures",
+        "variety": "Variété",
+        "allVarieties": "Toutes les variétés",
+        "department": "Département",
+        "allDepartments": "Tous les départements",
+        "from": "Disponible à partir du",
+        "to": "Disponible jusqu'au",
+        "radius": "Distance maximale",
+        "noLimit": "sans limite",
+        "minQuantity": "Quantité minimale",
+        "confidence": "Confiance",
+        "freshness": "Fraîcheur",
+        "verifiedOnly": "Producteurs vérifiés uniquement",
+        "reset": "Réinitialiser les filtres"
+      },
+      "pipeline": {
+        "title": "Pipeline de récolte",
+        "confirmed": "{{value}} t confirmées",
+        "suppliers": "{{count}} producteurs",
+        "note": "Une disponibilité confirmée remplace la prévision du même cycle cultural : les volumes ne sont jamais comptés deux fois.",
+        "bucket": {
+          "0_30": "0–30 jours",
+          "31_60": "31–60 jours",
+          "61_90": "61–90 jours",
+          "90_plus": "90 jours et +"
+        }
+      },
+      "coverage": {
+        "title": "Besoins vs offre identifiée",
+        "perMonth": "par mois",
+        "emptyTitle": "Aucun besoin en matière première déclaré",
+        "emptyDescription": "Ajoutez vos besoins récurrents dans votre profil transformateur pour mesurer la couverture locale.",
+        "detail": "{{pct}} % couvert · {{suppliers}} producteurs dans un rayon de {{radius}} km · {{confirmed}} t confirmées",
+        "note": "La couverture compare les besoins mensuels déclarés à l'offre identifiée dans le rayon d'approvisionnement. C'est une indication, pas un engagement."
+      },
+      "detail": {
+        "back": "Retour à l'offre",
+        "notFoundTitle": "Enregistrement indisponible",
+        "notFoundDescription": "Cet enregistrement ne correspond plus à vos droits d'accès ou a été retiré.",
+        "quantity": "Quantité",
+        "window": "Fenêtre de disponibilité",
+        "zone": "Zone",
+        "distance": "Distance au site",
+        "quality": "Qualité",
+        "certification": "Certification",
+        "lastConfirmed": "Dernière confirmation terrain",
+        "never": "Jamais confirmé",
+        "verification": "Vérification du producteur",
+        "historyTitle": "Historique des volumes",
+        "historyEmpty": "Aucune entrée antérieure pour cet enregistrement.",
+        "historyNote": "Les prévisions de récolte sont conservées en historique : chaque nouvelle estimation s'ajoute sans écraser la précédente.",
+        "entryType": {
+          "forecast": "Prévision de récolte",
+          "availability": "Disponibilité déclarée",
+          "confirmation": "Confirmation terrain"
+        },
+        "sourcingTitle": "Demande d'approvisionnement",
+        "sourcingDescription": "La mise en relation, la négociation et les bons de commande arrivent à la phase suivante. Aucune identité ni numéro n'est exposé aujourd'hui.",
+        "sourcingCta": "Ouvrir une demande (bientôt)"
+      }
+    },
+    "dataQuality": {
+      "title": "Qualité des données",
+      "description": "Suivi interne de la complétude des fiches producteurs et des offres. Visible uniquement par les administrateurs Agri-Grid et les agents terrain.",
+      "restrictedTitle": "Accès restreint",
+      "restrictedDescription": "Cette console est réservée aux administrateurs Agri-Grid et aux agents terrain.",
+      "cleanTitle": "Aucun problème de qualité détecté",
+      "cleanDescription": "Toutes les fiches respectent les règles de fraîcheur et de complétude.",
+      "note": "Les compteurs sont calculés en direct à partir des données terrain. Les fiches obsolètes doivent être revérifiées lors de la prochaine visite.",
+      "issue": {
+        "stale_supply": "Offres non confirmées depuis plus de 21 jours",
+        "suppliers_missing_gps": "Producteurs sans coordonnées GPS",
+        "suppliers_unverified": "Producteurs jamais vérifiés sur le terrain",
+        "cycles_without_forecast": "Cycles culturaux sans prévision de récolte",
+        "supply_without_window": "Offres sans fenêtre de disponibilité",
+        "supply_without_variety": "Offres sans variété précisée",
+        "farms_without_parcel": "Exploitations sans parcelle enregistrée"
       }
     }
   },

@@ -396,7 +396,22 @@
     },
     "supply": {
       "title": "Supply",
-      "description": "Discover available agricultural raw materials by crop, location and harvest period."
+      "description": "Discover available agricultural raw materials by crop, location and harvest period.",
+      "status": {
+        "forecast": "Forecast",
+        "expected": "Expected",
+        "available": "Available",
+        "reserved": "Reserved",
+        "sold": "Sold",
+        "expired": "Expired",
+        "withdrawn": "Withdrawn"
+      },
+      "verification": {
+        "unverified": "Not verified",
+        "field_verified": "Field verified",
+        "update_required": "Update required",
+        "inactive": "Inactive"
+      }
     },
     "sourcing": {
       "title": "Sourcing",
@@ -774,6 +789,128 @@
         "assignedCount": "{{count}} supplier(s)",
         "noAgents": "No field agent",
         "dataQuality": "Data quality"
+      }
+    },
+    "supplyIntel": {
+      "title": "Supply intelligence",
+      "description": "Aggregated, verified agricultural supply around your facilities. Producer identities stay protected until a sourcing request is opened.",
+      "loading": "Loading supply data…",
+      "errorTitle": "Supply data unavailable",
+      "emptyTitle": "No supply matches these filters",
+      "emptyDescription": "Widen the radius, the harvest window or the confidence level to see more records.",
+      "loadMore": "Load more",
+      "resultCount": "{{shown}} of {{total}} records",
+      "fieldVerified": "Field verified",
+      "approxLocation": "Approximate zone (±2 km)",
+      "viewDetail": "View details",
+      "mapPrivacyNote": "Locations are deliberately approximated. Exact plot coordinates are never shared with buyers.",
+      "privacyNote": "This feed shows verified aggregated supply only: no producer name, phone number, exact GPS position or field note is exposed.",
+      "tabs": {
+        "list": "List",
+        "map": "Map"
+      },
+      "kpi": {
+        "volume": "Identified volume",
+        "volumeHint": "Normalised to tonnes",
+        "confirmed": "Confirmed volume",
+        "confirmedHint": "Confirmed in the field",
+        "suppliers": "Producers",
+        "suppliersHint": "Distinct anonymous references",
+        "nearest": "Nearest supply",
+        "nearestHint": "Select a facility"
+      },
+      "confidence": {
+        "high": "High confidence",
+        "medium": "Medium confidence",
+        "low": "Low confidence"
+      },
+      "freshness": {
+        "fresh": "Fresh data",
+        "aging": "Ageing data",
+        "stale": "Stale data"
+      },
+      "filters": {
+        "searchPlaceholder": "Search by crop, variety or zone",
+        "facility": "Reference facility",
+        "allFacilities": "All facilities",
+        "crop": "Crop",
+        "allCrops": "All crops",
+        "variety": "Variety",
+        "allVarieties": "All varieties",
+        "department": "Department",
+        "allDepartments": "All departments",
+        "from": "Available from",
+        "to": "Available until",
+        "radius": "Maximum distance",
+        "noLimit": "no limit",
+        "minQuantity": "Minimum quantity",
+        "confidence": "Confidence",
+        "freshness": "Freshness",
+        "verifiedOnly": "Field-verified producers only",
+        "reset": "Reset filters"
+      },
+      "pipeline": {
+        "title": "Harvest pipeline",
+        "confirmed": "{{value}} t confirmed",
+        "suppliers": "{{count}} producers",
+        "note": "Confirmed availability replaces the forecast of the same crop cycle: volumes are never counted twice.",
+        "bucket": {
+          "0_30": "0–30 days",
+          "31_60": "31–60 days",
+          "61_90": "61–90 days",
+          "90_plus": "90+ days"
+        }
+      },
+      "coverage": {
+        "title": "Needs vs identified supply",
+        "perMonth": "per month",
+        "emptyTitle": "No raw material need declared",
+        "emptyDescription": "Add your recurring raw material needs to your processor profile to measure local coverage.",
+        "detail": "{{pct}}% covered · {{suppliers}} producers within {{radius}} km · {{confirmed}} t confirmed",
+        "note": "Coverage compares declared monthly needs with supply identified in the sourcing radius. It is an indication, not a commitment."
+      },
+      "detail": {
+        "back": "Back to supply",
+        "notFoundTitle": "Supply record unavailable",
+        "notFoundDescription": "This record no longer matches your access rights or has been withdrawn.",
+        "quantity": "Quantity",
+        "window": "Availability window",
+        "zone": "Zone",
+        "distance": "Distance to facility",
+        "quality": "Quality grade",
+        "certification": "Certification",
+        "lastConfirmed": "Last field confirmation",
+        "never": "Never confirmed",
+        "verification": "Producer verification",
+        "historyTitle": "Volume history",
+        "historyEmpty": "No previous entry for this record.",
+        "historyNote": "Harvest forecasts are kept as history: each new estimate is added rather than overwriting the previous one.",
+        "entryType": {
+          "forecast": "Harvest forecast",
+          "availability": "Declared availability",
+          "confirmation": "Field confirmation"
+        },
+        "sourcingTitle": "Sourcing request",
+        "sourcingDescription": "Contacting the producer, negotiating and purchase orders arrive in the next phase. No identity or phone number is exposed today.",
+        "sourcingCta": "Open a sourcing request (coming soon)"
+      }
+    },
+    "dataQuality": {
+      "title": "Data quality",
+      "description": "Internal monitoring of supplier and supply record completeness. Visible to Agri-Grid administrators and field agents only.",
+      "restrictedTitle": "Access restricted",
+      "restrictedDescription": "This console is reserved for Agri-Grid administrators and field agents.",
+      "cleanTitle": "No quality issue detected",
+      "cleanDescription": "All supplier and supply records meet the freshness and completeness rules.",
+      "note": "Counts are computed live from field data. Stale records should be re-verified during the next visit.",
+      "issue": {
+        "stale_supply": "Supply records not confirmed for over 21 days",
+        "suppliers_missing_gps": "Suppliers without GPS coordinates",
+        "suppliers_unverified": "Suppliers never field verified",
+        "cycles_without_forecast": "Crop cycles without harvest forecast",
+        "supply_without_window": "Supply without availability window",
+        "supply_without_variety": "Supply without a variety specified",
+        "farms_without_parcel": "Farms without a registered plot"
       }
     }
   },
