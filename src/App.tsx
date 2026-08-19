@@ -84,10 +84,9 @@ const App = () => (
                 <Route path="suppliers/:id" element={<V2SupplierDetail />} />
                 <Route path="admin" element={<V2FieldAdmin />} />
               </Route>
-              <Route
-                path="supply"
-                element={<ModulePlaceholder titleKey="v2.supply.title" descriptionKey="v2.supply.description" phaseKey="v2.phase.p1" />}
-              />
+              <Route path="supply" element={<V2SupplyDiscovery />} />
+              <Route path="supply/:id" element={<V2SupplyDetail />} />
+
               <Route
                 path="sourcing"
                 element={<ModulePlaceholder titleKey="v2.sourcing.title" descriptionKey="v2.sourcing.description" phaseKey="v2.phase.p1" />}
