@@ -113,7 +113,15 @@ const V2FieldAdmin = () => {
 
   return (
     <div className="pb-8">
-      <PageHeader title={t("v2.field.admin.title")} description={t("v2.field.admin.description")} />
+      <PageHeader
+        title={t("v2.field.admin.title")}
+        description={t("v2.field.admin.description")}
+        actions={
+          <Link to="/app/field/quality">
+            <Button variant="outline">{t("v2.dataQuality.title")}</Button>
+          </Link>
+        }
+      />
 
       <div className="mb-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
         <KpiCard label={t("v2.field.admin.agents")} value={agents.length} icon={Users} />
