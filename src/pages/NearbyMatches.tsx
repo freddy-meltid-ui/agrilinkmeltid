@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
-import { Sprout, ArrowLeft, Warehouse, Truck, ShoppingCart, MapPin, User, Star } from "lucide-react";
+import { Sprout, ArrowLeft, Warehouse, Truck, ShoppingCart, MapPin, User, Star, Factory } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -71,7 +71,8 @@ const NearbyMatches = () => {
 
   const storageOwners = filterByRole("warehouse_owner");
   const transporters = filterByRole("transporter");
-  const buyers = filterByRole("buyer");
+  const processors = filterByRole("processor");
+  const buyers = nearby.filter((u) => u.roles.includes("wholesaler") || u.roles.includes("semi_wholesaler"));
 
   const roleLabels: Record<string, string> = {
     farmer: t("auth.farmer"),
@@ -79,6 +80,9 @@ const NearbyMatches = () => {
     equipment_renter: t("auth.equipmentRenter"),
     warehouse_owner: t("auth.warehouseOwner"),
     transporter: t("auth.transporter"),
+    processor: t("auth.processor"),
+    wholesaler: t("auth.wholesaler"),
+    semi_wholesaler: t("auth.semiWholesaler"),
     buyer: t("auth.buyer"),
   };
 
@@ -161,12 +165,15 @@ const NearbyMatches = () => {
           <div className="text-center py-12 text-muted-foreground">{t("reputation.loading")}</div>
         ) : (
           <Tabs defaultValue="storage" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-3">
+            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4">
               <TabsTrigger value="storage" className="gap-2">
                 <Warehouse className="w-4 h-4" /> {t("nearby.storage")} ({storageOwners.length})
               </TabsTrigger>
               <TabsTrigger value="transporters" className="gap-2">
                 <Truck className="w-4 h-4" /> {t("nearby.transporters")} ({transporters.length})
+              </TabsTrigger>
+              <TabsTrigger value="processors" className="gap-2">
+                <Factory className="w-4 h-4" /> {t("nearby.processors")} ({processors.length})
               </TabsTrigger>
               <TabsTrigger value="buyers" className="gap-2">
                 <ShoppingCart className="w-4 h-4" /> {t("nearby.buyers")} ({buyers.length})
@@ -189,6 +196,16 @@ const NearbyMatches = () => {
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {transporters.map((u) => <UserCard key={u.user_id} u={u} />)}
+                </div>
+              )}
+            </TabsContent>
+
+            <TabsContent value="processors">
+              {processors.length === 0 ? (
+                <EmptyState icon={Factory} label={t("nearby.processors").toLowerCase()} />
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {processors.map((u) => <UserCard key={u.user_id} u={u} />)}
                 </div>
               )}
             </TabsContent>

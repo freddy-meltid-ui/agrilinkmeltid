@@ -43,6 +43,7 @@ const Marketplace = () => {
     { value: "equipment", label: t("marketplace.equipment") },
     { value: "warehouse", label: t("marketplace.warehouse") },
     { value: "transport", label: t("marketplace.transport") },
+    { value: "processing", label: t("marketplace.processing") },
     { value: "job", label: t("marketplace.jobs") },
   ];
 

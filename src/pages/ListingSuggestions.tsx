@@ -5,7 +5,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import {
   Sprout, ArrowRight, Warehouse, Truck, ShoppingCart, MapPin, User,
-  Star, MessageSquare, Sparkles, CheckCircle2, Tractor, Briefcase, Wheat
+  Star, MessageSquare, Sparkles, CheckCircle2, Tractor, Briefcase, Wheat, Factory
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
@@ -34,8 +34,8 @@ const SUGGESTION_CONFIG: Record<string, {
   roles: string[]; // user roles to suggest
 }> = {
   produce: {
-    listings: ["warehouse", "transport"],
-    roles: ["buyer"],
+    listings: ["warehouse", "transport", "processing"],
+    roles: ["processor", "wholesaler", "semi_wholesaler"],
   },
   equipment: {
     listings: ["produce"],
@@ -43,7 +43,11 @@ const SUGGESTION_CONFIG: Record<string, {
   },
   warehouse: {
     listings: ["produce", "transport"],
-    roles: ["farmer", "buyer"],
+    roles: ["farmer", "wholesaler", "semi_wholesaler"],
+  },
+  processing: {
+    listings: ["produce", "transport"],
+    roles: ["farmer", "wholesaler", "semi_wholesaler"],
   },
   transport: {
     listings: ["produce", "warehouse"],
@@ -60,12 +64,16 @@ const LISTING_TYPE_META: Record<string, { icon: any; color: string; labelKey: st
   equipment: { icon: Tractor, color: "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400", labelKey: "suggestions.equipmentListings" },
   warehouse: { icon: Warehouse, color: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400", labelKey: "suggestions.warehouseListings" },
   transport: { icon: Truck, color: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400", labelKey: "suggestions.transportListings" },
+  processing: { icon: Factory, color: "bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400", labelKey: "suggestions.processingListings" },
   job: { icon: Briefcase, color: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400", labelKey: "suggestions.jobListings" },
 };
 
 const ROLE_META: Record<string, { icon: any; color: string; labelKey: string }> = {
   farmer: { icon: Wheat, color: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400", labelKey: "suggestions.farmers" },
   worker: { icon: Briefcase, color: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400", labelKey: "suggestions.workers" },
+  processor: { icon: Factory, color: "bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400", labelKey: "suggestions.processors" },
+  wholesaler: { icon: ShoppingCart, color: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400", labelKey: "suggestions.wholesalers" },
+  semi_wholesaler: { icon: ShoppingCart, color: "bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-400", labelKey: "suggestions.semiWholesalers" },
   buyer: { icon: ShoppingCart, color: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400", labelKey: "suggestions.buyers" },
   warehouse_owner: { icon: Warehouse, color: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400", labelKey: "suggestions.warehouseOwners" },
   transporter: { icon: Truck, color: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400", labelKey: "suggestions.transporters" },

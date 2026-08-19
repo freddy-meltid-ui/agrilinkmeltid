@@ -81,6 +81,7 @@ const ListingDetail = () => {
     equipment: t("marketplace.equipment"),
     warehouse: t("marketplace.warehouse"),
     transport: t("marketplace.transport"),
+    processing: t("marketplace.processing"),
     job: t("marketplace.jobs"),
   };
 
@@ -90,6 +91,9 @@ const ListingDetail = () => {
     equipment_renter: t("auth.equipmentRenter"),
     warehouse_owner: t("auth.warehouseOwner"),
     transporter: t("auth.transporter"),
+    processor: t("auth.processor"),
+    wholesaler: t("auth.wholesaler"),
+    semi_wholesaler: t("auth.semiWholesaler"),
     buyer: t("auth.buyer"),
   };
 
