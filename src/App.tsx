@@ -33,6 +33,12 @@ import V2Settings from "./pages/v2/V2Settings";
 import V2Dashboard from "./pages/v2/V2Dashboard";
 import V2Onboarding from "./pages/v2/V2Onboarding";
 import V2ProcessorProfile from "./pages/v2/V2ProcessorProfile";
+import V2FieldLayout from "./pages/v2/field/V2FieldLayout";
+import V2FieldDashboard from "./pages/v2/field/V2FieldDashboard";
+import V2FieldSuppliers from "./pages/v2/field/V2FieldSuppliers";
+import V2RegisterSupplier from "./pages/v2/field/V2RegisterSupplier";
+import V2SupplierDetail from "./pages/v2/field/V2SupplierDetail";
+import V2FieldAdmin from "./pages/v2/field/V2FieldAdmin";
 
 const queryClient = new QueryClient();
 
