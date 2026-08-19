@@ -33,6 +33,12 @@ import V2Settings from "./pages/v2/V2Settings";
 import V2Dashboard from "./pages/v2/V2Dashboard";
 import V2Onboarding from "./pages/v2/V2Onboarding";
 import V2ProcessorProfile from "./pages/v2/V2ProcessorProfile";
+import V2FieldLayout from "./pages/v2/field/V2FieldLayout";
+import V2FieldDashboard from "./pages/v2/field/V2FieldDashboard";
+import V2FieldSuppliers from "./pages/v2/field/V2FieldSuppliers";
+import V2RegisterSupplier from "./pages/v2/field/V2RegisterSupplier";
+import V2SupplierDetail from "./pages/v2/field/V2SupplierDetail";
+import V2FieldAdmin from "./pages/v2/field/V2FieldAdmin";
 
 const queryClient = new QueryClient();
 
@@ -71,6 +77,13 @@ const App = () => (
               <Route path="dashboard" element={<V2Dashboard />} />
               <Route path="onboarding" element={<V2Onboarding />} />
               <Route path="processor" element={<V2ProcessorProfile />} />
+              <Route path="field" element={<V2FieldLayout />}>
+                <Route index element={<V2FieldDashboard />} />
+                <Route path="suppliers" element={<V2FieldSuppliers />} />
+                <Route path="suppliers/new" element={<V2RegisterSupplier />} />
+                <Route path="suppliers/:id" element={<V2SupplierDetail />} />
+                <Route path="admin" element={<V2FieldAdmin />} />
+              </Route>
               <Route
                 path="supply"
                 element={<ModulePlaceholder titleKey="v2.supply.title" descriptionKey="v2.supply.description" phaseKey="v2.phase.p1" />}
