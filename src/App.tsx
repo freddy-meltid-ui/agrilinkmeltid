@@ -24,6 +24,12 @@ import AgriculturalAtlasPage from "./pages/AgriculturalAtlasPage";
 import OfflineAtlas from "./pages/OfflineAtlas";
 import PendingSync from "./pages/PendingSync";
 import SyncQueueProvider from "./components/SyncQueueProvider";
+// AGRI-GRID V2 modules (parallel to V1 — V1 routes below remain untouched)
+import V2Layout from "./pages/v2/V2Layout";
+import ModulePlaceholder from "./pages/v2/ModulePlaceholder";
+import V2Atlas from "./pages/v2/V2Atlas";
+import V2Marketplace from "./pages/v2/V2Marketplace";
+import V2Settings from "./pages/v2/V2Settings";
 
 const queryClient = new QueryClient();
 
