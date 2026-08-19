@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Cpu, Users, Tractor, Warehouse, Truck, BarChart3, ArrowRight } from "lucide-react";
+import { Cpu, Users, Tractor, Warehouse, Truck, BarChart3, Factory, ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const container = {
