@@ -1,9 +1,15 @@
-import { useEffect } from "react";
-import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from "react-leaflet";
+import { useEffect, useState } from "react";
+import { MapContainer, TileLayer, WMSTileLayer, CircleMarker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import type { BeninRegion, Level } from "@/lib/beninRegions";
 import { BENIN_CENTER } from "@/lib/beninRegions";
 import MapLegend from "./MapLegend";
+import CadastreLayerToggle from "./CadastreLayerToggle";
+
+const CADASTRE_WMS_URL = "https://cadastre.bj/geoserver/wms";
+const CADASTRE_LAYERS = "benin:cadastre";
+const CADASTRE_MIN_ZOOM = 14;
+
 
 const colorFor = (level: Level): string => {
   if (level === "élevée") return "#10b981"; // emerald-500
