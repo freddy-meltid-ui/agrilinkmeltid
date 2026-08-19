@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
@@ -61,6 +61,48 @@ const App = () => (
             <Route path="/atlas/region/:regionId" element={<RegionProfile />} />
             <Route path="/atlas/offline" element={<OfflineAtlas />} />
             <Route path="/atlas/sync" element={<PendingSync />} />
+
+            {/* ===== AGRI-GRID V2 (parallel app shell) ===== */}
+            <Route path="/app" element={<V2Layout />}>
+              <Route index element={<Navigate to="/app/dashboard" replace />} />
+              <Route
+                path="dashboard"
+                element={<ModulePlaceholder titleKey="v2.dashboard.title" descriptionKey="v2.dashboard.description" phaseKey="v2.phase.p1" />}
+              />
+              <Route
+                path="supply"
+                element={<ModulePlaceholder titleKey="v2.supply.title" descriptionKey="v2.supply.description" phaseKey="v2.phase.p1" />}
+              />
+              <Route
+                path="sourcing"
+                element={<ModulePlaceholder titleKey="v2.sourcing.title" descriptionKey="v2.sourcing.description" phaseKey="v2.phase.p1" />}
+              />
+              <Route
+                path="suppliers"
+                element={<ModulePlaceholder titleKey="v2.suppliers.title" descriptionKey="v2.suppliers.description" phaseKey="v2.phase.p1" />}
+              />
+              <Route
+                path="operations"
+                element={<ModulePlaceholder titleKey="v2.operations.title" descriptionKey="v2.operations.description" phaseKey="v2.phase.p2" />}
+              />
+              <Route path="atlas" element={<V2Atlas />} />
+              <Route
+                path="compliance"
+                element={<ModulePlaceholder titleKey="v2.compliance.title" descriptionKey="v2.compliance.description" phaseKey="v2.phase.p3" />}
+              />
+              <Route
+                path="finance"
+                element={<ModulePlaceholder titleKey="v2.finance.title" descriptionKey="v2.finance.description" phaseKey="v2.phase.p4" />}
+              />
+              <Route
+                path="documents"
+                element={<ModulePlaceholder titleKey="v2.documents.title" descriptionKey="v2.documents.description" phaseKey="v2.phase.p3" />}
+              />
+              <Route path="marketplace" element={<V2Marketplace />} />
+              <Route path="settings" element={<V2Settings />} />
+            </Route>
+            <Route path="/legacy" element={<Navigate to="/dashboard" replace />} />
+
             <Route path="*" element={<NotFound />} />
             </Routes>
           </SyncQueueProvider>
