@@ -881,6 +881,86 @@ export type Database = {
         }
         Relationships: []
       }
+      v2_organization_members: {
+        Row: {
+          created_at: string
+          id: string
+          invited_by: string | null
+          organization_id: string
+          role: Database["public"]["Enums"]["v2_org_role"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          invited_by?: string | null
+          organization_id: string
+          role?: Database["public"]["Enums"]["v2_org_role"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          invited_by?: string | null
+          organization_id?: string
+          role?: Database["public"]["Enums"]["v2_org_role"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_organization_members_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_organizations: {
+        Row: {
+          city: string | null
+          country: string
+          created_at: string
+          created_by: string
+          id: string
+          legal_name: string | null
+          name: string
+          org_type: Database["public"]["Enums"]["v2_org_type"]
+          region: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          city?: string | null
+          country?: string
+          created_at?: string
+          created_by?: string
+          id?: string
+          legal_name?: string | null
+          name: string
+          org_type?: Database["public"]["Enums"]["v2_org_type"]
+          region?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          city?: string | null
+          country?: string
+          created_at?: string
+          created_by?: string
+          id?: string
+          legal_name?: string | null
+          name?: string
+          org_type?: Database["public"]["Enums"]["v2_org_type"]
+          region?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       whatsapp_sessions: {
         Row: {
           created_at: string
@@ -977,6 +1057,22 @@ export type Database = {
         }
         Returns: boolean
       }
+      v2_has_org_role: {
+        Args: {
+          _org_id: string
+          _role: Database["public"]["Enums"]["v2_org_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      v2_is_org_admin: {
+        Args: { _org_id: string; _user_id: string }
+        Returns: boolean
+      }
+      v2_is_org_member: {
+        Args: { _org_id: string; _user_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
       app_role:
@@ -997,6 +1093,16 @@ export type Database = {
         | "transport"
         | "job"
         | "processing"
+      v2_org_role:
+        | "processor_admin"
+        | "processor_employee"
+        | "field_agent"
+        | "farmer"
+        | "cooperative_manager"
+        | "agrigrid_admin"
+        | "compliance_advisor"
+        | "financial_partner"
+      v2_org_type: "processor" | "cooperative" | "field_network" | "agrigrid"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1144,6 +1250,17 @@ export const Constants = {
         "job",
         "processing",
       ],
+      v2_org_role: [
+        "processor_admin",
+        "processor_employee",
+        "field_agent",
+        "farmer",
+        "cooperative_manager",
+        "agrigrid_admin",
+        "compliance_advisor",
+        "financial_partner",
+      ],
+      v2_org_type: ["processor", "cooperative", "field_network", "agrigrid"],
     },
   },
 } as const
