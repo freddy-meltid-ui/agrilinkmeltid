@@ -338,7 +338,8 @@
       "finance": "Finance",
       "documents": "Documents",
       "marketplace": "Place de marché",
-      "settings": "Paramètres"
+      "settings": "Paramètres",
+      "processor": "Profil transformateur"
     },
     "shell": {
       "openMenu": "Ouvrir le menu",
@@ -364,7 +365,33 @@
     },
     "dashboard": {
       "title": "Centre de pilotage",
-      "description": "Offre, approvisionnement, opérations, conformité et finance en un coup d'œil."
+      "description": "Offre, approvisionnement, opérations, conformité et finance en un coup d'œil.",
+      "processorSubtitle": "Vue d'ensemble de votre activité de transformation.",
+      "viewProfile": "Voir le profil",
+      "noOrgTitle": "Bienvenue sur Agri-Grid V2",
+      "noOrgDescription": "Créez votre profil transformateur pour commencer.",
+      "ctaOnboarding": "Démarrer l'inscription",
+      "facilities": "Unités",
+      "products": "Produits transformés",
+      "rawMaterials": "Matières premières",
+      "monthlyNeed": "Besoin mensuel",
+      "monthlyNeedHint": "Estimé à partir de vos besoins récurrents",
+      "activities": "Activités de transformation",
+      "rawMaterialsTitle": "Matières premières requises",
+      "completeness": "Complétude du profil",
+      "completenessHint": "Complétez votre profil pour de meilleures mises en relation.",
+      "ctaComplete": "Compléter mon profil",
+      "noNeedsTitle": "Aucun besoin en matières premières",
+      "noNeedsDescription": "Ajoutez vos besoins récurrents pour préparer vos approvisionnements.",
+      "ctaAddNeeds": "Ajouter mes besoins en matières premières",
+      "operationsTitle": "Opérations",
+      "empty": {
+        "purchases": "Achats",
+        "suppliers": "Fournisseurs",
+        "deliveries": "Livraisons",
+        "none": "Aucune donnée pour le moment",
+        "sourcingSoon": "« Créer une demande de sourcing » sera disponible à la prochaine phase."
+      }
     },
     "supply": {
       "title": "Offre disponible",
@@ -429,6 +456,136 @@
       "agrigrid_admin": "Administrateur Agri-Grid",
       "compliance_advisor": "Conseiller conformité",
       "financial_partner": "Partenaire financier"
+    },
+    "common": {
+      "back": "Retour",
+      "next": "Suivant",
+      "save": "Enregistrer",
+      "remove": "Supprimer"
+    },
+    "units": {
+      "kg": "kg",
+      "tonnes": "tonnes",
+      "sacs": "sacs",
+      "litres": "litres"
+    },
+    "periods": {
+      "day": "jour",
+      "week": "semaine",
+      "month": "mois",
+      "year": "an"
+    },
+    "frequencies": {
+      "weekly": "hebdomadaire",
+      "biweekly": "bimensuel",
+      "monthly": "mensuel",
+      "quarterly": "trimestriel",
+      "seasonal": "saisonnier"
+    },
+    "valueChains": {
+      "ananas": "Ananas",
+      "anacarde": "Anacarde",
+      "manioc": "Manioc",
+      "mais": "Maïs",
+      "soja": "Soja",
+      "karite": "Karité",
+      "riz": "Riz",
+      "tomate": "Tomate",
+      "palmier": "Palmier à huile",
+      "autre": "Autre"
+    },
+    "challenges": {
+      "raw_material_sourcing": "Trouver des matières premières",
+      "unstable_supply": "Approvisionnement instable",
+      "high_prices": "Prix élevés des matières premières",
+      "quality_inconsistency": "Qualité irrégulière",
+      "inventory_management": "Gestion des stocks",
+      "production_tracking": "Suivi de production",
+      "financial_management": "Gestion financière",
+      "access_to_finance": "Accès au financement",
+      "certification": "Certification",
+      "market_access": "Accès au marché"
+    },
+    "onboarding": {
+      "title": "Inscription transformateur",
+      "description": "Renseignez votre entreprise, votre unité de transformation, vos produits et vos besoins en matières premières.",
+      "saved": "Profil transformateur enregistré",
+      "error": "Enregistrement impossible",
+      "finish": "Terminer",
+      "step1": {
+        "label": "Entreprise",
+        "title": "Informations sur l'entreprise"
+      },
+      "step2": {
+        "label": "Unité principale",
+        "title": "Unité de transformation principale"
+      },
+      "step3": {
+        "label": "Activités",
+        "title": "Filières et produits transformés"
+      },
+      "step4": {
+        "label": "Matières premières",
+        "title": "Besoins en matières premières",
+        "hint": "Ajoutez chaque matière première séparément. Les produits finis se saisissent à l'étape précédente."
+      },
+      "step5": {
+        "label": "Défis",
+        "title": "Défis actuels"
+      },
+      "fields": {
+        "select": "Sélectionner",
+        "legalName": "Raison sociale",
+        "tradeName": "Nom commercial",
+        "legalForm": "Forme juridique",
+        "rccm": "RCCM (si disponible)",
+        "ifu": "IFU (si disponible)",
+        "year": "Année de création",
+        "phone": "Téléphone professionnel",
+        "email": "Email professionnel",
+        "facilityName": "Nom de l'unité",
+        "department": "Département",
+        "commune": "Commune",
+        "arrondissement": "Arrondissement / village",
+        "address": "Adresse",
+        "latitude": "Latitude (GPS)",
+        "longitude": "Longitude (GPS)",
+        "capacity": "Capacité de transformation",
+        "unit": "Unité",
+        "period": "Périodicité",
+        "valueChains": "Filières agricoles",
+        "processedProducts": "Produits transformés",
+        "productName": "Nom du produit",
+        "valueChain": "Filière",
+        "productionCapacity": "Capacité de production",
+        "addProduct": "Ajouter un produit",
+        "employees": "Nombre d'employés",
+        "crop": "Culture",
+        "variety": "Variété",
+        "quality": "Qualité souhaitée",
+        "quantity": "Quantité type",
+        "frequency": "Fréquence",
+        "season": "Saison d'approvisionnement",
+        "radius": "Rayon de collecte (km)",
+        "addNeed": "Ajouter une matière première"
+      }
+    },
+    "processor": {
+      "title": "Profil transformateur",
+      "description": "Consultez et mettez à jour les informations de votre entreprise.",
+      "emptyTitle": "Aucun profil transformateur",
+      "emptyDescription": "Complétez l'inscription pour créer votre profil transformateur.",
+      "editOnboarding": "Compléter l'inscription",
+      "facilities": "Unités de transformation",
+      "mainFacility": "Principale",
+      "products": "Produits transformés",
+      "rawMaterials": "Matières premières requises",
+      "noFacilities": "Aucune unité enregistrée.",
+      "noProducts": "Aucun produit transformé enregistré.",
+      "noRawMaterials": "Aucune matière première enregistrée.",
+      "noChallenges": "Aucun défi sélectionné.",
+      "saved": "Profil mis à jour",
+      "saveError": "Mise à jour impossible"
     }
   },
   "language": {

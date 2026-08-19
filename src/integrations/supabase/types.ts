@@ -961,6 +961,283 @@ export type Database = {
         }
         Relationships: []
       }
+      v2_processed_products: {
+        Row: {
+          created_at: string
+          created_by: string
+          facility_id: string | null
+          id: string
+          notes: string | null
+          organization_id: string
+          product_name: string
+          production_capacity_period: string | null
+          production_capacity_unit: string | null
+          production_capacity_value: number | null
+          updated_at: string
+          value_chain: string | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string
+          facility_id?: string | null
+          id?: string
+          notes?: string | null
+          organization_id: string
+          product_name: string
+          production_capacity_period?: string | null
+          production_capacity_unit?: string | null
+          production_capacity_value?: number | null
+          updated_at?: string
+          value_chain?: string | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          facility_id?: string | null
+          id?: string
+          notes?: string | null
+          organization_id?: string
+          product_name?: string
+          production_capacity_period?: string | null
+          production_capacity_unit?: string | null
+          production_capacity_value?: number | null
+          updated_at?: string
+          value_chain?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_processed_products_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processing_facilities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_processed_products_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_processing_facilities: {
+        Row: {
+          address: string | null
+          arrondissement: string | null
+          commune: string | null
+          created_at: string
+          created_by: string
+          department: string | null
+          id: string
+          is_main: boolean
+          latitude: number | null
+          longitude: number | null
+          name: string
+          organization_id: string
+          processing_capacity_period: string | null
+          processing_capacity_unit: string | null
+          processing_capacity_value: number | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          arrondissement?: string | null
+          commune?: string | null
+          created_at?: string
+          created_by?: string
+          department?: string | null
+          id?: string
+          is_main?: boolean
+          latitude?: number | null
+          longitude?: number | null
+          name: string
+          organization_id: string
+          processing_capacity_period?: string | null
+          processing_capacity_unit?: string | null
+          processing_capacity_value?: number | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          arrondissement?: string | null
+          commune?: string | null
+          created_at?: string
+          created_by?: string
+          department?: string | null
+          id?: string
+          is_main?: boolean
+          latitude?: number | null
+          longitude?: number | null
+          name?: string
+          organization_id?: string
+          processing_capacity_period?: string | null
+          processing_capacity_unit?: string | null
+          processing_capacity_value?: number | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_processing_facilities_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_processor_profiles: {
+        Row: {
+          business_email: string | null
+          business_phone: string | null
+          challenges: string[]
+          created_at: string
+          created_by: string
+          employees_count: number | null
+          id: string
+          ifu: string | null
+          legal_form: string | null
+          onboarding_completed: boolean
+          onboarding_step: number
+          organization_id: string
+          rccm: string | null
+          trade_name: string | null
+          updated_at: string
+          value_chains: string[]
+          year_established: number | null
+        }
+        Insert: {
+          business_email?: string | null
+          business_phone?: string | null
+          challenges?: string[]
+          created_at?: string
+          created_by?: string
+          employees_count?: number | null
+          id?: string
+          ifu?: string | null
+          legal_form?: string | null
+          onboarding_completed?: boolean
+          onboarding_step?: number
+          organization_id: string
+          rccm?: string | null
+          trade_name?: string | null
+          updated_at?: string
+          value_chains?: string[]
+          year_established?: number | null
+        }
+        Update: {
+          business_email?: string | null
+          business_phone?: string | null
+          challenges?: string[]
+          created_at?: string
+          created_by?: string
+          employees_count?: number | null
+          id?: string
+          ifu?: string | null
+          legal_form?: string | null
+          onboarding_completed?: boolean
+          onboarding_step?: number
+          organization_id?: string
+          rccm?: string | null
+          trade_name?: string | null
+          updated_at?: string
+          value_chains?: string[]
+          year_established?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_processor_profiles_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: true
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_raw_material_needs: {
+        Row: {
+          created_at: string
+          created_by: string
+          crop: string
+          delivery_area: string | null
+          facility_id: string | null
+          frequency: string
+          id: string
+          notes: string | null
+          organization_id: string
+          preferred_delivery_max: number | null
+          preferred_delivery_min: number | null
+          quality_preference: string | null
+          quantity: number | null
+          sourcing_radius_km: number | null
+          sourcing_season: string | null
+          status: string
+          unit: string
+          updated_at: string
+          variety: string | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string
+          crop: string
+          delivery_area?: string | null
+          facility_id?: string | null
+          frequency?: string
+          id?: string
+          notes?: string | null
+          organization_id: string
+          preferred_delivery_max?: number | null
+          preferred_delivery_min?: number | null
+          quality_preference?: string | null
+          quantity?: number | null
+          sourcing_radius_km?: number | null
+          sourcing_season?: string | null
+          status?: string
+          unit?: string
+          updated_at?: string
+          variety?: string | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          crop?: string
+          delivery_area?: string | null
+          facility_id?: string | null
+          frequency?: string
+          id?: string
+          notes?: string | null
+          organization_id?: string
+          preferred_delivery_max?: number | null
+          preferred_delivery_min?: number | null
+          quality_preference?: string | null
+          quantity?: number | null
+          sourcing_radius_km?: number | null
+          sourcing_season?: string | null
+          status?: string
+          unit?: string
+          updated_at?: string
+          variety?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_raw_material_needs_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processing_facilities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_raw_material_needs_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       whatsapp_sessions: {
         Row: {
           created_at: string

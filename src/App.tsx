@@ -30,6 +30,9 @@ import ModulePlaceholder from "./pages/v2/ModulePlaceholder";
 import V2Atlas from "./pages/v2/V2Atlas";
 import V2Marketplace from "./pages/v2/V2Marketplace";
 import V2Settings from "./pages/v2/V2Settings";
+import V2Dashboard from "./pages/v2/V2Dashboard";
+import V2Onboarding from "./pages/v2/V2Onboarding";
+import V2ProcessorProfile from "./pages/v2/V2ProcessorProfile";
 
 const queryClient = new QueryClient();
 
@@ -65,10 +68,9 @@ const App = () => (
             {/* ===== AGRI-GRID V2 (parallel app shell) ===== */}
             <Route path="/app" element={<V2Layout />}>
               <Route index element={<Navigate to="/app/dashboard" replace />} />
-              <Route
-                path="dashboard"
-                element={<ModulePlaceholder titleKey="v2.dashboard.title" descriptionKey="v2.dashboard.description" phaseKey="v2.phase.p1" />}
-              />
+              <Route path="dashboard" element={<V2Dashboard />} />
+              <Route path="onboarding" element={<V2Onboarding />} />
+              <Route path="processor" element={<V2ProcessorProfile />} />
               <Route
                 path="supply"
                 element={<ModulePlaceholder titleKey="v2.supply.title" descriptionKey="v2.supply.description" phaseKey="v2.phase.p1" />}
