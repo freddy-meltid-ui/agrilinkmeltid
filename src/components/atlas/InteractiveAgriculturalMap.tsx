@@ -20,31 +20,51 @@ const colorFor = (level: Level): string => {
 const FlyToSelected = ({ region }: { region: BeninRegion | null }) => {
   const map = useMap();
   useEffect(() => {
-    if (region) {
+    if (!region) return;
+    const id = window.setTimeout(() => {
+      map.invalidateSize();
+      const size = map.getSize();
+      if (size.x <= 0 || size.y <= 0) return;
       map.flyTo(region.coordinates, 9, { duration: 1.0 });
-    }
+    }, 120);
+    return () => window.clearTimeout(id);
   }, [region, map]);
   return null;
 };
+
 
 // Auto-fit bounds when filters change (only if no region is actively selected)
 const FitToRegions = ({ regions, selected }: { regions: BeninRegion[]; selected: BeninRegion | null }) => {
   const map = useMap();
   useEffect(() => {
     if (selected) return;
-    if (regions.length === 0) {
-      map.flyTo(BENIN_CENTER, 7, { duration: 0.8 });
-      return;
-    }
-    if (regions.length === 1) {
-      map.flyTo(regions[0].coordinates, 9, { duration: 0.8 });
-      return;
-    }
-    const bounds = L.latLngBounds(regions.map((r) => r.coordinates));
-    map.flyToBounds(bounds, { padding: [40, 40], duration: 0.8, maxZoom: 9 });
+
+    // Defer: the container can still have a 0x0 size on mount (hidden tab / layout),
+    // which makes Leaflet compute NaN coordinates during flyTo animations.
+    const run = () => {
+      map.invalidateSize();
+      const size = map.getSize();
+      if (size.x <= 0 || size.y <= 0) return;
+
+      if (regions.length === 0) {
+        map.setView(BENIN_CENTER, 7);
+        return;
+      }
+      if (regions.length === 1) {
+        map.setView(regions[0].coordinates, 9);
+        return;
+      }
+      const bounds = L.latLngBounds(regions.map((r) => r.coordinates));
+      if (!bounds.isValid()) return;
+      map.fitBounds(bounds, { padding: [40, 40], maxZoom: 9, animate: true, duration: 0.8 });
+    };
+
+    const id = window.setTimeout(run, 120);
+    return () => window.clearTimeout(id);
   }, [regions, selected, map]);
   return null;
 };
+
 
 
 type Props = {
