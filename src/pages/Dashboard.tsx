@@ -74,6 +74,9 @@ const Dashboard = () => {
     equipment_renter: t("auth.equipmentRenter"),
     warehouse_owner: t("auth.warehouseOwner"),
     transporter: t("auth.transporter"),
+    processor: t("auth.processor"),
+    wholesaler: t("auth.wholesaler"),
+    semi_wholesaler: t("auth.semiWholesaler"),
     buyer: t("auth.buyer"),
   };
 

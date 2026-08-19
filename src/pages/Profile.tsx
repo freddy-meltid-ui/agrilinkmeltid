@@ -19,7 +19,9 @@ const ROLES = [
   { value: "equipment_renter", labelKey: "auth.equipmentRenter" },
   { value: "warehouse_owner", labelKey: "auth.warehouseOwner" },
   { value: "transporter", labelKey: "auth.transporter" },
-  { value: "buyer", labelKey: "auth.buyer" },
+  { value: "processor", labelKey: "auth.processor" },
+  { value: "wholesaler", labelKey: "auth.wholesaler" },
+  { value: "semi_wholesaler", labelKey: "auth.semiWholesaler" },
 ];
 
 const Profile = () => {
