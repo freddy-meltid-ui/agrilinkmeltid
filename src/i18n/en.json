@@ -326,6 +326,111 @@
     "badge": "Verified Professional",
     "status": "Verified"
   },
+  "v2": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "supply": "Supply",
+      "sourcing": "Sourcing",
+      "suppliers": "Suppliers",
+      "operations": "Operations",
+      "atlas": "Atlas",
+      "compliance": "Compliance",
+      "finance": "Finance",
+      "documents": "Documents",
+      "marketplace": "Marketplace",
+      "settings": "Settings"
+    },
+    "shell": {
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu",
+      "backToV1": "Back to V1",
+      "signOut": "Sign out",
+      "signIn": "Sign in"
+    },
+    "org": {
+      "none": "No organization",
+      "select": "Select an organization",
+      "yourOrganizations": "Your organizations"
+    },
+    "phase": {
+      "p1": "Phase 1",
+      "p2": "Phase 2",
+      "p3": "Phase 3",
+      "p4": "Phase 4"
+    },
+    "placeholder": {
+      "title": "Coming soon",
+      "description": "This module is part of the Agri-Grid V2 roadmap. The foundation is in place; the workflow will be built in the phase indicated above."
+    },
+    "dashboard": {
+      "title": "Command center",
+      "description": "Supply, sourcing, operations, compliance and finance at a glance."
+    },
+    "supply": {
+      "title": "Supply",
+      "description": "Discover available agricultural raw materials by crop, location and harvest period."
+    },
+    "sourcing": {
+      "title": "Sourcing",
+      "description": "Create sourcing requests and review matching suppliers."
+    },
+    "suppliers": {
+      "title": "Suppliers",
+      "description": "Farmer and cooperative profiles, verification status and delivery history."
+    },
+    "operations": {
+      "title": "Operations",
+      "description": "Purchases, inventory, production batches, sales and expenses."
+    },
+    "atlas": {
+      "title": "Atlas",
+      "description": "Environmental and supply intelligence for your sourcing areas."
+    },
+    "compliance": {
+      "title": "Compliance",
+      "description": "Prepare your business for inspections and certification. Agri-Grid does not issue certifications."
+    },
+    "finance": {
+      "title": "Finance",
+      "description": "Operational financial overview and Agri-Grid Finance Readiness Indicator."
+    },
+    "documents": {
+      "title": "Documents",
+      "description": "Business, compliance and financing documents in one place."
+    },
+    "marketplace": {
+      "title": "Marketplace",
+      "description": "The Agri-Grid ecosystem marketplace remains available as a secondary module.",
+      "legacyBadge": "Legacy module",
+      "emptyTitle": "Marketplace (V1)",
+      "emptyDescription": "All existing listings, messages and reputation features are preserved and unchanged.",
+      "open": "Open the marketplace"
+    },
+    "settings": {
+      "title": "Settings",
+      "description": "Manage your organization and your access.",
+      "currentOrg": "Current organization",
+      "createOrg": "Create an organization",
+      "orgName": "Organization name",
+      "orgNamePlaceholder": "e.g. Tropic Foods Benin",
+      "createHint": "You become the administrator of the organization you create.",
+      "createSuccess": "Organization created",
+      "createError": "Unable to create the organization",
+      "noOrg": "You do not belong to any organization yet.",
+      "orgCount": "{{count}} organization(s) linked to your account",
+      "signInRequired": "Sign in to manage your organization"
+    },
+    "roles": {
+      "processor_admin": "Processor admin",
+      "processor_employee": "Processor employee",
+      "field_agent": "Field agent",
+      "farmer": "Farmer",
+      "cooperative_manager": "Cooperative manager",
+      "agrigrid_admin": "Agri-Grid admin",
+      "compliance_advisor": "Compliance advisor",
+      "financial_partner": "Financial partner"
+    }
+  },
   "language": {
     "en": "English",
     "fr": "Français"
