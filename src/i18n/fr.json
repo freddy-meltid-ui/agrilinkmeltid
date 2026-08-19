@@ -339,7 +339,8 @@
       "documents": "Documents",
       "marketplace": "Place de marché",
       "settings": "Paramètres",
-      "processor": "Profil transformateur"
+      "processor": "Profil transformateur",
+      "field": "Réseau terrain"
     },
     "shell": {
       "openMenu": "Ouvrir le menu",
@@ -586,6 +587,194 @@
       "noChallenges": "Aucun défi sélectionné.",
       "saved": "Profil mis à jour",
       "saveError": "Mise à jour impossible"
+    },
+    "field": {
+      "daysAgo": "il y a {{count}} j",
+      "inDays": "dans {{count}} j",
+      "noAccess": {
+        "title": "Accès réservé au réseau terrain",
+        "description": "Votre compte n'est pas encore enregistré comme agent terrain ou administrateur Agri-Grid."
+      },
+      "freshness": {
+        "fresh": "À jour",
+        "aging": "À rafraîchir",
+        "needsVerification": "À vérifier",
+        "unknown": "Inconnu"
+      },
+      "dashboard": {
+        "title": "Réseau terrain",
+        "agentGreeting": "Votre journée sur le terrain",
+        "adminGreeting": "Vue d'ensemble du réseau terrain"
+      },
+      "kpi": {
+        "assignedSuppliers": "Producteurs suivis",
+        "todayVisits": "Visites du jour",
+        "needUpdate": "À confirmer",
+        "upcomingHarvests": "Récoltes à venir"
+      },
+      "sections": {
+        "needConfirmation": "Données à confirmer",
+        "upcomingHarvests": "Récoltes à venir",
+        "recentActivity": "Activité récente",
+        "allFresh": "Toutes les données sont à jour",
+        "noUpcoming": "Aucune récolte annoncée"
+      },
+      "actions": {
+        "register": "Enregistrer un producteur",
+        "viewSuppliers": "Voir les producteurs"
+      },
+      "suppliers": {
+        "title": "Producteurs",
+        "description": "Recherchez un producteur avant toute mise à jour terrain.",
+        "searchPlaceholder": "Nom, code, village…",
+        "empty": "Aucun producteur trouvé"
+      },
+      "supplierTypes": {
+        "individual_farmer": "Producteur individuel",
+        "cooperative": "Coopérative",
+        "producer_group": "Groupement de producteurs",
+        "aggregator": "Agrégateur"
+      },
+      "supplierStatus": {
+        "unverified": "Non vérifié",
+        "field_verified": "Vérifié terrain",
+        "update_required": "Mise à jour requise",
+        "inactive": "Inactif"
+      },
+      "cycleStatus": {
+        "planned": "Prévu",
+        "growing": "En croissance",
+        "harvest_approaching": "Récolte proche",
+        "harvesting": "En récolte",
+        "completed": "Terminé",
+        "cancelled": "Annulé"
+      },
+      "supplyStatus": {
+        "forecast": "Prévision",
+        "expected": "Attendu",
+        "available": "Disponible",
+        "reserved": "Réservé",
+        "sold": "Vendu",
+        "expired": "Expiré",
+        "withdrawn": "Retiré"
+      },
+      "confidence": {
+        "low": "Faible",
+        "medium": "Moyenne",
+        "high": "Élevée"
+      },
+      "visitTypes": {
+        "registration": "Enregistrement",
+        "crop_monitoring": "Suivi de culture",
+        "harvest_confirmation": "Confirmation de récolte",
+        "data_update": "Mise à jour",
+        "training": "Formation",
+        "other": "Autre"
+      },
+      "quick": {
+        "contact": "Contact",
+        "forecast": "Prévision",
+        "supply": "Disponibilité",
+        "observation": "Observation",
+        "confirmNow": "Confirmer maintenant"
+      },
+      "register": {
+        "title": "Enregistrer un producteur",
+        "description": "7 étapes courtes, optimisées pour le terrain.",
+        "stepOf": "Étape {{current}} / {{total}}",
+        "steps": {
+          "1": "Identité",
+          "2": "Localisation",
+          "3": "Exploitation",
+          "4": "Parcelle & culture",
+          "5": "Production",
+          "6": "Preuves",
+          "7": "Révision"
+        },
+        "supplierType": "Type de producteur",
+        "name": "Nom affiché",
+        "firstName": "Prénom",
+        "lastName": "Nom",
+        "phone": "Téléphone",
+        "phone2": "Téléphone secondaire",
+        "language": "Langue préférée",
+        "affiliation": "Coopérative / groupement",
+        "village": "Village",
+        "department": "Département",
+        "commune": "Commune",
+        "arrondissement": "Arrondissement",
+        "captureGps": "Capturer la position GPS",
+        "latitude": "Latitude",
+        "longitude": "Longitude",
+        "gpsHint": "La position peut être saisie manuellement si le GPS est indisponible.",
+        "gpsCaptured": "Position enregistrée",
+        "gpsDenied": "Position refusée ou indisponible",
+        "gpsUnavailable": "GPS non disponible sur cet appareil",
+        "location": "Position",
+        "farmName": "Nom de l'exploitation",
+        "area": "Superficie",
+        "unit": "Unité",
+        "accessibility": "Accès / notes logistiques",
+        "parcelReference": "Référence parcelle",
+        "crop": "Culture",
+        "variety": "Variété",
+        "selectCrop": "Choisir une culture",
+        "selectVariety": "Choisir une variété",
+        "cycleStage": "Stade du cycle",
+        "harvestStart": "Début de récolte",
+        "harvestEnd": "Fin de récolte",
+        "estimatedQuantity": "Quantité estimée",
+        "photos": "Photos",
+        "addPhoto": "Ajouter une photo",
+        "photosCount": "{{count}} photo(s) enregistrée(s)",
+        "photoError": "Échec de l'envoi de la photo",
+        "notes": "Notes",
+        "submit": "Enregistrer le producteur",
+        "saved": "Producteur enregistré"
+      },
+      "supplierDetail": {
+        "notFound": "Producteur introuvable",
+        "cycle": "Cycle de culture",
+        "confidence": "Confiance",
+        "observation": "Observation",
+        "forecastHistoryHint": "Chaque prévision est conservée : l'historique n'est jamais écrasé.",
+        "quantityAvailable": "Quantité disponible",
+        "status": "Statut",
+        "askingPrice": "Prix demandé (XOF/t)",
+        "grade": "Qualité",
+        "farmsAndCycles": "Exploitations et cycles",
+        "availableSupply": "Offre disponible",
+        "forecastHistory": "Historique des prévisions",
+        "latest": "Dernière",
+        "contactSaved": "Contact mis à jour",
+        "forecastSaved": "Prévision enregistrée",
+        "supplySaved": "Disponibilité enregistrée",
+        "supplyConfirmed": "Disponibilité confirmée",
+        "observationSaved": "Observation enregistrée"
+      },
+      "admin": {
+        "title": "Administration réseau terrain",
+        "description": "Agents, affectations et qualité des données.",
+        "restricted": "Réservé aux administrateurs",
+        "restrictedHint": "Seuls les administrateurs Agri-Grid accèdent à cette console.",
+        "agents": "Agents terrain",
+        "agent": "Agent",
+        "suppliers": "Producteurs",
+        "assignments": "Affectations",
+        "staleRecords": "Données à vérifier",
+        "newAgent": "Nouvel agent",
+        "newAssignment": "Nouvelle affectation",
+        "agentName": "Nom de l'agent",
+        "agentUserId": "Identifiant utilisateur (UUID)",
+        "coverage": "Zones couvertes (séparées par des virgules)",
+        "agentLinkHint": "L'agent doit déjà posséder un compte Agri-Grid ; renseignez son identifiant utilisateur.",
+        "agentCreated": "Agent créé",
+        "assignmentCreated": "Affectation créée",
+        "supplier": "Producteur",
+        "assignedCount": "{{count}} producteur(s)",
+        "noAgents": "Aucun agent terrain",
+        "dataQuality": "Qualité des données"
+      }
     }
   },
   "language": {

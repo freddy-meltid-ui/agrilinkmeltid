@@ -339,7 +339,8 @@
       "documents": "Documents",
       "marketplace": "Marketplace",
       "settings": "Settings",
-      "processor": "Processor profile"
+      "processor": "Processor profile",
+      "field": "Field network"
     },
     "shell": {
       "openMenu": "Open menu",
@@ -586,6 +587,194 @@
       "noChallenges": "No challenge selected.",
       "saved": "Profile updated",
       "saveError": "Could not update"
+    },
+    "field": {
+      "daysAgo": "{{count}}d ago",
+      "inDays": "in {{count}}d",
+      "noAccess": {
+        "title": "Field network access only",
+        "description": "Your account is not registered as a field agent or Agri-Grid administrator yet."
+      },
+      "freshness": {
+        "fresh": "Up to date",
+        "aging": "Ageing",
+        "needsVerification": "Needs check",
+        "unknown": "Unknown"
+      },
+      "dashboard": {
+        "title": "Field network",
+        "agentGreeting": "Your day in the field",
+        "adminGreeting": "Field network overview"
+      },
+      "kpi": {
+        "assignedSuppliers": "Suppliers tracked",
+        "todayVisits": "Today's visits",
+        "needUpdate": "To confirm",
+        "upcomingHarvests": "Upcoming harvests"
+      },
+      "sections": {
+        "needConfirmation": "Data to confirm",
+        "upcomingHarvests": "Upcoming harvests",
+        "recentActivity": "Recent activity",
+        "allFresh": "All data is up to date",
+        "noUpcoming": "No harvest announced"
+      },
+      "actions": {
+        "register": "Register a supplier",
+        "viewSuppliers": "View suppliers"
+      },
+      "suppliers": {
+        "title": "Suppliers",
+        "description": "Search a supplier before any field update.",
+        "searchPlaceholder": "Name, code, village…",
+        "empty": "No supplier found"
+      },
+      "supplierTypes": {
+        "individual_farmer": "Individual farmer",
+        "cooperative": "Cooperative",
+        "producer_group": "Producer group",
+        "aggregator": "Aggregator"
+      },
+      "supplierStatus": {
+        "unverified": "Unverified",
+        "field_verified": "Field verified",
+        "update_required": "Update required",
+        "inactive": "Inactive"
+      },
+      "cycleStatus": {
+        "planned": "Planned",
+        "growing": "Growing",
+        "harvest_approaching": "Harvest approaching",
+        "harvesting": "Harvesting",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      },
+      "supplyStatus": {
+        "forecast": "Forecast",
+        "expected": "Expected",
+        "available": "Available",
+        "reserved": "Reserved",
+        "sold": "Sold",
+        "expired": "Expired",
+        "withdrawn": "Withdrawn"
+      },
+      "confidence": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
+      },
+      "visitTypes": {
+        "registration": "Registration",
+        "crop_monitoring": "Crop monitoring",
+        "harvest_confirmation": "Harvest confirmation",
+        "data_update": "Data update",
+        "training": "Training",
+        "other": "Other"
+      },
+      "quick": {
+        "contact": "Contact",
+        "forecast": "Forecast",
+        "supply": "Availability",
+        "observation": "Observation",
+        "confirmNow": "Confirm now"
+      },
+      "register": {
+        "title": "Register a supplier",
+        "description": "7 short steps, optimised for the field.",
+        "stepOf": "Step {{current}} / {{total}}",
+        "steps": {
+          "1": "Identity",
+          "2": "Location",
+          "3": "Farm",
+          "4": "Parcel & crop",
+          "5": "Production",
+          "6": "Evidence",
+          "7": "Review"
+        },
+        "supplierType": "Supplier type",
+        "name": "Display name",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "phone": "Phone",
+        "phone2": "Secondary phone",
+        "language": "Preferred language",
+        "affiliation": "Cooperative / group",
+        "village": "Village",
+        "department": "Department",
+        "commune": "Commune",
+        "arrondissement": "Arrondissement",
+        "captureGps": "Capture GPS position",
+        "latitude": "Latitude",
+        "longitude": "Longitude",
+        "gpsHint": "Coordinates can be typed manually when GPS is unavailable.",
+        "gpsCaptured": "Position captured",
+        "gpsDenied": "Position denied or unavailable",
+        "gpsUnavailable": "GPS unavailable on this device",
+        "location": "Position",
+        "farmName": "Farm name",
+        "area": "Area",
+        "unit": "Unit",
+        "accessibility": "Access / logistics notes",
+        "parcelReference": "Parcel reference",
+        "crop": "Crop",
+        "variety": "Variety",
+        "selectCrop": "Select a crop",
+        "selectVariety": "Select a variety",
+        "cycleStage": "Cycle stage",
+        "harvestStart": "Harvest start",
+        "harvestEnd": "Harvest end",
+        "estimatedQuantity": "Estimated quantity",
+        "photos": "Photos",
+        "addPhoto": "Add a photo",
+        "photosCount": "{{count}} photo(s) uploaded",
+        "photoError": "Photo upload failed",
+        "notes": "Notes",
+        "submit": "Register supplier",
+        "saved": "Supplier registered"
+      },
+      "supplierDetail": {
+        "notFound": "Supplier not found",
+        "cycle": "Crop cycle",
+        "confidence": "Confidence",
+        "observation": "Observation",
+        "forecastHistoryHint": "Every forecast is kept: history is never overwritten.",
+        "quantityAvailable": "Quantity available",
+        "status": "Status",
+        "askingPrice": "Asking price (XOF/t)",
+        "grade": "Quality grade",
+        "farmsAndCycles": "Farms and cycles",
+        "availableSupply": "Available supply",
+        "forecastHistory": "Forecast history",
+        "latest": "Latest",
+        "contactSaved": "Contact updated",
+        "forecastSaved": "Forecast saved",
+        "supplySaved": "Availability saved",
+        "supplyConfirmed": "Availability confirmed",
+        "observationSaved": "Observation saved"
+      },
+      "admin": {
+        "title": "Field network administration",
+        "description": "Agents, assignments and data quality.",
+        "restricted": "Administrators only",
+        "restrictedHint": "Only Agri-Grid administrators can open this console.",
+        "agents": "Field agents",
+        "agent": "Agent",
+        "suppliers": "Suppliers",
+        "assignments": "Assignments",
+        "staleRecords": "Records to verify",
+        "newAgent": "New agent",
+        "newAssignment": "New assignment",
+        "agentName": "Agent name",
+        "agentUserId": "User identifier (UUID)",
+        "coverage": "Coverage areas (comma separated)",
+        "agentLinkHint": "The agent must already have an Agri-Grid account; provide their user identifier.",
+        "agentCreated": "Agent created",
+        "assignmentCreated": "Assignment created",
+        "supplier": "Supplier",
+        "assignedCount": "{{count}} supplier(s)",
+        "noAgents": "No field agent",
+        "dataQuality": "Data quality"
+      }
     }
   },
   "language": {
