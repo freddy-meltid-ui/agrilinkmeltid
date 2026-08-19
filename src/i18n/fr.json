@@ -38,7 +38,9 @@
     "transporters": "Logistique & Transport",
     "transportersDesc": "Optimisation d'itinéraires, appariement de charges et coordination de flotte. Éliminez les kilomètres à vide.",
     "buyers": "Accès au Marché & Commerce",
-    "buyersDesc": "Canaux d'approvisionnement directs, tarification en temps réel et vérification qualité. Construisez des chaînes transparentes."
+    "buyersDesc": "Canaux d'approvisionnement directs, tarification en temps réel et vérification qualité. Construisez des chaînes transparentes.",
+    "processors": "Transformation & Valeur Ajoutée",
+    "processorsDesc": "Transformez les récoltes en produits à plus forte valeur. Trouvez des unités de transformation et sécurisez un approvisionnement régulier."
   },
   "howItWorks": {
     "title": "Comment",
@@ -131,7 +133,10 @@
     "passwordsMismatch": "Les mots de passe ne correspondent pas.",
     "passwordTooShort": "Le mot de passe doit contenir au moins 6 caractères.",
     "invalidResetLink": "Ce lien de réinitialisation est invalide ou a expiré.",
-    "backToLogin": "Retour à la connexion"
+    "backToLogin": "Retour à la connexion",
+    "processor": "Transformateur",
+    "wholesaler": "Grossiste",
+    "semiWholesaler": "Semi-grossiste"
   },
   "profile": {
     "title": "Modifier le profil",
@@ -189,7 +194,8 @@
     "anyRating": "Toute note",
     "stars": "{{count}}+ Étoiles",
     "activeFilters": "{{count}} actif(s)",
-    "premium": "Premium"
+    "premium": "Premium",
+    "processing": "Transformation"
   },
   "messages": {
     "title": "Conversations",
@@ -226,7 +232,8 @@
     "imageTooLarge": "L'image doit faire moins de 5 Mo",
     "imageUploadError": "Échec du téléchargement de l'image",
     "premium": "Annonce Premium",
-    "premiumDesc": "Boostez la visibilité avec un badge et un placement prioritaire"
+    "premiumDesc": "Boostez la visibilité avec un badge et un placement prioritaire",
+    "processingLabel": "Transformation / Unité de transformation"
   },
   "notFound": {
     "title": "404",
@@ -241,7 +248,8 @@
     "buyers": "Acheteurs",
     "noResults": "Aucun(e) {{type}} à proximité.",
     "signInRequired": "Veuillez vous connecter pour voir les correspondances.",
-    "findNearby": "Trouver à proximité"
+    "findNearby": "Trouver à proximité",
+    "processors": "Transformateurs"
   },
   "reputation": {
     "loading": "Chargement...",
@@ -299,7 +307,11 @@
     "noListings": "Aucune annonce disponible dans cette catégorie pour le moment.",
     "noProfiles": "Aucun acteur correspondant trouvé dans votre zone.",
     "goToDashboard": "Aller au tableau de bord",
-    "browseMarketplace": "Parcourir le marché"
+    "browseMarketplace": "Parcourir le marché",
+    "processingListings": "Services de transformation",
+    "processors": "Transformateurs à proximité",
+    "wholesalers": "Grossistes",
+    "semiWholesalers": "Semi-grossistes"
   },
   "listingDetail": {
     "backToMarketplace": "Retour au marché",

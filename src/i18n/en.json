@@ -38,7 +38,9 @@
     "transporters": "Logistics & Transport",
     "transportersDesc": "Route optimization, load matching, and fleet coordination. Eliminate empty miles and reduce supply chain friction.",
     "buyers": "Market Access & Trade",
-    "buyersDesc": "Direct procurement channels, real-time pricing, and quality verification. Build transparent supply chains from source."
+    "buyersDesc": "Direct procurement channels, real-time pricing, and quality verification. Build transparent supply chains from source.",
+    "processors": "Processing & Value Addition",
+    "processorsDesc": "Transform raw harvests into higher-value products. Find processing units, agree volumes and secure steady supply."
   },
   "howItWorks": {
     "title": "How",
@@ -131,7 +133,10 @@
     "passwordsMismatch": "Passwords do not match.",
     "passwordTooShort": "Password must be at least 6 characters.",
     "invalidResetLink": "This password reset link is invalid or has expired.",
-    "backToLogin": "Back to login"
+    "backToLogin": "Back to login",
+    "processor": "Processor",
+    "wholesaler": "Wholesaler",
+    "semiWholesaler": "Semi-Wholesaler"
   },
   "profile": {
     "title": "Edit Profile",
@@ -189,7 +194,8 @@
     "anyRating": "Any Rating",
     "stars": "{{count}}+ Stars",
     "activeFilters": "{{count}} active",
-    "premium": "Premium"
+    "premium": "Premium",
+    "processing": "Processing"
   },
   "messages": {
     "title": "Conversations",
@@ -226,7 +232,8 @@
     "imageTooLarge": "Image must be under 5MB",
     "imageUploadError": "Failed to upload image",
     "premium": "Premium Listing",
-    "premiumDesc": "Boost visibility with a highlighted badge and top placement"
+    "premiumDesc": "Boost visibility with a highlighted badge and top placement",
+    "processingLabel": "Processing / Transformation"
   },
   "notFound": {
     "title": "404",
@@ -241,7 +248,8 @@
     "buyers": "Buyers",
     "noResults": "No nearby {{type}} found.",
     "signInRequired": "Please sign in to see nearby matches.",
-    "findNearby": "Find Nearby"
+    "findNearby": "Find Nearby",
+    "processors": "Processors"
   },
   "reputation": {
     "loading": "Loading...",
@@ -299,7 +307,11 @@
     "noListings": "No listings available in this category yet.",
     "noProfiles": "No matching stakeholders found in your area yet.",
     "goToDashboard": "Go to Dashboard",
-    "browseMarketplace": "Browse Marketplace"
+    "browseMarketplace": "Browse Marketplace",
+    "processingListings": "Processing Services",
+    "processors": "Processors Nearby",
+    "wholesalers": "Wholesalers",
+    "semiWholesalers": "Semi-Wholesalers"
   },
   "listingDetail": {
     "backToMarketplace": "Back to marketplace",
