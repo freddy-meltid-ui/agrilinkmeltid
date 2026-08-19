@@ -20,12 +20,18 @@ const colorFor = (level: Level): string => {
 const FlyToSelected = ({ region }: { region: BeninRegion | null }) => {
   const map = useMap();
   useEffect(() => {
-    if (region) {
+    if (!region) return;
+    const id = window.setTimeout(() => {
+      map.invalidateSize();
+      const size = map.getSize();
+      if (size.x <= 0 || size.y <= 0) return;
       map.flyTo(region.coordinates, 9, { duration: 1.0 });
-    }
+    }, 120);
+    return () => window.clearTimeout(id);
   }, [region, map]);
   return null;
 };
+
 
 // Auto-fit bounds when filters change (only if no region is actively selected)
 const FitToRegions = ({ regions, selected }: { regions: BeninRegion[]; selected: BeninRegion | null }) => {
