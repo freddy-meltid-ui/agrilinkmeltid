@@ -128,4 +128,4 @@ export const FRESHNESS_TONE: Record<string, "success" | "warning" | "danger"> = 
   stale: "danger",
 };
 
-export const PIPELINE_BUCKETS = ["0_30", "31_60", "61_90", "90_plus"] as const;
+export const PIPELINE_BUCKETS = ["available_now", "within_30_days", "days_31_90", "beyond_90_days"] as const;
