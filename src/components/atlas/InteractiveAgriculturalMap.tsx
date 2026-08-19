@@ -1,9 +1,15 @@
-import { useEffect } from "react";
-import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from "react-leaflet";
+import { useEffect, useState } from "react";
+import { MapContainer, TileLayer, WMSTileLayer, CircleMarker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import type { BeninRegion, Level } from "@/lib/beninRegions";
 import { BENIN_CENTER } from "@/lib/beninRegions";
 import MapLegend from "./MapLegend";
+import CadastreLayerToggle from "./CadastreLayerToggle";
+
+const CADASTRE_WMS_URL = "https://cadastre.bj/geoserver/wms";
+const CADASTRE_LAYERS = "benin:cadastre";
+const CADASTRE_MIN_ZOOM = 14;
+
 
 const colorFor = (level: Level): string => {
   if (level === "élevée") return "#10b981"; // emerald-500
@@ -47,7 +53,24 @@ type Props = {
   onSelect: (r: BeninRegion) => void;
 };
 
+const ZoomWatcher = ({ onZoom }: { onZoom: (z: number) => void }) => {
+  const map = useMap();
+  useEffect(() => {
+    onZoom(map.getZoom());
+    const handler = () => onZoom(map.getZoom());
+    map.on("zoomend", handler);
+    return () => {
+      map.off("zoomend", handler);
+    };
+  }, [map, onZoom]);
+  return null;
+};
+
 const InteractiveAgriculturalMap = ({ regions, selected, onSelect }: Props) => {
+  const [cadastreOn, setCadastreOn] = useState(false);
+  const [cadastreOpacity, setCadastreOpacity] = useState(0.7);
+  const [zoom, setZoom] = useState(7);
+
   return (
     <div className="relative h-full w-full overflow-hidden rounded-lg border border-stone-200 shadow-sm">
       <MapContainer
@@ -60,6 +83,20 @@ const InteractiveAgriculturalMap = ({ regions, selected, onSelect }: Props) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        {cadastreOn && (
+          <WMSTileLayer
+            url={CADASTRE_WMS_URL}
+            layers={CADASTRE_LAYERS}
+            format="image/png"
+            transparent
+            version="1.3.0"
+            opacity={cadastreOpacity}
+            minZoom={CADASTRE_MIN_ZOOM}
+            attribution='Cadastre&nbsp;: <a href="https://cadastre.bj" target="_blank" rel="noopener noreferrer">ANDF</a>'
+          />
+        )}
+        <ZoomWatcher onZoom={setZoom} />
+
         {regions.map((r) => {
           const isSelected = selected?.id === r.id;
           const color = colorFor(r.potential_level);
@@ -96,9 +133,21 @@ const InteractiveAgriculturalMap = ({ regions, selected, onSelect }: Props) => {
         <FlyToSelected region={selected} />
         <FitToRegions regions={regions} selected={selected} />
       </MapContainer>
+      <CadastreLayerToggle
+        enabled={cadastreOn}
+        onToggle={setCadastreOn}
+        opacity={cadastreOpacity}
+        onOpacityChange={setCadastreOpacity}
+      />
+      {cadastreOn && zoom < CADASTRE_MIN_ZOOM && (
+        <div className="absolute left-1/2 top-3 z-[1000] -translate-x-1/2 rounded-md border border-amber-200 bg-amber-50/95 px-3 py-1.5 text-[11px] font-medium text-amber-800 shadow-sm backdrop-blur">
+          Zoomez davantage pour afficher le parcellaire cadastral
+        </div>
+      )}
       <MapLegend />
     </div>
   );
+
 };
 
 export default InteractiveAgriculturalMap;
