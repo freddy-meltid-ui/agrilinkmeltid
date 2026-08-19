@@ -39,6 +39,9 @@ import V2FieldSuppliers from "./pages/v2/field/V2FieldSuppliers";
 import V2RegisterSupplier from "./pages/v2/field/V2RegisterSupplier";
 import V2SupplierDetail from "./pages/v2/field/V2SupplierDetail";
 import V2FieldAdmin from "./pages/v2/field/V2FieldAdmin";
+import V2DataQuality from "./pages/v2/field/V2DataQuality";
+import V2SupplyDiscovery from "./pages/v2/V2SupplyDiscovery";
+import V2SupplyDetail from "./pages/v2/V2SupplyDetail";
 
 const queryClient = new QueryClient();
 
