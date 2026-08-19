@@ -30,6 +30,7 @@ import {
   Lightbulb,
   HeartHandshake,
   PackageSearch,
+  Factory,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { enqueueAction, syncAction } from "@/lib/offlineQueue";
@@ -65,6 +66,7 @@ const NEXT_ACTIONS = [
   { type: "job", label: "Main-d'œuvre", icon: Users },
   { type: "warehouse", label: "Stockage", icon: Warehouse },
   { type: "transport", label: "Transport", icon: Truck },
+  { type: "processing", label: "Transformation", icon: Factory },
   { type: "produce", label: "Acheteurs", icon: ShoppingCart },
 ] as const;
 

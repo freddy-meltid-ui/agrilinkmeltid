@@ -35,6 +35,7 @@ const NewListing = () => {
     { value: "equipment", label: t("newListing.equipmentLabel") },
     { value: "warehouse", label: t("newListing.warehouseLabel") },
     { value: "transport", label: t("newListing.transportLabel") },
+    { value: "processing", label: t("newListing.processingLabel") },
     { value: "job", label: t("newListing.jobLabel") },
   ];
 

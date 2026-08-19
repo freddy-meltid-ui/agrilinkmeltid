@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Cpu, Users, Tractor, Warehouse, Truck, BarChart3, ArrowRight } from "lucide-react";
+import { Cpu, Users, Tractor, Warehouse, Truck, BarChart3, Factory, ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const container = {
@@ -21,6 +21,7 @@ const StakeholderSection = () => {
     { icon: Tractor, titleKey: "stakeholders.renters", descKey: "stakeholders.rentersDesc", color: "bg-secondary/20 text-secondary" },
     { icon: Warehouse, titleKey: "stakeholders.warehouse", descKey: "stakeholders.warehouseDesc", color: "bg-primary/10 text-primary" },
     { icon: Truck, titleKey: "stakeholders.transporters", descKey: "stakeholders.transportersDesc", color: "bg-accent/20 text-accent-foreground" },
+    { icon: Factory, titleKey: "stakeholders.processors", descKey: "stakeholders.processorsDesc", color: "bg-primary/10 text-primary" },
     { icon: BarChart3, titleKey: "stakeholders.buyers", descKey: "stakeholders.buyersDesc", color: "bg-secondary/20 text-secondary" },
   ];
 

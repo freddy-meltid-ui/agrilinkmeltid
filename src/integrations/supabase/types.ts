@@ -986,8 +986,17 @@ export type Database = {
         | "warehouse_owner"
         | "transporter"
         | "buyer"
+        | "processor"
+        | "wholesaler"
+        | "semi_wholesaler"
       listing_status: "active" | "paused" | "sold" | "expired"
-      listing_type: "produce" | "equipment" | "warehouse" | "transport" | "job"
+      listing_type:
+        | "produce"
+        | "equipment"
+        | "warehouse"
+        | "transport"
+        | "job"
+        | "processing"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1122,9 +1131,19 @@ export const Constants = {
         "warehouse_owner",
         "transporter",
         "buyer",
+        "processor",
+        "wholesaler",
+        "semi_wholesaler",
       ],
       listing_status: ["active", "paused", "sold", "expired"],
-      listing_type: ["produce", "equipment", "warehouse", "transport", "job"],
+      listing_type: [
+        "produce",
+        "equipment",
+        "warehouse",
+        "transport",
+        "job",
+        "processing",
+      ],
     },
   },
 } as const
