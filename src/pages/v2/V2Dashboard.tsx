@@ -1,4 +1,5 @@
-// AGRI-GRID V2 — processor dashboard (Phase 1A: profile-driven, no invented metrics)
+// AGRI-GRID V2 — processor dashboard (Phase 1A profile + Phase 1C supply signals)
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Building2, Factory, Gauge, Loader2, Package, ShoppingCart, Sprout, Truck, Users } from "lucide-react";
@@ -7,12 +8,26 @@ import KpiCard from "@/components/v2/ui-kit/KpiCard";
 import EmptyState from "@/components/v2/ui-kit/EmptyState";
 import StatusBadge from "@/components/v2/ui-kit/StatusBadge";
 import { Button } from "@/components/ui/button";
+import CoveragePanel from "@/components/v2/supply/CoveragePanel";
+import PipelineSummary from "@/components/v2/supply/PipelineSummary";
 import { useProcessor } from "@/hooks/v2/useProcessor";
 import { completeness, totalMonthlyTonnes } from "@/lib/v2/processor";
+import { fetchSupplyCoverage, fetchSupplyPipeline, type CoverageRow, type PipelineRow } from "@/lib/v2/commercialSupply";
 
 const V2Dashboard = () => {
   const { t } = useTranslation();
   const { bundle, loading, activeOrg } = useProcessor();
+  const [coverage, setCoverage] = useState<CoverageRow[]>([]);
+  const [pipeline, setPipeline] = useState<PipelineRow[]>([]);
+
+  useEffect(() => {
+    if (!activeOrg) return;
+    const main = bundle.facilities.find((f) => f.is_main) ?? bundle.facilities[0];
+    fetchSupplyCoverage(activeOrg.id, main?.id ?? null).then(setCoverage).catch(() => setCoverage([]));
+    fetchSupplyPipeline({ facilityId: main?.id ?? null }).then(setPipeline).catch(() => setPipeline([]));
+  }, [activeOrg, bundle.facilities]);
+
+
 
   if (loading) {
     return (
@@ -67,6 +82,18 @@ const V2Dashboard = () => {
           icon={Gauge}
         />
       </div>
+
+      <div className="mt-6 grid gap-6 lg:grid-cols-2">
+        <CoveragePanel rows={coverage} />
+        <PipelineSummary rows={pipeline} />
+      </div>
+      <div className="mt-3">
+        <Link to="/app/supply">
+          <Button variant="outline" size="sm">{t("v2.supplyIntel.title")}</Button>
+        </Link>
+      </div>
+
+
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
         <section className="rounded-lg border border-border bg-card p-5">

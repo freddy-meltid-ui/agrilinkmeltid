@@ -39,6 +39,9 @@ import V2FieldSuppliers from "./pages/v2/field/V2FieldSuppliers";
 import V2RegisterSupplier from "./pages/v2/field/V2RegisterSupplier";
 import V2SupplierDetail from "./pages/v2/field/V2SupplierDetail";
 import V2FieldAdmin from "./pages/v2/field/V2FieldAdmin";
+import V2DataQuality from "./pages/v2/field/V2DataQuality";
+import V2SupplyDiscovery from "./pages/v2/V2SupplyDiscovery";
+import V2SupplyDetail from "./pages/v2/V2SupplyDetail";
 
 const queryClient = new QueryClient();
 
@@ -83,11 +86,11 @@ const App = () => (
                 <Route path="suppliers/new" element={<V2RegisterSupplier />} />
                 <Route path="suppliers/:id" element={<V2SupplierDetail />} />
                 <Route path="admin" element={<V2FieldAdmin />} />
+                <Route path="quality" element={<V2DataQuality />} />
               </Route>
-              <Route
-                path="supply"
-                element={<ModulePlaceholder titleKey="v2.supply.title" descriptionKey="v2.supply.description" phaseKey="v2.phase.p1" />}
-              />
+              <Route path="supply" element={<V2SupplyDiscovery />} />
+              <Route path="supply/:id" element={<V2SupplyDetail />} />
+
               <Route
                 path="sourcing"
                 element={<ModulePlaceholder titleKey="v2.sourcing.title" descriptionKey="v2.sourcing.description" phaseKey="v2.phase.p1" />}

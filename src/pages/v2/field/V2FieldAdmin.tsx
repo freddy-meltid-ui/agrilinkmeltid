@@ -1,6 +1,7 @@
 // AGRI-GRID V2 — field network admin console (agents, assignments, data quality)
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { Loader2, ShieldAlert, UserPlus, Users } from "lucide-react";
 import PageHeader from "@/components/v2/ui-kit/PageHeader";
 import KpiCard from "@/components/v2/ui-kit/KpiCard";
@@ -113,7 +114,15 @@ const V2FieldAdmin = () => {
 
   return (
     <div className="pb-8">
-      <PageHeader title={t("v2.field.admin.title")} description={t("v2.field.admin.description")} />
+      <PageHeader
+        title={t("v2.field.admin.title")}
+        description={t("v2.field.admin.description")}
+        actions={
+          <Link to="/app/field/quality">
+            <Button variant="outline">{t("v2.dataQuality.title")}</Button>
+          </Link>
+        }
+      />
 
       <div className="mb-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
         <KpiCard label={t("v2.field.admin.agents")} value={agents.length} icon={Users} />
