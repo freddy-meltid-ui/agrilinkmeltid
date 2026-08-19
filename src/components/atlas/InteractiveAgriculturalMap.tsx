@@ -133,9 +133,21 @@ const InteractiveAgriculturalMap = ({ regions, selected, onSelect }: Props) => {
         <FlyToSelected region={selected} />
         <FitToRegions regions={regions} selected={selected} />
       </MapContainer>
+      <CadastreLayerToggle
+        enabled={cadastreOn}
+        onToggle={setCadastreOn}
+        opacity={cadastreOpacity}
+        onOpacityChange={setCadastreOpacity}
+      />
+      {cadastreOn && zoom < CADASTRE_MIN_ZOOM && (
+        <div className="absolute left-1/2 top-3 z-[1000] -translate-x-1/2 rounded-md border border-amber-200 bg-amber-50/95 px-3 py-1.5 text-[11px] font-medium text-amber-800 shadow-sm backdrop-blur">
+          Zoomez davantage pour afficher le parcellaire cadastral
+        </div>
+      )}
       <MapLegend />
     </div>
   );
+
 };
 
 export default InteractiveAgriculturalMap;
