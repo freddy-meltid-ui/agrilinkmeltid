@@ -2235,10 +2235,89 @@ export type Database = {
         }
         Returns: boolean
       }
+      v2_approx_coord: { Args: { _value: number }; Returns: number }
       v2_can_access_supplier: {
         Args: { _supplier_id: string; _user_id: string }
         Returns: boolean
       }
+      v2_can_read_commercial_supply: {
+        Args: { _user_id: string }
+        Returns: boolean
+      }
+      v2_commercial_supply: {
+        Args: {
+          _available_from?: string
+          _available_to?: string
+          _commune?: string
+          _confidence?: string[]
+          _crop_id?: string
+          _department?: string
+          _facility_id?: string
+          _freshness?: string[]
+          _limit?: number
+          _max_distance_km?: number
+          _min_quantity_t?: number
+          _offset?: number
+          _quality_grade?: string
+          _search?: string
+          _variety_id?: string
+          _verified_only?: boolean
+        }
+        Returns: {
+          approx_latitude: number
+          approx_longitude: number
+          availability_end: string
+          availability_start: string
+          certification_status: string
+          commune: string
+          confidence: string
+          crop_code: string
+          crop_id: string
+          crop_name_en: string
+          crop_name_fr: string
+          department: string
+          distance_km: number
+          freshness: string
+          last_confirmed_at: string
+          quality_grade: string
+          quantity: number
+          quantity_tonnes: number
+          supplier_ref: string
+          supplier_type: string
+          supply_id: string
+          supply_status: string
+          total_count: number
+          unit_code: string
+          variety_code: string
+          variety_id: string
+          variety_name_en: string
+          variety_name_fr: string
+          verification_status: string
+        }[]
+      }
+      v2_commercial_supply_history: {
+        Args: { _supply_id: string }
+        Returns: {
+          confidence: string
+          entry_date: string
+          entry_type: string
+          quantity: number
+          quantity_tonnes: number
+          unit_code: string
+        }[]
+      }
+      v2_data_quality_summary: {
+        Args: never
+        Returns: {
+          issue: string
+          record_count: number
+        }[]
+      }
+      v2_distance_km: {
+        Args: { _lat1: number; _lat2: number; _lng1: number; _lng2: number }
+        Returns: number
+      }
+      v2_freshness_status: { Args: { _reference: string }; Returns: string }
       v2_has_org_role: {
         Args: {
           _org_id: string
@@ -2256,6 +2335,54 @@ export type Database = {
       v2_is_org_member: {
         Args: { _org_id: string; _user_id: string }
         Returns: boolean
+      }
+      v2_supply_confidence: {
+        Args: {
+          _confirmed_at: string
+          _freshness: string
+          _has_variety: boolean
+          _has_window: boolean
+          _supplier_status: string
+          _supply_status: string
+        }
+        Returns: string
+      }
+      v2_supply_coverage: {
+        Args: { _facility_id?: string; _organization_id: string }
+        Returns: {
+          confirmed_tonnes: number
+          coverage_ratio: number
+          crop_id: string
+          crop_name_en: string
+          crop_name_fr: string
+          identified_tonnes: number
+          need_id: string
+          need_tonnes_per_month: number
+          radius_km: number
+          supplier_count: number
+          variety_id: string
+          variety_name_en: string
+          variety_name_fr: string
+        }[]
+      }
+      v2_supply_pipeline: {
+        Args: {
+          _crop_id?: string
+          _facility_id?: string
+          _max_distance_km?: number
+          _variety_id?: string
+        }
+        Returns: {
+          bucket: string
+          quantity_tonnes: number
+          record_count: number
+          source: string
+          supplier_count: number
+        }[]
+      }
+      v2_to_tonnes: {
+        Args: { _quantity: number; _unit_code: string }
+        Returns: number
       }
     }
     Enums: {

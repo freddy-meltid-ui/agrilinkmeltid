@@ -1,0 +1,11 @@
+GRANT EXECUTE ON FUNCTION public.v2_to_tonnes(numeric, text) TO service_role;
+GRANT EXECUTE ON FUNCTION public.v2_distance_km(numeric, numeric, numeric, numeric) TO service_role;
+GRANT EXECUTE ON FUNCTION public.v2_approx_coord(numeric) TO service_role;
+GRANT EXECUTE ON FUNCTION public.v2_freshness_status(timestamptz) TO service_role;
+GRANT EXECUTE ON FUNCTION public.v2_supply_confidence(text, text, text, timestamptz, boolean, boolean) TO service_role;
+GRANT EXECUTE ON FUNCTION public.v2_can_read_commercial_supply(uuid) TO service_role;
+GRANT EXECUTE ON FUNCTION public.v2_commercial_supply(uuid, uuid, uuid, text, text, text, text[], text[], numeric, date, date, numeric, boolean, text, int, int) TO service_role;
+GRANT EXECUTE ON FUNCTION public.v2_commercial_supply_history(uuid) TO service_role;
+GRANT EXECUTE ON FUNCTION public.v2_supply_pipeline(uuid, uuid, uuid, numeric) TO service_role;
+GRANT EXECUTE ON FUNCTION public.v2_supply_coverage(uuid, uuid) TO service_role;
+GRANT EXECUTE ON FUNCTION public.v2_data_quality_summary() TO service_role;
