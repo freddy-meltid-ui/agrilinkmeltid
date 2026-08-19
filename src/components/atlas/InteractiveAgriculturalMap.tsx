@@ -53,7 +53,24 @@ type Props = {
   onSelect: (r: BeninRegion) => void;
 };
 
+const ZoomWatcher = ({ onZoom }: { onZoom: (z: number) => void }) => {
+  const map = useMap();
+  useEffect(() => {
+    onZoom(map.getZoom());
+    const handler = () => onZoom(map.getZoom());
+    map.on("zoomend", handler);
+    return () => {
+      map.off("zoomend", handler);
+    };
+  }, [map, onZoom]);
+  return null;
+};
+
 const InteractiveAgriculturalMap = ({ regions, selected, onSelect }: Props) => {
+  const [cadastreOn, setCadastreOn] = useState(false);
+  const [cadastreOpacity, setCadastreOpacity] = useState(0.7);
+  const [zoom, setZoom] = useState(7);
+
   return (
     <div className="relative h-full w-full overflow-hidden rounded-lg border border-stone-200 shadow-sm">
       <MapContainer
@@ -66,6 +83,20 @@ const InteractiveAgriculturalMap = ({ regions, selected, onSelect }: Props) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        {cadastreOn && (
+          <WMSTileLayer
+            url={CADASTRE_WMS_URL}
+            layers={CADASTRE_LAYERS}
+            format="image/png"
+            transparent
+            version="1.3.0"
+            opacity={cadastreOpacity}
+            minZoom={CADASTRE_MIN_ZOOM}
+            attribution='Cadastre&nbsp;: <a href="https://cadastre.bj" target="_blank" rel="noopener noreferrer">ANDF</a>'
+          />
+        )}
+        <ZoomWatcher onZoom={setZoom} />
+
         {regions.map((r) => {
           const isSelected = selected?.id === r.id;
           const color = colorFor(r.potential_level);
