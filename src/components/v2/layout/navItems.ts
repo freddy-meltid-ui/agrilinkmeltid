@@ -34,7 +34,7 @@ export const V2_NAV_ITEMS: V2NavItem[] = [
   { to: "/app/operations/production", labelKey: "v2.nav.production", icon: Factory },
   { to: "/app/atlas", labelKey: "v2.nav.atlas", icon: Map },
   { to: "/app/compliance", labelKey: "v2.nav.compliance", icon: ShieldCheck },
-  { to: "/app/finance", labelKey: "v2.nav.finance", icon: Wallet, comingSoon: true },
+  { to: "/app/finance", labelKey: "v2.nav.finance", icon: Wallet },
   { to: "/app/documents", labelKey: "v2.nav.documents", icon: FileText, comingSoon: true },
   { to: "/app/marketplace", labelKey: "v2.nav.marketplace", icon: Store },
   { to: "/app/settings", labelKey: "v2.nav.settings", icon: Settings },
