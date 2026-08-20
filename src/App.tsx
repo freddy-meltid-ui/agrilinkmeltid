@@ -73,6 +73,7 @@ import V2FinanceRequest from "./pages/v2/finance/V2FinanceRequest";
 import V2FinanceDocuments from "./pages/v2/finance/V2FinanceDocuments";
 import V2FinanceDossier from "./pages/v2/finance/V2FinanceDossier";
 import V2FinanceSharing from "./pages/v2/finance/V2FinanceSharing";
+import V2FinanceSharedDossier from "./pages/v2/finance/V2FinanceSharedDossier";
 
 const queryClient = new QueryClient();
 
@@ -160,6 +161,7 @@ const App = () => (
                 <Route path="dossier" element={<V2FinanceDossier />} />
                 <Route path="sharing" element={<V2FinanceSharing />} />
               </Route>
+
 
               <Route
                 path="documents"

@@ -63,7 +63,8 @@ const V2FinanceDossier = () => {
 
   const lang = i18n.language;
   const s = (dossier.snapshot ?? {}) as FinanceDossier["snapshot"];
-  const cur = s.currency ?? "XOF";
+  const cur = s.currency ?? null;
+  const multiCurrency = Boolean(s.multi_currency);
   const org = (s.business ?? {}) as Record<string, any>;
   const req = s.financing_request as Record<string, any> | null;
   const history = dossier.readiness?.history ?? s.history;
@@ -158,10 +159,17 @@ const V2FinanceDossier = () => {
           value={formatAmount(s.collections?.outstanding_receivables, cur, lang)}
         />
         <Row label={t("v2.finance.facts.collection_ratio")} value={s.collections?.collection_ratio} />
-        <Row label={t("v2.finance.facts.expenses")} value={formatAmount(s.expenses?.total, cur, lang)} />
+        <Row
+          label={t("v2.finance.facts.expenses")}
+          value={formatAmount(s.expenses?.other_operating_expenses, cur, lang)}
+        />
+        <Row
+          label={t("v2.finance.facts.procurement_expenditure")}
+          value={formatAmount(s.expenses?.procurement_expenditure, cur, lang)}
+        />
         <Row
           label={t("v2.finance.facts.inventory_value")}
-          value={formatAmount(s.inventory?.value, cur, lang)}
+          value={formatAmount(s.inventory?.raw_material_value, cur, lang)}
         />
       </Section>
 
