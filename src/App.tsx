@@ -172,6 +172,9 @@ const App = () => (
             </Route>
             <Route path="/legacy" element={<Navigate to="/dashboard" replace />} />
 
+            {/* Consent-based lender pack: public, token-only, no session required. */}
+            <Route path="/finance-pack/:token" element={<V2FinanceSharedDossier />} />
+
             <Route path="*" element={<NotFound />} />
             </Routes>
           </SyncQueueProvider>
