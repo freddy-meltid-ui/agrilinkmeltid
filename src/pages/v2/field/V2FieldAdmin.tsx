@@ -19,6 +19,7 @@ import { useFieldNetwork } from "@/hooks/v2/useFieldNetwork";
 import { computeFreshness } from "@/lib/v2/freshness";
 import { runFieldMutation } from "@/lib/v2/fieldSync";
 import type { FieldAgent } from "@/lib/v2/supply";
+import DemandIntelligence from "@/components/v2/sourcing/DemandIntelligence";
 
 type Assignment = { id: string; supplier_id: string; field_agent_id: string; is_primary: boolean };
 
@@ -225,6 +226,10 @@ const V2FieldAdmin = () => {
             {staleSuppliers.length === 0 && <p className="text-sm text-muted-foreground">{t("v2.field.sections.allFresh")}</p>}
           </CardContent>
         </Card>
+
+        <div className="lg:col-span-2">
+          <DemandIntelligence />
+        </div>
       </div>
     </div>
   );

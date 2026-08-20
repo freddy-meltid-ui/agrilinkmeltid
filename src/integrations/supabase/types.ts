@@ -1796,6 +1796,127 @@ export type Database = {
           },
         ]
       }
+      v2_reconfirmation_tasks: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          created_by: string
+          crop_cycle_id: string | null
+          crop_id: string | null
+          due_date: string | null
+          field_agent_id: string | null
+          id: string
+          needed_by: string | null
+          observation: string | null
+          priority: string
+          reason: string | null
+          result_asking_price: number | null
+          result_available_end: string | null
+          result_available_start: string | null
+          result_quality_grade: string | null
+          result_quantity: number | null
+          result_unit_code: string | null
+          sourcing_request_id: string | null
+          status: Database["public"]["Enums"]["v2_reconfirmation_status"]
+          supplier_id: string
+          supply_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          created_by: string
+          crop_cycle_id?: string | null
+          crop_id?: string | null
+          due_date?: string | null
+          field_agent_id?: string | null
+          id?: string
+          needed_by?: string | null
+          observation?: string | null
+          priority?: string
+          reason?: string | null
+          result_asking_price?: number | null
+          result_available_end?: string | null
+          result_available_start?: string | null
+          result_quality_grade?: string | null
+          result_quantity?: number | null
+          result_unit_code?: string | null
+          sourcing_request_id?: string | null
+          status?: Database["public"]["Enums"]["v2_reconfirmation_status"]
+          supplier_id: string
+          supply_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          created_by?: string
+          crop_cycle_id?: string | null
+          crop_id?: string | null
+          due_date?: string | null
+          field_agent_id?: string | null
+          id?: string
+          needed_by?: string | null
+          observation?: string | null
+          priority?: string
+          reason?: string | null
+          result_asking_price?: number | null
+          result_available_end?: string | null
+          result_available_start?: string | null
+          result_quality_grade?: string | null
+          result_quantity?: number | null
+          result_unit_code?: string | null
+          sourcing_request_id?: string | null
+          status?: Database["public"]["Enums"]["v2_reconfirmation_status"]
+          supplier_id?: string
+          supply_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_reconfirmation_tasks_crop_cycle_id_fkey"
+            columns: ["crop_cycle_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crop_cycles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_reconfirmation_tasks_crop_id_fkey"
+            columns: ["crop_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crops"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_reconfirmation_tasks_field_agent_id_fkey"
+            columns: ["field_agent_id"]
+            isOneToOne: false
+            referencedRelation: "v2_field_agents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_reconfirmation_tasks_sourcing_request_id_fkey"
+            columns: ["sourcing_request_id"]
+            isOneToOne: false
+            referencedRelation: "v2_sourcing_requests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_reconfirmation_tasks_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "v2_suppliers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_reconfirmation_tasks_supply_id_fkey"
+            columns: ["supply_id"]
+            isOneToOne: false
+            referencedRelation: "v2_supply_availability"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       v2_settings: {
         Row: {
           created_at: string
@@ -1819,6 +1940,213 @@ export type Database = {
           value?: Json
         }
         Relationships: []
+      }
+      v2_sourcing_events: {
+        Row: {
+          actor_id: string | null
+          created_at: string
+          event_type: string
+          id: string
+          payload: Json
+          sourcing_request_id: string
+        }
+        Insert: {
+          actor_id?: string | null
+          created_at?: string
+          event_type: string
+          id?: string
+          payload?: Json
+          sourcing_request_id: string
+        }
+        Update: {
+          actor_id?: string | null
+          created_at?: string
+          event_type?: string
+          id?: string
+          payload?: Json
+          sourcing_request_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_sourcing_events_sourcing_request_id_fkey"
+            columns: ["sourcing_request_id"]
+            isOneToOne: false
+            referencedRelation: "v2_sourcing_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_sourcing_match_runs: {
+        Row: {
+          coverage_ratio: number | null
+          created_at: string
+          created_by: string | null
+          high_confidence_tonnes: number | null
+          id: string
+          identified_tonnes: number | null
+          match_count: number
+          near_match_count: number
+          recommended_set: Json
+          requested_tonnes: number | null
+          sourcing_request_id: string
+          supplier_count: number
+          weighted_avg_distance_km: number | null
+        }
+        Insert: {
+          coverage_ratio?: number | null
+          created_at?: string
+          created_by?: string | null
+          high_confidence_tonnes?: number | null
+          id?: string
+          identified_tonnes?: number | null
+          match_count?: number
+          near_match_count?: number
+          recommended_set?: Json
+          requested_tonnes?: number | null
+          sourcing_request_id: string
+          supplier_count?: number
+          weighted_avg_distance_km?: number | null
+        }
+        Update: {
+          coverage_ratio?: number | null
+          created_at?: string
+          created_by?: string | null
+          high_confidence_tonnes?: number | null
+          id?: string
+          identified_tonnes?: number | null
+          match_count?: number
+          near_match_count?: number
+          recommended_set?: Json
+          requested_tonnes?: number | null
+          sourcing_request_id?: string
+          supplier_count?: number
+          weighted_avg_distance_km?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_sourcing_match_runs_sourcing_request_id_fkey"
+            columns: ["sourcing_request_id"]
+            isOneToOne: false
+            referencedRelation: "v2_sourcing_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_sourcing_requests: {
+        Row: {
+          availability_end: string
+          availability_start: string
+          certification_mandatory: boolean
+          certification_requirement: string | null
+          created_at: string
+          created_by: string
+          crop_id: string
+          facility_id: string | null
+          id: string
+          max_distance_km: number | null
+          max_quantity_per_supplier: number | null
+          min_quantity_per_supplier: number | null
+          notes: string | null
+          organization_id: string
+          packaging_requirement: string | null
+          price_unit: string | null
+          quality_requirement: string | null
+          reference: string
+          requested_quantity: number
+          status: Database["public"]["Enums"]["v2_sourcing_status"]
+          strict_radius: boolean
+          target_price: number | null
+          unit_code: string
+          updated_at: string
+          variety_flexible: boolean
+          variety_id: string | null
+        }
+        Insert: {
+          availability_end: string
+          availability_start: string
+          certification_mandatory?: boolean
+          certification_requirement?: string | null
+          created_at?: string
+          created_by: string
+          crop_id: string
+          facility_id?: string | null
+          id?: string
+          max_distance_km?: number | null
+          max_quantity_per_supplier?: number | null
+          min_quantity_per_supplier?: number | null
+          notes?: string | null
+          organization_id: string
+          packaging_requirement?: string | null
+          price_unit?: string | null
+          quality_requirement?: string | null
+          reference?: string
+          requested_quantity: number
+          status?: Database["public"]["Enums"]["v2_sourcing_status"]
+          strict_radius?: boolean
+          target_price?: number | null
+          unit_code?: string
+          updated_at?: string
+          variety_flexible?: boolean
+          variety_id?: string | null
+        }
+        Update: {
+          availability_end?: string
+          availability_start?: string
+          certification_mandatory?: boolean
+          certification_requirement?: string | null
+          created_at?: string
+          created_by?: string
+          crop_id?: string
+          facility_id?: string | null
+          id?: string
+          max_distance_km?: number | null
+          max_quantity_per_supplier?: number | null
+          min_quantity_per_supplier?: number | null
+          notes?: string | null
+          organization_id?: string
+          packaging_requirement?: string | null
+          price_unit?: string | null
+          quality_requirement?: string | null
+          reference?: string
+          requested_quantity?: number
+          status?: Database["public"]["Enums"]["v2_sourcing_status"]
+          strict_radius?: boolean
+          target_price?: number | null
+          unit_code?: string
+          updated_at?: string
+          variety_flexible?: boolean
+          variety_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_sourcing_requests_crop_id_fkey"
+            columns: ["crop_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crops"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_sourcing_requests_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processing_facilities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_sourcing_requests_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_sourcing_requests_variety_id_fkey"
+            columns: ["variety_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crop_varieties"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       v2_supplier_assignments: {
         Row: {
@@ -2336,6 +2664,102 @@ export type Database = {
         Args: { _org_id: string; _user_id: string }
         Returns: boolean
       }
+      v2_reconfirmation_task_feed: {
+        Args: never
+        Returns: {
+          commune: string
+          created_at: string
+          crop_id: string
+          crop_name_en: string
+          crop_name_fr: string
+          current_quantity: number
+          current_unit: string
+          due_date: string
+          last_confirmed_at: string
+          needed_by: string
+          priority: string
+          reason: string
+          status: string
+          supplier_code: string
+          supplier_id: string
+          supplier_name: string
+          supply_id: string
+          task_id: string
+        }[]
+      }
+      v2_request_supply_reconfirmation: {
+        Args: {
+          _due_date?: string
+          _priority?: string
+          _reason?: string
+          _request_id: string
+          _supply_id: string
+        }
+        Returns: string
+      }
+      v2_sourcing_demand_intelligence: {
+        Args: never
+        Returns: {
+          crop_id: string
+          crop_name_en: string
+          crop_name_fr: string
+          demand_tonnes: number
+          department: string
+          gap_tonnes: number
+          identified_tonnes: number
+          period_month: string
+          request_count: number
+        }[]
+      }
+      v2_sourcing_matches: {
+        Args: { _request_id: string }
+        Returns: {
+          approx_latitude: number
+          approx_longitude: number
+          availability_end: string
+          availability_start: string
+          blocking_reasons: string[]
+          certification_status: string
+          commune: string
+          confidence: string
+          crop_id: string
+          crop_name_en: string
+          crop_name_fr: string
+          department: string
+          distance_km: number
+          freshness: string
+          last_confirmed_at: string
+          match_class: string
+          overlap_days: number
+          quality_grade: string
+          quantity: number
+          quantity_tonnes: number
+          reasons: Json
+          score: number
+          score_breakdown: Json
+          supplier_ref: string
+          supplier_status: string
+          supplier_type: string
+          supply_id: string
+          supply_status: string
+          unit_code: string
+          variety_id: string
+          variety_name_en: string
+          variety_name_fr: string
+          verification_status: string
+        }[]
+      }
+      v2_sourcing_request_tasks: {
+        Args: { _request_id: string }
+        Returns: {
+          created_at: string
+          due_date: string
+          priority: string
+          status: string
+          supply_id: string
+          task_id: string
+        }[]
+      }
       v2_supply_confidence: {
         Args: {
           _confirmed_at: string
@@ -2422,6 +2846,24 @@ export type Database = {
         | "compliance_advisor"
         | "financial_partner"
       v2_org_type: "processor" | "cooperative" | "field_network" | "agrigrid"
+      v2_reconfirmation_status:
+        | "open"
+        | "assigned"
+        | "in_progress"
+        | "confirmed"
+        | "not_available"
+        | "completed"
+        | "cancelled"
+      v2_sourcing_status:
+        | "draft"
+        | "open"
+        | "matching"
+        | "reviewing"
+        | "ready_for_confirmation"
+        | "partially_covered"
+        | "covered"
+        | "cancelled"
+        | "expired"
       v2_supplier_status:
         | "unverified"
         | "field_verified"
@@ -2615,6 +3057,26 @@ export const Constants = {
         "financial_partner",
       ],
       v2_org_type: ["processor", "cooperative", "field_network", "agrigrid"],
+      v2_reconfirmation_status: [
+        "open",
+        "assigned",
+        "in_progress",
+        "confirmed",
+        "not_available",
+        "completed",
+        "cancelled",
+      ],
+      v2_sourcing_status: [
+        "draft",
+        "open",
+        "matching",
+        "reviewing",
+        "ready_for_confirmation",
+        "partially_covered",
+        "covered",
+        "cancelled",
+        "expired",
+      ],
       v2_supplier_status: [
         "unverified",
         "field_verified",

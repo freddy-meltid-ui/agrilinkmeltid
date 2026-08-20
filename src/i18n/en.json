@@ -415,7 +415,166 @@
     },
     "sourcing": {
       "title": "Sourcing",
-      "description": "Create sourcing requests and review matching suppliers."
+      "description": "Express a concrete raw-material need and find verified potential suppliers.",
+      "newRequest": "New request",
+      "emptyTitle": "No sourcing request yet",
+      "emptyDescription": "Create a request to start searching for suppliers.",
+      "viewMatches": "View matches",
+      "backToList": "Back to requests",
+      "notFound": "Request not found",
+      "notFoundHint": "This request does not exist or is not accessible to you.",
+      "listCoverage": "Identified coverage {{pct}}% · {{identified}} t / {{requested}} t",
+      "runMatching": "Find suppliers",
+      "matchingRunning": "Matching in progress…",
+      "matchError": "Matching failed",
+      "matchScore": "Match",
+      "allocated": "Allocated: {{tonnes}} t",
+      "created": "Request published",
+      "draftSaved": "Draft saved",
+      "createError": "Could not create the request",
+      "detailSubtitle": "{{reference}} · {{from}} → {{to}} · {{facility}} · {{radius}} km radius",
+      "noMatchTitle": "No direct match",
+      "noMatchDescription": "No supply satisfies every hard criterion. Check the alternatives or widen the search.",
+      "noNearTitle": "No alternatives",
+      "noNearDescription": "No near-matching supply was found.",
+      "nearNote": "These supplies fail at least one hard criterion. They never count towards coverage.",
+      "noEvents": "No events",
+      "privacyNote": "Supplier identities are anonymised: no phone, exact address or internal notes. Locations are approximate (~2 km).",
+      "mapLegend": "Green: recommended suppliers · Orange: matches · Grey: alternatives · Blue: your facility",
+      "reconfirmCta": "Request field confirmation",
+      "reconfirmPending": "Field confirmation requested",
+      "reconfirmCreated": "Reconfirmation task created",
+      "reconfirmError": "Could not create the task",
+      "reconfirmReason": "Confirmation requested for a sourcing request ({{ref}})",
+      "kpi": {
+        "open": "Open requests",
+        "covered": "Covered",
+        "partial": "Partially covered",
+        "attention": "Needs attention"
+      },
+      "status": {
+        "draft": "Draft",
+        "open": "Open",
+        "matching": "Matching",
+        "reviewing": "Reviewing",
+        "ready_for_confirmation": "Ready to confirm",
+        "partially_covered": "Partially covered",
+        "covered": "Covered",
+        "cancelled": "Cancelled",
+        "expired": "Expired"
+      },
+      "wizard": {
+        "title": "What do you need?",
+        "description": "Describe your raw-material need, then run the search.",
+        "step1": "Product and quantity",
+        "step2": "Period and delivery",
+        "step3": "Commercial preferences",
+        "review": "Review",
+        "next": "Continue",
+        "back": "Back",
+        "cancel": "Cancel",
+        "saveDraft": "Save draft",
+        "publish": "Find suppliers"
+      },
+      "fields": {
+        "crop": "Product",
+        "cropPlaceholder": "Select a product",
+        "variety": "Variety",
+        "varietyPlaceholder": "Select a variety",
+        "varietyFlexible": "A close variety is acceptable",
+        "quantity": "Quantity",
+        "unit": "Unit",
+        "from": "Available from",
+        "to": "Until",
+        "window": "Period",
+        "facility": "Deliver to",
+        "facilityPlaceholder": "Select a facility",
+        "radius": "Maximum radius (km)",
+        "strictRadius": "Strict radius (exclude beyond)",
+        "strictShort": "strict",
+        "minPerSupplier": "Minimum quantity per supplier (t)",
+        "maxPerSupplier": "Maximum quantity per supplier (t)",
+        "targetPrice": "Target price",
+        "priceUnit": "Price unit",
+        "quality": "Preferred quality",
+        "certification": "Certification",
+        "certificationMandatory": "Certification mandatory",
+        "packaging": "Packaging",
+        "notes": "Notes"
+      },
+      "coverage": {
+        "title": "Identified coverage",
+        "requested": "Requested",
+        "identified": "Identified",
+        "identifiedHint": "Potential, not reserved",
+        "highConfidence": "High confidence",
+        "highConfidenceHint": "Recent, field-verified data",
+        "gap": "Potential gap",
+        "gapHint": "High-confidence gap: {{tonnes}} t",
+        "suppliers": "Suppliers",
+        "avgDistance": "~{{km}} km weighted average",
+        "advisoryNote": "Identified potential supply — nothing is reserved at this stage. The same volume may appear on several requests."
+      },
+      "recommended": {
+        "title": "Recommended coverage",
+        "empty": "No supplier combination available yet.",
+        "total": "Total (of {{requested}} t requested)",
+        "algorithm": "Deterministic selection: high confidence, then data freshness, then distance, then volume — one lot per supplier."
+      },
+      "widen": {
+        "title": "Widen the search",
+        "description": "Adjust the radius or availability window, then rerun matching.",
+        "cta": "Rerun matching"
+      },
+      "freshnessWarning": {
+        "title": "Data to confirm",
+        "body": "{{tonnes}} t come from less recent or less reliable supply records. Request a field confirmation."
+      },
+      "tabs": {
+        "matches": "Matches ({{count}})",
+        "near": "Alternatives ({{count}})",
+        "map": "Map",
+        "history": "History"
+      },
+      "reason": {
+        "variety": "{{value}}",
+        "windowOk": "Available during the requested period ({{days}} d)",
+        "windowKo": "Outside the requested period",
+        "distance": "{{km}} km from the facility",
+        "distanceUnknown": "Unknown distance (missing GPS)",
+        "freshness_fresh": "Recently field-confirmed",
+        "freshness_aging": "Data needs a refresh",
+        "freshness_needs_verification": "Stale data — confirmation required",
+        "freshness_unknown": "Unknown freshness",
+        "confidence": "{{value}} confidence",
+        "quantity": "Can supply {{value}} t",
+        "quality": "Quality {{value}}",
+        "qualityUnknown": "Quality not recorded",
+        "certification": "Certification {{value}}",
+        "certificationNone": "No certification declared"
+      },
+      "blocking": {
+        "no_window_overlap": "No overlap with the requested period",
+        "no_quantity": "No available quantity",
+        "outside_strict_radius": "Outside the strict radius",
+        "missing_required_certification": "Required certification missing",
+        "variety_mismatch": "Different variety than requested",
+        "far_outside_radius": "Far beyond the requested radius",
+        "stale_data": "Not confirmed recently"
+      },
+      "event": {
+        "request_created": "Request created",
+        "request_updated": "Request updated",
+        "status_changed": "Status changed",
+        "matching_run": "Matching run",
+        "reconfirmation_requested": "Field confirmation requested",
+        "supply_reconfirmed": "Supply reconfirmed"
+      },
+      "dashboard": {
+        "title": "Sourcing requests",
+        "viewAll": "View all",
+        "empty": "No sourcing request yet."
+      }
     },
     "suppliers": {
       "title": "Suppliers",
@@ -912,6 +1071,51 @@
         "supply_without_variety": "Supply without a variety specified",
         "farms_without_parcel": "Farms without a registered plot"
       }
+    },
+    "tasks": {
+      "title": "Priority requests",
+      "description": "Field confirmations triggered by processor needs.",
+      "navCta": "Priority requests",
+      "emptyTitle": "No task",
+      "emptyDescription": "No field confirmation is assigned to you.",
+      "confirmLine": "Confirm {{quantity}} of {{crop}} at {{supplier}}",
+      "neededBy": "needed by {{date}}",
+      "confirmCta": "Confirm",
+      "startCta": "Start",
+      "dialogTitle": "Field confirmation",
+      "quantity": "Confirmed quantity",
+      "unit": "Unit",
+      "from": "Available from",
+      "to": "until",
+      "quality": "Quality",
+      "price": "Asking price",
+      "observation": "Observation",
+      "notAvailable": "Not available",
+      "confirmSave": "Save confirmation",
+      "confirmed": "Supply confirmed",
+      "markedUnavailable": "Marked unavailable",
+      "error": "Could not save",
+      "priority": {
+        "low": "Low",
+        "normal": "Normal",
+        "high": "High",
+        "urgent": "Urgent"
+      },
+      "status": {
+        "open": "Open",
+        "assigned": "Assigned",
+        "in_progress": "In progress",
+        "confirmed": "Confirmed",
+        "not_available": "Not available",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      }
+    },
+    "demand": {
+      "title": "Demand intelligence (internal)",
+      "empty": "No demand recorded.",
+      "line": "{{requests}} request(s) · {{demand}} t demanded · {{supply}} t identified · gap {{gap}} t",
+      "tasks": "Open confirmation tasks: {{count}}"
     }
   },
   "language": {

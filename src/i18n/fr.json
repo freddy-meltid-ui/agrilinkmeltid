@@ -415,7 +415,166 @@
     },
     "sourcing": {
       "title": "Approvisionnement",
-      "description": "Créer des demandes d'approvisionnement et consulter les fournisseurs correspondants."
+      "description": "Exprimez un besoin concret et trouvez des fournisseurs potentiels vérifiés.",
+      "newRequest": "Nouvelle demande",
+      "emptyTitle": "Aucune demande d'approvisionnement",
+      "emptyDescription": "Créez une demande pour lancer la recherche de fournisseurs.",
+      "viewMatches": "Voir les correspondances",
+      "backToList": "Retour aux demandes",
+      "notFound": "Demande introuvable",
+      "notFoundHint": "Cette demande n'existe pas ou ne vous est pas accessible.",
+      "listCoverage": "Couverture identifiée {{pct}}% · {{identified}} t / {{requested}} t",
+      "runMatching": "Rechercher des fournisseurs",
+      "matchingRunning": "Recherche en cours…",
+      "matchError": "Échec de la recherche",
+      "matchScore": "Compatibilité",
+      "allocated": "Retenu : {{tonnes}} t",
+      "created": "Demande publiée",
+      "draftSaved": "Brouillon enregistré",
+      "createError": "Création impossible",
+      "detailSubtitle": "{{reference}} · {{from}} → {{to}} · {{facility}} · rayon {{radius}} km",
+      "noMatchTitle": "Aucune correspondance directe",
+      "noMatchDescription": "Aucun approvisionnement ne satisfait tous les critères stricts. Consultez les alternatives ou élargissez la recherche.",
+      "noNearTitle": "Aucune alternative",
+      "noNearDescription": "Aucun approvisionnement proche des critères n'a été trouvé.",
+      "nearNote": "Ces approvisionnements ne satisfont pas tous les critères stricts. Ils ne sont jamais comptés dans la couverture.",
+      "noEvents": "Aucun évènement",
+      "privacyNote": "Identités fournisseurs anonymisées : ni téléphone, ni adresse exacte, ni notes internes. Localisations approximatives (~2 km).",
+      "mapLegend": "Vert : fournisseurs recommandés · Orange : correspondances · Gris : alternatives · Bleu : votre unité",
+      "reconfirmCta": "Demander une confirmation terrain",
+      "reconfirmPending": "Confirmation terrain demandée",
+      "reconfirmCreated": "Tâche de confirmation créée",
+      "reconfirmError": "Création de la tâche impossible",
+      "reconfirmReason": "Confirmation demandée pour une demande d'approvisionnement ({{ref}})",
+      "kpi": {
+        "open": "Demandes ouvertes",
+        "covered": "Couvertes",
+        "partial": "Partiellement couvertes",
+        "attention": "À surveiller"
+      },
+      "status": {
+        "draft": "Brouillon",
+        "open": "Ouverte",
+        "matching": "Recherche",
+        "reviewing": "En revue",
+        "ready_for_confirmation": "Prête à confirmer",
+        "partially_covered": "Partiellement couverte",
+        "covered": "Couverte",
+        "cancelled": "Annulée",
+        "expired": "Expirée"
+      },
+      "wizard": {
+        "title": "De quoi avez-vous besoin ?",
+        "description": "Décrivez votre besoin en matière première, puis lancez la recherche.",
+        "step1": "Produit et quantité",
+        "step2": "Période et livraison",
+        "step3": "Préférences commerciales",
+        "review": "Récapitulatif",
+        "next": "Continuer",
+        "back": "Retour",
+        "cancel": "Annuler",
+        "saveDraft": "Enregistrer le brouillon",
+        "publish": "Rechercher des fournisseurs"
+      },
+      "fields": {
+        "crop": "Produit",
+        "cropPlaceholder": "Choisir un produit",
+        "variety": "Variété",
+        "varietyPlaceholder": "Choisir une variété",
+        "varietyFlexible": "J'accepte une variété proche",
+        "quantity": "Quantité",
+        "unit": "Unité",
+        "from": "Disponible à partir du",
+        "to": "Jusqu'au",
+        "window": "Période",
+        "facility": "Livraison à",
+        "facilityPlaceholder": "Choisir une unité",
+        "radius": "Rayon maximum (km)",
+        "strictRadius": "Rayon strict (exclure au-delà)",
+        "strictShort": "strict",
+        "minPerSupplier": "Quantité minimale par fournisseur (t)",
+        "maxPerSupplier": "Quantité maximale par fournisseur (t)",
+        "targetPrice": "Prix cible",
+        "priceUnit": "Unité de prix",
+        "quality": "Qualité souhaitée",
+        "certification": "Certification",
+        "certificationMandatory": "Certification obligatoire",
+        "packaging": "Conditionnement",
+        "notes": "Notes"
+      },
+      "coverage": {
+        "title": "Couverture identifiée",
+        "requested": "Demandé",
+        "identified": "Identifié",
+        "identifiedHint": "Potentiel, non réservé",
+        "highConfidence": "Haute confiance",
+        "highConfidenceHint": "Données récentes et vérifiées",
+        "gap": "Écart potentiel",
+        "gapHint": "Écart haute confiance : {{tonnes}} t",
+        "suppliers": "Fournisseurs",
+        "avgDistance": "~{{km}} km en moyenne pondérée",
+        "advisoryNote": "Approvisionnement potentiel identifié — aucune réservation n'existe à ce stade. Le même volume peut apparaître sur plusieurs demandes."
+      },
+      "recommended": {
+        "title": "Couverture recommandée",
+        "empty": "Aucune combinaison de fournisseurs disponible pour l'instant.",
+        "total": "Total (sur {{requested}} t demandées)",
+        "algorithm": "Sélection déterministe : confiance élevée, puis fraîcheur des données, puis distance, puis volume — un seul lot par fournisseur."
+      },
+      "widen": {
+        "title": "Élargir la recherche",
+        "description": "Ajustez le rayon ou la fenêtre de disponibilité, puis relancez la recherche.",
+        "cta": "Relancer la recherche"
+      },
+      "freshnessWarning": {
+        "title": "Données à confirmer",
+        "body": "{{tonnes}} t proviennent d'approvisionnements moins récents ou moins fiables. Demandez une confirmation terrain."
+      },
+      "tabs": {
+        "matches": "Correspondances ({{count}})",
+        "near": "Alternatives ({{count}})",
+        "map": "Carte",
+        "history": "Historique"
+      },
+      "reason": {
+        "variety": "{{value}}",
+        "windowOk": "Disponible sur la période demandée ({{days}} j)",
+        "windowKo": "Hors de la période demandée",
+        "distance": "À {{km}} km de l'unité",
+        "distanceUnknown": "Distance inconnue (GPS manquant)",
+        "freshness_fresh": "Données confirmées récemment",
+        "freshness_aging": "Données à rafraîchir",
+        "freshness_needs_verification": "Données anciennes — confirmation requise",
+        "freshness_unknown": "Fraîcheur inconnue",
+        "confidence": "Fiabilité {{value}}",
+        "quantity": "Peut fournir {{value}} t",
+        "quality": "Qualité {{value}}",
+        "qualityUnknown": "Qualité non renseignée",
+        "certification": "Certification {{value}}",
+        "certificationNone": "Aucune certification déclarée"
+      },
+      "blocking": {
+        "no_window_overlap": "Aucun recouvrement avec la période demandée",
+        "no_quantity": "Aucune quantité disponible",
+        "outside_strict_radius": "Hors du rayon strict défini",
+        "missing_required_certification": "Certification obligatoire absente",
+        "variety_mismatch": "Variété différente de celle demandée",
+        "far_outside_radius": "Très au-delà du rayon demandé",
+        "stale_data": "Données non confirmées récemment"
+      },
+      "event": {
+        "request_created": "Demande créée",
+        "request_updated": "Demande modifiée",
+        "status_changed": "Statut modifié",
+        "matching_run": "Recherche de fournisseurs exécutée",
+        "reconfirmation_requested": "Confirmation terrain demandée",
+        "supply_reconfirmed": "Approvisionnement reconfirmé"
+      },
+      "dashboard": {
+        "title": "Demandes d'approvisionnement",
+        "viewAll": "Tout voir",
+        "empty": "Aucune demande en cours."
+      }
     },
     "suppliers": {
       "title": "Fournisseurs",
@@ -912,6 +1071,51 @@
         "supply_without_variety": "Offres sans variété précisée",
         "farms_without_parcel": "Exploitations sans parcelle enregistrée"
       }
+    },
+    "tasks": {
+      "title": "Demandes prioritaires",
+      "description": "Confirmations terrain déclenchées par les besoins des transformateurs.",
+      "navCta": "Demandes prioritaires",
+      "emptyTitle": "Aucune tâche",
+      "emptyDescription": "Aucune confirmation terrain ne vous est assignée.",
+      "confirmLine": "Confirmer {{quantity}} de {{crop}} chez {{supplier}}",
+      "neededBy": "besoin le {{date}}",
+      "confirmCta": "Confirmer",
+      "startCta": "Démarrer",
+      "dialogTitle": "Confirmation terrain",
+      "quantity": "Quantité confirmée",
+      "unit": "Unité",
+      "from": "Disponible du",
+      "to": "au",
+      "quality": "Qualité",
+      "price": "Prix demandé",
+      "observation": "Observation",
+      "notAvailable": "Non disponible",
+      "confirmSave": "Enregistrer la confirmation",
+      "confirmed": "Approvisionnement confirmé",
+      "markedUnavailable": "Marqué non disponible",
+      "error": "Enregistrement impossible",
+      "priority": {
+        "low": "Basse",
+        "normal": "Normale",
+        "high": "Haute",
+        "urgent": "Urgente"
+      },
+      "status": {
+        "open": "Ouverte",
+        "assigned": "Assignée",
+        "in_progress": "En cours",
+        "confirmed": "Confirmée",
+        "not_available": "Non disponible",
+        "completed": "Terminée",
+        "cancelled": "Annulée"
+      }
+    },
+    "demand": {
+      "title": "Intelligence de la demande (interne)",
+      "empty": "Aucune demande enregistrée.",
+      "line": "{{requests}} demande(s) · {{demand}} t demandées · {{supply}} t identifiées · écart {{gap}} t",
+      "tasks": "Tâches de confirmation ouvertes : {{count}}"
     }
   },
   "language": {
