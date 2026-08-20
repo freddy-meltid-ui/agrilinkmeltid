@@ -96,6 +96,11 @@ const V2ProductionNew = () => {
   );
 
   const yieldRatio = totalInputTonnes > 0 ? finishedQty / (totalInputTonnes * 1000) : 0;
+  const finishedOutputs = outputs.filter((o) => o.type === "finished_product");
+  const finishedUnit = finishedOutputs[0]?.unit ?? "kg";
+  // Percentage yield is only meaningful when output and input share a mass basis.
+  const yieldIsMass =
+    ["kg", "g", "t"].includes(finishedUnit) && finishedOutputs.every((o) => o.unit === finishedUnit);
 
   const overdrawn = inputs.some((l) => {
     const b = rawBatches.find((x) => x.id === l.rawBatchId);
