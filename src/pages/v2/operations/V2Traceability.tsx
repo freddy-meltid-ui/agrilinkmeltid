@@ -1,5 +1,6 @@
-// AGRI-GRID V2 — Phase 2A: backward traceability for one finished lot.
-// Finished batch → production batch → raw batches → receipts/orders → suppliers.
+// AGRI-GRID V2 — Phase 2A/2B: full traceability for one finished lot.
+// Backward: finished batch → production batch → raw batches → receipts/orders → suppliers.
+// Forward (Phase 2B): finished batch → dispatches → customers ("where did this lot go?").
 // Supplier identity is only shown when the commercial relationship released it.
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -8,6 +9,13 @@ import { ArrowLeft, Loader2, ShieldAlert } from "lucide-react";
 import PageHeader from "@/components/v2/ui-kit/PageHeader";
 import { Button } from "@/components/ui/button";
 import { traceFinishedBatch, type BackwardTrace } from "@/lib/v2/production";
+import {
+  fetchDirectCost,
+  formatMoney,
+  traceFinishedBatchCustomers,
+  type DirectCost,
+  type LotDestinations,
+} from "@/lib/v2/sales";
 import { localeTag } from "@/lib/v2/locale";
 
 const V2Traceability = () => {
@@ -15,6 +23,8 @@ const V2Traceability = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [trace, setTrace] = useState<BackwardTrace | null>(null);
+  const [downstream, setDownstream] = useState<LotDestinations | null>(null);
+  const [cost, setCost] = useState<DirectCost | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -22,7 +32,14 @@ const V2Traceability = () => {
     if (!finishedBatchId) return;
     setLoading(true);
     try {
-      setTrace(await traceFinishedBatch(finishedBatchId));
+      const [b, d, c] = await Promise.all([
+        traceFinishedBatch(finishedBatchId),
+        traceFinishedBatchCustomers(finishedBatchId).catch(() => null),
+        fetchDirectCost(finishedBatchId).catch(() => null),
+      ]);
+      setTrace(b);
+      setDownstream(d);
+      setCost(c);
     } catch {
       setError(true);
     } finally {
@@ -36,6 +53,7 @@ const V2Traceability = () => {
 
   if (loading) return <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />;
   if (error || !trace) return <p className="text-muted-foreground">{t("v2.production.trace.unavailable")}</p>;
+
 
   const locale = localeTag(i18n.language);
   const fb = trace.finished_batch;
