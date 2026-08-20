@@ -54,13 +54,30 @@ const V2ProductionDetail = () => {
 
   const { batch, inputs, outputs, finished } = detail;
   const fr = i18n.language.startsWith("fr");
-  const finishedQty = outputs.filter((o) => o.output_type === "finished_product").reduce((s, o) => s + Number(o.quantity), 0);
-  const lossQty = outputs
-    .filter((o) => o.output_type === "waste" || o.output_type === "rejected_output")
-    .reduce((s, o) => s + Number(o.quantity), 0);
+  const finishedOutputs = outputs.filter((o) => o.output_type === "finished_product");
+  const finishedQty = finishedOutputs.reduce((s, o) => s + Number(o.quantity), 0);
+  const lossOutputs = outputs.filter((o) => o.output_type === "waste" || o.output_type === "rejected_output");
+  const lossQty = lossOutputs.reduce((s, o) => s + Number(o.quantity), 0);
   const inputKg = Number(batch.total_input_tonnes) * 1000;
-  const yieldPct = inputKg > 0 ? (finishedQty / inputKg) * 100 : 0;
-  const lossPct = inputKg > 0 ? (lossQty / inputKg) * 100 : 0;
+  const MASS_UNITS = ["kg", "g", "t"];
+  const finishedUnit = finishedOutputs[0]?.unit_code ?? "kg";
+  const lossUnit = lossOutputs[0]?.unit_code ?? "kg";
+  const finishedIsMass = MASS_UNITS.includes(finishedUnit) && finishedOutputs.every((o) => o.unit_code === finishedUnit);
+  const lossIsMass = MASS_UNITS.includes(lossUnit) && lossOutputs.every((o) => o.unit_code === lossUnit);
+  // Yield is only a percentage when input and output share a mass basis; otherwise show the honest ratio (e.g. l/kg).
+  const yieldValue =
+    inputKg <= 0
+      ? "—"
+      : finishedIsMass
+        ? `${((finishedQty / inputKg) * 100).toFixed(1)} %`
+        : `${(finishedQty / inputKg).toFixed(3)} ${finishedUnit}/kg`;
+  const lossValue =
+    inputKg <= 0
+      ? "—"
+      : lossIsMass
+        ? `${((lossQty / inputKg) * 100).toFixed(1)} %`
+        : `${lossQty.toFixed(2)} ${lossUnit}`;
+
 
   const doVoid = async () => {
     if (!batchId) return;
