@@ -61,6 +61,12 @@ import V2SalesNew from "./pages/v2/operations/V2SalesNew";
 import V2SaleDetail from "./pages/v2/operations/V2SaleDetail";
 import V2Expenses from "./pages/v2/operations/V2Expenses";
 import V2Performance from "./pages/v2/operations/V2Performance";
+import V2ComplianceLayout from "./pages/v2/compliance/V2ComplianceLayout";
+import V2ComplianceOverview from "./pages/v2/compliance/V2ComplianceOverview";
+import V2ComplianceAssessment from "./pages/v2/compliance/V2ComplianceAssessment";
+import V2ComplianceActions from "./pages/v2/compliance/V2ComplianceActions";
+import V2ComplianceDocuments from "./pages/v2/compliance/V2ComplianceDocuments";
+import V2ComplianceAuditPack from "./pages/v2/compliance/V2ComplianceAuditPack";
 
 const queryClient = new QueryClient();
 
@@ -134,10 +140,13 @@ const App = () => (
               <Route path="operations/expenses" element={<V2Expenses />} />
               <Route path="operations/performance" element={<V2Performance />} />
               <Route path="atlas" element={<V2Atlas />} />
-              <Route
-                path="compliance"
-                element={<ModulePlaceholder titleKey="v2.compliance.title" descriptionKey="v2.compliance.description" phaseKey="v2.phase.p3" />}
-              />
+              <Route path="compliance" element={<V2ComplianceLayout />}>
+                <Route index element={<V2ComplianceOverview />} />
+                <Route path="actions" element={<V2ComplianceActions />} />
+                <Route path="documents" element={<V2ComplianceDocuments />} />
+              </Route>
+              <Route path="compliance/programs/:orgProgramId" element={<V2ComplianceAssessment />} />
+              <Route path="compliance/programs/:orgProgramId/audit-pack" element={<V2ComplianceAuditPack />} />
               <Route
                 path="finance"
                 element={<ModulePlaceholder titleKey="v2.finance.title" descriptionKey="v2.finance.description" phaseKey="v2.phase.p4" />}

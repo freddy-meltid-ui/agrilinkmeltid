@@ -1029,6 +1029,786 @@ export type Database = {
           },
         ]
       }
+      v2_compliance_actions: {
+        Row: {
+          completed_at: string | null
+          completion_evidence_id: string | null
+          completion_note: string | null
+          created_at: string
+          created_by: string
+          description: string | null
+          due_date: string | null
+          finding_id: string
+          id: string
+          organization_id: string
+          priority: Database["public"]["Enums"]["v2_compliance_severity"]
+          responsible_name: string | null
+          responsible_user_id: string | null
+          status: Database["public"]["Enums"]["v2_action_status"]
+          title: string
+          updated_at: string
+          verified_at: string | null
+          verified_by: string | null
+        }
+        Insert: {
+          completed_at?: string | null
+          completion_evidence_id?: string | null
+          completion_note?: string | null
+          created_at?: string
+          created_by?: string
+          description?: string | null
+          due_date?: string | null
+          finding_id: string
+          id?: string
+          organization_id: string
+          priority?: Database["public"]["Enums"]["v2_compliance_severity"]
+          responsible_name?: string | null
+          responsible_user_id?: string | null
+          status?: Database["public"]["Enums"]["v2_action_status"]
+          title: string
+          updated_at?: string
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Update: {
+          completed_at?: string | null
+          completion_evidence_id?: string | null
+          completion_note?: string | null
+          created_at?: string
+          created_by?: string
+          description?: string | null
+          due_date?: string | null
+          finding_id?: string
+          id?: string
+          organization_id?: string
+          priority?: Database["public"]["Enums"]["v2_compliance_severity"]
+          responsible_name?: string | null
+          responsible_user_id?: string | null
+          status?: Database["public"]["Enums"]["v2_action_status"]
+          title?: string
+          updated_at?: string
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_compliance_actions_completion_evidence_id_fkey"
+            columns: ["completion_evidence_id"]
+            isOneToOne: false
+            referencedRelation: "v2_compliance_evidence"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_compliance_actions_finding_id_fkey"
+            columns: ["finding_id"]
+            isOneToOne: false
+            referencedRelation: "v2_compliance_findings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_compliance_actions_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_compliance_assessments: {
+        Row: {
+          assessed_at: string
+          assessed_by: string
+          comment: string | null
+          confidence: string | null
+          created_at: string
+          facility_id: string | null
+          id: string
+          is_current: boolean
+          org_program_id: string
+          organization_id: string
+          requirement_id: string
+          response: Database["public"]["Enums"]["v2_assessment_response"]
+        }
+        Insert: {
+          assessed_at?: string
+          assessed_by?: string
+          comment?: string | null
+          confidence?: string | null
+          created_at?: string
+          facility_id?: string | null
+          id?: string
+          is_current?: boolean
+          org_program_id: string
+          organization_id: string
+          requirement_id: string
+          response: Database["public"]["Enums"]["v2_assessment_response"]
+        }
+        Update: {
+          assessed_at?: string
+          assessed_by?: string
+          comment?: string | null
+          confidence?: string | null
+          created_at?: string
+          facility_id?: string | null
+          id?: string
+          is_current?: boolean
+          org_program_id?: string
+          organization_id?: string
+          requirement_id?: string
+          response?: Database["public"]["Enums"]["v2_assessment_response"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_compliance_assessments_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processing_facilities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_compliance_assessments_org_program_id_fkey"
+            columns: ["org_program_id"]
+            isOneToOne: false
+            referencedRelation: "v2_org_compliance_programs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_compliance_assessments_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_compliance_assessments_requirement_id_fkey"
+            columns: ["requirement_id"]
+            isOneToOne: false
+            referencedRelation: "v2_compliance_requirements"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_compliance_document_versions: {
+        Row: {
+          document_id: string
+          expiry_date: string | null
+          file_name: string | null
+          id: string
+          is_current: boolean
+          issue_date: string | null
+          notes: string | null
+          organization_id: string
+          storage_path: string | null
+          uploaded_at: string
+          uploaded_by: string
+          version_number: number
+        }
+        Insert: {
+          document_id: string
+          expiry_date?: string | null
+          file_name?: string | null
+          id?: string
+          is_current?: boolean
+          issue_date?: string | null
+          notes?: string | null
+          organization_id: string
+          storage_path?: string | null
+          uploaded_at?: string
+          uploaded_by?: string
+          version_number: number
+        }
+        Update: {
+          document_id?: string
+          expiry_date?: string | null
+          file_name?: string | null
+          id?: string
+          is_current?: boolean
+          issue_date?: string | null
+          notes?: string | null
+          organization_id?: string
+          storage_path?: string | null
+          uploaded_at?: string
+          uploaded_by?: string
+          version_number?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_compliance_document_versions_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "v2_compliance_documents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_compliance_document_versions_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_compliance_documents: {
+        Row: {
+          category: Database["public"]["Enums"]["v2_document_category"]
+          created_at: string
+          created_by: string
+          current_version: number
+          description: string | null
+          facility_id: string | null
+          id: string
+          is_archived: boolean
+          organization_id: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: Database["public"]["Enums"]["v2_document_category"]
+          created_at?: string
+          created_by?: string
+          current_version?: number
+          description?: string | null
+          facility_id?: string | null
+          id?: string
+          is_archived?: boolean
+          organization_id: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: Database["public"]["Enums"]["v2_document_category"]
+          created_at?: string
+          created_by?: string
+          current_version?: number
+          description?: string | null
+          facility_id?: string | null
+          id?: string
+          is_archived?: boolean
+          organization_id?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_compliance_documents_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processing_facilities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_compliance_documents_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_compliance_events: {
+        Row: {
+          actor_id: string | null
+          created_at: string
+          entity_id: string | null
+          entity_type: string
+          event_type: string
+          id: string
+          organization_id: string
+          payload: Json
+        }
+        Insert: {
+          actor_id?: string | null
+          created_at?: string
+          entity_id?: string | null
+          entity_type: string
+          event_type: string
+          id?: string
+          organization_id: string
+          payload?: Json
+        }
+        Update: {
+          actor_id?: string | null
+          created_at?: string
+          entity_id?: string | null
+          entity_type?: string
+          event_type?: string
+          id?: string
+          organization_id?: string
+          payload?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_compliance_events_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_compliance_evidence: {
+        Row: {
+          assessment_id: string | null
+          created_at: string
+          description: string | null
+          evidence_type: Database["public"]["Enums"]["v2_evidence_type"]
+          expiry_date: string | null
+          external_reference: string | null
+          facility_id: string | null
+          id: string
+          is_archived: boolean
+          issue_date: string | null
+          org_program_id: string | null
+          organization_id: string
+          related_entity_id: string | null
+          related_entity_reference: string | null
+          related_entity_type: string | null
+          requirement_id: string | null
+          source: Database["public"]["Enums"]["v2_evidence_source"]
+          storage_path: string | null
+          title: string
+          updated_at: string
+          uploaded_at: string
+          uploaded_by: string
+          verification_status: string
+        }
+        Insert: {
+          assessment_id?: string | null
+          created_at?: string
+          description?: string | null
+          evidence_type?: Database["public"]["Enums"]["v2_evidence_type"]
+          expiry_date?: string | null
+          external_reference?: string | null
+          facility_id?: string | null
+          id?: string
+          is_archived?: boolean
+          issue_date?: string | null
+          org_program_id?: string | null
+          organization_id: string
+          related_entity_id?: string | null
+          related_entity_reference?: string | null
+          related_entity_type?: string | null
+          requirement_id?: string | null
+          source?: Database["public"]["Enums"]["v2_evidence_source"]
+          storage_path?: string | null
+          title: string
+          updated_at?: string
+          uploaded_at?: string
+          uploaded_by?: string
+          verification_status?: string
+        }
+        Update: {
+          assessment_id?: string | null
+          created_at?: string
+          description?: string | null
+          evidence_type?: Database["public"]["Enums"]["v2_evidence_type"]
+          expiry_date?: string | null
+          external_reference?: string | null
+          facility_id?: string | null
+          id?: string
+          is_archived?: boolean
+          issue_date?: string | null
+          org_program_id?: string | null
+          organization_id?: string
+          related_entity_id?: string | null
+          related_entity_reference?: string | null
+          related_entity_type?: string | null
+          requirement_id?: string | null
+          source?: Database["public"]["Enums"]["v2_evidence_source"]
+          storage_path?: string | null
+          title?: string
+          updated_at?: string
+          uploaded_at?: string
+          uploaded_by?: string
+          verification_status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_compliance_evidence_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: false
+            referencedRelation: "v2_compliance_assessments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_compliance_evidence_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processing_facilities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_compliance_evidence_org_program_id_fkey"
+            columns: ["org_program_id"]
+            isOneToOne: false
+            referencedRelation: "v2_org_compliance_programs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_compliance_evidence_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_compliance_evidence_requirement_id_fkey"
+            columns: ["requirement_id"]
+            isOneToOne: false
+            referencedRelation: "v2_compliance_requirements"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_compliance_evidence_analyses: {
+        Row: {
+          analysis_version: string
+          confidence: number | null
+          created_at: string
+          evidence_id: string
+          findings: Json
+          human_validated: boolean
+          id: string
+          model: string | null
+          organization_id: string
+          requirement_id: string | null
+          validated_at: string | null
+          validated_by: string | null
+        }
+        Insert: {
+          analysis_version: string
+          confidence?: number | null
+          created_at?: string
+          evidence_id: string
+          findings?: Json
+          human_validated?: boolean
+          id?: string
+          model?: string | null
+          organization_id: string
+          requirement_id?: string | null
+          validated_at?: string | null
+          validated_by?: string | null
+        }
+        Update: {
+          analysis_version?: string
+          confidence?: number | null
+          created_at?: string
+          evidence_id?: string
+          findings?: Json
+          human_validated?: boolean
+          id?: string
+          model?: string | null
+          organization_id?: string
+          requirement_id?: string | null
+          validated_at?: string | null
+          validated_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_compliance_evidence_analyses_evidence_id_fkey"
+            columns: ["evidence_id"]
+            isOneToOne: false
+            referencedRelation: "v2_compliance_evidence"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_compliance_evidence_analyses_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_compliance_evidence_analyses_requirement_id_fkey"
+            columns: ["requirement_id"]
+            isOneToOne: false
+            referencedRelation: "v2_compliance_requirements"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_compliance_findings: {
+        Row: {
+          assessment_id: string | null
+          created_at: string
+          created_by: string | null
+          description: string | null
+          facility_id: string | null
+          id: string
+          org_program_id: string | null
+          organization_id: string
+          requirement_id: string | null
+          resolved_at: string | null
+          severity: Database["public"]["Enums"]["v2_compliance_severity"]
+          status: Database["public"]["Enums"]["v2_finding_status"]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          assessment_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          facility_id?: string | null
+          id?: string
+          org_program_id?: string | null
+          organization_id: string
+          requirement_id?: string | null
+          resolved_at?: string | null
+          severity?: Database["public"]["Enums"]["v2_compliance_severity"]
+          status?: Database["public"]["Enums"]["v2_finding_status"]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          assessment_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          facility_id?: string | null
+          id?: string
+          org_program_id?: string | null
+          organization_id?: string
+          requirement_id?: string | null
+          resolved_at?: string | null
+          severity?: Database["public"]["Enums"]["v2_compliance_severity"]
+          status?: Database["public"]["Enums"]["v2_finding_status"]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_compliance_findings_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: false
+            referencedRelation: "v2_compliance_assessments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_compliance_findings_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processing_facilities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_compliance_findings_org_program_id_fkey"
+            columns: ["org_program_id"]
+            isOneToOne: false
+            referencedRelation: "v2_org_compliance_programs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_compliance_findings_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_compliance_findings_requirement_id_fkey"
+            columns: ["requirement_id"]
+            isOneToOne: false
+            referencedRelation: "v2_compliance_requirements"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_compliance_programs: {
+        Row: {
+          code: string
+          country: string
+          created_at: string
+          description_en: string | null
+          description_fr: string | null
+          disclaimer_en: string
+          disclaimer_fr: string
+          effective_date: string
+          id: string
+          is_active: boolean
+          managed_by: string
+          name_en: string
+          name_fr: string
+          product_applicability: string | null
+          sort_order: number
+          source_reference: string | null
+          updated_at: string
+          value_chain_id: string | null
+          version: string
+        }
+        Insert: {
+          code: string
+          country?: string
+          created_at?: string
+          description_en?: string | null
+          description_fr?: string | null
+          disclaimer_en: string
+          disclaimer_fr: string
+          effective_date?: string
+          id?: string
+          is_active?: boolean
+          managed_by?: string
+          name_en: string
+          name_fr: string
+          product_applicability?: string | null
+          sort_order?: number
+          source_reference?: string | null
+          updated_at?: string
+          value_chain_id?: string | null
+          version?: string
+        }
+        Update: {
+          code?: string
+          country?: string
+          created_at?: string
+          description_en?: string | null
+          description_fr?: string | null
+          disclaimer_en?: string
+          disclaimer_fr?: string
+          effective_date?: string
+          id?: string
+          is_active?: boolean
+          managed_by?: string
+          name_en?: string
+          name_fr?: string
+          product_applicability?: string | null
+          sort_order?: number
+          source_reference?: string | null
+          updated_at?: string
+          value_chain_id?: string | null
+          version?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_compliance_programs_value_chain_id_fkey"
+            columns: ["value_chain_id"]
+            isOneToOne: false
+            referencedRelation: "v2_value_chains"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_compliance_requirements: {
+        Row: {
+          applicability_rule: Json
+          category: Database["public"]["Enums"]["v2_compliance_category"]
+          code: string
+          created_at: string
+          description_en: string | null
+          description_fr: string | null
+          evidence_expected_en: string | null
+          evidence_expected_fr: string | null
+          guidance_en: string | null
+          guidance_fr: string | null
+          id: string
+          is_active: boolean
+          program_id: string
+          requirement_type: Database["public"]["Enums"]["v2_requirement_type"]
+          scope: Database["public"]["Enums"]["v2_compliance_scope"]
+          severity: Database["public"]["Enums"]["v2_compliance_severity"]
+          sort_order: number
+          system_evidence_rule: string | null
+          title_en: string
+          title_fr: string
+          updated_at: string
+        }
+        Insert: {
+          applicability_rule?: Json
+          category?: Database["public"]["Enums"]["v2_compliance_category"]
+          code: string
+          created_at?: string
+          description_en?: string | null
+          description_fr?: string | null
+          evidence_expected_en?: string | null
+          evidence_expected_fr?: string | null
+          guidance_en?: string | null
+          guidance_fr?: string | null
+          id?: string
+          is_active?: boolean
+          program_id: string
+          requirement_type?: Database["public"]["Enums"]["v2_requirement_type"]
+          scope?: Database["public"]["Enums"]["v2_compliance_scope"]
+          severity?: Database["public"]["Enums"]["v2_compliance_severity"]
+          sort_order?: number
+          system_evidence_rule?: string | null
+          title_en: string
+          title_fr: string
+          updated_at?: string
+        }
+        Update: {
+          applicability_rule?: Json
+          category?: Database["public"]["Enums"]["v2_compliance_category"]
+          code?: string
+          created_at?: string
+          description_en?: string | null
+          description_fr?: string | null
+          evidence_expected_en?: string | null
+          evidence_expected_fr?: string | null
+          guidance_en?: string | null
+          guidance_fr?: string | null
+          id?: string
+          is_active?: boolean
+          program_id?: string
+          requirement_type?: Database["public"]["Enums"]["v2_requirement_type"]
+          scope?: Database["public"]["Enums"]["v2_compliance_scope"]
+          severity?: Database["public"]["Enums"]["v2_compliance_severity"]
+          sort_order?: number
+          system_evidence_rule?: string | null
+          title_en?: string
+          title_fr?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_compliance_requirements_program_id_fkey"
+            columns: ["program_id"]
+            isOneToOne: false
+            referencedRelation: "v2_compliance_programs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_compliance_settings: {
+        Row: {
+          created_at: string
+          expiring_soon_days: number
+          organization_id: string
+          updated_at: string
+          weight_critical: number
+          weight_high: number
+          weight_low: number
+          weight_medium: number
+        }
+        Insert: {
+          created_at?: string
+          expiring_soon_days?: number
+          organization_id: string
+          updated_at?: string
+          weight_critical?: number
+          weight_high?: number
+          weight_low?: number
+          weight_medium?: number
+        }
+        Update: {
+          created_at?: string
+          expiring_soon_days?: number
+          organization_id?: string
+          updated_at?: string
+          weight_critical?: number
+          weight_high?: number
+          weight_low?: number
+          weight_medium?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_compliance_settings_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: true
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       v2_crop_cycles: {
         Row: {
           area_unit: string
@@ -2311,6 +3091,70 @@ export type Database = {
             columns: ["supplier_id"]
             isOneToOne: false
             referencedRelation: "v2_suppliers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_org_compliance_programs: {
+        Row: {
+          created_at: string
+          created_by: string
+          facility_id: string | null
+          id: string
+          notes: string | null
+          organization_id: string
+          program_id: string
+          started_at: string
+          status: Database["public"]["Enums"]["v2_program_status"]
+          target_audit_date: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string
+          facility_id?: string | null
+          id?: string
+          notes?: string | null
+          organization_id: string
+          program_id: string
+          started_at?: string
+          status?: Database["public"]["Enums"]["v2_program_status"]
+          target_audit_date?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          facility_id?: string | null
+          id?: string
+          notes?: string | null
+          organization_id?: string
+          program_id?: string
+          started_at?: string
+          status?: Database["public"]["Enums"]["v2_program_status"]
+          target_audit_date?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_org_compliance_programs_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processing_facilities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_org_compliance_programs_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_org_compliance_programs_program_id_fkey"
+            columns: ["program_id"]
+            isOneToOne: false
+            referencedRelation: "v2_compliance_programs"
             referencedColumns: ["id"]
           },
         ]
@@ -4821,6 +5665,17 @@ export type Database = {
         }
         Returns: boolean
       }
+      v2_add_document_version: {
+        Args: {
+          _document_id: string
+          _expiry_date?: string
+          _file_name: string
+          _issue_date?: string
+          _notes?: string
+          _storage_path: string
+        }
+        Returns: Json
+      }
       v2_approx_coord: { Args: { _value: number }; Returns: number }
       v2_business_completeness: {
         Args: { _organization_id: string }
@@ -4946,6 +5801,33 @@ export type Database = {
         }[]
       }
       v2_committed_tonnes: { Args: { _supply_id: string }; Returns: number }
+      v2_complete_action: {
+        Args: { _action_id: string; _evidence_id?: string; _note?: string }
+        Returns: Json
+      }
+      v2_compliance_audit_pack: {
+        Args: { _org_program_id: string; _organization_id: string }
+        Returns: Json
+      }
+      v2_compliance_dashboard: {
+        Args: { _organization_id: string }
+        Returns: Json
+      }
+      v2_compliance_readiness: {
+        Args: { _org_program_id: string; _organization_id: string }
+        Returns: Json
+      }
+      v2_compliance_system_evidence: {
+        Args: { _organization_id: string }
+        Returns: {
+          detail: Json
+          entity_id: string
+          entity_reference: string
+          entity_type: string
+          qualifies: boolean
+          rule_code: string
+        }[]
+      }
       v2_confirm_commitment: {
         Args: {
           _accepted: boolean
@@ -5053,6 +5935,10 @@ export type Database = {
         }[]
       }
       v2_expire_commitments: { Args: never; Returns: number }
+      v2_expiry_status: {
+        Args: { _expiry: string; _threshold_days?: number }
+        Returns: string
+      }
       v2_finished_batch_direct_cost: {
         Args: { _finished_batch_id: string }
         Returns: Json
@@ -5244,6 +6130,16 @@ export type Database = {
           task_kind: string
         }[]
       }
+      v2_record_assessment: {
+        Args: {
+          _comment?: string
+          _facility_id?: string
+          _org_program_id: string
+          _requirement_id: string
+          _response: Database["public"]["Enums"]["v2_assessment_response"]
+        }
+        Returns: Json
+      }
       v2_record_customer_payment: {
         Args: {
           _amount: number
@@ -5317,6 +6213,11 @@ export type Database = {
         Args: { _dispatch_id: string; _reason: string }
         Returns: Json
       }
+      v2_sales_active_statuses: {
+        Args: never
+        Returns: Database["public"]["Enums"]["v2_sales_status"][]
+      }
+      v2_sales_order_kpis: { Args: { _organization_id: string }; Returns: Json }
       v2_sourcing_demand_intelligence: {
         Args: never
         Returns: {
@@ -5491,11 +6392,23 @@ export type Database = {
         | "transport"
         | "job"
         | "processing"
+      v2_action_status:
+        | "open"
+        | "in_progress"
+        | "completed"
+        | "verified"
+        | "cancelled"
       v2_allocation_status:
         | "reserved"
         | "partially_dispatched"
         | "dispatched"
         | "released"
+      v2_assessment_response:
+        | "compliant"
+        | "partially_compliant"
+        | "non_compliant"
+        | "not_assessed"
+        | "not_applicable"
       v2_cash_account_type: "cash" | "bank" | "mobile_money"
       v2_cash_event_type:
         | "customer_payment"
@@ -5513,6 +6426,25 @@ export type Database = {
         | "expired"
         | "cancelled"
         | "fulfilled"
+      v2_compliance_category:
+        | "premises"
+        | "hygiene"
+        | "personnel"
+        | "equipment"
+        | "raw_materials"
+        | "water"
+        | "cleaning"
+        | "pest_control"
+        | "waste"
+        | "storage"
+        | "traceability"
+        | "labeling"
+        | "documentation"
+        | "quality_control"
+        | "process_control"
+        | "other"
+      v2_compliance_scope: "organization" | "facility"
+      v2_compliance_severity: "low" | "medium" | "high" | "critical"
       v2_confidence: "low" | "medium" | "high"
       v2_confirmation_method:
         | "supplier_self_service"
@@ -5544,6 +6476,33 @@ export type Database = {
         | "rejected"
         | "cancelled"
       v2_dispatch_status: "posted" | "reversed"
+      v2_document_category:
+        | "legal"
+        | "business_registration"
+        | "tax"
+        | "food_safety"
+        | "lab_analysis"
+        | "certificate"
+        | "inspection"
+        | "procedure"
+        | "training"
+        | "facility"
+        | "product"
+        | "label"
+        | "other"
+      v2_evidence_source:
+        | "user_upload"
+        | "system_traceability"
+        | "system_inventory"
+        | "system_production"
+        | "system_sales"
+        | "system_document"
+      v2_evidence_type:
+        | "document"
+        | "photo"
+        | "video"
+        | "text_note"
+        | "external_reference"
       v2_expense_category:
         | "raw_materials"
         | "packaging"
@@ -5566,6 +6525,13 @@ export type Database = {
         | "production_void"
         | "sale_dispatch"
         | "dispatch_reversal"
+      v2_finding_status:
+        | "open"
+        | "action_planned"
+        | "in_progress"
+        | "resolved"
+        | "verified"
+        | "dismissed"
       v2_inventory_movement_type:
         | "receipt"
         | "adjustment_in"
@@ -5610,6 +6576,12 @@ export type Database = {
         | "waste"
         | "rejected_output"
       v2_production_status: "draft" | "ready" | "completed" | "voided"
+      v2_program_status:
+        | "not_started"
+        | "in_progress"
+        | "ready_for_review"
+        | "completed"
+        | "archived"
       v2_receipt_quality:
         | "accepted"
         | "accepted_with_reservation"
@@ -5623,6 +6595,15 @@ export type Database = {
         | "not_available"
         | "completed"
         | "cancelled"
+      v2_requirement_type:
+        | "yes_no"
+        | "multiple_choice"
+        | "text"
+        | "number"
+        | "document_required"
+        | "photo_required"
+        | "date_required"
+        | "confirmation"
       v2_sales_payment_status:
         | "unpaid"
         | "partially_paid"
@@ -5817,11 +6798,25 @@ export const Constants = {
         "job",
         "processing",
       ],
+      v2_action_status: [
+        "open",
+        "in_progress",
+        "completed",
+        "verified",
+        "cancelled",
+      ],
       v2_allocation_status: [
         "reserved",
         "partially_dispatched",
         "dispatched",
         "released",
+      ],
+      v2_assessment_response: [
+        "compliant",
+        "partially_compliant",
+        "non_compliant",
+        "not_assessed",
+        "not_applicable",
       ],
       v2_cash_account_type: ["cash", "bank", "mobile_money"],
       v2_cash_event_type: [
@@ -5842,6 +6837,26 @@ export const Constants = {
         "cancelled",
         "fulfilled",
       ],
+      v2_compliance_category: [
+        "premises",
+        "hygiene",
+        "personnel",
+        "equipment",
+        "raw_materials",
+        "water",
+        "cleaning",
+        "pest_control",
+        "waste",
+        "storage",
+        "traceability",
+        "labeling",
+        "documentation",
+        "quality_control",
+        "process_control",
+        "other",
+      ],
+      v2_compliance_scope: ["organization", "facility"],
+      v2_compliance_severity: ["low", "medium", "high", "critical"],
       v2_confidence: ["low", "medium", "high"],
       v2_confirmation_method: [
         "supplier_self_service",
@@ -5877,6 +6892,36 @@ export const Constants = {
         "cancelled",
       ],
       v2_dispatch_status: ["posted", "reversed"],
+      v2_document_category: [
+        "legal",
+        "business_registration",
+        "tax",
+        "food_safety",
+        "lab_analysis",
+        "certificate",
+        "inspection",
+        "procedure",
+        "training",
+        "facility",
+        "product",
+        "label",
+        "other",
+      ],
+      v2_evidence_source: [
+        "user_upload",
+        "system_traceability",
+        "system_inventory",
+        "system_production",
+        "system_sales",
+        "system_document",
+      ],
+      v2_evidence_type: [
+        "document",
+        "photo",
+        "video",
+        "text_note",
+        "external_reference",
+      ],
       v2_expense_category: [
         "raw_materials",
         "packaging",
@@ -5900,6 +6945,14 @@ export const Constants = {
         "production_void",
         "sale_dispatch",
         "dispatch_reversal",
+      ],
+      v2_finding_status: [
+        "open",
+        "action_planned",
+        "in_progress",
+        "resolved",
+        "verified",
+        "dismissed",
       ],
       v2_inventory_movement_type: [
         "receipt",
@@ -5951,6 +7004,13 @@ export const Constants = {
         "rejected_output",
       ],
       v2_production_status: ["draft", "ready", "completed", "voided"],
+      v2_program_status: [
+        "not_started",
+        "in_progress",
+        "ready_for_review",
+        "completed",
+        "archived",
+      ],
       v2_receipt_quality: [
         "accepted",
         "accepted_with_reservation",
@@ -5965,6 +7025,16 @@ export const Constants = {
         "not_available",
         "completed",
         "cancelled",
+      ],
+      v2_requirement_type: [
+        "yes_no",
+        "multiple_choice",
+        "text",
+        "number",
+        "document_required",
+        "photo_required",
+        "date_required",
+        "confirmation",
       ],
       v2_sales_payment_status: [
         "unpaid",
