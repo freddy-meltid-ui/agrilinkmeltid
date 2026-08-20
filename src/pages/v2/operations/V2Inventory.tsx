@@ -92,7 +92,12 @@ const V2Inventory = () => {
             <EmptyState icon={Boxes} title={t("v2.procurement.inventory.noBatches")} />
           ) : (
             batches.map((b) => (
-              <div key={b.id} className="rounded-lg border border-border bg-card p-4">
+              <button
+                key={b.id}
+                type="button"
+                onClick={() => openForwardTrace(b.id)}
+                className="w-full rounded-lg border border-border bg-card p-4 text-left transition-colors hover:border-primary/40"
+              >
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <span className="font-mono text-xs">{b.batch_reference}</span>
                   <span className="font-medium">{Number(b.current_tonnes).toFixed(2)} t</span>
@@ -104,7 +109,7 @@ const V2Inventory = () => {
                     storage: b.storage_location ?? "—",
                   })}
                 </p>
-              </div>
+              </button>
             ))
           )}
         </TabsContent>
