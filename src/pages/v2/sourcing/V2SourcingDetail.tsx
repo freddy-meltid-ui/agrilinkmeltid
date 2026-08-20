@@ -32,6 +32,19 @@ import {
   type SourcingRequest,
 } from "@/lib/v2/sourcing";
 import { localeTag } from "@/lib/v2/locale";
+import FunnelBar from "@/components/v2/procurement/FunnelBar";
+import CommitmentList from "@/components/v2/procurement/CommitmentList";
+import ProposeCommitmentDialog, { type ProposePayload } from "@/components/v2/procurement/ProposeCommitmentDialog";
+import {
+  createProcurementOrder,
+  fetchFunnel,
+  fetchRequestCommitments,
+  parseProcurementError,
+  proposeCommitment,
+  releaseCommitment,
+  type FunnelRow,
+  type RequestCommitmentRow,
+} from "@/lib/v2/procurement";
 
 const V2SourcingDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -49,6 +62,12 @@ const V2SourcingDetail = () => {
   const [matching, setMatching] = useState(false);
   const [busySupply, setBusySupply] = useState<string | null>(null);
   const [widen, setWiden] = useState({ radius: "", end: "" });
+  // Phase 1E — commercial confirmation + procurement state
+  const [commitments, setCommitments] = useState<RequestCommitmentRow[]>([]);
+  const [funnel, setFunnel] = useState<FunnelRow | null>(null);
+  const [commitRow, setCommitRow] = useState<MatchRow | null>(null);
+  const [commitBusy, setCommitBusy] = useState(false);
+  const [procurementBusy, setProcurementBusy] = useState<string | null>(null);
 
   useEffect(() => {
     fetchReferenceData().then(setReference);
@@ -58,6 +77,23 @@ const V2SourcingDetail = () => {
     const { data } = await supabase.rpc("v2_sourcing_request_tasks", { _request_id: requestId });
     setTasks((data ?? []).map((r) => ({ supply_id: r.supply_id, status: r.status })));
   }, []);
+
+  const loadProcurement = useCallback(async (requestId: string) => {
+    const [rows, f] = await Promise.all([fetchRequestCommitments(requestId), fetchFunnel(requestId)]);
+    setCommitments(rows);
+    setFunnel(f);
+  }, []);
+
+  const procurementError = useCallback(
+    (e: unknown) => {
+      const parsed = parseProcurementError(e instanceof Error ? e.message : String(e));
+      toast({
+        title: t(`v2.procurement.error.${parsed.code}`, { value: parsed.value ?? "", defaultValue: parsed.raw }),
+        variant: "destructive",
+      });
+    },
+    [t],
+  );
 
   const runEngine = useCallback(
     async (req: SourcingRequest) => {
@@ -89,6 +125,7 @@ const V2SourcingDetail = () => {
       if (req) {
         setEvents(await fetchSourcingEvents(req.id));
         await loadTasks(req.id);
+        await loadProcurement(req.id);
         if (params.get("run") === "1" || req.status !== "draft") await runEngine(req);
       }
     })();
@@ -139,6 +176,61 @@ const V2SourcingDetail = () => {
     setEvents(await fetchSourcingEvents(request.id));
   };
 
+  const submitProposal = async (payload: ProposePayload) => {
+    if (!request || !commitRow) return;
+    setCommitBusy(true);
+    try {
+      await proposeCommitment({
+        requestId: request.id,
+        supplyId: commitRow.supply_id,
+        quantity: payload.quantity,
+        unitCode: payload.unitCode,
+        start: payload.start,
+        end: payload.end,
+        targetPrice: payload.targetPrice,
+        notes: payload.notes,
+      });
+      toast({ title: t("v2.procurement.propose.created") });
+      setCommitRow(null);
+      await Promise.all([loadProcurement(request.id), loadTasks(request.id)]);
+      setEvents(await fetchSourcingEvents(request.id));
+      await runEngine(request);
+    } catch (e) {
+      procurementError(e);
+    } finally {
+      setCommitBusy(false);
+    }
+  };
+
+  const createOrder = async (row: RequestCommitmentRow) => {
+    if (!request) return;
+    setProcurementBusy(row.commitment_id);
+    try {
+      const orderId = await createProcurementOrder({ commitmentId: row.commitment_id });
+      toast({ title: t("v2.procurement.order.created") });
+      await loadProcurement(request.id);
+      navigate(`/app/operations/orders/${orderId}`);
+    } catch (e) {
+      procurementError(e);
+    } finally {
+      setProcurementBusy(null);
+    }
+  };
+
+  const release = async (row: RequestCommitmentRow) => {
+    if (!request) return;
+    setProcurementBusy(row.commitment_id);
+    try {
+      await releaseCommitment(row.commitment_id, t("v2.procurement.commitments.releaseReason"));
+      await Promise.all([loadProcurement(request.id), runEngine(request)]);
+      toast({ title: t("v2.procurement.commitments.released") });
+    } catch (e) {
+      procurementError(e);
+    } finally {
+      setProcurementBusy(null);
+    }
+  };
+
   const applyWidening = async () => {
     if (!request) return;
     const patch: Record<string, unknown> = {};
@@ -163,6 +255,16 @@ const V2SourcingDetail = () => {
 
   return (
     <>
+      <ProposeCommitmentDialog
+        open={!!commitRow}
+        onOpenChange={(v) => !v && setCommitRow(null)}
+        row={commitRow}
+        request={request}
+        suggested={commitRow ? allocatedBySupply.get(commitRow.supply_id) : undefined}
+        busy={commitBusy}
+        onSubmit={submitProposal}
+      />
+
       <Button variant="ghost" size="sm" className="mb-2" onClick={() => navigate("/app/sourcing")}>
         <ArrowLeft className="mr-1.5 h-4 w-4" />
         {t("v2.sourcing.backToList")}
@@ -193,6 +295,8 @@ const V2SourcingDetail = () => {
 
       <div className="space-y-6">
         <CoverageOverview summary={summary} />
+
+        {funnel && <FunnelBar funnel={funnel} />}
 
         {summary.coverageRatio < 1 && (
           <section className="rounded-lg border border-dashed border-border bg-card p-5">
@@ -234,6 +338,9 @@ const V2SourcingDetail = () => {
               <TabsList>
                 <TabsTrigger value="matches">{t("v2.sourcing.tabs.matches", { count: primary.length })}</TabsTrigger>
                 <TabsTrigger value="near">{t("v2.sourcing.tabs.near", { count: near.length })}</TabsTrigger>
+                <TabsTrigger value="commitments">
+                  {t("v2.procurement.commitments.tab", { count: commitments.length })}
+                </TabsTrigger>
                 <TabsTrigger value="map">
                   <MapPin className="mr-1.5 h-4 w-4" />
                   {t("v2.sourcing.tabs.map")}
@@ -261,9 +368,16 @@ const V2SourcingDetail = () => {
                       onReconfirm={requestReconfirmation}
                       reconfirmBusy={busySupply === m.supply_id}
                       taskPending={pendingTaskSupplies.has(m.supply_id)}
+                      onCommit={setCommitRow}
+                      commitPending={commitBusy && commitRow?.supply_id === m.supply_id}
                     />
                   ))
                 )}
+              </TabsContent>
+
+              <TabsContent value="commitments" className="mt-4 space-y-3">
+                <p className="text-sm text-muted-foreground">{t("v2.procurement.commitments.intro")}</p>
+                <CommitmentList rows={commitments} busyId={procurementBusy} onCreateOrder={createOrder} onRelease={release} />
               </TabsContent>
 
               <TabsContent value="near" className="mt-4 space-y-3">
