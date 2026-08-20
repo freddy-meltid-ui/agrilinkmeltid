@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Boxes, ClipboardList, Factory, Loader2, PackageCheck, Truck } from "lucide-react";
+import { Boxes, ClipboardList, Factory, Loader2, PackageCheck, Receipt, ShoppingCart, TrendingUp, Truck } from "lucide-react";
 import PageHeader from "@/components/v2/ui-kit/PageHeader";
 import KpiCard from "@/components/v2/ui-kit/KpiCard";
 import EmptyState from "@/components/v2/ui-kit/EmptyState";
