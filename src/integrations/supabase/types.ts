@@ -881,6 +881,154 @@ export type Database = {
         }
         Relationships: []
       }
+      v2_business_documents: {
+        Row: {
+          created_at: string
+          document_type: string | null
+          entity_id: string
+          entity_type: string
+          file_name: string | null
+          id: string
+          organization_id: string
+          storage_path: string
+          uploaded_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          document_type?: string | null
+          entity_id: string
+          entity_type: string
+          file_name?: string | null
+          id?: string
+          organization_id: string
+          storage_path: string
+          uploaded_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          document_type?: string | null
+          entity_id?: string
+          entity_type?: string
+          file_name?: string | null
+          id?: string
+          organization_id?: string
+          storage_path?: string
+          uploaded_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_business_documents_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_cash_accounts: {
+        Row: {
+          account_type: Database["public"]["Enums"]["v2_cash_account_type"]
+          created_at: string
+          currency: string
+          id: string
+          is_active: boolean
+          name: string
+          opening_balance: number | null
+          opening_date: string | null
+          organization_id: string
+          updated_at: string
+        }
+        Insert: {
+          account_type?: Database["public"]["Enums"]["v2_cash_account_type"]
+          created_at?: string
+          currency?: string
+          id?: string
+          is_active?: boolean
+          name: string
+          opening_balance?: number | null
+          opening_date?: string | null
+          organization_id: string
+          updated_at?: string
+        }
+        Update: {
+          account_type?: Database["public"]["Enums"]["v2_cash_account_type"]
+          created_at?: string
+          currency?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+          opening_balance?: number | null
+          opening_date?: string | null
+          organization_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_cash_accounts_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_cash_movements: {
+        Row: {
+          amount: number
+          cash_account_id: string | null
+          created_at: string
+          currency: string
+          description: string | null
+          event_type: Database["public"]["Enums"]["v2_cash_event_type"]
+          id: string
+          movement_date: string
+          organization_id: string
+          reference_id: string | null
+          reference_type: string | null
+        }
+        Insert: {
+          amount: number
+          cash_account_id?: string | null
+          created_at?: string
+          currency?: string
+          description?: string | null
+          event_type: Database["public"]["Enums"]["v2_cash_event_type"]
+          id?: string
+          movement_date?: string
+          organization_id: string
+          reference_id?: string | null
+          reference_type?: string | null
+        }
+        Update: {
+          amount?: number
+          cash_account_id?: string | null
+          created_at?: string
+          currency?: string
+          description?: string | null
+          event_type?: Database["public"]["Enums"]["v2_cash_event_type"]
+          id?: string
+          movement_date?: string
+          organization_id?: string
+          reference_id?: string | null
+          reference_type?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_cash_movements_cash_account_id_fkey"
+            columns: ["cash_account_id"]
+            isOneToOne: false
+            referencedRelation: "v2_cash_accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_cash_movements_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       v2_crop_cycles: {
         Row: {
           area_unit: string
@@ -1070,6 +1218,175 @@ export type Database = {
           },
         ]
       }
+      v2_customer_payments: {
+        Row: {
+          amount: number
+          cash_account_id: string | null
+          created_at: string
+          created_by: string | null
+          currency: string
+          customer_id: string
+          document_path: string | null
+          id: string
+          is_reversal: boolean
+          notes: string | null
+          organization_id: string
+          payment_date: string
+          payment_method: Database["public"]["Enums"]["v2_payment_method"]
+          payment_reference: string | null
+          reversal_reason: string | null
+          reversed_at: string | null
+          reverses_payment_id: string | null
+          sales_order_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          cash_account_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          customer_id: string
+          document_path?: string | null
+          id?: string
+          is_reversal?: boolean
+          notes?: string | null
+          organization_id: string
+          payment_date?: string
+          payment_method?: Database["public"]["Enums"]["v2_payment_method"]
+          payment_reference?: string | null
+          reversal_reason?: string | null
+          reversed_at?: string | null
+          reverses_payment_id?: string | null
+          sales_order_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          cash_account_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          customer_id?: string
+          document_path?: string | null
+          id?: string
+          is_reversal?: boolean
+          notes?: string | null
+          organization_id?: string
+          payment_date?: string
+          payment_method?: Database["public"]["Enums"]["v2_payment_method"]
+          payment_reference?: string | null
+          reversal_reason?: string | null
+          reversed_at?: string | null
+          reverses_payment_id?: string | null
+          sales_order_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_customer_payments_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "v2_customers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_customer_payments_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_customer_payments_reverses_payment_id_fkey"
+            columns: ["reverses_payment_id"]
+            isOneToOne: false
+            referencedRelation: "v2_customer_payments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_customer_payments_sales_order_id_fkey"
+            columns: ["sales_order_id"]
+            isOneToOne: false
+            referencedRelation: "v2_sales_orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_customers: {
+        Row: {
+          address: string | null
+          commune: string | null
+          contact_person: string | null
+          country: string
+          created_at: string
+          created_by: string | null
+          customer_code: string
+          customer_type: Database["public"]["Enums"]["v2_customer_type"]
+          department: string | null
+          display_name: string
+          email: string | null
+          id: string
+          is_active: boolean
+          legal_name: string | null
+          notes: string | null
+          organization_id: string
+          phone: string | null
+          tax_reference: string | null
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          commune?: string | null
+          contact_person?: string | null
+          country?: string
+          created_at?: string
+          created_by?: string | null
+          customer_code: string
+          customer_type?: Database["public"]["Enums"]["v2_customer_type"]
+          department?: string | null
+          display_name: string
+          email?: string | null
+          id?: string
+          is_active?: boolean
+          legal_name?: string | null
+          notes?: string | null
+          organization_id: string
+          phone?: string | null
+          tax_reference?: string | null
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          commune?: string | null
+          contact_person?: string | null
+          country?: string
+          created_at?: string
+          created_by?: string | null
+          customer_code?: string
+          customer_type?: Database["public"]["Enums"]["v2_customer_type"]
+          department?: string | null
+          display_name?: string
+          email?: string | null
+          id?: string
+          is_active?: boolean
+          legal_name?: string | null
+          notes?: string | null
+          organization_id?: string
+          phone?: string | null
+          tax_reference?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_customers_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       v2_deliveries: {
         Row: {
           actual_arrival_date: string | null
@@ -1152,6 +1469,90 @@ export type Database = {
             columns: ["supplier_id"]
             isOneToOne: false
             referencedRelation: "v2_suppliers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_expenses: {
+        Row: {
+          amount: number
+          cash_account_id: string | null
+          category: Database["public"]["Enums"]["v2_expense_category"]
+          created_at: string
+          created_by: string | null
+          currency: string
+          description: string
+          document_path: string | null
+          expense_date: string
+          facility_id: string | null
+          id: string
+          notes: string | null
+          organization_id: string
+          payee: string | null
+          payment_date: string | null
+          payment_method:
+            | Database["public"]["Enums"]["v2_payment_method"]
+            | null
+          payment_status: Database["public"]["Enums"]["v2_expense_payment_status"]
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          cash_account_id?: string | null
+          category?: Database["public"]["Enums"]["v2_expense_category"]
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          description: string
+          document_path?: string | null
+          expense_date?: string
+          facility_id?: string | null
+          id?: string
+          notes?: string | null
+          organization_id: string
+          payee?: string | null
+          payment_date?: string | null
+          payment_method?:
+            | Database["public"]["Enums"]["v2_payment_method"]
+            | null
+          payment_status?: Database["public"]["Enums"]["v2_expense_payment_status"]
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          cash_account_id?: string | null
+          category?: Database["public"]["Enums"]["v2_expense_category"]
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          description?: string
+          document_path?: string | null
+          expense_date?: string
+          facility_id?: string | null
+          id?: string
+          notes?: string | null
+          organization_id?: string
+          payee?: string | null
+          payment_date?: string | null
+          payment_method?:
+            | Database["public"]["Enums"]["v2_payment_method"]
+            | null
+          payment_status?: Database["public"]["Enums"]["v2_expense_payment_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_expenses_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processing_facilities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_expenses_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
             referencedColumns: ["id"]
           },
         ]
@@ -3220,6 +3621,396 @@ export type Database = {
         }
         Relationships: []
       }
+      v2_sales_allocations: {
+        Row: {
+          created_at: string
+          dispatched_quantity: number
+          finished_batch_id: string
+          id: string
+          organization_id: string
+          quantity: number
+          released_quantity: number
+          sales_order_id: string
+          sales_order_line_id: string
+          status: Database["public"]["Enums"]["v2_allocation_status"]
+          unit_code: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          dispatched_quantity?: number
+          finished_batch_id: string
+          id?: string
+          organization_id: string
+          quantity: number
+          released_quantity?: number
+          sales_order_id: string
+          sales_order_line_id: string
+          status?: Database["public"]["Enums"]["v2_allocation_status"]
+          unit_code: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          dispatched_quantity?: number
+          finished_batch_id?: string
+          id?: string
+          organization_id?: string
+          quantity?: number
+          released_quantity?: number
+          sales_order_id?: string
+          sales_order_line_id?: string
+          status?: Database["public"]["Enums"]["v2_allocation_status"]
+          unit_code?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_sales_allocations_finished_batch_id_fkey"
+            columns: ["finished_batch_id"]
+            isOneToOne: false
+            referencedRelation: "v2_finished_product_batches"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_sales_allocations_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_sales_allocations_sales_order_id_fkey"
+            columns: ["sales_order_id"]
+            isOneToOne: false
+            referencedRelation: "v2_sales_orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_sales_allocations_sales_order_line_id_fkey"
+            columns: ["sales_order_line_id"]
+            isOneToOne: false
+            referencedRelation: "v2_sales_order_lines"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_sales_dispatch_lines: {
+        Row: {
+          allocation_id: string | null
+          created_at: string
+          dispatch_id: string
+          finished_batch_id: string
+          id: string
+          organization_id: string
+          quantity: number
+          sales_order_line_id: string
+          unit_code: string
+        }
+        Insert: {
+          allocation_id?: string | null
+          created_at?: string
+          dispatch_id: string
+          finished_batch_id: string
+          id?: string
+          organization_id: string
+          quantity: number
+          sales_order_line_id: string
+          unit_code: string
+        }
+        Update: {
+          allocation_id?: string | null
+          created_at?: string
+          dispatch_id?: string
+          finished_batch_id?: string
+          id?: string
+          organization_id?: string
+          quantity?: number
+          sales_order_line_id?: string
+          unit_code?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_sales_dispatch_lines_allocation_id_fkey"
+            columns: ["allocation_id"]
+            isOneToOne: false
+            referencedRelation: "v2_sales_allocations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_sales_dispatch_lines_dispatch_id_fkey"
+            columns: ["dispatch_id"]
+            isOneToOne: false
+            referencedRelation: "v2_sales_dispatches"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_sales_dispatch_lines_finished_batch_id_fkey"
+            columns: ["finished_batch_id"]
+            isOneToOne: false
+            referencedRelation: "v2_finished_product_batches"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_sales_dispatch_lines_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_sales_dispatch_lines_sales_order_line_id_fkey"
+            columns: ["sales_order_line_id"]
+            isOneToOne: false
+            referencedRelation: "v2_sales_order_lines"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_sales_dispatches: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          customer_id: string
+          dispatch_date: string
+          dispatch_reference: string
+          facility_id: string | null
+          id: string
+          notes: string | null
+          organization_id: string
+          reversal_reason: string | null
+          reversed_at: string | null
+          reversed_by: string | null
+          sales_order_id: string
+          status: Database["public"]["Enums"]["v2_dispatch_status"]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          customer_id: string
+          dispatch_date?: string
+          dispatch_reference: string
+          facility_id?: string | null
+          id?: string
+          notes?: string | null
+          organization_id: string
+          reversal_reason?: string | null
+          reversed_at?: string | null
+          reversed_by?: string | null
+          sales_order_id: string
+          status?: Database["public"]["Enums"]["v2_dispatch_status"]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          customer_id?: string
+          dispatch_date?: string
+          dispatch_reference?: string
+          facility_id?: string | null
+          id?: string
+          notes?: string | null
+          organization_id?: string
+          reversal_reason?: string | null
+          reversed_at?: string | null
+          reversed_by?: string | null
+          sales_order_id?: string
+          status?: Database["public"]["Enums"]["v2_dispatch_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_sales_dispatches_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "v2_customers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_sales_dispatches_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processing_facilities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_sales_dispatches_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_sales_dispatches_sales_order_id_fkey"
+            columns: ["sales_order_id"]
+            isOneToOne: false
+            referencedRelation: "v2_sales_orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_sales_order_lines: {
+        Row: {
+          created_at: string
+          discount_amount: number
+          dispatched_quantity: number
+          id: string
+          line_total: number | null
+          notes: string | null
+          organization_id: string
+          product_id: string
+          quantity: number
+          sales_order_id: string
+          unit_code: string
+          unit_price: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          discount_amount?: number
+          dispatched_quantity?: number
+          id?: string
+          line_total?: number | null
+          notes?: string | null
+          organization_id: string
+          product_id: string
+          quantity: number
+          sales_order_id: string
+          unit_code: string
+          unit_price: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          discount_amount?: number
+          dispatched_quantity?: number
+          id?: string
+          line_total?: number | null
+          notes?: string | null
+          organization_id?: string
+          product_id?: string
+          quantity?: number
+          sales_order_id?: string
+          unit_code?: string
+          unit_price?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_sales_order_lines_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_sales_order_lines_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processed_products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_sales_order_lines_sales_order_id_fkey"
+            columns: ["sales_order_id"]
+            isOneToOne: false
+            referencedRelation: "v2_sales_orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_sales_orders: {
+        Row: {
+          cancellation_reason: string | null
+          cancelled_at: string | null
+          commercial_notes: string | null
+          confirmed_at: string | null
+          created_at: string
+          created_by: string | null
+          currency: string
+          customer_id: string
+          facility_id: string | null
+          fulfilled_at: string | null
+          id: string
+          order_date: string
+          organization_id: string
+          paid_amount: number
+          payment_status: Database["public"]["Enums"]["v2_sales_payment_status"]
+          requested_delivery_date: string | null
+          sales_reference: string
+          status: Database["public"]["Enums"]["v2_sales_status"]
+          total_amount: number
+          updated_at: string
+        }
+        Insert: {
+          cancellation_reason?: string | null
+          cancelled_at?: string | null
+          commercial_notes?: string | null
+          confirmed_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          customer_id: string
+          facility_id?: string | null
+          fulfilled_at?: string | null
+          id?: string
+          order_date?: string
+          organization_id: string
+          paid_amount?: number
+          payment_status?: Database["public"]["Enums"]["v2_sales_payment_status"]
+          requested_delivery_date?: string | null
+          sales_reference: string
+          status?: Database["public"]["Enums"]["v2_sales_status"]
+          total_amount?: number
+          updated_at?: string
+        }
+        Update: {
+          cancellation_reason?: string | null
+          cancelled_at?: string | null
+          commercial_notes?: string | null
+          confirmed_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          customer_id?: string
+          facility_id?: string | null
+          fulfilled_at?: string | null
+          id?: string
+          order_date?: string
+          organization_id?: string
+          paid_amount?: number
+          payment_status?: Database["public"]["Enums"]["v2_sales_payment_status"]
+          requested_delivery_date?: string | null
+          sales_reference?: string
+          status?: Database["public"]["Enums"]["v2_sales_status"]
+          total_amount?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_sales_orders_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "v2_customers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_sales_orders_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processing_facilities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_sales_orders_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       v2_settings: {
         Row: {
           created_at: string
@@ -4031,6 +4822,24 @@ export type Database = {
         Returns: boolean
       }
       v2_approx_coord: { Args: { _value: number }; Returns: number }
+      v2_business_completeness: {
+        Args: { _organization_id: string }
+        Returns: Json
+      }
+      v2_business_performance: {
+        Args: { _from: string; _organization_id: string; _to: string }
+        Returns: Json
+      }
+      v2_business_trend: {
+        Args: { _months?: number; _organization_id: string }
+        Returns: {
+          cash_collected: number
+          month: string
+          other_expenses: number
+          procurement_spend: number
+          sales_value: number
+        }[]
+      }
       v2_can_access_supplier: {
         Args: { _supplier_id: string; _user_id: string }
         Returns: boolean
@@ -4042,6 +4851,10 @@ export type Database = {
       v2_cancel_procurement_order: {
         Args: { _order_id: string; _reason?: string }
         Returns: undefined
+      }
+      v2_cancel_sales_order: {
+        Args: { _reason: string; _sales_order_id: string }
+        Returns: Json
       }
       v2_commercial_confirmation_feed: {
         Args: never
@@ -4188,6 +5001,10 @@ export type Database = {
           isSetofReturn: false
         }
       }
+      v2_confirm_sales_order: {
+        Args: { _allocations?: Json; _sales_order_id: string }
+        Returns: Json
+      }
       v2_create_procurement_order: {
         Args: {
           _commitment_id: string
@@ -4202,6 +5019,19 @@ export type Database = {
         }
         Returns: string
       }
+      v2_create_sales_order: {
+        Args: {
+          _currency?: string
+          _customer_id: string
+          _facility_id?: string
+          _lines: Json
+          _notes?: string
+          _order_date?: string
+          _organization_id: string
+          _requested_delivery_date?: string
+        }
+        Returns: Json
+      }
       v2_data_quality_summary: {
         Args: never
         Returns: {
@@ -4213,7 +5043,37 @@ export type Database = {
         Args: { _lat1: number; _lat2: number; _lng1: number; _lng2: number }
         Returns: number
       }
+      v2_expense_breakdown: {
+        Args: { _from: string; _organization_id: string; _to: string }
+        Returns: {
+          category: Database["public"]["Enums"]["v2_expense_category"]
+          entries: number
+          paid: number
+          total: number
+        }[]
+      }
       v2_expire_commitments: { Args: never; Returns: number }
+      v2_finished_batch_direct_cost: {
+        Args: { _finished_batch_id: string }
+        Returns: Json
+      }
+      v2_finished_goods_availability: {
+        Args: { _facility_id?: string; _organization_id: string }
+        Returns: {
+          available_quantity: number
+          batch_reference: string
+          expiry_date: string
+          facility_id: string
+          finished_batch_id: string
+          physical_quantity: number
+          product_id: string
+          product_name: string
+          production_date: string
+          reserved_quantity: number
+          status: string
+          unit_code: string
+        }[]
+      }
       v2_finished_goods_stock: {
         Args: { _facility_id?: string; _organization_id: string }
         Returns: {
@@ -4268,7 +5128,25 @@ export type Database = {
         Args: { _org_id: string; _user_id: string }
         Returns: boolean
       }
+      v2_next_ref: {
+        Args: {
+          _column: string
+          _organization_id: string
+          _prefix: string
+          _table: unknown
+        }
+        Returns: string
+      }
       v2_next_reference: { Args: { _prefix: string }; Returns: string }
+      v2_post_dispatch: {
+        Args: {
+          _dispatch_date?: string
+          _lines: Json
+          _notes?: string
+          _sales_order_id: string
+        }
+        Returns: Json
+      }
       v2_post_production: {
         Args: {
           _facility_id: string
@@ -4336,6 +5214,10 @@ export type Database = {
         }
         Returns: string
       }
+      v2_recompute_payment_status: {
+        Args: { _order_id: string }
+        Returns: undefined
+      }
       v2_reconfirmation_task_feed: {
         Args: never
         Returns: {
@@ -4361,6 +5243,19 @@ export type Database = {
           task_id: string
           task_kind: string
         }[]
+      }
+      v2_record_customer_payment: {
+        Args: {
+          _amount: number
+          _cash_account_id?: string
+          _document_path?: string
+          _notes?: string
+          _payment_date?: string
+          _payment_method?: Database["public"]["Enums"]["v2_payment_method"]
+          _reference?: string
+          _sales_order_id: string
+        }
+        Returns: Json
       }
       v2_release_commitment: {
         Args: { _cancel?: boolean; _commitment_id: string; _reason?: string }
@@ -4413,6 +5308,14 @@ export type Database = {
           _supply_id: string
         }
         Returns: string
+      }
+      v2_reverse_customer_payment: {
+        Args: { _payment_id: string; _reason: string }
+        Returns: Json
+      }
+      v2_reverse_dispatch: {
+        Args: { _dispatch_id: string; _reason: string }
+        Returns: Json
       }
       v2_sourcing_demand_intelligence: {
         Args: never
@@ -4559,6 +5462,10 @@ export type Database = {
         Args: { _finished_batch_id: string }
         Returns: Json
       }
+      v2_trace_finished_batch_customers: {
+        Args: { _finished_batch_id: string }
+        Returns: Json
+      }
       v2_trace_raw_batch: { Args: { _raw_batch_id: string }; Returns: Json }
       v2_void_production: {
         Args: { _production_batch_id: string; _reason?: string }
@@ -4584,6 +5491,18 @@ export type Database = {
         | "transport"
         | "job"
         | "processing"
+      v2_allocation_status:
+        | "reserved"
+        | "partially_dispatched"
+        | "dispatched"
+        | "released"
+      v2_cash_account_type: "cash" | "bank" | "mobile_money"
+      v2_cash_event_type:
+        | "customer_payment"
+        | "other_inflow"
+        | "procurement_payment"
+        | "operating_expense"
+        | "other_outflow"
       v2_commitment_status:
         | "proposed"
         | "pending_confirmation"
@@ -4606,6 +5525,16 @@ export type Database = {
         | "harvesting"
         | "completed"
         | "cancelled"
+      v2_customer_type:
+        | "individual"
+        | "retailer"
+        | "wholesaler"
+        | "distributor"
+        | "supermarket"
+        | "restaurant_hotel"
+        | "exporter"
+        | "institution"
+        | "other"
       v2_delivery_status:
         | "scheduled"
         | "in_transit"
@@ -4614,11 +5543,29 @@ export type Database = {
         | "partially_accepted"
         | "rejected"
         | "cancelled"
+      v2_dispatch_status: "posted" | "reversed"
+      v2_expense_category:
+        | "raw_materials"
+        | "packaging"
+        | "transport"
+        | "labor"
+        | "electricity"
+        | "water"
+        | "rent"
+        | "maintenance"
+        | "certification"
+        | "marketing"
+        | "administration"
+        | "taxes_and_fees"
+        | "other"
+      v2_expense_payment_status: "unpaid" | "paid"
       v2_fg_movement_type:
         | "production_output"
         | "adjustment_in"
         | "adjustment_out"
         | "production_void"
+        | "sale_dispatch"
+        | "dispatch_reversal"
       v2_inventory_movement_type:
         | "receipt"
         | "adjustment_in"
@@ -4634,6 +5581,12 @@ export type Database = {
         | "compliance_advisor"
         | "financial_partner"
       v2_org_type: "processor" | "cooperative" | "field_network" | "agrigrid"
+      v2_payment_method:
+        | "cash"
+        | "bank_transfer"
+        | "mobile_money"
+        | "cheque"
+        | "other"
       v2_payment_status: "not_recorded" | "unpaid" | "partially_paid" | "paid"
       v2_procurement_status:
         | "draft"
@@ -4669,6 +5622,17 @@ export type Database = {
         | "confirmed"
         | "not_available"
         | "completed"
+        | "cancelled"
+      v2_sales_payment_status:
+        | "unpaid"
+        | "partially_paid"
+        | "paid"
+        | "cancelled"
+      v2_sales_status:
+        | "draft"
+        | "confirmed"
+        | "partially_fulfilled"
+        | "fulfilled"
         | "cancelled"
       v2_sourcing_status:
         | "draft"
@@ -4853,6 +5817,20 @@ export const Constants = {
         "job",
         "processing",
       ],
+      v2_allocation_status: [
+        "reserved",
+        "partially_dispatched",
+        "dispatched",
+        "released",
+      ],
+      v2_cash_account_type: ["cash", "bank", "mobile_money"],
+      v2_cash_event_type: [
+        "customer_payment",
+        "other_inflow",
+        "procurement_payment",
+        "operating_expense",
+        "other_outflow",
+      ],
       v2_commitment_status: [
         "proposed",
         "pending_confirmation",
@@ -4878,6 +5856,17 @@ export const Constants = {
         "completed",
         "cancelled",
       ],
+      v2_customer_type: [
+        "individual",
+        "retailer",
+        "wholesaler",
+        "distributor",
+        "supermarket",
+        "restaurant_hotel",
+        "exporter",
+        "institution",
+        "other",
+      ],
       v2_delivery_status: [
         "scheduled",
         "in_transit",
@@ -4887,11 +5876,30 @@ export const Constants = {
         "rejected",
         "cancelled",
       ],
+      v2_dispatch_status: ["posted", "reversed"],
+      v2_expense_category: [
+        "raw_materials",
+        "packaging",
+        "transport",
+        "labor",
+        "electricity",
+        "water",
+        "rent",
+        "maintenance",
+        "certification",
+        "marketing",
+        "administration",
+        "taxes_and_fees",
+        "other",
+      ],
+      v2_expense_payment_status: ["unpaid", "paid"],
       v2_fg_movement_type: [
         "production_output",
         "adjustment_in",
         "adjustment_out",
         "production_void",
+        "sale_dispatch",
+        "dispatch_reversal",
       ],
       v2_inventory_movement_type: [
         "receipt",
@@ -4910,6 +5918,13 @@ export const Constants = {
         "financial_partner",
       ],
       v2_org_type: ["processor", "cooperative", "field_network", "agrigrid"],
+      v2_payment_method: [
+        "cash",
+        "bank_transfer",
+        "mobile_money",
+        "cheque",
+        "other",
+      ],
       v2_payment_status: ["not_recorded", "unpaid", "partially_paid", "paid"],
       v2_procurement_status: [
         "draft",
@@ -4949,6 +5964,19 @@ export const Constants = {
         "confirmed",
         "not_available",
         "completed",
+        "cancelled",
+      ],
+      v2_sales_payment_status: [
+        "unpaid",
+        "partially_paid",
+        "paid",
+        "cancelled",
+      ],
+      v2_sales_status: [
+        "draft",
+        "confirmed",
+        "partially_fulfilled",
+        "fulfilled",
         "cancelled",
       ],
       v2_sourcing_status: [

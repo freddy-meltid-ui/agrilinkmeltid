@@ -638,7 +638,8 @@
       "next": "Suivant",
       "save": "Enregistrer",
       "remove": "Supprimer",
-      "cancel": "Annuler"
+      "cancel": "Annuler",
+      "error": "Erreur"
     },
     "units": {
       "kg": "kg",
@@ -1411,7 +1412,8 @@
         "posted": "Production {{reference}} enregistrée.",
         "incomplete": "Ajoutez au moins une entrée et une sortie.",
         "noStockTitle": "Aucune matière première en stock",
-        "noStockDescription": "Réceptionnez d'abord des marchandises : la production ne peut consommer que des lots présents dans le registre."
+        "noStockDescription": "Réceptionnez d'abord des marchandises : la production ne peut consommer que des lots présents dans le registre.",
+        "yieldRatio": "Rendement estimé : {{value}} {{unit}} par kg de matière première"
       },
       "error": {
         "INSUFFICIENT_RAW_MATERIAL_STOCK": "Stock de matière première insuffisant ({{value}}). Rien n'a été enregistré.",
@@ -1453,6 +1455,254 @@
         "forwardTitle": "Où est parti ce lot ?",
         "forwardDescription": "Lots finis issus de ce lot de matière première.",
         "forwardEmpty": "Ce lot n'a pas encore été utilisé en production."
+      }
+    },
+    "sales": {
+      "list": {
+        "title": "Ventes",
+        "description": "Commandes clients, expéditions et encaissements.",
+        "new": "Nouvelle vente",
+        "search": "Rechercher une vente…",
+        "emptyTitle": "Aucune vente enregistrée",
+        "emptyDescription": "Créez une vente pour suivre vos livraisons et vos encaissements.",
+        "paidOf": "{{paid}} encaissés sur {{total}}"
+      },
+      "kpi": {
+        "salesRecorded": "Ventes enregistrées",
+        "cashCollected": "Encaissements",
+        "outstanding": "Encours client",
+        "outstandingHint": "Montant facturé non encore encaissé",
+        "orders": "Commandes actives"
+      },
+      "customers": {
+        "title": "Clients",
+        "description": "Votre portefeuille client. Ces données appartiennent uniquement à votre organisation.",
+        "new": "Nouveau client",
+        "created": "Client enregistré",
+        "search": "Rechercher un client…",
+        "name": "Nom commercial",
+        "type": "Type de client",
+        "contact": "Personne de contact",
+        "phone": "Téléphone",
+        "department": "Département",
+        "commune": "Commune",
+        "notes": "Notes",
+        "emptyTitle": "Aucun client",
+        "emptyDescription": "Ajoutez vos premiers clients pour enregistrer des ventes."
+      },
+      "customerType": {
+        "individual": "Particulier",
+        "retailer": "Détaillant",
+        "wholesaler": "Grossiste",
+        "distributor": "Distributeur",
+        "supermarket": "Supermarché",
+        "restaurant_hotel": "Restaurant / Hôtel",
+        "exporter": "Exportateur",
+        "institution": "Institution",
+        "other": "Autre"
+      },
+      "status": {
+        "draft": "Brouillon",
+        "confirmed": "Confirmée",
+        "partially_fulfilled": "Partiellement livrée",
+        "fulfilled": "Livrée",
+        "cancelled": "Annulée"
+      },
+      "paymentStatus": {
+        "unpaid": "Non payée",
+        "partially_paid": "Partiellement payée",
+        "paid": "Payée",
+        "cancelled": "Annulée"
+      },
+      "allocationStatus": {
+        "reserved": "Réservé",
+        "partially_dispatched": "Partiellement expédié",
+        "dispatched": "Expédié",
+        "released": "Libéré"
+      },
+      "dispatchStatus": {
+        "posted": "Validée",
+        "reversed": "Annulée"
+      },
+      "methods": {
+        "cash": "Espèces",
+        "bank_transfer": "Virement bancaire",
+        "mobile_money": "Mobile money",
+        "cheque": "Chèque",
+        "other": "Autre"
+      },
+      "new": {
+        "title": "Nouvelle vente",
+        "description": "Les totaux sont calculés automatiquement : quantité × prix unitaire − remise.",
+        "customer": "Client",
+        "selectCustomer": "Choisir un client",
+        "date": "Date de vente",
+        "deliveryDate": "Livraison souhaitée",
+        "notes": "Notes commerciales",
+        "product": "Produit fini",
+        "selectProduct": "Choisir un produit",
+        "quantity": "Quantité",
+        "unit": "Unité",
+        "unitPrice": "Prix unitaire",
+        "discount": "Remise",
+        "addLine": "Ajouter une ligne",
+        "total": "Total de la vente",
+        "availableToSell": "Disponible à la vente : {{quantity}} {{unit}}",
+        "overStock": "Quantité supérieure au stock disponible à la vente",
+        "confirmNow": "Confirmer et réserver le stock immédiatement",
+        "confirmNowHint": "La réservation n'affecte pas le stock physique : seule une expédition validée le diminue.",
+        "submit": "Enregistrer la vente",
+        "created": "Vente {{reference}} créée"
+      },
+      "detail": {
+        "back": "Retour aux ventes",
+        "notFound": "Vente introuvable",
+        "description": "{{date}} · {{type}}",
+        "salesValue": "Valeur de la vente",
+        "received": "Montant reçu",
+        "outstanding": "Reste à encaisser",
+        "lines": "Lignes de vente",
+        "allocations": "Lots réservés",
+        "allocationLine": "Réservé {{reserved}} · expédié {{dispatched}} {{unit}}",
+        "dispatches": "Expéditions",
+        "noDispatch": "Aucune expédition pour le moment.",
+        "payments": "Paiements",
+        "noPayment": "Aucun paiement enregistré.",
+        "paymentNote": "Les paiements ne sont jamais modifiés ni supprimés : une annulation crée un enregistrement inverse.",
+        "confirm": "Confirmer",
+        "confirmed": "Vente confirmée, stock réservé",
+        "dispatch": "Expédier",
+        "dispatchHint": "Le stock physique diminue uniquement au moment de l'expédition.",
+        "postDispatch": "Valider l'expédition",
+        "dispatchPosted": "Expédition enregistrée",
+        "reverse": "Annuler",
+        "reversed": "Expédition annulée (mouvement compensatoire créé)",
+        "reversalReason": "Annulation opérationnelle",
+        "recordPayment": "Enregistrer un paiement",
+        "paymentRecorded": "Paiement enregistré",
+        "paymentReversed": "Paiement annulé",
+        "amount": "Montant",
+        "method": "Moyen de paiement",
+        "reference": "Référence",
+        "outstandingHint": "Reste à encaisser : {{amount}}",
+        "cancel": "Annuler la vente",
+        "cancelReason": "Motif d'annulation",
+        "cancelHint": "Les réservations non expédiées sont libérées. La vente est conservée dans l'historique.",
+        "cancelled": "Vente annulée",
+        "cancelledOn": "Annulée le {{date}} — {{reason}}",
+        "dispatched": "Expédié {{dispatched}}/{{total}} {{unit}}"
+      },
+      "trace": {
+        "destinationsTitle": "Destinations du lot (préparation au rappel)",
+        "stockLine": "Restant {{remaining}} {{unit}} · réservé {{reserved}} · disponible {{available}}",
+        "noDestinations": "Ce lot n'a encore été expédié à aucun client.",
+        "directCostTitle": "Coût matière première direct",
+        "directCostPerUnit": "{{amount}} par {{unit}} produit",
+        "directCostNote": "Coût matière première direct uniquement — hors emballage, main-d'œuvre, énergie et taxes.",
+        "directCostPartial": "Calcul partiel : {{tonnes}} t sans prix d'achat connu."
+      },
+      "errors": {
+        "INSUFFICIENT_FINISHED_STOCK": "Stock de produits finis insuffisant ({{value}}).",
+        "OVERPAYMENT_BLOCKED": "Paiement supérieur au solde dû ({{value}}). Le sur-paiement est bloqué.",
+        "EXCEEDS_RESERVATION": "Quantité supérieure à la réservation ({{value}}).",
+        "ORDER_NOT_DRAFT": "La vente n'est plus en brouillon.",
+        "ORDER_NOT_DISPATCHABLE": "La vente ne peut pas être expédiée dans cet état.",
+        "ORDER_NOT_CANCELLABLE": "La vente ne peut plus être annulée.",
+        "ORDER_CANCELLED": "La vente est annulée.",
+        "ALLOCATION_NOT_FOUND": "Réservation introuvable.",
+        "NOT_AUTHORIZED": "Accès non autorisé.",
+        "INVALID_QUANTITY": "Quantité invalide.",
+        "INVALID_AMOUNT": "Montant invalide.",
+        "NO_LINES": "Aucune ligne.",
+        "UNKNOWN": "Opération impossible."
+      }
+    },
+    "expenses": {
+      "title": "Dépenses d'exploitation",
+      "description": "Saisie rapide des charges. Les achats de matière première passés par l'approvisionnement ne sont pas ressaisis ici.",
+      "new": "Nouvelle dépense",
+      "created": "Dépense enregistrée",
+      "date": "Date",
+      "category": "Catégorie",
+      "descriptionField": "Description",
+      "amount": "Montant",
+      "payee": "Bénéficiaire",
+      "paymentStatus": "Statut de paiement",
+      "paid": "Payée",
+      "unpaid": "Non payée",
+      "markPaid": "Marquer payée",
+      "method": "Moyen de paiement",
+      "notes": "Notes",
+      "procurementHint": "Les achats de matière première déjà enregistrés via l'approvisionnement ne doivent pas être ressaisis : ils sont comptés séparément comme coût d'approvisionnement.",
+      "emptyTitle": "Aucune dépense",
+      "emptyDescription": "Enregistrez vos charges d'exploitation pour suivre votre activité.",
+      "kpi": {
+        "recorded": "Dépenses enregistrées",
+        "paid": "Dépenses payées",
+        "unpaid": "Non payé : {{amount}}"
+      },
+      "categories": {
+        "raw_materials": "Matière première",
+        "packaging": "Emballage",
+        "transport": "Transport",
+        "labor": "Main-d'œuvre",
+        "electricity": "Électricité",
+        "water": "Eau",
+        "rent": "Loyer",
+        "maintenance": "Maintenance",
+        "certification": "Certification",
+        "marketing": "Marketing",
+        "administration": "Administration",
+        "taxes_and_fees": "Taxes et redevances",
+        "other": "Autre"
+      }
+    },
+    "performance": {
+      "title": "Performance de l'activité",
+      "description": "Chiffres reconstitués à partir des enregistrements réels : ventes, encaissements, dépenses, stocks.",
+      "cashIncomplete": "Données de trésorerie incomplètes",
+      "period": {
+        "this_month": "Ce mois",
+        "last_month": "Mois dernier",
+        "last_3_months": "3 derniers mois",
+        "custom": "Période libre"
+      },
+      "kpi": {
+        "salesRecorded": "Ventes enregistrées",
+        "salesHint": "Chiffre d'affaires enregistré — ce n'est pas de la trésorerie",
+        "cashCollected": "Encaissements",
+        "cashHint": "Argent réellement reçu — ce n'est pas du chiffre d'affaires",
+        "outstanding": "Encours clients",
+        "procurement": "Achats matière première",
+        "procurementHint": "Issu des commandes d'approvisionnement",
+        "otherExpenses": "Autres charges d'exploitation",
+        "otherExpensesHint": "Hors matière première (pas de double comptage)",
+        "goodsSold": "Produits finis expédiés",
+        "production": "Volume produit",
+        "rawInventory": "Stock matière première",
+        "rawConsumed": "Consommé : {{tonnes}} t",
+        "fgInventory": "Stock produits finis",
+        "cashPosition": "Flux net d'exploitation",
+        "cashFlowHint": "Entrées {{in}} · Sorties {{out}}"
+      },
+      "trend": {
+        "title": "Tendance",
+        "hint": "Ventes enregistrées et encaissements sont affichés séparément et jamais additionnés.",
+        "line": "Ventes {{sales}} · Encaissé {{cash}}"
+      },
+      "expenses": {
+        "title": "Charges par catégorie",
+        "hint": "Le coût d'approvisionnement est suivi séparément des autres charges.",
+        "paid": "payé {{amount}}",
+        "empty": "Aucune dépense sur la période."
+      },
+      "completeness": {
+        "title": "Complétude des données",
+        "hint": "Indicateur opérationnel de complétude — ce n'est pas un score de crédit.",
+        "sales_tracking": "Suivi des ventes",
+        "payment_tracking": "Suivi des paiements",
+        "expense_tracking": "Suivi des dépenses",
+        "inventory_tracking": "Suivi des stocks"
       }
     }
   },

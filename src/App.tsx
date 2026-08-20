@@ -55,6 +55,12 @@ import V2ProductionNew from "./pages/v2/operations/V2ProductionNew";
 import V2ProductionDetail from "./pages/v2/operations/V2ProductionDetail";
 import V2FinishedGoods from "./pages/v2/operations/V2FinishedGoods";
 import V2Traceability from "./pages/v2/operations/V2Traceability";
+import V2Customers from "./pages/v2/operations/V2Customers";
+import V2Sales from "./pages/v2/operations/V2Sales";
+import V2SalesNew from "./pages/v2/operations/V2SalesNew";
+import V2SaleDetail from "./pages/v2/operations/V2SaleDetail";
+import V2Expenses from "./pages/v2/operations/V2Expenses";
+import V2Performance from "./pages/v2/operations/V2Performance";
 
 const queryClient = new QueryClient();
 
@@ -121,6 +127,12 @@ const App = () => (
               <Route path="operations/production/:batchId" element={<V2ProductionDetail />} />
               <Route path="operations/finished-goods" element={<V2FinishedGoods />} />
               <Route path="operations/finished-goods/:finishedBatchId" element={<V2Traceability />} />
+              <Route path="operations/customers" element={<V2Customers />} />
+              <Route path="operations/sales" element={<V2Sales />} />
+              <Route path="operations/sales/new" element={<V2SalesNew />} />
+              <Route path="operations/sales/:saleId" element={<V2SaleDetail />} />
+              <Route path="operations/expenses" element={<V2Expenses />} />
+              <Route path="operations/performance" element={<V2Performance />} />
               <Route path="atlas" element={<V2Atlas />} />
               <Route
                 path="compliance"

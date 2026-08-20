@@ -638,7 +638,8 @@
       "next": "Next",
       "save": "Save",
       "remove": "Remove",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "error": "Error"
     },
     "units": {
       "kg": "kg",
@@ -1411,7 +1412,8 @@
         "posted": "Production {{reference}} posted.",
         "incomplete": "Add at least one input and one output.",
         "noStockTitle": "No raw material in stock",
-        "noStockDescription": "Receive goods first — production can only consume batches that exist in the raw-material ledger."
+        "noStockDescription": "Receive goods first — production can only consume batches that exist in the raw-material ledger.",
+        "yieldRatio": "Estimated yield: {{value}} {{unit}} per kg of raw material"
       },
       "error": {
         "INSUFFICIENT_RAW_MATERIAL_STOCK": "Not enough raw material in stock ({{value}}). Nothing was posted.",
@@ -1453,6 +1455,254 @@
         "forwardTitle": "Where did this batch go?",
         "forwardDescription": "Finished lots produced from this raw-material batch.",
         "forwardEmpty": "This batch has not been used in production yet."
+      }
+    },
+    "sales": {
+      "list": {
+        "title": "Sales",
+        "description": "Customer orders, dispatches and collections.",
+        "new": "New sale",
+        "search": "Search a sale…",
+        "emptyTitle": "No sale recorded",
+        "emptyDescription": "Create a sale to track deliveries and collections.",
+        "paidOf": "{{paid}} collected of {{total}}"
+      },
+      "kpi": {
+        "salesRecorded": "Sales recorded",
+        "cashCollected": "Cash collected",
+        "outstanding": "Outstanding",
+        "outstandingHint": "Invoiced but not yet collected",
+        "orders": "Active orders"
+      },
+      "customers": {
+        "title": "Customers",
+        "description": "Your customer book. This data belongs to your organization only.",
+        "new": "New customer",
+        "created": "Customer saved",
+        "search": "Search a customer…",
+        "name": "Business name",
+        "type": "Customer type",
+        "contact": "Contact person",
+        "phone": "Phone",
+        "department": "Department",
+        "commune": "Commune",
+        "notes": "Notes",
+        "emptyTitle": "No customer",
+        "emptyDescription": "Add your first customers to record sales."
+      },
+      "customerType": {
+        "individual": "Individual",
+        "retailer": "Retailer",
+        "wholesaler": "Wholesaler",
+        "distributor": "Distributor",
+        "supermarket": "Supermarket",
+        "restaurant_hotel": "Restaurant / Hotel",
+        "exporter": "Exporter",
+        "institution": "Institution",
+        "other": "Other"
+      },
+      "status": {
+        "draft": "Draft",
+        "confirmed": "Confirmed",
+        "partially_fulfilled": "Partially fulfilled",
+        "fulfilled": "Fulfilled",
+        "cancelled": "Cancelled"
+      },
+      "paymentStatus": {
+        "unpaid": "Unpaid",
+        "partially_paid": "Partially paid",
+        "paid": "Paid",
+        "cancelled": "Cancelled"
+      },
+      "allocationStatus": {
+        "reserved": "Reserved",
+        "partially_dispatched": "Partially dispatched",
+        "dispatched": "Dispatched",
+        "released": "Released"
+      },
+      "dispatchStatus": {
+        "posted": "Posted",
+        "reversed": "Reversed"
+      },
+      "methods": {
+        "cash": "Cash",
+        "bank_transfer": "Bank transfer",
+        "mobile_money": "Mobile money",
+        "cheque": "Cheque",
+        "other": "Other"
+      },
+      "new": {
+        "title": "New sale",
+        "description": "Totals are computed deterministically: quantity × unit price − discount.",
+        "customer": "Customer",
+        "selectCustomer": "Select a customer",
+        "date": "Sale date",
+        "deliveryDate": "Requested delivery",
+        "notes": "Commercial notes",
+        "product": "Finished product",
+        "selectProduct": "Select a product",
+        "quantity": "Quantity",
+        "unit": "Unit",
+        "unitPrice": "Unit price",
+        "discount": "Discount",
+        "addLine": "Add a line",
+        "total": "Sale total",
+        "availableToSell": "Available to sell: {{quantity}} {{unit}}",
+        "overStock": "Quantity above available-to-sell stock",
+        "confirmNow": "Confirm and reserve stock now",
+        "confirmNowHint": "A reservation does not change physical stock: only a posted dispatch does.",
+        "submit": "Save sale",
+        "created": "Sale {{reference}} created"
+      },
+      "detail": {
+        "back": "Back to sales",
+        "notFound": "Sale not found",
+        "description": "{{date}} · {{type}}",
+        "salesValue": "Sales value",
+        "received": "Amount received",
+        "outstanding": "Amount outstanding",
+        "lines": "Sale lines",
+        "allocations": "Reserved lots",
+        "allocationLine": "Reserved {{reserved}} · dispatched {{dispatched}} {{unit}}",
+        "dispatches": "Dispatches",
+        "noDispatch": "No dispatch yet.",
+        "payments": "Payments",
+        "noPayment": "No payment recorded.",
+        "paymentNote": "Payments are never edited or deleted: a reversal creates an opposite record.",
+        "confirm": "Confirm",
+        "confirmed": "Sale confirmed, stock reserved",
+        "dispatch": "Dispatch",
+        "dispatchHint": "Physical stock decreases only when the dispatch is posted.",
+        "postDispatch": "Post dispatch",
+        "dispatchPosted": "Dispatch posted",
+        "reverse": "Reverse",
+        "reversed": "Dispatch reversed (compensating movement created)",
+        "reversalReason": "Operational reversal",
+        "recordPayment": "Record payment",
+        "paymentRecorded": "Payment recorded",
+        "paymentReversed": "Payment reversed",
+        "amount": "Amount",
+        "method": "Payment method",
+        "reference": "Reference",
+        "outstandingHint": "Outstanding: {{amount}}",
+        "cancel": "Cancel sale",
+        "cancelReason": "Cancellation reason",
+        "cancelHint": "Undispatched reservations are released. The sale is kept in history.",
+        "cancelled": "Sale cancelled",
+        "cancelledOn": "Cancelled on {{date}} — {{reason}}",
+        "dispatched": "Dispatched {{dispatched}}/{{total}} {{unit}}"
+      },
+      "trace": {
+        "destinationsTitle": "Lot destinations (recall readiness)",
+        "stockLine": "Remaining {{remaining}} {{unit}} · reserved {{reserved}} · available {{available}}",
+        "noDestinations": "This lot has not been dispatched to any customer yet.",
+        "directCostTitle": "Direct raw-material cost",
+        "directCostPerUnit": "{{amount}} per {{unit}} produced",
+        "directCostNote": "Direct raw-material cost only — excludes packaging, labour, energy and taxes.",
+        "directCostPartial": "Partial calculation: {{tonnes}} t without a known purchase price."
+      },
+      "errors": {
+        "INSUFFICIENT_FINISHED_STOCK": "Insufficient finished-goods stock ({{value}}).",
+        "OVERPAYMENT_BLOCKED": "Payment above the outstanding balance ({{value}}). Overpayment is blocked.",
+        "EXCEEDS_RESERVATION": "Quantity above the reservation ({{value}}).",
+        "ORDER_NOT_DRAFT": "The sale is no longer a draft.",
+        "ORDER_NOT_DISPATCHABLE": "The sale cannot be dispatched in this state.",
+        "ORDER_NOT_CANCELLABLE": "The sale can no longer be cancelled.",
+        "ORDER_CANCELLED": "The sale is cancelled.",
+        "ALLOCATION_NOT_FOUND": "Reservation not found.",
+        "NOT_AUTHORIZED": "Not authorized.",
+        "INVALID_QUANTITY": "Invalid quantity.",
+        "INVALID_AMOUNT": "Invalid amount.",
+        "NO_LINES": "No line.",
+        "UNKNOWN": "Operation failed."
+      }
+    },
+    "expenses": {
+      "title": "Operating expenses",
+      "description": "Fast expense entry. Raw-material purchases captured through procurement are not re-entered here.",
+      "new": "New expense",
+      "created": "Expense saved",
+      "date": "Date",
+      "category": "Category",
+      "descriptionField": "Description",
+      "amount": "Amount",
+      "payee": "Payee",
+      "paymentStatus": "Payment status",
+      "paid": "Paid",
+      "unpaid": "Unpaid",
+      "markPaid": "Mark as paid",
+      "method": "Payment method",
+      "notes": "Notes",
+      "procurementHint": "Raw-material purchases already recorded through procurement must not be re-entered: they are counted separately as procurement cost.",
+      "emptyTitle": "No expense",
+      "emptyDescription": "Record your operating costs to follow your activity.",
+      "kpi": {
+        "recorded": "Expenses recorded",
+        "paid": "Expenses paid",
+        "unpaid": "Unpaid: {{amount}}"
+      },
+      "categories": {
+        "raw_materials": "Raw materials",
+        "packaging": "Packaging",
+        "transport": "Transport",
+        "labor": "Labour",
+        "electricity": "Electricity",
+        "water": "Water",
+        "rent": "Rent",
+        "maintenance": "Maintenance",
+        "certification": "Certification",
+        "marketing": "Marketing",
+        "administration": "Administration",
+        "taxes_and_fees": "Taxes and fees",
+        "other": "Other"
+      }
+    },
+    "performance": {
+      "title": "Business performance",
+      "description": "Figures reconstructed from real records: sales, collections, expenses, inventory.",
+      "cashIncomplete": "Cash data incomplete",
+      "period": {
+        "this_month": "This month",
+        "last_month": "Last month",
+        "last_3_months": "Last 3 months",
+        "custom": "Custom period"
+      },
+      "kpi": {
+        "salesRecorded": "Sales recorded",
+        "salesHint": "Revenue recorded — this is not cash",
+        "cashCollected": "Cash collected",
+        "cashHint": "Money actually received — this is not revenue",
+        "outstanding": "Outstanding customer balances",
+        "procurement": "Procurement spend",
+        "procurementHint": "From procurement orders",
+        "otherExpenses": "Other operating expenses",
+        "otherExpensesHint": "Excludes raw materials (no double counting)",
+        "goodsSold": "Finished goods sold",
+        "production": "Production volume",
+        "rawInventory": "Raw-material inventory",
+        "rawConsumed": "Consumed: {{tonnes}} t",
+        "fgInventory": "Finished-goods inventory",
+        "cashPosition": "Net operating cash flow",
+        "cashFlowHint": "In {{in}} · Out {{out}}"
+      },
+      "trend": {
+        "title": "Trend",
+        "hint": "Sales recorded and cash collected are shown separately and never added together.",
+        "line": "Sales {{sales}} · Collected {{cash}}"
+      },
+      "expenses": {
+        "title": "Expenses by category",
+        "hint": "Procurement cost is tracked separately from other operating expenses.",
+        "paid": "paid {{amount}}",
+        "empty": "No expense in this period."
+      },
+      "completeness": {
+        "title": "Data completeness",
+        "hint": "Operational completeness indicator — this is not a credit score.",
+        "sales_tracking": "Sales tracking",
+        "payment_tracking": "Payment tracking",
+        "expense_tracking": "Expense tracking",
+        "inventory_tracking": "Inventory tracking"
       }
     }
   },

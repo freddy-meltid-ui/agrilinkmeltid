@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Boxes, ClipboardList, Factory, Loader2, PackageCheck, Truck } from "lucide-react";
+import { Boxes, ClipboardList, Factory, Loader2, PackageCheck, Receipt, ShoppingCart, TrendingUp, Truck } from "lucide-react";
 import PageHeader from "@/components/v2/ui-kit/PageHeader";
 import KpiCard from "@/components/v2/ui-kit/KpiCard";
 import EmptyState from "@/components/v2/ui-kit/EmptyState";
@@ -67,7 +67,20 @@ const V2Operations = () => {
               <Factory className="mr-2 h-4 w-4" />
               {t("v2.production.title")}
             </Button>
+            <Button variant="outline" onClick={() => navigate("/app/operations/sales")}>
+              <ShoppingCart className="mr-2 h-4 w-4" />
+              {t("v2.sales.list.title")}
+            </Button>
+            <Button variant="outline" onClick={() => navigate("/app/operations/expenses")}>
+              <Receipt className="mr-2 h-4 w-4" />
+              {t("v2.expenses.title")}
+            </Button>
+            <Button variant="outline" onClick={() => navigate("/app/operations/performance")}>
+              <TrendingUp className="mr-2 h-4 w-4" />
+              {t("v2.performance.title")}
+            </Button>
           </>
+
         }
       />
 
