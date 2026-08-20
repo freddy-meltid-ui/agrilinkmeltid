@@ -1116,6 +1116,213 @@
       "empty": "No demand recorded.",
       "line": "{{requests}} request(s) · {{demand}} t demanded · {{supply}} t identified · gap {{gap}} t",
       "tasks": "Open confirmation tasks: {{count}}"
+    },
+    "procurement": {
+      "operations": {
+        "title": "Procurement operations",
+        "description": "Confirmed purchases, deliveries, goods receipts and raw-material stock.",
+        "inventoryCta": "Raw-material stock",
+        "search": "Search an order…",
+        "window": "Delivery {{from}} → {{to}}",
+        "emptyTitle": "No procurement order yet",
+        "emptyDescription": "Orders appear here once a supplier has commercially confirmed a quantity for one of your sourcing requests."
+      },
+      "kpi": {
+        "pendingConfirmations": "Awaiting confirmation",
+        "confirmedTonnes": "Confirmed & reserved",
+        "expectedDeliveries": "Expected deliveries",
+        "inventory": "Raw-material stock",
+        "received30d": "{{tonnes}} t accepted in the last 30 days"
+      },
+      "funnel": {
+        "title": "Sourcing funnel",
+        "requested": "Requested",
+        "identified": "Identified",
+        "confirmed": "Confirmed",
+        "ordered": "Ordered",
+        "received": "Accepted",
+        "hint": "{{toConfirm}} t still to confirm · {{toReceive}} t ordered but not yet received."
+      },
+      "propose": {
+        "title": "Request a commercial confirmation",
+        "description": "{{supplier}} — {{available}} t commercially available (already-confirmed volumes excluded).",
+        "quantity": "Quantity to request (t)",
+        "from": "Needed from",
+        "to": "Needed until",
+        "price": "Target price",
+        "notes": "Message for the supplier",
+        "tooMuch": "Only {{available}} t remain uncommitted on this supply record.",
+        "disclaimer": "Nothing is reserved yet. The quantity is only committed once the supplier — or the field agent on their behalf — confirms it.",
+        "cta": "Request confirmation",
+        "pending": "Sending…",
+        "created": "Confirmation requested"
+      },
+      "commitments": {
+        "tab": "Confirmations ({{count}})",
+        "intro": "Commercial confirmations for this request. A confirmed quantity is reserved and disappears from what other processors can see.",
+        "emptyTitle": "No confirmation requested",
+        "emptyDescription": "Pick a supplier in the matches tab and ask for a commercial confirmation.",
+        "proposed": "Requested",
+        "confirmed": "Confirmed",
+        "window": "Window",
+        "contactReleased": "Contact released after confirmation",
+        "contactHidden": "Supplier identity and phone number stay hidden until this supplier confirms.",
+        "confirmedBy": "Confirmed via {{method}} on {{date}}",
+        "expires": "Expires on {{date}}",
+        "createOrder": "Create procurement order",
+        "openOrder": "Open order",
+        "release": "Release quantity",
+        "releaseReason": "Released by the processor",
+        "released": "Quantity released",
+        "task": "Field task: {{status}}",
+        "showNotes": "Show note"
+      },
+      "commitmentStatus": {
+        "proposed": "Proposed",
+        "pending_confirmation": "Awaiting confirmation",
+        "confirmed": "Confirmed",
+        "partially_confirmed": "Partially confirmed",
+        "declined": "Declined",
+        "released": "Released",
+        "expired": "Expired",
+        "cancelled": "Cancelled",
+        "fulfilled": "Fulfilled"
+      },
+      "method": {
+        "supplier_self_service": "the supplier",
+        "field_agent": "a field agent",
+        "agrigrid_admin": "Agri Grid support"
+      },
+      "orderStatus": {
+        "draft": "Draft",
+        "pending_supplier_confirmation": "Awaiting supplier",
+        "confirmed": "Confirmed",
+        "ready_for_delivery": "Ready for delivery",
+        "partially_delivered": "Partially delivered",
+        "delivered": "Delivered",
+        "cancelled": "Cancelled",
+        "expired": "Expired"
+      },
+      "deliveryStatus": {
+        "scheduled": "Scheduled",
+        "in_transit": "In transit",
+        "arrived": "Arrived",
+        "received": "Received",
+        "partially_accepted": "Partially accepted",
+        "rejected": "Rejected",
+        "cancelled": "Cancelled"
+      },
+      "quality": {
+        "accepted": "Accepted",
+        "accepted_with_reservation": "Accepted with reservation",
+        "partially_accepted": "Partially accepted",
+        "rejected": "Rejected"
+      },
+      "movement": {
+        "receipt": "Goods receipt",
+        "adjustment_in": "Adjustment (in)",
+        "adjustment_out": "Adjustment (out)"
+      },
+      "order": {
+        "back": "Back to operations",
+        "notFound": "Order not found",
+        "subtitle": "{{tonnes}} t · delivery {{from}} → {{to}} · {{location}}",
+        "supplier": "Supplier",
+        "ordered": "Ordered",
+        "accepted": "Accepted",
+        "outstanding": "{{tonnes}} t still expected",
+        "price": "Agreed price",
+        "cancel": "Cancel order",
+        "cancelReason": "Cancelled by the processor",
+        "created": "Procurement order created"
+      },
+      "delivery": {
+        "title": "Deliveries",
+        "plan": "Plan a delivery",
+        "planHint": "{{tonnes}} t are still expected on this order.",
+        "empty": "No delivery planned yet.",
+        "date": "Scheduled date",
+        "quantity": "Announced quantity",
+        "notes": "Notes",
+        "confirmPlan": "Save delivery",
+        "created": "Delivery planned",
+        "scheduled": "Scheduled for {{date}}",
+        "markInTransit": "In transit"
+      },
+      "receipt": {
+        "cta": "Receive goods",
+        "title": "Goods receipt",
+        "description": "Delivery {{reference}} — record what physically arrived.",
+        "delivered": "Delivered",
+        "accepted": "Accepted",
+        "rejected": "Rejected",
+        "grade": "Quality grade",
+        "storage": "Storage location",
+        "condition": "Condition on arrival",
+        "acceptOverDelivery": "Explicitly accept more than the ordered quantity (outstanding: {{tonnes}} t)",
+        "confirm": "Post receipt",
+        "posted": "Goods received — stock updated",
+        "history": "Receipt history",
+        "summary": "{{delivered}} t delivered · {{accepted}} t accepted · {{rejected}} t rejected · {{quality}}",
+        "overDeliveryNote": "Over-delivery of {{tonnes}} t explicitly accepted"
+      },
+      "batches": {
+        "title": "Raw-material batches",
+        "trace": "Received {{date}} · {{storage}}",
+        "traceHint": "Each batch keeps the link back to the supplier, farm, crop cycle, order and receipt."
+      },
+      "inventory": {
+        "title": "Raw-material stock",
+        "description": "{{tonnes}} t in stock. Stock only increases when goods are accepted at receipt.",
+        "tabs": {
+          "stock": "Stock",
+          "batches": "Batches ({{count}})",
+          "ledger": "Movements"
+        },
+        "emptyTitle": "No stock yet",
+        "emptyDescription": "Receive a delivery to create your first raw-material batch.",
+        "batchCount": "{{count}} batch(es)",
+        "batchTrace": "Received {{date}} · {{quality}} · {{storage}}",
+        "noBatches": "No batch yet",
+        "noMovements": "No movement yet"
+      },
+      "confirm": {
+        "title": "Commercial confirmations",
+        "navCta": "Commercial confirmations",
+        "description": "Processors asking a supplier to commit to a quantity. Confirm, adjust or decline.",
+        "emptyTitle": "Nothing to confirm",
+        "emptyDescription": "No processor is currently waiting for a commercial confirmation.",
+        "askedBy": "Requested by {{processor}}",
+        "answer": "Answer",
+        "quantity": "Quantity actually available ({{unit}})",
+        "price": "Agreed price",
+        "from": "Available from",
+        "to": "Until",
+        "notes": "Observation",
+        "partialHint": "Confirming less than requested is allowed — it is recorded as a partial confirmation.",
+        "accept": "Confirm",
+        "decline": "Not available",
+        "done": "Quantity confirmed and reserved",
+        "declined": "Marked unavailable",
+        "expires": "Answer needed before {{date}}"
+      },
+      "error": {
+        "INSUFFICIENT_AVAILABILITY": "Too late — only {{value}} t remain uncommitted on this supply.",
+        "OVER_DELIVERY_REQUIRES_CONFIRMATION": "This receipt exceeds the ordered quantity by {{value}} t. Tick the over-delivery box to accept it.",
+        "COMMITMENT_NOT_PENDING": "This confirmation has already been answered.",
+        "COMMITMENT_NOT_CONFIRMED": "The supplier has not confirmed this quantity yet.",
+        "COMMITMENT_NOT_FOUND": "Confirmation not found.",
+        "COMMITMENT_ALREADY_FULFILLED": "This commitment has already been fulfilled.",
+        "ORDER_ALREADY_EXISTS": "An order already exists for this confirmation.",
+        "ORDER_ALREADY_DELIVERED": "This order has already been fully delivered.",
+        "DELIVERY_ALREADY_CLOSED": "This delivery is already closed.",
+        "ACCEPTED_PLUS_REJECTED_EXCEEDS_DELIVERED": "Accepted plus rejected cannot exceed the delivered quantity.",
+        "NOT_AUTHORIZED_TO_CONFIRM": "Only the supplier, their field agent or Agri Grid support can confirm.",
+        "NOT_AUTHORIZED": "You are not allowed to perform this action.",
+        "SUPPLY_NOT_FOUND": "Supply record not found.",
+        "INVALID_QUANTITY": "Invalid quantity.",
+        "UNKNOWN": "Operation failed."
+      }
     }
   },
   "language": {
