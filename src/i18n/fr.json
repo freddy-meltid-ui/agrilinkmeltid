@@ -764,8 +764,282 @@
       "evidence": "Preuves"
     },
     "finance": {
-      "title": "Finance",
-      "description": "Vue financière opérationnelle et Indicateur Agri-Grid de préparation au financement."
+      "title": "Préparation au financement",
+      "description": "Constituez un dossier de financement structuré à partir de vos données réelles d'activité.",
+      "disclaimer": "AgriGrid ne prête pas, n'attribue pas de score de crédit, n'analyse pas de risque et ne recommande aucun financement. L'indicateur mesure uniquement la complétude et la structuration de vos données. Les décisions de financement relèvent exclusivement des institutions financières.",
+      "notACreditScore": "Indicateur de complétude des données, ce n'est ni un score de crédit ni une probabilité d'accord.",
+      "overviewDescription": "Niveau de complétude et de structuration de vos données d'entreprise.",
+      "noData": "Aucune donnée d'organisation disponible.",
+      "readinessLabel": "Complétude du dossier d'entreprise",
+      "qualifiersTitle": "Réserves importantes",
+      "dimensionsTitle": "Complétude par dimension",
+      "weight": "Poids",
+      "available": "Disponible",
+      "missing": "Manquant",
+      "nothingMissing": "Rien ne manque",
+      "sourceLabel": "Source",
+      "nextStep": "Étape suivante",
+      "monthsShort": "mois",
+      "generatedAt": "Généré le",
+      "print": "Imprimer / exporter",
+      "demoTag": "Données de démonstration",
+      "tabs": {
+        "overview": "Vue d'ensemble",
+        "request": "Demande de financement",
+        "documents": "Documents",
+        "dossier": "Dossier",
+        "sharing": "Partage"
+      },
+      "states": {
+        "early": "Dossier initial",
+        "building_record": "Dossier en construction",
+        "structured": "Dossier structuré",
+        "dossier_ready": "Dossier prêt",
+        "ready_for_review": "Prêt pour examen"
+      },
+      "maturity": {
+        "none": "Aucune activité enregistrée",
+        "lt_1_month": "Moins d'un mois d'historique",
+        "m1_3": "1 à 3 mois d'historique",
+        "m3_6": "3 à 6 mois d'historique",
+        "m6_12": "6 à 12 mois d'historique",
+        "m12_plus": "Plus de 12 mois d'historique"
+      },
+      "qualifiers": {
+        "short_history": "Historique d'activité court — la complétude ne remplace pas le temps.",
+        "very_short_history": "Moins d'un mois d'activité enregistrée.",
+        "missing_required_documents": "Des documents légaux ou administratifs obligatoires manquent.",
+        "no_payment_records": "Aucun paiement client enregistré.",
+        "no_sales_records": "Aucune vente enregistrée.",
+        "incomplete_cash_data": "Les données de trésorerie et de charges sont incomplètes.",
+        "no_financing_request": "Aucune demande de financement préparée.",
+        "low_compliance": "Le niveau de conformité reste faible."
+      },
+      "kpi": {
+        "history": "Historique d'activité",
+        "historyHint": "{{count}} mois actifs",
+        "documents": "Documents obligatoires",
+        "documentsHint": "Réutilisés depuis votre bibliothèque",
+        "sales": "Ventes enregistrées",
+        "collected": "Encaissements",
+        "collectionRatio": "Taux d'encaissement : {{value}}",
+        "outstanding": "Créances en attente",
+        "procurement": "Approvisionnement",
+        "procurementHint": "{{tonnes}} t auprès de {{suppliers}} fournisseurs",
+        "compliance": "Dimension conformité",
+        "request": "Demande de financement",
+        "noRequest": "Non démarrée",
+        "requestHint": "Préparez votre demande pour compléter cette dimension"
+      },
+      "dimensions": {
+        "business_identity": {
+          "label": "Identité de l'entreprise",
+          "why": "L'entité juridique derrière l'activité doit être identifiable.",
+          "next": "Complétez le profil de votre organisation dans les paramètres."
+        },
+        "legal_documents": {
+          "label": "Documents légaux et administratifs",
+          "why": "Registre, fiscalité et licences sont le ticket d'entrée de tout examen.",
+          "next": "Rattachez les documents obligatoires manquants."
+        },
+        "operating_history": {
+          "label": "Historique d'exploitation",
+          "why": "La durée et la régularité des enregistrements ne se rattrapent pas.",
+          "next": "Continuez à enregistrer vos opérations chaque mois."
+        },
+        "sales_records": {
+          "label": "Données de vente",
+          "why": "Des ventes structurées démontrent une demande commerciale réelle.",
+          "next": "Enregistrez vos clients et commandes dans Opérations."
+        },
+        "payment_records": {
+          "label": "Données de paiement",
+          "why": "Les encaissements sont la meilleure preuve d'un cycle commercial fonctionnel.",
+          "next": "Enregistrez les paiements clients liés à vos ventes."
+        },
+        "expense_records": {
+          "label": "Données de charges",
+          "why": "La visibilité des coûts est indispensable pour lire une marge honnêtement.",
+          "next": "Enregistrez régulièrement vos charges d'exploitation."
+        },
+        "inventory_records": {
+          "label": "Données de stock",
+          "why": "Les stocks soutiennent l'analyse des actifs et du besoin en fonds de roulement.",
+          "next": "Tenez à jour vos stocks de matières premières et de produits finis."
+        },
+        "compliance": {
+          "label": "Conformité",
+          "why": "La maîtrise sanitaire et réglementaire réduit le risque opérationnel perçu.",
+          "next": "Avancez votre auto-évaluation de conformité."
+        },
+        "financing_request": {
+          "label": "Demande de financement",
+          "why": "Un montant, un objet et une affectation claire sont attendus dans tout dossier.",
+          "next": "Complétez la demande et la ventilation de l'utilisation des fonds."
+        }
+      },
+      "source": {
+        "organization_profile": "Profil de l'organisation",
+        "compliance_document_library": "Bibliothèque documentaire",
+        "agrigrid_operations": "Opérations AgriGrid",
+        "agrigrid_sales": "Ventes AgriGrid",
+        "agrigrid_payments": "Paiements AgriGrid",
+        "agrigrid_expenses": "Charges AgriGrid",
+        "agrigrid_inventory": "Stocks AgriGrid",
+        "agrigrid_compliance": "Conformité AgriGrid",
+        "finance_request": "Demande de financement"
+      },
+      "facts": {
+        "months_of_history": "Mois d'historique",
+        "maturity": "Maturité des données",
+        "suppliers": "Fournisseurs actifs",
+        "accepted_tonnes": "Volume accepté (t)",
+        "procurement_value": "Valeur des achats",
+        "production_batches": "Lots de production",
+        "yield_ratio": "Rendement moyen",
+        "customers": "Clients",
+        "orders": "Commandes de vente",
+        "sales_value": "Chiffre d'affaires",
+        "cash_collected": "Encaissements",
+        "outstanding": "Créances en attente",
+        "collection_ratio": "Taux d'encaissement",
+        "expenses": "Charges d'exploitation",
+        "inventory_value": "Valeur des stocks",
+        "compliance_readiness": "Niveau de conformité",
+        "critical_gaps": "Écarts critiques"
+      },
+      "requestTitle": "Demande de financement",
+      "requestDescription": "Décrivez ce que vous préparez. Rien n'est transmis à une institution.",
+      "requestSaved": "Demande enregistrée",
+      "requestStatus": {
+        "draft": "Brouillon",
+        "in_preparation": "En préparation",
+        "ready_for_review": "Prête pour examen"
+      },
+      "fields": {
+        "purpose": "Objet",
+        "purposePlaceholder": "Choisir un objet",
+        "type": "Type de financement",
+        "typePlaceholder": "Choisir un type",
+        "amount": "Montant demandé",
+        "currency": "Devise",
+        "tenor": "Durée (mois)",
+        "ownContribution": "Apport propre",
+        "targetDate": "Date cible",
+        "status": "Statut",
+        "description": "Contexte et utilisation prévue",
+        "lineLabel": "Description",
+        "orgName": "Raison sociale",
+        "orgType": "Type d'entreprise",
+        "country": "Pays",
+        "city": "Ville",
+        "registration": "Numéro d'immatriculation",
+        "taxId": "Identifiant fiscal",
+        "recipientType": "Type de destinataire",
+        "recipientName": "Nom du destinataire",
+        "recipientEmail": "E-mail du destinataire",
+        "expiresIn": "Expire dans (jours)"
+      },
+      "purposes": {
+        "working_capital": "Fonds de roulement",
+        "raw_material_purchase": "Achat de matières premières",
+        "equipment": "Équipement",
+        "facility_expansion": "Extension du site",
+        "packaging": "Emballage",
+        "certification": "Certification",
+        "logistics": "Logistique",
+        "export_development": "Développement export",
+        "other": "Autre"
+      },
+      "types": {
+        "short_term_loan": "Prêt court terme",
+        "working_capital_facility": "Ligne de fonds de roulement",
+        "equipment_loan": "Crédit équipement",
+        "invoice_financing": "Financement de factures",
+        "leasing": "Crédit-bail",
+        "grant": "Subvention",
+        "equity": "Fonds propres",
+        "other": "Autre"
+      },
+      "useOfFunds": "Utilisation des fonds",
+      "useOfFundsHint": "Ventilez le montant demandé en usages concrets.",
+      "useOfFundsTotal": "Total affecté",
+      "addLine": "Ajouter une ligne",
+      "reconciles": "Cohérent avec le montant demandé",
+      "doesNotReconcile": "Écart de {{amount}}",
+      "documentsTitle": "Documents de financement",
+      "documentsDescription": "Une checklist standard, satisfaite par les documents que vous détenez déjà.",
+      "documentsNotice": "Les documents sont réutilisés depuis votre bibliothèque de conformité — jamais téléversés deux fois.",
+      "openLibrary": "Ouvrir la bibliothèque",
+      "importance": {
+        "required": "Obligatoire",
+        "recommended": "Recommandé",
+        "situational": "Selon le cas"
+      },
+      "availableBadge": "Disponible",
+      "missingBadge": "Manquant",
+      "linkExisting": "Rattacher un document existant",
+      "libraryEmpty": "Aucun document dans votre bibliothèque",
+      "documentLinked": "Document rattaché",
+      "unlink": "Détacher",
+      "duplicateNotice": "Cette ligne est déjà satisfaite — les documents supplémentaires n'augmentent pas la complétude.",
+      "dossierTitle": "Dossier de financement",
+      "dossierDescription": "Synthèse structurée de votre activité, construite uniquement à partir de vos enregistrements.",
+      "noRequestYet": "Aucune demande de financement préparée.",
+      "sections": {
+        "identity": "Identité de l'entreprise",
+        "request": "Demande de financement",
+        "operations": "Historique d'exploitation",
+        "commercial": "Commercial et trésorerie",
+        "compliance": "Conformité",
+        "documents": "Documents",
+        "readiness": "Complétude"
+      },
+      "sharingTitle": "Partage avec consentement",
+      "sharingDescription": "Partagez un dossier limité et expirant. Vous choisissez ce qui est visible et pouvez révoquer à tout moment.",
+      "newShare": "Nouveau partage",
+      "createShare": "Créer le lien de partage",
+      "shareCreated": "Partage créé",
+      "shareRevoked": "Partage révoqué",
+      "shareLinkOnce": "Copiez ce lien maintenant — il n'est affiché qu'une seule fois.",
+      "copied": "Lien copié",
+      "scopesLabel": "Sections partagées",
+      "scopesHint": "Seules les sections sélectionnées sont visibles par le destinataire.",
+      "scopes": {
+        "business_profile": "Profil d'entreprise",
+        "operating_metrics": "Indicateurs d'exploitation",
+        "sales_summary": "Synthèse des ventes",
+        "documents": "Documents",
+        "compliance_summary": "Synthèse conformité",
+        "full_dossier": "Dossier complet"
+      },
+      "recipientTypes": {
+        "bank": "Banque",
+        "microfinance": "Institution de microfinance",
+        "investor": "Investisseur",
+        "guarantee_fund": "Fonds de garantie",
+        "development_partner": "Partenaire de développement",
+        "advisor": "Conseiller",
+        "other": "Autre"
+      },
+      "activeShares": "Partages",
+      "noShares": "Aucun partage.",
+      "expiresOn": "Expire le {{date}}",
+      "revoke": "Révoquer",
+      "revoked": "Révoqué",
+      "expired": "Expiré",
+      "active": "Actif",
+      "auditLog": "Journal d'accès",
+      "noEvents": "Aucun événement enregistré.",
+      "events": {
+        "share_created": "Partage créé",
+        "share_revoked": "Partage révoqué",
+        "share_accessed": "Dossier consulté",
+        "dossier_generated": "Dossier généré",
+        "profile_updated": "Demande mise à jour",
+        "document_linked": "Document rattaché",
+        "document_unlinked": "Document détaché"
+      }
     },
     "documents": {
       "title": "Documents",

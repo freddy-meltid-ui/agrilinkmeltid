@@ -764,8 +764,282 @@
       "evidence": "Evidence"
     },
     "finance": {
-      "title": "Finance",
-      "description": "Operational financial overview and Agri-Grid Finance Readiness Indicator."
+      "title": "Finance readiness",
+      "description": "Prepare a structured, evidence-backed financing dossier from your real business records.",
+      "disclaimer": "AgriGrid does not lend, score credit, underwrite or recommend financing. Finance Readiness measures how complete and structured your business record is. Financing decisions belong entirely to financial institutions.",
+      "notACreditScore": "This is a record-completeness indicator, not a credit score or an approval probability.",
+      "overviewDescription": "How complete and structured your business record is today.",
+      "noData": "No organisation data available yet.",
+      "readinessLabel": "Business record readiness",
+      "qualifiersTitle": "Important qualifiers",
+      "dimensionsTitle": "Readiness by dimension",
+      "weight": "Weight",
+      "available": "Available",
+      "missing": "Missing",
+      "nothingMissing": "Nothing missing",
+      "sourceLabel": "Source",
+      "nextStep": "Next step",
+      "monthsShort": "months",
+      "generatedAt": "Generated at",
+      "print": "Print / export",
+      "demoTag": "Demo data",
+      "tabs": {
+        "overview": "Overview",
+        "request": "Financing request",
+        "documents": "Documents",
+        "dossier": "Dossier",
+        "sharing": "Sharing"
+      },
+      "states": {
+        "early": "Early record",
+        "building_record": "Building record",
+        "structured": "Structured record",
+        "dossier_ready": "Dossier ready",
+        "ready_for_review": "Ready for review"
+      },
+      "maturity": {
+        "none": "No activity yet",
+        "lt_1_month": "Less than 1 month of history",
+        "m1_3": "1-3 months of history",
+        "m3_6": "3-6 months of history",
+        "m6_12": "6-12 months of history",
+        "m12_plus": "12+ months of history"
+      },
+      "qualifiers": {
+        "short_history": "Short operating history — completeness cannot substitute for time.",
+        "very_short_history": "Less than one month of recorded activity.",
+        "missing_required_documents": "Required legal or business documents are missing.",
+        "no_payment_records": "No customer payments recorded yet.",
+        "no_sales_records": "No sales recorded yet.",
+        "incomplete_cash_data": "Cash and expense records are incomplete.",
+        "no_financing_request": "No financing request prepared yet.",
+        "low_compliance": "Compliance readiness is still low."
+      },
+      "kpi": {
+        "history": "Operating history",
+        "historyHint": "{{count}} active months",
+        "documents": "Required documents",
+        "documentsHint": "Reused from your document library",
+        "sales": "Sales recorded",
+        "collected": "Cash collected",
+        "collectionRatio": "Collection ratio: {{value}}",
+        "outstanding": "Outstanding receivables",
+        "procurement": "Procurement",
+        "procurementHint": "{{tonnes}} t from {{suppliers}} suppliers",
+        "compliance": "Compliance dimension",
+        "request": "Financing request",
+        "noRequest": "Not started",
+        "requestHint": "Prepare your request to complete this dimension"
+      },
+      "dimensions": {
+        "business_identity": {
+          "label": "Business identity",
+          "why": "Lenders must identify the legal entity behind the operation.",
+          "next": "Complete your organisation profile in Settings."
+        },
+        "legal_documents": {
+          "label": "Legal & business documents",
+          "why": "Registration, tax and licence documents are the entry ticket to any review.",
+          "next": "Link the missing required documents from your library."
+        },
+        "operating_history": {
+          "label": "Operating history",
+          "why": "Length and continuity of recorded activity cannot be shortcut.",
+          "next": "Keep recording operations every month."
+        },
+        "sales_records": {
+          "label": "Sales records",
+          "why": "Structured sales show real commercial demand.",
+          "next": "Record customers and sales orders in Operations."
+        },
+        "payment_records": {
+          "label": "Payment records",
+          "why": "Collected cash is the strongest evidence of a working commercial cycle.",
+          "next": "Record customer payments against your sales."
+        },
+        "expense_records": {
+          "label": "Expense records",
+          "why": "Cost visibility is required to read any margin honestly.",
+          "next": "Record operating expenses regularly."
+        },
+        "inventory_records": {
+          "label": "Inventory records",
+          "why": "Stock records support asset and working-capital discussions.",
+          "next": "Keep raw material and finished goods stock up to date."
+        },
+        "compliance": {
+          "label": "Compliance",
+          "why": "Food-safety and regulatory readiness reduces perceived operational risk.",
+          "next": "Advance your compliance assessment."
+        },
+        "financing_request": {
+          "label": "Financing request",
+          "why": "A clear amount, purpose and use of funds is expected in any dossier.",
+          "next": "Complete the financing request and use-of-funds breakdown."
+        }
+      },
+      "source": {
+        "organization_profile": "Organisation profile",
+        "compliance_document_library": "Document library",
+        "agrigrid_operations": "AgriGrid operations",
+        "agrigrid_sales": "AgriGrid sales",
+        "agrigrid_payments": "AgriGrid payments",
+        "agrigrid_expenses": "AgriGrid expenses",
+        "agrigrid_inventory": "AgriGrid inventory",
+        "agrigrid_compliance": "AgriGrid compliance",
+        "finance_request": "Financing request"
+      },
+      "facts": {
+        "months_of_history": "Months of history",
+        "maturity": "Data maturity",
+        "suppliers": "Active suppliers",
+        "accepted_tonnes": "Accepted volume (t)",
+        "procurement_value": "Procurement value",
+        "production_batches": "Production batches",
+        "yield_ratio": "Average yield ratio",
+        "customers": "Customers",
+        "orders": "Sales orders",
+        "sales_value": "Sales value",
+        "cash_collected": "Cash collected",
+        "outstanding": "Outstanding receivables",
+        "collection_ratio": "Collection ratio",
+        "expenses": "Operating expenses",
+        "inventory_value": "Inventory value",
+        "compliance_readiness": "Compliance readiness",
+        "critical_gaps": "Critical gaps"
+      },
+      "requestTitle": "Financing request",
+      "requestDescription": "Describe what you are preparing for. Nothing is submitted to any institution.",
+      "requestSaved": "Financing request saved",
+      "requestStatus": {
+        "draft": "Draft",
+        "in_preparation": "In preparation",
+        "ready_for_review": "Ready for review"
+      },
+      "fields": {
+        "purpose": "Purpose",
+        "purposePlaceholder": "Select a purpose",
+        "type": "Financing type",
+        "typePlaceholder": "Select a type",
+        "amount": "Requested amount",
+        "currency": "Currency",
+        "tenor": "Tenor (months)",
+        "ownContribution": "Own contribution",
+        "targetDate": "Target date",
+        "status": "Status",
+        "description": "Context and intended use",
+        "lineLabel": "Description",
+        "orgName": "Business name",
+        "orgType": "Business type",
+        "country": "Country",
+        "city": "City",
+        "registration": "Registration number",
+        "taxId": "Tax identifier",
+        "recipientType": "Recipient type",
+        "recipientName": "Recipient name",
+        "recipientEmail": "Recipient email",
+        "expiresIn": "Expires in (days)"
+      },
+      "purposes": {
+        "working_capital": "Working capital",
+        "raw_material_purchase": "Raw material purchase",
+        "equipment": "Equipment",
+        "facility_expansion": "Facility expansion",
+        "packaging": "Packaging",
+        "certification": "Certification",
+        "logistics": "Logistics",
+        "export_development": "Export development",
+        "other": "Other"
+      },
+      "types": {
+        "short_term_loan": "Short-term loan",
+        "working_capital_facility": "Working capital facility",
+        "equipment_loan": "Equipment loan",
+        "invoice_financing": "Invoice financing",
+        "leasing": "Leasing",
+        "grant": "Grant",
+        "equity": "Equity",
+        "other": "Other"
+      },
+      "useOfFunds": "Use of funds",
+      "useOfFundsHint": "Break the requested amount down into concrete uses.",
+      "useOfFundsTotal": "Total allocated",
+      "addLine": "Add line",
+      "reconciles": "Reconciles with the requested amount",
+      "doesNotReconcile": "Gap of {{amount}}",
+      "documentsTitle": "Financing documents",
+      "documentsDescription": "A standard checklist, satisfied by documents you already hold.",
+      "documentsNotice": "Documents are reused from your compliance document library — never uploaded twice.",
+      "openLibrary": "Open document library",
+      "importance": {
+        "required": "Required",
+        "recommended": "Recommended",
+        "situational": "Situational"
+      },
+      "availableBadge": "Available",
+      "missingBadge": "Missing",
+      "linkExisting": "Link an existing document",
+      "libraryEmpty": "No documents in your library yet",
+      "documentLinked": "Document linked",
+      "unlink": "Unlink",
+      "duplicateNotice": "This line is already satisfied — extra documents do not increase readiness.",
+      "dossierTitle": "Financing dossier",
+      "dossierDescription": "A structured summary of your business record, built only from what you actually recorded.",
+      "noRequestYet": "No financing request prepared yet.",
+      "sections": {
+        "identity": "Business identity",
+        "request": "Financing request",
+        "operations": "Operating history",
+        "commercial": "Commercial & cash",
+        "compliance": "Compliance",
+        "documents": "Documents",
+        "readiness": "Readiness"
+      },
+      "sharingTitle": "Consent-based sharing",
+      "sharingDescription": "Share a scoped, expiring lender pack. You choose what is visible and can revoke at any time.",
+      "newShare": "New share",
+      "createShare": "Create share link",
+      "shareCreated": "Share created",
+      "shareRevoked": "Share revoked",
+      "shareLinkOnce": "Copy this link now — it is shown only once.",
+      "copied": "Link copied",
+      "scopesLabel": "Shared sections",
+      "scopesHint": "Only the sections you select are visible to the recipient.",
+      "scopes": {
+        "business_profile": "Business profile",
+        "operating_metrics": "Operating metrics",
+        "sales_summary": "Sales summary",
+        "documents": "Documents",
+        "compliance_summary": "Compliance summary",
+        "full_dossier": "Full dossier"
+      },
+      "recipientTypes": {
+        "bank": "Bank",
+        "microfinance": "Microfinance institution",
+        "investor": "Investor",
+        "guarantee_fund": "Guarantee fund",
+        "development_partner": "Development partner",
+        "advisor": "Advisor",
+        "other": "Other"
+      },
+      "activeShares": "Shares",
+      "noShares": "No shares yet.",
+      "expiresOn": "Expires on {{date}}",
+      "revoke": "Revoke",
+      "revoked": "Revoked",
+      "expired": "Expired",
+      "active": "Active",
+      "auditLog": "Access log",
+      "noEvents": "No events recorded yet.",
+      "events": {
+        "share_created": "Share created",
+        "share_revoked": "Share revoked",
+        "share_accessed": "Share accessed",
+        "dossier_generated": "Dossier generated",
+        "profile_updated": "Financing request updated",
+        "document_linked": "Document linked",
+        "document_unlinked": "Document unlinked"
+      }
     },
     "documents": {
       "title": "Documents",
