@@ -1423,6 +1423,166 @@ export type Database = {
           },
         ]
       }
+      v2_finished_goods_movements: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          facility_id: string | null
+          finished_batch_id: string | null
+          id: string
+          movement_type: Database["public"]["Enums"]["v2_fg_movement_type"]
+          notes: string | null
+          organization_id: string
+          product_id: string | null
+          quantity: number
+          reference_id: string | null
+          reference_type: string | null
+          unit_code: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          facility_id?: string | null
+          finished_batch_id?: string | null
+          id?: string
+          movement_type: Database["public"]["Enums"]["v2_fg_movement_type"]
+          notes?: string | null
+          organization_id: string
+          product_id?: string | null
+          quantity: number
+          reference_id?: string | null
+          reference_type?: string | null
+          unit_code?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          facility_id?: string | null
+          finished_batch_id?: string | null
+          id?: string
+          movement_type?: Database["public"]["Enums"]["v2_fg_movement_type"]
+          notes?: string | null
+          organization_id?: string
+          product_id?: string | null
+          quantity?: number
+          reference_id?: string | null
+          reference_type?: string | null
+          unit_code?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_finished_goods_movements_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processing_facilities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_finished_goods_movements_finished_batch_id_fkey"
+            columns: ["finished_batch_id"]
+            isOneToOne: false
+            referencedRelation: "v2_finished_product_batches"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_finished_goods_movements_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_finished_goods_movements_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processed_products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_finished_product_batches: {
+        Row: {
+          batch_reference: string
+          created_at: string
+          expiry_date: string | null
+          facility_id: string | null
+          id: string
+          organization_id: string
+          product_id: string | null
+          production_batch_id: string
+          production_date: string
+          quality_status: string
+          quantity_produced: number
+          status: string
+          storage_location: string | null
+          unit_code: string
+          updated_at: string
+        }
+        Insert: {
+          batch_reference: string
+          created_at?: string
+          expiry_date?: string | null
+          facility_id?: string | null
+          id?: string
+          organization_id: string
+          product_id?: string | null
+          production_batch_id: string
+          production_date?: string
+          quality_status?: string
+          quantity_produced: number
+          status?: string
+          storage_location?: string | null
+          unit_code?: string
+          updated_at?: string
+        }
+        Update: {
+          batch_reference?: string
+          created_at?: string
+          expiry_date?: string | null
+          facility_id?: string | null
+          id?: string
+          organization_id?: string
+          product_id?: string | null
+          production_batch_id?: string
+          production_date?: string
+          quality_status?: string
+          quantity_produced?: number
+          status?: string
+          storage_location?: string | null
+          unit_code?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_finished_product_batches_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processing_facilities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_finished_product_batches_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_finished_product_batches_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processed_products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_finished_product_batches_production_batch_id_fkey"
+            columns: ["production_batch_id"]
+            isOneToOne: false
+            referencedRelation: "v2_production_batches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       v2_goods_receipts: {
         Row: {
           accepted_quantity: number
@@ -1836,44 +1996,62 @@ export type Database = {
       }
       v2_processed_products: {
         Row: {
+          category: string | null
           created_at: string
           created_by: string
+          default_inventory_unit: string
+          default_production_unit: string
           facility_id: string | null
           id: string
+          is_active: boolean
           notes: string | null
           organization_id: string
+          product_code: string | null
           product_name: string
           production_capacity_period: string | null
           production_capacity_unit: string | null
           production_capacity_value: number | null
+          shelf_life_days: number | null
           updated_at: string
           value_chain: string | null
         }
         Insert: {
+          category?: string | null
           created_at?: string
           created_by?: string
+          default_inventory_unit?: string
+          default_production_unit?: string
           facility_id?: string | null
           id?: string
+          is_active?: boolean
           notes?: string | null
           organization_id: string
+          product_code?: string | null
           product_name: string
           production_capacity_period?: string | null
           production_capacity_unit?: string | null
           production_capacity_value?: number | null
+          shelf_life_days?: number | null
           updated_at?: string
           value_chain?: string | null
         }
         Update: {
+          category?: string | null
           created_at?: string
           created_by?: string
+          default_inventory_unit?: string
+          default_production_unit?: string
           facility_id?: string | null
           id?: string
+          is_active?: boolean
           notes?: string | null
           organization_id?: string
+          product_code?: string | null
           product_name?: string
           production_capacity_period?: string | null
           production_capacity_unit?: string | null
           production_capacity_value?: number | null
+          shelf_life_days?: number | null
           updated_at?: string
           value_chain?: string | null
         }
@@ -2236,6 +2414,399 @@ export type Database = {
             columns: ["supplier_id"]
             isOneToOne: false
             referencedRelation: "v2_suppliers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_production_batches: {
+        Row: {
+          batch_reference: string
+          completed_at: string | null
+          created_at: string
+          created_by: string | null
+          facility_id: string | null
+          id: string
+          notes: string | null
+          organization_id: string
+          product_id: string | null
+          production_date: string
+          recipe_id: string | null
+          responsible_user_id: string | null
+          started_at: string | null
+          status: Database["public"]["Enums"]["v2_production_status"]
+          total_input_tonnes: number
+          updated_at: string
+          void_reason: string | null
+          voided_at: string | null
+          voided_by: string | null
+        }
+        Insert: {
+          batch_reference: string
+          completed_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          facility_id?: string | null
+          id?: string
+          notes?: string | null
+          organization_id: string
+          product_id?: string | null
+          production_date?: string
+          recipe_id?: string | null
+          responsible_user_id?: string | null
+          started_at?: string | null
+          status?: Database["public"]["Enums"]["v2_production_status"]
+          total_input_tonnes?: number
+          updated_at?: string
+          void_reason?: string | null
+          voided_at?: string | null
+          voided_by?: string | null
+        }
+        Update: {
+          batch_reference?: string
+          completed_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          facility_id?: string | null
+          id?: string
+          notes?: string | null
+          organization_id?: string
+          product_id?: string | null
+          production_date?: string
+          recipe_id?: string | null
+          responsible_user_id?: string | null
+          started_at?: string | null
+          status?: Database["public"]["Enums"]["v2_production_status"]
+          total_input_tonnes?: number
+          updated_at?: string
+          void_reason?: string | null
+          voided_at?: string | null
+          voided_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_production_batches_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processing_facilities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_production_batches_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_production_batches_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processed_products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_production_batches_recipe_id_fkey"
+            columns: ["recipe_id"]
+            isOneToOne: false
+            referencedRelation: "v2_production_recipes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_production_inputs: {
+        Row: {
+          created_at: string
+          crop_id: string | null
+          id: string
+          production_batch_id: string
+          quantity_tonnes: number
+          raw_material_batch_id: string
+          unit_code: string
+          variety_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          crop_id?: string | null
+          id?: string
+          production_batch_id: string
+          quantity_tonnes: number
+          raw_material_batch_id: string
+          unit_code?: string
+          variety_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          crop_id?: string | null
+          id?: string
+          production_batch_id?: string
+          quantity_tonnes?: number
+          raw_material_batch_id?: string
+          unit_code?: string
+          variety_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_production_inputs_crop_id_fkey"
+            columns: ["crop_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crops"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_production_inputs_production_batch_id_fkey"
+            columns: ["production_batch_id"]
+            isOneToOne: false
+            referencedRelation: "v2_production_batches"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_production_inputs_raw_material_batch_id_fkey"
+            columns: ["raw_material_batch_id"]
+            isOneToOne: false
+            referencedRelation: "v2_raw_material_batches"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_production_inputs_variety_id_fkey"
+            columns: ["variety_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crop_varieties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_production_outputs: {
+        Row: {
+          created_at: string
+          finished_batch_id: string | null
+          id: string
+          label: string | null
+          loss_category:
+            | Database["public"]["Enums"]["v2_production_loss_category"]
+            | null
+          notes: string | null
+          output_type: Database["public"]["Enums"]["v2_production_output_type"]
+          product_id: string | null
+          production_batch_id: string
+          quantity: number
+          unit_code: string
+        }
+        Insert: {
+          created_at?: string
+          finished_batch_id?: string | null
+          id?: string
+          label?: string | null
+          loss_category?:
+            | Database["public"]["Enums"]["v2_production_loss_category"]
+            | null
+          notes?: string | null
+          output_type: Database["public"]["Enums"]["v2_production_output_type"]
+          product_id?: string | null
+          production_batch_id: string
+          quantity: number
+          unit_code?: string
+        }
+        Update: {
+          created_at?: string
+          finished_batch_id?: string | null
+          id?: string
+          label?: string | null
+          loss_category?:
+            | Database["public"]["Enums"]["v2_production_loss_category"]
+            | null
+          notes?: string | null
+          output_type?: Database["public"]["Enums"]["v2_production_output_type"]
+          product_id?: string | null
+          production_batch_id?: string
+          quantity?: number
+          unit_code?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_production_outputs_finished_batch_id_fkey"
+            columns: ["finished_batch_id"]
+            isOneToOne: false
+            referencedRelation: "v2_finished_product_batches"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_production_outputs_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processed_products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_production_outputs_production_batch_id_fkey"
+            columns: ["production_batch_id"]
+            isOneToOne: false
+            referencedRelation: "v2_production_batches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_production_recipe_inputs: {
+        Row: {
+          created_at: string
+          crop_id: string | null
+          id: string
+          notes: string | null
+          quantity: number
+          recipe_id: string
+          unit_code: string
+          variety_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          crop_id?: string | null
+          id?: string
+          notes?: string | null
+          quantity: number
+          recipe_id: string
+          unit_code?: string
+          variety_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          crop_id?: string | null
+          id?: string
+          notes?: string | null
+          quantity?: number
+          recipe_id?: string
+          unit_code?: string
+          variety_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_production_recipe_inputs_crop_id_fkey"
+            columns: ["crop_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crops"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_production_recipe_inputs_recipe_id_fkey"
+            columns: ["recipe_id"]
+            isOneToOne: false
+            referencedRelation: "v2_production_recipes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_production_recipe_inputs_variety_id_fkey"
+            columns: ["variety_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crop_varieties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_production_recipe_outputs: {
+        Row: {
+          created_at: string
+          id: string
+          label: string | null
+          output_type: Database["public"]["Enums"]["v2_production_output_type"]
+          product_id: string | null
+          quantity: number
+          recipe_id: string
+          unit_code: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          label?: string | null
+          output_type?: Database["public"]["Enums"]["v2_production_output_type"]
+          product_id?: string | null
+          quantity: number
+          recipe_id: string
+          unit_code?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          label?: string | null
+          output_type?: Database["public"]["Enums"]["v2_production_output_type"]
+          product_id?: string | null
+          quantity?: number
+          recipe_id?: string
+          unit_code?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_production_recipe_outputs_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processed_products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_production_recipe_outputs_recipe_id_fkey"
+            columns: ["recipe_id"]
+            isOneToOne: false
+            referencedRelation: "v2_production_recipes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_production_recipes: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          expected_output_quantity: number | null
+          expected_output_unit: string | null
+          id: string
+          is_active: boolean
+          name: string
+          notes: string | null
+          organization_id: string
+          product_id: string | null
+          reference_input_quantity: number
+          reference_input_unit: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          expected_output_quantity?: number | null
+          expected_output_unit?: string | null
+          id?: string
+          is_active?: boolean
+          name: string
+          notes?: string | null
+          organization_id: string
+          product_id?: string | null
+          reference_input_quantity?: number
+          reference_input_unit?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          expected_output_quantity?: number | null
+          expected_output_unit?: string | null
+          id?: string
+          is_active?: boolean
+          name?: string
+          notes?: string | null
+          organization_id?: string
+          product_id?: string | null
+          reference_input_quantity?: number
+          reference_input_unit?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_production_recipes_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_production_recipes_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processed_products"
             referencedColumns: ["id"]
           },
         ]
@@ -2630,6 +3201,24 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      v2_reference_counters: {
+        Row: {
+          current_value: number
+          prefix: string
+          year: number
+        }
+        Insert: {
+          current_value?: number
+          prefix: string
+          year: number
+        }
+        Update: {
+          current_value?: number
+          prefix?: string
+          year?: number
+        }
+        Relationships: []
       }
       v2_settings: {
         Row: {
@@ -3625,6 +4214,27 @@ export type Database = {
         Returns: number
       }
       v2_expire_commitments: { Args: never; Returns: number }
+      v2_finished_goods_stock: {
+        Args: { _facility_id?: string; _organization_id: string }
+        Returns: {
+          batch_reference: string
+          expiry_date: string
+          facility_id: string
+          facility_name: string
+          finished_batch_id: string
+          product_id: string
+          product_name: string
+          production_batch_id: string
+          production_date: string
+          production_reference: string
+          quality_status: string
+          quantity_available: number
+          quantity_produced: number
+          status: string
+          storage_location: string
+          unit_code: string
+        }[]
+      }
       v2_freshness_status: { Args: { _reference: string }; Returns: string }
       v2_has_org_role: {
         Args: {
@@ -3658,6 +4268,20 @@ export type Database = {
         Args: { _org_id: string; _user_id: string }
         Returns: boolean
       }
+      v2_next_reference: { Args: { _prefix: string }; Returns: string }
+      v2_post_production: {
+        Args: {
+          _facility_id: string
+          _inputs: Json
+          _notes?: string
+          _organization_id: string
+          _outputs: Json
+          _product_id: string
+          _production_date?: string
+          _recipe_id?: string
+        }
+        Returns: Json
+      }
       v2_procurement_summary: {
         Args: { _organization_id: string }
         Returns: {
@@ -3669,6 +4293,17 @@ export type Database = {
           ordered_tonnes: number
           pending_confirmations: number
           received_tonnes_30d: number
+        }[]
+      }
+      v2_production_summary: {
+        Args: { _organization_id: string }
+        Returns: {
+          batches_this_month: number
+          completed_batches: number
+          finished_batches: number
+          input_tonnes_this_month: number
+          outputs_this_month: Json
+          raw_inventory_tonnes: number
         }[]
       }
       v2_propose_commitment: {
@@ -3920,6 +4555,15 @@ export type Database = {
         Args: { _quantity: number; _unit_code: string }
         Returns: number
       }
+      v2_trace_finished_batch: {
+        Args: { _finished_batch_id: string }
+        Returns: Json
+      }
+      v2_trace_raw_batch: { Args: { _raw_batch_id: string }; Returns: Json }
+      v2_void_production: {
+        Args: { _production_batch_id: string; _reason?: string }
+        Returns: Json
+      }
     }
     Enums: {
       app_role:
@@ -3970,7 +4614,16 @@ export type Database = {
         | "partially_accepted"
         | "rejected"
         | "cancelled"
-      v2_inventory_movement_type: "receipt" | "adjustment_in" | "adjustment_out"
+      v2_fg_movement_type:
+        | "production_output"
+        | "adjustment_in"
+        | "adjustment_out"
+        | "production_void"
+      v2_inventory_movement_type:
+        | "receipt"
+        | "adjustment_in"
+        | "adjustment_out"
+        | "production_consumption"
       v2_org_role:
         | "processor_admin"
         | "processor_employee"
@@ -3991,6 +4644,19 @@ export type Database = {
         | "delivered"
         | "cancelled"
         | "expired"
+      v2_production_loss_category:
+        | "process_loss"
+        | "rejected_raw_material"
+        | "peel_or_husk"
+        | "damaged_output"
+        | "quality_rejection"
+        | "other"
+      v2_production_output_type:
+        | "finished_product"
+        | "by_product"
+        | "waste"
+        | "rejected_output"
+      v2_production_status: "draft" | "ready" | "completed" | "voided"
       v2_receipt_quality:
         | "accepted"
         | "accepted_with_reservation"
@@ -4221,10 +4887,17 @@ export const Constants = {
         "rejected",
         "cancelled",
       ],
+      v2_fg_movement_type: [
+        "production_output",
+        "adjustment_in",
+        "adjustment_out",
+        "production_void",
+      ],
       v2_inventory_movement_type: [
         "receipt",
         "adjustment_in",
         "adjustment_out",
+        "production_consumption",
       ],
       v2_org_role: [
         "processor_admin",
@@ -4248,6 +4921,21 @@ export const Constants = {
         "cancelled",
         "expired",
       ],
+      v2_production_loss_category: [
+        "process_loss",
+        "rejected_raw_material",
+        "peel_or_husk",
+        "damaged_output",
+        "quality_rejection",
+        "other",
+      ],
+      v2_production_output_type: [
+        "finished_product",
+        "by_product",
+        "waste",
+        "rejected_output",
+      ],
+      v2_production_status: ["draft", "ready", "completed", "voided"],
       v2_receipt_quality: [
         "accepted",
         "accepted_with_reservation",

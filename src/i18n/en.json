@@ -340,7 +340,8 @@
       "marketplace": "Marketplace",
       "settings": "Settings",
       "processor": "Processor profile",
-      "field": "Field network"
+      "field": "Field network",
+      "production": "Production"
     },
     "shell": {
       "openMenu": "Open menu",
@@ -636,7 +637,8 @@
       "back": "Back",
       "next": "Next",
       "save": "Save",
-      "remove": "Remove"
+      "remove": "Remove",
+      "cancel": "Cancel"
     },
     "units": {
       "kg": "kg",
@@ -1322,6 +1324,135 @@
         "SUPPLY_NOT_FOUND": "Supply record not found.",
         "INVALID_QUANTITY": "Invalid quantity.",
         "UNKNOWN": "Operation failed."
+      }
+    },
+    "production": {
+      "title": "Production",
+      "description": "Production batches turn received raw material into finished lots. Stock only moves when a batch is posted.",
+      "newCta": "Record production",
+      "finishedGoodsCta": "Finished goods",
+      "emptyTitle": "No production batch yet",
+      "emptyDescription": "Record a production run to consume raw material and create finished lots.",
+      "notFound": "Production batch not found.",
+      "finishedBatches": "Finished lots",
+      "viewTrace": "View traceability",
+      "voidCta": "Void batch",
+      "voided": "Production batch voided and raw material restored.",
+      "voidTitle": "Void this production batch?",
+      "voidDescription": "Nothing is deleted: compensating entries restore the raw material and cancel the finished lots.",
+      "voidReason": "Reason",
+      "voidedBanner": "Voided on {{date}} — {{reason}}",
+      "kpi": {
+        "batchesMonth": "Batches this month",
+        "inputTonnes": "Raw material used",
+        "finishedBatches": "Finished lots",
+        "rawInventory": "Raw material in stock",
+        "consumed": "Consumed",
+        "produced": "Produced",
+        "yield": "Yield",
+        "loss": "Loss"
+      },
+      "status": {
+        "draft": "Draft",
+        "ready": "Ready",
+        "completed": "Completed",
+        "voided": "Voided"
+      },
+      "outputType": {
+        "finished_product": "Finished product",
+        "by_product": "By-product",
+        "waste": "Loss / waste",
+        "rejected_output": "Rejected output"
+      },
+      "loss": {
+        "process_loss": "Process loss",
+        "peel_or_husk": "Peel / husk",
+        "rejected_raw_material": "Rejected raw material",
+        "damaged_output": "Damaged output",
+        "quality_rejection": "Quality rejection",
+        "other": "Other"
+      },
+      "fgStatus": {
+        "available": "Available",
+        "reserved": "Reserved",
+        "consumed": "Consumed",
+        "written_off": "Written off",
+        "voided": "Voided"
+      },
+      "fgMovement": {
+        "production_output": "Production output",
+        "adjustment_in": "Adjustment in",
+        "adjustment_out": "Adjustment out",
+        "production_void": "Production void"
+      },
+      "form": {
+        "title": "Record a production run",
+        "description": "Select the raw-material batches consumed and declare the outputs. Stock is checked and posted atomically.",
+        "facility": "Facility",
+        "product": "Finished product",
+        "recipe": "Recipe (optional)",
+        "recipeNone": "No recipe",
+        "date": "Production date",
+        "inputs": "Raw material consumed",
+        "addInput": "Add batch",
+        "selectBatch": "Select a raw-material batch",
+        "batchSource": "Supplier: {{supplier}} · received {{date}}",
+        "kg": "kg",
+        "overStock": "Only {{tonnes}} t left in this batch",
+        "totalInput": "Total consumed: {{tonnes}} t",
+        "outputs": "Outputs",
+        "addOutput": "Add output",
+        "outputLabel": "Label",
+        "quantity": "Quantity",
+        "storage": "Storage location",
+        "yield": "Estimated yield: {{value}} %",
+        "notes": "Notes",
+        "submit": "Post production",
+        "posted": "Production {{reference}} posted.",
+        "incomplete": "Add at least one input and one output.",
+        "noStockTitle": "No raw material in stock",
+        "noStockDescription": "Receive goods first — production can only consume batches that exist in the raw-material ledger."
+      },
+      "error": {
+        "INSUFFICIENT_RAW_MATERIAL_STOCK": "Not enough raw material in stock ({{value}}). Nothing was posted.",
+        "NO_INPUTS": "At least one raw-material batch is required.",
+        "NO_OUTPUTS": "At least one output is required.",
+        "INVALID_QUANTITY": "Invalid quantity.",
+        "BATCH_NOT_FOUND": "Raw-material batch not found.",
+        "PRODUCTION_NOT_FOUND": "Production batch not found.",
+        "PRODUCTION_NOT_COMPLETED": "Only a completed batch can be voided.",
+        "ALREADY_VOIDED": "This batch is already voided.",
+        "FINISHED_BATCH_CONSUMED": "Finished stock has already moved; this batch cannot be voided.",
+        "NOT_AUTHORIZED": "You are not allowed to do this.",
+        "UNKNOWN": "The operation failed. Nothing was changed."
+      },
+      "fg": {
+        "title": "Finished goods",
+        "description": "{{count}} lots in stock · {{quantity}} units available.",
+        "tabs": {
+          "stock": "Stock",
+          "ledger": "Movements"
+        },
+        "emptyTitle": "No finished goods yet",
+        "emptyDescription": "Finished lots appear here as soon as a production batch is posted.",
+        "noMovements": "No movement recorded"
+      },
+      "trace": {
+        "title": "Traceability — {{reference}}",
+        "description": "{{product}} · {{quantity}} produced on {{date}}",
+        "productionStep": "Production batch",
+        "consumed": "{{tonnes}} t of raw material consumed",
+        "originSteps": "Origin ({{count}} raw-material batches)",
+        "supplier": "Supplier",
+        "supplierHidden": "Identity not released",
+        "origin": "Origin",
+        "receipt": "Receipt",
+        "order": "Order",
+        "privacyNote": "Supplier identity stays hidden until the commercial relationship releases it.",
+        "unavailable": "This traceability report is not available.",
+        "forwardTitle": "Where did this batch go?",
+        "forwardDescription": "Finished lots produced from this raw-material batch.",
+        "forwardEmpty": "This batch has not been used in production yet."
       }
     }
   },

@@ -16,6 +16,8 @@ import {
   type RawMaterialBatch,
 } from "@/lib/v2/procurement";
 import { localeTag } from "@/lib/v2/locale";
+import { traceRawBatch, type ForwardTrace } from "@/lib/v2/production";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 const V2Inventory = () => {
   const { t, i18n } = useTranslation();
@@ -25,6 +27,19 @@ const V2Inventory = () => {
   const [batches, setBatches] = useState<RawMaterialBatch[]>([]);
   const [movements, setMovements] = useState<InventoryMovement[]>([]);
   const [loading, setLoading] = useState(true);
+  const [forward, setForward] = useState<ForwardTrace | null>(null);
+  const [traceOpen, setTraceOpen] = useState(false);
+
+  // Forward traceability: which finished lots came out of this raw-material batch.
+  const openForwardTrace = async (rawBatchId: string) => {
+    setForward(null);
+    setTraceOpen(true);
+    try {
+      setForward(await traceRawBatch(rawBatchId));
+    } catch {
+      setForward(null);
+    }
+  };
 
   const load = useCallback(async () => {
     if (!activeOrg) {
@@ -92,7 +107,12 @@ const V2Inventory = () => {
             <EmptyState icon={Boxes} title={t("v2.procurement.inventory.noBatches")} />
           ) : (
             batches.map((b) => (
-              <div key={b.id} className="rounded-lg border border-border bg-card p-4">
+              <button
+                key={b.id}
+                type="button"
+                onClick={() => openForwardTrace(b.id)}
+                className="w-full rounded-lg border border-border bg-card p-4 text-left transition-colors hover:border-primary/40"
+              >
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <span className="font-mono text-xs">{b.batch_reference}</span>
                   <span className="font-medium">{Number(b.current_tonnes).toFixed(2)} t</span>
@@ -104,7 +124,7 @@ const V2Inventory = () => {
                     storage: b.storage_location ?? "—",
                   })}
                 </p>
-              </div>
+              </button>
             ))
           )}
         </TabsContent>
@@ -126,6 +146,38 @@ const V2Inventory = () => {
           )}
         </TabsContent>
       </Tabs>
+
+      <Dialog open={traceOpen} onOpenChange={setTraceOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{t("v2.production.trace.forwardTitle")}</DialogTitle>
+            <DialogDescription>{t("v2.production.trace.forwardDescription")}</DialogDescription>
+          </DialogHeader>
+          {!forward ? (
+            <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
+          ) : forward.productions.length === 0 ? (
+            <p className="text-sm text-muted-foreground">{t("v2.production.trace.forwardEmpty")}</p>
+          ) : (
+            <div className="space-y-3">
+              {forward.productions.map((p) => (
+                <div key={p.production_batch_id} className="rounded-md border border-border p-3 text-sm">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="font-mono text-xs">{p.production_reference}</span>
+                    <span>{Number(p.quantity_tonnes).toFixed(3)} t</span>
+                  </div>
+                  <ul className="mt-2 space-y-1 text-xs text-muted-foreground">
+                    {p.finished_batches.map((f) => (
+                      <li key={f.id}>
+                        {f.reference} — {f.product ?? "—"} · {Number(f.quantity).toFixed(2)} {f.unit_code}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

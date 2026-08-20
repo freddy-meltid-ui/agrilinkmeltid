@@ -50,6 +50,11 @@ import V2CommercialConfirmations from "./pages/v2/field/V2CommercialConfirmation
 import V2Operations from "./pages/v2/operations/V2Operations";
 import V2OrderDetail from "./pages/v2/operations/V2OrderDetail";
 import V2Inventory from "./pages/v2/operations/V2Inventory";
+import V2Production from "./pages/v2/operations/V2Production";
+import V2ProductionNew from "./pages/v2/operations/V2ProductionNew";
+import V2ProductionDetail from "./pages/v2/operations/V2ProductionDetail";
+import V2FinishedGoods from "./pages/v2/operations/V2FinishedGoods";
+import V2Traceability from "./pages/v2/operations/V2Traceability";
 
 const queryClient = new QueryClient();
 
@@ -111,6 +116,11 @@ const App = () => (
               <Route path="operations" element={<V2Operations />} />
               <Route path="operations/orders/:orderId" element={<V2OrderDetail />} />
               <Route path="operations/inventory" element={<V2Inventory />} />
+              <Route path="operations/production" element={<V2Production />} />
+              <Route path="operations/production/new" element={<V2ProductionNew />} />
+              <Route path="operations/production/:batchId" element={<V2ProductionDetail />} />
+              <Route path="operations/finished-goods" element={<V2FinishedGoods />} />
+              <Route path="operations/finished-goods/:finishedBatchId" element={<V2Traceability />} />
               <Route path="atlas" element={<V2Atlas />} />
               <Route
                 path="compliance"
