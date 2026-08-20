@@ -71,6 +71,7 @@ const V2Customers = () => {
     setSaving(true);
     try {
       await createCustomer({
+        // customer_code is assigned by a database trigger.
         organization_id: activeOrg.id,
         display_name: form.display_name.trim(),
         customer_type: form.customer_type,
