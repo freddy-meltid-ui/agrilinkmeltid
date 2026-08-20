@@ -22,8 +22,7 @@ import {
   revokeShare,
   type FinanceEvent,
   type FinanceShare,
-  type FinanceShareScope,
-} from "@/lib/v2/finance";
+  type FinanceShareScope, formatDate} from "@/lib/v2/finance";
 
 
 const V2FinanceSharing = () => {
@@ -219,7 +218,7 @@ const V2FinanceSharing = () => {
                   <p className="font-medium text-foreground">{s.recipient_name}</p>
                   <p className="text-xs text-muted-foreground">
                     {t(`v2.finance.recipientTypes.${s.recipient_type}`)} ·{" "}
-                    {t("v2.finance.expiresOn", { date: new Date(s.expires_at).toLocaleDateString(i18n.language) })}
+                    {t("v2.finance.expiresOn", { date: formatDate(s.expires_at, i18n.language) })}
                   </p>
                   <p className="mt-1 text-xs text-muted-foreground">
                     {(s.scopes ?? []).map((sc) => t(`v2.finance.scopes.${sc}`)).join(" · ")}
@@ -259,7 +258,7 @@ const V2FinanceSharing = () => {
               <span className="text-foreground">
                 {t(`v2.finance.events.${e.event_type}`, { defaultValue: e.event_type })}
               </span>
-              <span className="text-muted-foreground">{new Date(e.created_at).toLocaleString(i18n.language)}</span>
+              <span className="text-muted-foreground">{formatDate(e.created_at, i18n.language, true)}</span>
             </div>
           ))
         )}

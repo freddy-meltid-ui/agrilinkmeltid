@@ -9,7 +9,7 @@ import StatusBadge from "@/components/v2/ui-kit/StatusBadge";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { useOrganization } from "@/hooks/v2/useOrganization";
-import { fetchFinanceDossier, formatAmount, readinessTone, type FinanceDossier } from "@/lib/v2/finance";
+import { fetchFinanceDossier, formatAmount, readinessTone, type FinanceDossier, formatDate} from "@/lib/v2/finance";
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <section className="mt-6 break-inside-avoid rounded-lg border border-border bg-card p-4">
@@ -85,7 +85,7 @@ const V2FinanceDossier = () => {
       />
 
       <p className="text-xs text-muted-foreground">
-        {t("v2.finance.generatedAt")}: {new Date(dossier.generated_at).toLocaleString(lang)}
+        {t("v2.finance.generatedAt")}: {formatDate(dossier.generated_at, lang, true)}
       </p>
 
       {multiCurrency && (
