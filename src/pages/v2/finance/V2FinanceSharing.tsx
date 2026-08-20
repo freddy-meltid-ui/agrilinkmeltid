@@ -14,23 +14,24 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { useOrganization } from "@/hooks/v2/useOrganization";
 import {
+  RECIPIENT_TYPES,
   SHARE_SCOPES,
   createShare,
   fetchFinanceEvents,
-  fetchShares,
+  fetchFinanceShares,
   revokeShare,
+  type FinanceEvent,
   type FinanceShare,
   type FinanceShareScope,
 } from "@/lib/v2/finance";
 
-const RECIPIENT_TYPES = ["bank", "microfinance", "investor", "buyer", "development_partner", "other"] as const;
 
 const V2FinanceSharing = () => {
   const { t, i18n } = useTranslation();
   const { toast } = useToast();
   const { activeOrg, loading: orgLoading } = useOrganization();
   const [shares, setShares] = useState<FinanceShare[]>([]);
-  const [events, setEvents] = useState<Array<{ id: string; event_type: string; created_at: string; details: Record<string, unknown> | null }>>([]);
+  const [events, setEvents] = useState<FinanceEvent[]>([]);
   const [loading, setLoading] = useState(true);
   const [creating, setCreating] = useState(false);
   const [lastToken, setLastToken] = useState<string | null>(null);
@@ -49,7 +50,7 @@ const V2FinanceSharing = () => {
     }
     setLoading(true);
     try {
-      const [s, e] = await Promise.all([fetchShares(activeOrg.id), fetchFinanceEvents(activeOrg.id)]);
+      const [s, e] = await Promise.all([fetchFinanceShares(activeOrg.id), fetchFinanceEvents(activeOrg.id)]);
       setShares(s);
       setEvents(e);
     } catch (err) {

@@ -116,7 +116,7 @@ const V2FinanceDossier = () => {
               label={t("v2.finance.fields.ownContribution")}
               value={formatAmount(Number(req.own_contribution ?? 0), req.currency ?? cur, lang)}
             />
-            {(dossier.use_of_funds ?? []).map((l, i) => (
+            {useOfFunds.map((l, i) => (
               <Row
                 key={i}
                 label={`${t(`v2.finance.purposes.${l.category}`)}${l.label ? ` — ${l.label}` : ""}`}
@@ -130,10 +130,10 @@ const V2FinanceDossier = () => {
       </Section>
 
       <Section title={t("v2.finance.sections.operations")}>
-        <Row label={t("v2.finance.facts.months_of_history")} value={dossier.history?.months_of_history} />
+        <Row label={t("v2.finance.facts.months_of_history")} value={history?.months_of_history} />
         <Row
           label={t("v2.finance.facts.maturity")}
-          value={dossier.history ? t(`v2.finance.maturity.${dossier.history.maturity}`) : "—"}
+          value={history ? t(`v2.finance.maturity.${history.maturity}`) : "—"}
         />
         <Row label={t("v2.finance.facts.suppliers")} value={s.procurement?.active_suppliers} />
         <Row label={t("v2.finance.facts.accepted_tonnes")} value={s.procurement?.accepted_tonnes} />
@@ -171,10 +171,10 @@ const V2FinanceDossier = () => {
       </Section>
 
       <Section title={t("v2.finance.sections.documents")}>
-        {(dossier.documents ?? []).map((d) => (
+        {(dossier.readiness?.documents ?? []).map((d) => (
           <Row
             key={d.code}
-            label={`${d.label_en}${d.importance === "required" ? " *" : ""}`}
+            label={`${d.name_en}${d.importance === "required" ? " *" : ""}`}
             value={
               <StatusBadge
                 label={d.available ? t("v2.finance.availableBadge") : t("v2.finance.missingBadge")}
