@@ -13,6 +13,7 @@ import PipelineSummary from "@/components/v2/supply/PipelineSummary";
 import { useProcessor } from "@/hooks/v2/useProcessor";
 import { completeness, totalMonthlyTonnes } from "@/lib/v2/processor";
 import { fetchSupplyCoverage, fetchSupplyPipeline, type CoverageRow, type PipelineRow } from "@/lib/v2/commercialSupply";
+import SourcingRequestsPanel from "@/components/v2/sourcing/SourcingRequestsPanel";
 
 const V2Dashboard = () => {
   const { t } = useTranslation();
@@ -87,6 +88,10 @@ const V2Dashboard = () => {
         <CoveragePanel rows={coverage} />
         <PipelineSummary rows={pipeline} />
       </div>
+      <div className="mt-6">
+        <SourcingRequestsPanel organizationId={activeOrg.id} />
+      </div>
+
       <div className="mt-3">
         <Link to="/app/supply">
           <Button variant="outline" size="sm">{t("v2.supplyIntel.title")}</Button>
