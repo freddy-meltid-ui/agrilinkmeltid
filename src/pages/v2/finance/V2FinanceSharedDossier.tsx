@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { AlertTriangle, Loader2, Printer, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { fetchSharedFinanceDossier, formatAmount, type SharedFinanceDossier } from "@/lib/v2/finance";
+import { fetchSharedFinanceDossier, formatAmount, type SharedFinanceDossier, formatDate} from "@/lib/v2/finance";
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <section className="mb-6 rounded-lg border border-border bg-card p-4">
@@ -100,7 +100,7 @@ const V2FinanceSharedDossier = () => {
         <p className="mt-1 text-sm text-muted-foreground">
           {t("v2.finance.shared.sharedWith", { name: pack.recipient ?? "—" })} ·{" "}
           {t("v2.finance.shared.validUntil", {
-            date: pack.expires_at ? new Date(pack.expires_at).toLocaleDateString(lang) : "—",
+            date: formatDate(pack.expires_at, lang),
           })}
         </p>
         <div className="mt-3 flex items-start gap-2 rounded-lg border border-border bg-muted/40 p-3 text-xs text-muted-foreground">

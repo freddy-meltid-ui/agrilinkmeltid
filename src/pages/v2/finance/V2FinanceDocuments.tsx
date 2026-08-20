@@ -19,8 +19,7 @@ import {
   fetchLibraryDocuments,
   linkDocument,
   unlinkDocument,
-  type FinanceDocumentStatus,
-} from "@/lib/v2/finance";
+  type FinanceDocumentStatus, formatDate} from "@/lib/v2/finance";
 
 type LibraryDoc = { id: string; title: string; category: string; current_version: number };
 
@@ -170,7 +169,7 @@ const V2FinanceDocuments = () => {
                                 }
                               >
                                 · {t(`v2.finance.expiry.${ld.expiry_status ?? "no_expiry"}`)} (
-                                {new Date(ld.expiry_date).toLocaleDateString(i18n.language)})
+                                {formatDate(ld.expiry_date, i18n.language)})
                               </span>
                             ) : null}
                             <span className="text-muted-foreground/70">

@@ -419,8 +419,23 @@ export function formatAmount(
 ) {
   // A null value means "not aggregatable" (several currencies) or "not recorded".
   if (value === null || value === undefined) return "—";
-  const n = new Intl.NumberFormat(lang.startsWith("fr") ? "fr-FR" : "en-US").format(Math.round(value));
+  const n = new Intl.NumberFormat(safeLocale(lang)).format(Math.round(value));
   return currency ? `${n} ${currency}` : n;
+}
+
+/**
+ * Locale tags coming from i18n (or an exotic runtime locale such as "en-US@posix")
+ * can be rejected by Intl and crash a whole page. Normalise to a known-good tag.
+ */
+export function safeLocale(lang: string | null | undefined) {
+  return (lang ?? "").toLowerCase().startsWith("fr") ? "fr-FR" : "en-US";
+}
+
+export function formatDate(value: string | null | undefined, lang = "fr", withTime = false) {
+  if (!value) return "—";
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return "—";
+  return withTime ? d.toLocaleString(safeLocale(lang)) : d.toLocaleDateString(safeLocale(lang));
 }
 
 export function sumLines(lines: { amount: number | string }[]) {
