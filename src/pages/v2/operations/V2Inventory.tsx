@@ -16,6 +16,8 @@ import {
   type RawMaterialBatch,
 } from "@/lib/v2/procurement";
 import { localeTag } from "@/lib/v2/locale";
+import { traceRawBatch, type ForwardTrace } from "@/lib/v2/production";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 const V2Inventory = () => {
   const { t, i18n } = useTranslation();
@@ -25,6 +27,19 @@ const V2Inventory = () => {
   const [batches, setBatches] = useState<RawMaterialBatch[]>([]);
   const [movements, setMovements] = useState<InventoryMovement[]>([]);
   const [loading, setLoading] = useState(true);
+  const [forward, setForward] = useState<ForwardTrace | null>(null);
+  const [traceOpen, setTraceOpen] = useState(false);
+
+  // Forward traceability: which finished lots came out of this raw-material batch.
+  const openForwardTrace = async (rawBatchId: string) => {
+    setForward(null);
+    setTraceOpen(true);
+    try {
+      setForward(await traceRawBatch(rawBatchId));
+    } catch {
+      setForward(null);
+    }
+  };
 
   const load = useCallback(async () => {
     if (!activeOrg) {
