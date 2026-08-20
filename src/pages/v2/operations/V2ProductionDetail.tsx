@@ -132,8 +132,8 @@ const V2ProductionDetail = () => {
       <div className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <KpiCard label={t("v2.production.kpi.consumed")} value={`${Number(batch.total_input_tonnes).toFixed(3)} t`} />
         <KpiCard label={t("v2.production.kpi.produced")} value={finishedQty.toFixed(2)} />
-        <KpiCard label={t("v2.production.kpi.yield")} value={`${yieldPct.toFixed(1)} %`} />
-        <KpiCard label={t("v2.production.kpi.loss")} value={`${lossPct.toFixed(1)} %`} />
+        <KpiCard label={t("v2.production.kpi.yield")} value={yieldValue} />
+        <KpiCard label={t("v2.production.kpi.loss")} value={lossValue} />
       </div>
 
       <section className="mb-6">
