@@ -18,7 +18,6 @@ import {
   CUSTOMER_TYPES,
   createCustomer,
   fetchCustomers,
-  nextCustomerCode,
   type Customer,
   type CustomerType,
 } from "@/lib/v2/sales";
@@ -71,10 +70,8 @@ const V2Customers = () => {
     if (!activeOrg || !form.display_name.trim()) return;
     setSaving(true);
     try {
-      const code = await nextCustomerCode(activeOrg.id);
       await createCustomer({
         organization_id: activeOrg.id,
-        customer_code: code,
         display_name: form.display_name.trim(),
         customer_type: form.customer_type,
         contact_person: form.contact_person || null,

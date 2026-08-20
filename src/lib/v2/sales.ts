@@ -159,16 +159,6 @@ export async function updateCustomer(id: string, patch: Tables["v2_customers"]["
   if (error) throw error;
 }
 
-/** Next customer code for an organisation, e.g. CUS-000004. */
-export async function nextCustomerCode(organizationId: string): Promise<string> {
-  const { count, error } = await supabase
-    .from("v2_customers")
-    .select("id", { count: "exact", head: true })
-    .eq("organization_id", organizationId);
-  if (error) throw error;
-  return `CUS-${String((count ?? 0) + 1).padStart(6, "0")}`;
-}
-
 /* =================================== sales ================================== */
 
 export type SalesOrderRow = SalesOrder & {
