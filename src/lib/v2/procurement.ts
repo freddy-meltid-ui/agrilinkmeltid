@@ -22,8 +22,11 @@
 //
 // RESERVATION RULE (mirrors the database, documented once):
 //   committed = Σ confirmed tonnes of commitments in
-//   confirmed / partially_confirmed / fulfilled.
-//   Only those statuses reduce what other processors see. A confirmation is a
+//   confirmed / partially_confirmed / fulfilled
+//             + Σ accepted tonnes already received under commitments that are no
+//               longer active (released / cancelled / expired after a partial
+//               receipt) — delivered volume is consumed, never re-offered.
+//   Only those quantities reduce what other processors see. A confirmation is a
 //   commercial reservation, NOT a change to the field observation: the physical
 //   quantity captured by the field agent is never rewritten by this module.
 //
