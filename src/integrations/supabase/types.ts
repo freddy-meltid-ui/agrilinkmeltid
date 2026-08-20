@@ -1124,6 +1124,7 @@ export type Database = {
           facility_id: string | null
           id: string
           is_current: boolean
+          is_demo: boolean
           org_program_id: string
           organization_id: string
           requirement_id: string
@@ -1138,6 +1139,7 @@ export type Database = {
           facility_id?: string | null
           id?: string
           is_current?: boolean
+          is_demo?: boolean
           org_program_id: string
           organization_id: string
           requirement_id: string
@@ -1152,6 +1154,7 @@ export type Database = {
           facility_id?: string | null
           id?: string
           is_current?: boolean
+          is_demo?: boolean
           org_program_id?: string
           organization_id?: string
           requirement_id?: string
@@ -1258,6 +1261,7 @@ export type Database = {
           facility_id: string | null
           id: string
           is_archived: boolean
+          is_demo: boolean
           organization_id: string
           title: string
           updated_at: string
@@ -1271,6 +1275,7 @@ export type Database = {
           facility_id?: string | null
           id?: string
           is_archived?: boolean
+          is_demo?: boolean
           organization_id: string
           title: string
           updated_at?: string
@@ -1284,6 +1289,7 @@ export type Database = {
           facility_id?: string | null
           id?: string
           is_archived?: boolean
+          is_demo?: boolean
           organization_id?: string
           title?: string
           updated_at?: string
@@ -1357,6 +1363,7 @@ export type Database = {
           facility_id: string | null
           id: string
           is_archived: boolean
+          is_demo: boolean
           issue_date: string | null
           org_program_id: string | null
           organization_id: string
@@ -1382,6 +1389,7 @@ export type Database = {
           facility_id?: string | null
           id?: string
           is_archived?: boolean
+          is_demo?: boolean
           issue_date?: string | null
           org_program_id?: string | null
           organization_id: string
@@ -1407,6 +1415,7 @@ export type Database = {
           facility_id?: string | null
           id?: string
           is_archived?: boolean
+          is_demo?: boolean
           issue_date?: string | null
           org_program_id?: string | null
           organization_id?: string
@@ -2600,6 +2609,392 @@ export type Database = {
             columns: ["supplier_id"]
             isOneToOne: false
             referencedRelation: "v2_suppliers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_finance_document_links: {
+        Row: {
+          created_at: string
+          document_id: string | null
+          evidence_id: string | null
+          id: string
+          linked_by: string | null
+          note: string | null
+          organization_id: string
+          requirement_code: string
+        }
+        Insert: {
+          created_at?: string
+          document_id?: string | null
+          evidence_id?: string | null
+          id?: string
+          linked_by?: string | null
+          note?: string | null
+          organization_id: string
+          requirement_code: string
+        }
+        Update: {
+          created_at?: string
+          document_id?: string | null
+          evidence_id?: string | null
+          id?: string
+          linked_by?: string | null
+          note?: string | null
+          organization_id?: string
+          requirement_code?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_finance_document_links_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "v2_compliance_documents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_finance_document_links_evidence_id_fkey"
+            columns: ["evidence_id"]
+            isOneToOne: false
+            referencedRelation: "v2_compliance_evidence"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_finance_document_links_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_finance_document_links_requirement_code_fkey"
+            columns: ["requirement_code"]
+            isOneToOne: false
+            referencedRelation: "v2_finance_document_requirements"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      v2_finance_document_requirements: {
+        Row: {
+          category: string
+          code: string
+          country: string | null
+          created_at: string
+          description_en: string | null
+          description_fr: string | null
+          id: string
+          importance: string
+          is_active: boolean
+          name_en: string
+          name_fr: string
+          sort_order: number
+          suggested_document_category:
+            | Database["public"]["Enums"]["v2_document_category"]
+            | null
+        }
+        Insert: {
+          category: string
+          code: string
+          country?: string | null
+          created_at?: string
+          description_en?: string | null
+          description_fr?: string | null
+          id?: string
+          importance?: string
+          is_active?: boolean
+          name_en: string
+          name_fr: string
+          sort_order?: number
+          suggested_document_category?:
+            | Database["public"]["Enums"]["v2_document_category"]
+            | null
+        }
+        Update: {
+          category?: string
+          code?: string
+          country?: string | null
+          created_at?: string
+          description_en?: string | null
+          description_fr?: string | null
+          id?: string
+          importance?: string
+          is_active?: boolean
+          name_en?: string
+          name_fr?: string
+          sort_order?: number
+          suggested_document_category?:
+            | Database["public"]["Enums"]["v2_document_category"]
+            | null
+        }
+        Relationships: []
+      }
+      v2_finance_events: {
+        Row: {
+          actor_id: string | null
+          created_at: string
+          entity_id: string | null
+          entity_type: string | null
+          event_type: string
+          id: string
+          organization_id: string
+          payload: Json
+        }
+        Insert: {
+          actor_id?: string | null
+          created_at?: string
+          entity_id?: string | null
+          entity_type?: string | null
+          event_type: string
+          id?: string
+          organization_id: string
+          payload?: Json
+        }
+        Update: {
+          actor_id?: string | null
+          created_at?: string
+          entity_id?: string | null
+          entity_type?: string | null
+          event_type?: string
+          id?: string
+          organization_id?: string
+          payload?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_finance_events_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_finance_profiles: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          currency: string
+          financing_purpose:
+            | Database["public"]["Enums"]["v2_financing_purpose"]
+            | null
+          financing_type:
+            | Database["public"]["Enums"]["v2_financing_type"]
+            | null
+          id: string
+          intended_use: string | null
+          is_demo: boolean
+          notes: string | null
+          organization_id: string
+          own_contribution: number | null
+          requested_amount: number | null
+          status: Database["public"]["Enums"]["v2_finance_request_status"]
+          target_date: string | null
+          tenor_months: number | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          financing_purpose?:
+            | Database["public"]["Enums"]["v2_financing_purpose"]
+            | null
+          financing_type?:
+            | Database["public"]["Enums"]["v2_financing_type"]
+            | null
+          id?: string
+          intended_use?: string | null
+          is_demo?: boolean
+          notes?: string | null
+          organization_id: string
+          own_contribution?: number | null
+          requested_amount?: number | null
+          status?: Database["public"]["Enums"]["v2_finance_request_status"]
+          target_date?: string | null
+          tenor_months?: number | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          financing_purpose?:
+            | Database["public"]["Enums"]["v2_financing_purpose"]
+            | null
+          financing_type?:
+            | Database["public"]["Enums"]["v2_financing_type"]
+            | null
+          id?: string
+          intended_use?: string | null
+          is_demo?: boolean
+          notes?: string | null
+          organization_id?: string
+          own_contribution?: number | null
+          requested_amount?: number | null
+          status?: Database["public"]["Enums"]["v2_finance_request_status"]
+          target_date?: string | null
+          tenor_months?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_finance_profiles_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: true
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_finance_settings: {
+        Row: {
+          created_at: string
+          organization_id: string
+          updated_at: string
+          weights: Json
+        }
+        Insert: {
+          created_at?: string
+          organization_id: string
+          updated_at?: string
+          weights?: Json
+        }
+        Update: {
+          created_at?: string
+          organization_id?: string
+          updated_at?: string
+          weights?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_finance_settings_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: true
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_finance_shares: {
+        Row: {
+          access_count: number
+          created_at: string
+          created_by: string | null
+          expires_at: string
+          finance_profile_id: string | null
+          id: string
+          last_accessed_at: string | null
+          organization_id: string
+          recipient_email: string | null
+          recipient_name: string
+          recipient_type: Database["public"]["Enums"]["v2_finance_recipient_type"]
+          revoked_at: string | null
+          revoked_by: string | null
+          scopes: Database["public"]["Enums"]["v2_finance_share_scope"][]
+          token_hash: string
+        }
+        Insert: {
+          access_count?: number
+          created_at?: string
+          created_by?: string | null
+          expires_at: string
+          finance_profile_id?: string | null
+          id?: string
+          last_accessed_at?: string | null
+          organization_id: string
+          recipient_email?: string | null
+          recipient_name: string
+          recipient_type: Database["public"]["Enums"]["v2_finance_recipient_type"]
+          revoked_at?: string | null
+          revoked_by?: string | null
+          scopes?: Database["public"]["Enums"]["v2_finance_share_scope"][]
+          token_hash: string
+        }
+        Update: {
+          access_count?: number
+          created_at?: string
+          created_by?: string | null
+          expires_at?: string
+          finance_profile_id?: string | null
+          id?: string
+          last_accessed_at?: string | null
+          organization_id?: string
+          recipient_email?: string | null
+          recipient_name?: string
+          recipient_type?: Database["public"]["Enums"]["v2_finance_recipient_type"]
+          revoked_at?: string | null
+          revoked_by?: string | null
+          scopes?: Database["public"]["Enums"]["v2_finance_share_scope"][]
+          token_hash?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_finance_shares_finance_profile_id_fkey"
+            columns: ["finance_profile_id"]
+            isOneToOne: false
+            referencedRelation: "v2_finance_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_finance_shares_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_finance_use_of_funds: {
+        Row: {
+          amount: number
+          category: Database["public"]["Enums"]["v2_financing_purpose"]
+          created_at: string
+          finance_profile_id: string
+          id: string
+          label: string | null
+          notes: string | null
+          organization_id: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          amount?: number
+          category: Database["public"]["Enums"]["v2_financing_purpose"]
+          created_at?: string
+          finance_profile_id: string
+          id?: string
+          label?: string | null
+          notes?: string | null
+          organization_id: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          category?: Database["public"]["Enums"]["v2_financing_purpose"]
+          created_at?: string
+          finance_profile_id?: string
+          id?: string
+          label?: string | null
+          notes?: string | null
+          organization_id?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_finance_use_of_funds_finance_profile_id_fkey"
+            columns: ["finance_profile_id"]
+            isOneToOne: false
+            referencedRelation: "v2_finance_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_finance_use_of_funds_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
             referencedColumns: ["id"]
           },
         ]
@@ -5887,6 +6282,17 @@ export type Database = {
         Args: { _allocations?: Json; _sales_order_id: string }
         Returns: Json
       }
+      v2_create_finance_share: {
+        Args: {
+          _expires_in_days?: number
+          _organization_id: string
+          _recipient_email?: string
+          _recipient_name: string
+          _recipient_type: Database["public"]["Enums"]["v2_finance_recipient_type"]
+          _scopes: Database["public"]["Enums"]["v2_finance_share_scope"][]
+        }
+        Returns: Json
+      }
       v2_create_procurement_order: {
         Args: {
           _commitment_id: string
@@ -5938,6 +6344,21 @@ export type Database = {
       v2_expiry_status: {
         Args: { _expiry: string; _threshold_days?: number }
         Returns: string
+      }
+      v2_finance_documents_status: {
+        Args: { _organization_id: string }
+        Returns: Json
+      }
+      v2_finance_dossier: { Args: { _organization_id: string }; Returns: Json }
+      v2_finance_history: { Args: { _organization_id: string }; Returns: Json }
+      v2_finance_readiness: {
+        Args: { _organization_id: string }
+        Returns: Json
+      }
+      v2_finance_shared_dossier: { Args: { _token: string }; Returns: Json }
+      v2_finance_snapshot: {
+        Args: { _months?: number; _organization_id: string }
+        Returns: Json
       }
       v2_finished_batch_direct_cost: {
         Args: { _finished_batch_id: string }
@@ -6213,6 +6634,7 @@ export type Database = {
         Args: { _dispatch_id: string; _reason: string }
         Returns: Json
       }
+      v2_revoke_finance_share: { Args: { _share_id: string }; Returns: Json }
       v2_sales_active_statuses: {
         Args: never
         Returns: Database["public"]["Enums"]["v2_sales_status"][]
@@ -6525,6 +6947,41 @@ export type Database = {
         | "production_void"
         | "sale_dispatch"
         | "dispatch_reversal"
+      v2_finance_recipient_type:
+        | "bank"
+        | "microfinance"
+        | "investor"
+        | "guarantee_fund"
+        | "development_partner"
+        | "advisor"
+        | "other"
+      v2_finance_request_status: "draft" | "in_preparation" | "ready_for_review"
+      v2_finance_share_scope:
+        | "business_profile"
+        | "operating_metrics"
+        | "sales_summary"
+        | "documents"
+        | "compliance_summary"
+        | "full_dossier"
+      v2_financing_purpose:
+        | "working_capital"
+        | "raw_material_purchase"
+        | "equipment"
+        | "facility_expansion"
+        | "packaging"
+        | "certification"
+        | "logistics"
+        | "export_development"
+        | "other"
+      v2_financing_type:
+        | "short_term_loan"
+        | "working_capital_facility"
+        | "equipment_loan"
+        | "invoice_financing"
+        | "leasing"
+        | "grant"
+        | "equity"
+        | "other"
       v2_finding_status:
         | "open"
         | "action_planned"
@@ -6945,6 +7402,49 @@ export const Constants = {
         "production_void",
         "sale_dispatch",
         "dispatch_reversal",
+      ],
+      v2_finance_recipient_type: [
+        "bank",
+        "microfinance",
+        "investor",
+        "guarantee_fund",
+        "development_partner",
+        "advisor",
+        "other",
+      ],
+      v2_finance_request_status: [
+        "draft",
+        "in_preparation",
+        "ready_for_review",
+      ],
+      v2_finance_share_scope: [
+        "business_profile",
+        "operating_metrics",
+        "sales_summary",
+        "documents",
+        "compliance_summary",
+        "full_dossier",
+      ],
+      v2_financing_purpose: [
+        "working_capital",
+        "raw_material_purchase",
+        "equipment",
+        "facility_expansion",
+        "packaging",
+        "certification",
+        "logistics",
+        "export_development",
+        "other",
+      ],
+      v2_financing_type: [
+        "short_term_loan",
+        "working_capital_facility",
+        "equipment_loan",
+        "invoice_financing",
+        "leasing",
+        "grant",
+        "equity",
+        "other",
       ],
       v2_finding_status: [
         "open",
