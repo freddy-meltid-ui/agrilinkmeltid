@@ -138,7 +138,7 @@ const CommitmentList = ({
               {row.task_status && (
                 <span className="self-center text-xs text-muted-foreground">
                   {t("v2.procurement.commitments.task", {
-                    status: t(`v2.field.taskStatus.${row.task_status}`, { defaultValue: row.task_status }),
+                    status: t(`v2.tasks.status.${row.task_status}`, { defaultValue: row.task_status }),
                   })}
                 </span>
               )}
