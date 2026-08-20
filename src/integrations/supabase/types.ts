@@ -6212,6 +6212,10 @@ export type Database = {
         Args: { _org_program_id: string; _organization_id: string }
         Returns: Json
       }
+      v2_compliance_readiness_safe: {
+        Args: { _org_program_id?: string; _organization_id: string }
+        Returns: Json
+      }
       v2_compliance_system_evidence: {
         Args: { _organization_id: string }
         Returns: {
