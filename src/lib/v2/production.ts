@@ -39,7 +39,7 @@ export type ProductionSummaryRow = Fn["v2_production_summary"]["Returns"][number
 
 export const PRODUCTION_TONE: Record<string, StatusTone> = {
   draft: "neutral",
-  in_progress: "info",
+  ready: "info",
   completed: "success",
   voided: "danger",
 };
