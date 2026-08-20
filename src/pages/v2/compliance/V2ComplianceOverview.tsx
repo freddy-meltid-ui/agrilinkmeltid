@@ -100,7 +100,7 @@ const V2ComplianceOverview = () => {
   }
 
   if (!activeOrg) {
-    return <EmptyState icon={ShieldCheck} title={t("v2.common.noOrg")} />;
+    return <EmptyState icon={ShieldCheck} title={t("v2.compliance.noProgramTitle")} />;
   }
 
   return (
