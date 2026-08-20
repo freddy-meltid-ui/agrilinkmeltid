@@ -31,6 +31,7 @@ import {
   type SourcingEvent,
   type SourcingRequest,
 } from "@/lib/v2/sourcing";
+import { localeTag } from "@/lib/v2/locale";
 
 const V2SourcingDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -171,8 +172,8 @@ const V2SourcingDetail = () => {
         title={`${crop}${variety ? ` — ${variety}` : ""} · ${requested.toFixed(1)} t`}
         description={t("v2.sourcing.detailSubtitle", {
           reference: request.reference,
-          from: new Date(request.availability_start).toLocaleDateString(i18n.language),
-          to: new Date(request.availability_end).toLocaleDateString(i18n.language),
+          from: new Date(request.availability_start).toLocaleDateString(localeTag(i18n.language)),
+          to: new Date(request.availability_end).toLocaleDateString(localeTag(i18n.language)),
           facility: facility?.name ?? "—",
           radius: request.max_distance_km ?? "—",
         })}
@@ -291,7 +292,7 @@ const V2SourcingDetail = () => {
                   {events.map((e) => (
                     <li key={e.id} className="rounded-md border border-border p-3">
                       <p className="font-medium">{t(`v2.sourcing.event.${e.event_type}`, { defaultValue: e.event_type })}</p>
-                      <p className="text-xs text-muted-foreground">{new Date(e.created_at).toLocaleString(i18n.language)}</p>
+                      <p className="text-xs text-muted-foreground">{new Date(e.created_at).toLocaleString(localeTag(i18n.language))}</p>
                     </li>
                   ))}
                   {events.length === 0 && <p className="text-muted-foreground">{t("v2.sourcing.noEvents")}</p>}

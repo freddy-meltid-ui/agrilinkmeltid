@@ -18,6 +18,7 @@ import {
   type MatchRun,
   type SourcingRequest,
 } from "@/lib/v2/sourcing";
+import { localeTag } from "@/lib/v2/locale";
 
 const V2SourcingList = () => {
   const { t, i18n } = useTranslation();
@@ -124,8 +125,8 @@ const V2SourcingList = () => {
                     </p>
                     <p className="mt-0.5 text-xs text-muted-foreground">
                       {r.reference} · {requestedTonnes(r).toFixed(1)} t ·{" "}
-                      {new Date(r.availability_start).toLocaleDateString(i18n.language, { day: "2-digit", month: "short" })} →{" "}
-                      {new Date(r.availability_end).toLocaleDateString(i18n.language, { day: "2-digit", month: "short" })}
+                      {new Date(r.availability_start).toLocaleDateString(localeTag(i18n.language), { day: "2-digit", month: "short" })} →{" "}
+                      {new Date(r.availability_end).toLocaleDateString(localeTag(i18n.language), { day: "2-digit", month: "short" })}
                     </p>
                   </div>
                   <StatusBadge

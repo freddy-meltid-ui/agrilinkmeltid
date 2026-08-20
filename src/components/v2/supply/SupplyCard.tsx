@@ -4,8 +4,9 @@ import { useTranslation } from "react-i18next";
 import { CalendarRange, MapPin, Scale } from "lucide-react";
 import { ConfidenceBadge, FreshnessBadge, SupplyStatusBadge } from "./SupplyBadges";
 import type { CommercialSupplyRow } from "@/lib/v2/commercialSupply";
+import { localeTag } from "@/lib/v2/locale";
 
-const fmtDate = (d: string | null, lang: string) => (d ? new Date(d).toLocaleDateString(lang, { day: "2-digit", month: "short" }) : "—");
+const fmtDate = (d: string | null, lang: string) => (d ? new Date(d).toLocaleDateString(localeTag(lang), { day: "2-digit", month: "short" }) : "—");
 
 const SupplyCard = ({ row }: { row: CommercialSupplyRow }) => {
   const { t, i18n } = useTranslation();

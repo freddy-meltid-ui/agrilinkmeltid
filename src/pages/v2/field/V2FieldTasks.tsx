@@ -14,6 +14,7 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "
 import { toast } from "@/hooks/use-toast";
 import { confirmReconfirmationTask, fetchTaskFeed, updateTaskStatus, type TaskFeedRow } from "@/lib/v2/sourcing";
 import { supabase } from "@/integrations/supabase/client";
+import { localeTag } from "@/lib/v2/locale";
 
 const PRIORITY_TONE: Record<string, "danger" | "warning" | "neutral"> = {
   urgent: "danger",
@@ -113,7 +114,7 @@ const V2FieldTasks = () => {
                     <p className="mt-0.5 text-xs text-muted-foreground">
                       {task.supplier_code}
                       {task.commune ? ` · ${task.commune}` : ""}
-                      {task.needed_by ? ` · ${t("v2.tasks.neededBy", { date: new Date(task.needed_by).toLocaleDateString(i18n.language) })}` : ""}
+                      {task.needed_by ? ` · ${t("v2.tasks.neededBy", { date: new Date(task.needed_by).toLocaleDateString(localeTag(i18n.language)) })}` : ""}
                     </p>
                     {task.reason && <p className="mt-1 text-xs text-muted-foreground">{task.reason}</p>}
                   </div>

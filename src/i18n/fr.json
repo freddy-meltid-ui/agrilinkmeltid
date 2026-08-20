@@ -546,7 +546,7 @@
         "freshness_aging": "Données à rafraîchir",
         "freshness_needs_verification": "Données anciennes — confirmation requise",
         "freshness_unknown": "Fraîcheur inconnue",
-        "confidence": "Fiabilité {{value}}",
+        "confidence": "{{value}}",
         "quantity": "Peut fournir {{value}} t",
         "quality": "Qualité {{value}}",
         "qualityUnknown": "Qualité non renseignée",
