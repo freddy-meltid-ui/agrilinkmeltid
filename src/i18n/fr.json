@@ -340,7 +340,8 @@
       "marketplace": "Place de marché",
       "settings": "Paramètres",
       "processor": "Profil transformateur",
-      "field": "Réseau terrain"
+      "field": "Réseau terrain",
+      "production": "Production"
     },
     "shell": {
       "openMenu": "Ouvrir le menu",
@@ -636,7 +637,8 @@
       "back": "Retour",
       "next": "Suivant",
       "save": "Enregistrer",
-      "remove": "Supprimer"
+      "remove": "Supprimer",
+      "cancel": "Annuler"
     },
     "units": {
       "kg": "kg",
@@ -1322,6 +1324,135 @@
         "SUPPLY_NOT_FOUND": "Offre introuvable.",
         "INVALID_QUANTITY": "Quantité invalide.",
         "UNKNOWN": "L'opération a échoué."
+      }
+    },
+    "production": {
+      "title": "Production",
+      "description": "Les lots de production transforment la matière première reçue en lots finis. Le stock ne bouge qu'à la validation.",
+      "newCta": "Enregistrer une production",
+      "finishedGoodsCta": "Produits finis",
+      "emptyTitle": "Aucun lot de production",
+      "emptyDescription": "Enregistrez une production pour consommer la matière première et créer des lots finis.",
+      "notFound": "Lot de production introuvable.",
+      "finishedBatches": "Lots finis",
+      "viewTrace": "Voir la traçabilité",
+      "voidCta": "Annuler le lot",
+      "voided": "Lot annulé et matière première restituée.",
+      "voidTitle": "Annuler ce lot de production ?",
+      "voidDescription": "Rien n'est supprimé : des écritures de contrepassation restituent la matière première et annulent les lots finis.",
+      "voidReason": "Motif",
+      "voidedBanner": "Annulé le {{date}} — {{reason}}",
+      "kpi": {
+        "batchesMonth": "Lots ce mois-ci",
+        "inputTonnes": "Matière première utilisée",
+        "finishedBatches": "Lots finis",
+        "rawInventory": "Matière première en stock",
+        "consumed": "Consommé",
+        "produced": "Produit",
+        "yield": "Rendement",
+        "loss": "Pertes"
+      },
+      "status": {
+        "draft": "Brouillon",
+        "ready": "Prêt",
+        "completed": "Terminé",
+        "voided": "Annulé"
+      },
+      "outputType": {
+        "finished_product": "Produit fini",
+        "by_product": "Sous-produit",
+        "waste": "Perte / déchet",
+        "rejected_output": "Rebut"
+      },
+      "loss": {
+        "process_loss": "Perte de process",
+        "peel_or_husk": "Pelures / écorces",
+        "rejected_raw_material": "Matière première rejetée",
+        "damaged_output": "Produit endommagé",
+        "quality_rejection": "Rejet qualité",
+        "other": "Autre"
+      },
+      "fgStatus": {
+        "available": "Disponible",
+        "reserved": "Réservé",
+        "consumed": "Consommé",
+        "written_off": "Sorti du stock",
+        "voided": "Annulé"
+      },
+      "fgMovement": {
+        "production_output": "Sortie de production",
+        "adjustment_in": "Ajustement entrée",
+        "adjustment_out": "Ajustement sortie",
+        "production_void": "Annulation de production"
+      },
+      "form": {
+        "title": "Enregistrer une production",
+        "description": "Sélectionnez les lots de matière première consommés et déclarez les sorties. Le stock est vérifié et écrit de façon atomique.",
+        "facility": "Unité de transformation",
+        "product": "Produit fini",
+        "recipe": "Recette (optionnel)",
+        "recipeNone": "Aucune recette",
+        "date": "Date de production",
+        "inputs": "Matière première consommée",
+        "addInput": "Ajouter un lot",
+        "selectBatch": "Choisir un lot de matière première",
+        "batchSource": "Fournisseur : {{supplier}} · reçu le {{date}}",
+        "kg": "kg",
+        "overStock": "Il ne reste que {{tonnes}} t dans ce lot",
+        "totalInput": "Total consommé : {{tonnes}} t",
+        "outputs": "Sorties",
+        "addOutput": "Ajouter une sortie",
+        "outputLabel": "Libellé",
+        "quantity": "Quantité",
+        "storage": "Lieu de stockage",
+        "yield": "Rendement estimé : {{value}} %",
+        "notes": "Notes",
+        "submit": "Valider la production",
+        "posted": "Production {{reference}} enregistrée.",
+        "incomplete": "Ajoutez au moins une entrée et une sortie.",
+        "noStockTitle": "Aucune matière première en stock",
+        "noStockDescription": "Réceptionnez d'abord des marchandises : la production ne peut consommer que des lots présents dans le registre."
+      },
+      "error": {
+        "INSUFFICIENT_RAW_MATERIAL_STOCK": "Stock de matière première insuffisant ({{value}}). Rien n'a été enregistré.",
+        "NO_INPUTS": "Au moins un lot de matière première est requis.",
+        "NO_OUTPUTS": "Au moins une sortie est requise.",
+        "INVALID_QUANTITY": "Quantité invalide.",
+        "BATCH_NOT_FOUND": "Lot de matière première introuvable.",
+        "PRODUCTION_NOT_FOUND": "Lot de production introuvable.",
+        "PRODUCTION_NOT_COMPLETED": "Seul un lot terminé peut être annulé.",
+        "ALREADY_VOIDED": "Ce lot est déjà annulé.",
+        "FINISHED_BATCH_CONSUMED": "Le stock fini a déjà bougé : ce lot ne peut plus être annulé.",
+        "NOT_AUTHORIZED": "Vous n'êtes pas autorisé à effectuer cette action.",
+        "UNKNOWN": "L'opération a échoué. Rien n'a été modifié."
+      },
+      "fg": {
+        "title": "Produits finis",
+        "description": "{{count}} lots en stock · {{quantity}} unités disponibles.",
+        "tabs": {
+          "stock": "Stock",
+          "ledger": "Mouvements"
+        },
+        "emptyTitle": "Aucun produit fini",
+        "emptyDescription": "Les lots finis apparaissent ici dès qu'une production est validée.",
+        "noMovements": "Aucun mouvement enregistré"
+      },
+      "trace": {
+        "title": "Traçabilité — {{reference}}",
+        "description": "{{product}} · {{quantity}} produit le {{date}}",
+        "productionStep": "Lot de production",
+        "consumed": "{{tonnes}} t de matière première consommée",
+        "originSteps": "Origine ({{count}} lots de matière première)",
+        "supplier": "Fournisseur",
+        "supplierHidden": "Identité non communiquée",
+        "origin": "Origine",
+        "receipt": "Réception",
+        "order": "Commande",
+        "privacyNote": "L'identité du fournisseur reste masquée tant que la relation commerciale ne l'a pas libérée.",
+        "unavailable": "Ce rapport de traçabilité n'est pas disponible.",
+        "forwardTitle": "Où est parti ce lot ?",
+        "forwardDescription": "Lots finis issus de ce lot de matière première.",
+        "forwardEmpty": "Ce lot n'a pas encore été utilisé en production."
       }
     }
   },
