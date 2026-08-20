@@ -1116,6 +1116,213 @@
       "empty": "Aucune demande enregistrée.",
       "line": "{{requests}} demande(s) · {{demand}} t demandées · {{supply}} t identifiées · écart {{gap}} t",
       "tasks": "Tâches de confirmation ouvertes : {{count}}"
+    },
+    "procurement": {
+      "operations": {
+        "title": "Opérations d'approvisionnement",
+        "description": "Achats confirmés, livraisons, réceptions et stock de matière première.",
+        "inventoryCta": "Stock matière première",
+        "search": "Rechercher une commande…",
+        "window": "Livraison {{from}} → {{to}}",
+        "emptyTitle": "Aucune commande d'achat",
+        "emptyDescription": "Les commandes apparaissent ici dès qu'un fournisseur a confirmé commercialement une quantité pour l'une de vos demandes."
+      },
+      "kpi": {
+        "pendingConfirmations": "En attente de confirmation",
+        "confirmedTonnes": "Confirmé et réservé",
+        "expectedDeliveries": "Livraisons attendues",
+        "inventory": "Stock matière première",
+        "received30d": "{{tonnes}} t acceptées sur 30 jours"
+      },
+      "funnel": {
+        "title": "Entonnoir d'approvisionnement",
+        "requested": "Demandé",
+        "identified": "Identifié",
+        "confirmed": "Confirmé",
+        "ordered": "Commandé",
+        "received": "Accepté",
+        "hint": "{{toConfirm}} t restent à confirmer · {{toReceive}} t commandées non encore réceptionnées."
+      },
+      "propose": {
+        "title": "Demander une confirmation commerciale",
+        "description": "{{supplier}} — {{available}} t disponibles commercialement (hors volumes déjà confirmés).",
+        "quantity": "Quantité demandée (t)",
+        "from": "Besoin à partir du",
+        "to": "Jusqu'au",
+        "price": "Prix cible",
+        "notes": "Message au fournisseur",
+        "tooMuch": "Seulement {{available}} t restent non engagées sur cette offre.",
+        "disclaimer": "Rien n'est réservé à ce stade. La quantité n'est engagée qu'après confirmation du fournisseur — ou de l'agent terrain pour son compte.",
+        "cta": "Demander la confirmation",
+        "pending": "Envoi…",
+        "created": "Confirmation demandée"
+      },
+      "commitments": {
+        "tab": "Confirmations ({{count}})",
+        "intro": "Confirmations commerciales de cette demande. Une quantité confirmée est réservée et disparaît de ce que voient les autres transformateurs.",
+        "emptyTitle": "Aucune confirmation demandée",
+        "emptyDescription": "Choisissez un fournisseur dans l'onglet correspondances et demandez une confirmation commerciale.",
+        "proposed": "Demandé",
+        "confirmed": "Confirmé",
+        "window": "Fenêtre",
+        "contactReleased": "Contact débloqué après confirmation",
+        "contactHidden": "L'identité et le téléphone du fournisseur restent masqués tant qu'il n'a pas confirmé.",
+        "confirmedBy": "Confirmé via {{method}} le {{date}}",
+        "expires": "Expire le {{date}}",
+        "createOrder": "Créer la commande d'achat",
+        "openOrder": "Ouvrir la commande",
+        "release": "Libérer la quantité",
+        "releaseReason": "Libérée par le transformateur",
+        "released": "Quantité libérée",
+        "task": "Tâche terrain : {{status}}",
+        "showNotes": "Voir la note"
+      },
+      "commitmentStatus": {
+        "proposed": "Proposé",
+        "pending_confirmation": "En attente de confirmation",
+        "confirmed": "Confirmé",
+        "partially_confirmed": "Partiellement confirmé",
+        "declined": "Refusé",
+        "released": "Libéré",
+        "expired": "Expiré",
+        "cancelled": "Annulé",
+        "fulfilled": "Honoré"
+      },
+      "method": {
+        "supplier_self_service": "le fournisseur",
+        "field_agent": "un agent terrain",
+        "agrigrid_admin": "le support Agri Grid"
+      },
+      "orderStatus": {
+        "draft": "Brouillon",
+        "pending_supplier_confirmation": "En attente fournisseur",
+        "confirmed": "Confirmée",
+        "ready_for_delivery": "Prête à livrer",
+        "partially_delivered": "Partiellement livrée",
+        "delivered": "Livrée",
+        "cancelled": "Annulée",
+        "expired": "Expirée"
+      },
+      "deliveryStatus": {
+        "scheduled": "Planifiée",
+        "in_transit": "En route",
+        "arrived": "Arrivée",
+        "received": "Réceptionnée",
+        "partially_accepted": "Partiellement acceptée",
+        "rejected": "Refusée",
+        "cancelled": "Annulée"
+      },
+      "quality": {
+        "accepted": "Accepté",
+        "accepted_with_reservation": "Accepté avec réserve",
+        "partially_accepted": "Partiellement accepté",
+        "rejected": "Refusé"
+      },
+      "movement": {
+        "receipt": "Réception",
+        "adjustment_in": "Ajustement (entrée)",
+        "adjustment_out": "Ajustement (sortie)"
+      },
+      "order": {
+        "back": "Retour aux opérations",
+        "notFound": "Commande introuvable",
+        "subtitle": "{{tonnes}} t · livraison {{from}} → {{to}} · {{location}}",
+        "supplier": "Fournisseur",
+        "ordered": "Commandé",
+        "accepted": "Accepté",
+        "outstanding": "{{tonnes}} t encore attendues",
+        "price": "Prix convenu",
+        "cancel": "Annuler la commande",
+        "cancelReason": "Annulée par le transformateur",
+        "created": "Commande d'achat créée"
+      },
+      "delivery": {
+        "title": "Livraisons",
+        "plan": "Planifier une livraison",
+        "planHint": "{{tonnes}} t sont encore attendues sur cette commande.",
+        "empty": "Aucune livraison planifiée.",
+        "date": "Date prévue",
+        "quantity": "Quantité annoncée",
+        "notes": "Notes",
+        "confirmPlan": "Enregistrer la livraison",
+        "created": "Livraison planifiée",
+        "scheduled": "Prévue le {{date}}",
+        "markInTransit": "En route"
+      },
+      "receipt": {
+        "cta": "Réceptionner",
+        "title": "Réception de marchandise",
+        "description": "Livraison {{reference}} — enregistrez ce qui est physiquement arrivé.",
+        "delivered": "Livré",
+        "accepted": "Accepté",
+        "rejected": "Refusé",
+        "grade": "Grade qualité",
+        "storage": "Lieu de stockage",
+        "condition": "État à l'arrivée",
+        "acceptOverDelivery": "Accepter explicitement plus que la quantité commandée (reste : {{tonnes}} t)",
+        "confirm": "Valider la réception",
+        "posted": "Marchandise réceptionnée — stock mis à jour",
+        "history": "Historique des réceptions",
+        "summary": "{{delivered}} t livrées · {{accepted}} t acceptées · {{rejected}} t refusées · {{quality}}",
+        "overDeliveryNote": "Sur-livraison de {{tonnes}} t explicitement acceptée"
+      },
+      "batches": {
+        "title": "Lots de matière première",
+        "trace": "Reçu le {{date}} · {{storage}}",
+        "traceHint": "Chaque lot conserve le lien vers le fournisseur, la ferme, le cycle cultural, la commande et la réception."
+      },
+      "inventory": {
+        "title": "Stock matière première",
+        "description": "{{tonnes}} t en stock. Le stock n'augmente qu'à l'acceptation en réception.",
+        "tabs": {
+          "stock": "Stock",
+          "batches": "Lots ({{count}})",
+          "ledger": "Mouvements"
+        },
+        "emptyTitle": "Pas encore de stock",
+        "emptyDescription": "Réceptionnez une livraison pour créer votre premier lot.",
+        "batchCount": "{{count}} lot(s)",
+        "batchTrace": "Reçu le {{date}} · {{quality}} · {{storage}}",
+        "noBatches": "Aucun lot",
+        "noMovements": "Aucun mouvement"
+      },
+      "confirm": {
+        "title": "Confirmations commerciales",
+        "navCta": "Confirmations commerciales",
+        "description": "Transformateurs demandant à un fournisseur d'engager une quantité. Confirmez, ajustez ou refusez.",
+        "emptyTitle": "Rien à confirmer",
+        "emptyDescription": "Aucun transformateur n'attend de confirmation commerciale.",
+        "askedBy": "Demandé par {{processor}}",
+        "answer": "Répondre",
+        "quantity": "Quantité réellement disponible ({{unit}})",
+        "price": "Prix convenu",
+        "from": "Disponible à partir du",
+        "to": "Jusqu'au",
+        "notes": "Observation",
+        "partialHint": "Confirmer moins que demandé est possible : c'est enregistré comme confirmation partielle.",
+        "accept": "Confirmer",
+        "decline": "Non disponible",
+        "done": "Quantité confirmée et réservée",
+        "declined": "Marqué non disponible",
+        "expires": "Réponse attendue avant le {{date}}"
+      },
+      "error": {
+        "INSUFFICIENT_AVAILABILITY": "Trop tard — il ne reste que {{value}} t non engagées sur cette offre.",
+        "OVER_DELIVERY_REQUIRES_CONFIRMATION": "Cette réception dépasse la commande de {{value}} t. Cochez la case de sur-livraison pour l'accepter.",
+        "COMMITMENT_NOT_PENDING": "Cette confirmation a déjà reçu une réponse.",
+        "COMMITMENT_NOT_CONFIRMED": "Le fournisseur n'a pas encore confirmé cette quantité.",
+        "COMMITMENT_NOT_FOUND": "Confirmation introuvable.",
+        "COMMITMENT_ALREADY_FULFILLED": "Cet engagement est déjà honoré.",
+        "ORDER_ALREADY_EXISTS": "Une commande existe déjà pour cette confirmation.",
+        "ORDER_ALREADY_DELIVERED": "Cette commande est déjà entièrement livrée.",
+        "DELIVERY_ALREADY_CLOSED": "Cette livraison est déjà clôturée.",
+        "ACCEPTED_PLUS_REJECTED_EXCEEDS_DELIVERED": "Accepté plus refusé ne peut dépasser la quantité livrée.",
+        "NOT_AUTHORIZED_TO_CONFIRM": "Seuls le fournisseur, son agent terrain ou le support Agri Grid peuvent confirmer.",
+        "NOT_AUTHORIZED": "Action non autorisée.",
+        "SUPPLY_NOT_FOUND": "Offre introuvable.",
+        "INVALID_QUANTITY": "Quantité invalide.",
+        "UNKNOWN": "L'opération a échoué."
+      }
     }
   },
   "language": {

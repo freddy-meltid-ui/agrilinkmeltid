@@ -1,6 +1,6 @@
 // AGRI-GRID V2 — Phase 1D: explainable match card (processor-safe data only).
 import { useTranslation } from "react-i18next";
-import { AlertTriangle, CalendarRange, Check, MapPin, RefreshCw, Scale, X } from "lucide-react";
+import { AlertTriangle, CalendarRange, Check, Handshake, MapPin, RefreshCw, Scale, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ConfidenceBadge, FreshnessBadge, SupplyStatusBadge } from "@/components/v2/supply/SupplyBadges";
 import type { MatchRow } from "@/lib/v2/sourcing";
@@ -17,12 +17,17 @@ const MatchCard = ({
   onReconfirm,
   reconfirmBusy,
   taskPending,
+  onCommit,
+  commitPending,
 }: {
   row: MatchRow;
   allocated?: number;
   onReconfirm?: (row: MatchRow) => void;
   reconfirmBusy?: boolean;
   taskPending?: boolean;
+  /** Phase 1E — ask this supplier to commercially confirm a quantity. */
+  onCommit?: (row: MatchRow) => void;
+  commitPending?: boolean;
 }) => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
@@ -133,18 +138,20 @@ const MatchCard = ({
         )}
       </div>
 
-      {onReconfirm && (
-        <Button
-          variant="outline"
-          size="sm"
-          className="mt-3"
-          disabled={reconfirmBusy || taskPending}
-          onClick={() => onReconfirm(row)}
-        >
-          <RefreshCw className="mr-1.5 h-4 w-4" />
-          {taskPending ? t("v2.sourcing.reconfirmPending") : t("v2.sourcing.reconfirmCta")}
-        </Button>
-      )}
+      <div className="mt-3 flex flex-wrap gap-2">
+        {onCommit && (
+          <Button size="sm" disabled={commitPending || Number(row.quantity_tonnes ?? 0) <= 0} onClick={() => onCommit(row)}>
+            <Handshake className="mr-1.5 h-4 w-4" />
+            {commitPending ? t("v2.procurement.propose.pending") : t("v2.procurement.propose.cta")}
+          </Button>
+        )}
+        {onReconfirm && (
+          <Button variant="outline" size="sm" disabled={reconfirmBusy || taskPending} onClick={() => onReconfirm(row)}>
+            <RefreshCw className="mr-1.5 h-4 w-4" />
+            {taskPending ? t("v2.sourcing.reconfirmPending") : t("v2.sourcing.reconfirmCta")}
+          </Button>
+        )}
+      </div>
     </article>
   );
 };

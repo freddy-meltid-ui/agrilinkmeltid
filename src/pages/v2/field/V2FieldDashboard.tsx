@@ -58,11 +58,17 @@ const V2FieldDashboard = () => {
         <KpiCard icon={Sprout} label={t("v2.field.kpi.upcomingHarvests")} value={stats.upcomingHarvests.length} />
       </div>
 
-      <div className="mt-4">
+      <div className="mt-4 flex flex-col gap-3 sm:flex-row">
         <Link to="/app/field/tasks">
           <Button variant="outline" className="h-12 w-full sm:w-auto">
             <ClipboardCheck className="mr-2 h-5 w-5" />
             {t("v2.tasks.navCta")}
+          </Button>
+        </Link>
+        <Link to="/app/field/confirmations">
+          <Button variant="outline" className="h-12 w-full sm:w-auto">
+            <ClipboardCheck className="mr-2 h-5 w-5" />
+            {t("v2.procurement.confirm.navCta")}
           </Button>
         </Link>
       </div>

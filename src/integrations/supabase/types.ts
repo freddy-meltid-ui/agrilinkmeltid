@@ -1070,6 +1070,92 @@ export type Database = {
           },
         ]
       }
+      v2_deliveries: {
+        Row: {
+          actual_arrival_date: string | null
+          created_at: string
+          created_by: string
+          declared_quantity: number | null
+          facility_id: string | null
+          id: string
+          notes: string | null
+          order_id: string
+          organization_id: string
+          received_quantity: number | null
+          reference: string
+          scheduled_date: string | null
+          status: Database["public"]["Enums"]["v2_delivery_status"]
+          supplier_id: string
+          unit_code: string
+          updated_at: string
+        }
+        Insert: {
+          actual_arrival_date?: string | null
+          created_at?: string
+          created_by: string
+          declared_quantity?: number | null
+          facility_id?: string | null
+          id?: string
+          notes?: string | null
+          order_id: string
+          organization_id: string
+          received_quantity?: number | null
+          reference: string
+          scheduled_date?: string | null
+          status?: Database["public"]["Enums"]["v2_delivery_status"]
+          supplier_id: string
+          unit_code?: string
+          updated_at?: string
+        }
+        Update: {
+          actual_arrival_date?: string | null
+          created_at?: string
+          created_by?: string
+          declared_quantity?: number | null
+          facility_id?: string | null
+          id?: string
+          notes?: string | null
+          order_id?: string
+          organization_id?: string
+          received_quantity?: number | null
+          reference?: string
+          scheduled_date?: string | null
+          status?: Database["public"]["Enums"]["v2_delivery_status"]
+          supplier_id?: string
+          unit_code?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_deliveries_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processing_facilities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_deliveries_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "v2_procurement_orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_deliveries_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_deliveries_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "v2_suppliers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       v2_farm_parcels: {
         Row: {
           area: number | null
@@ -1337,6 +1423,123 @@ export type Database = {
           },
         ]
       }
+      v2_goods_receipts: {
+        Row: {
+          accepted_quantity: number
+          accepted_tonnes: number
+          condition_notes: string | null
+          created_at: string
+          delivered_quantity: number
+          delivered_tonnes: number
+          delivery_id: string
+          facility_id: string | null
+          id: string
+          order_id: string
+          organization_id: string
+          over_delivery_accepted: boolean
+          over_delivery_tonnes: number
+          photos: Json
+          quality_grade: string | null
+          quality_result: Database["public"]["Enums"]["v2_receipt_quality"]
+          received_at: string
+          received_by: string
+          receiving_notes: string | null
+          reference: string
+          rejected_quantity: number
+          rejected_tonnes: number
+          supplier_id: string
+          unit_code: string
+        }
+        Insert: {
+          accepted_quantity?: number
+          accepted_tonnes?: number
+          condition_notes?: string | null
+          created_at?: string
+          delivered_quantity?: number
+          delivered_tonnes?: number
+          delivery_id: string
+          facility_id?: string | null
+          id?: string
+          order_id: string
+          organization_id: string
+          over_delivery_accepted?: boolean
+          over_delivery_tonnes?: number
+          photos?: Json
+          quality_grade?: string | null
+          quality_result?: Database["public"]["Enums"]["v2_receipt_quality"]
+          received_at?: string
+          received_by: string
+          receiving_notes?: string | null
+          reference: string
+          rejected_quantity?: number
+          rejected_tonnes?: number
+          supplier_id: string
+          unit_code?: string
+        }
+        Update: {
+          accepted_quantity?: number
+          accepted_tonnes?: number
+          condition_notes?: string | null
+          created_at?: string
+          delivered_quantity?: number
+          delivered_tonnes?: number
+          delivery_id?: string
+          facility_id?: string | null
+          id?: string
+          order_id?: string
+          organization_id?: string
+          over_delivery_accepted?: boolean
+          over_delivery_tonnes?: number
+          photos?: Json
+          quality_grade?: string | null
+          quality_result?: Database["public"]["Enums"]["v2_receipt_quality"]
+          received_at?: string
+          received_by?: string
+          receiving_notes?: string | null
+          reference?: string
+          rejected_quantity?: number
+          rejected_tonnes?: number
+          supplier_id?: string
+          unit_code?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_goods_receipts_delivery_id_fkey"
+            columns: ["delivery_id"]
+            isOneToOne: false
+            referencedRelation: "v2_deliveries"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_goods_receipts_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processing_facilities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_goods_receipts_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "v2_procurement_orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_goods_receipts_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_goods_receipts_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "v2_suppliers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       v2_harvest_forecasts: {
         Row: {
           captured_by: string
@@ -1409,6 +1612,141 @@ export type Database = {
           },
           {
             foreignKeyName: "v2_harvest_forecasts_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "v2_suppliers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_inventory_movements: {
+        Row: {
+          batch_id: string | null
+          created_at: string
+          created_by: string | null
+          crop_id: string | null
+          facility_id: string | null
+          id: string
+          movement_type: Database["public"]["Enums"]["v2_inventory_movement_type"]
+          notes: string | null
+          organization_id: string
+          quantity_tonnes: number
+          reference_id: string | null
+          reference_type: string | null
+          variety_id: string | null
+        }
+        Insert: {
+          batch_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          crop_id?: string | null
+          facility_id?: string | null
+          id?: string
+          movement_type: Database["public"]["Enums"]["v2_inventory_movement_type"]
+          notes?: string | null
+          organization_id: string
+          quantity_tonnes: number
+          reference_id?: string | null
+          reference_type?: string | null
+          variety_id?: string | null
+        }
+        Update: {
+          batch_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          crop_id?: string | null
+          facility_id?: string | null
+          id?: string
+          movement_type?: Database["public"]["Enums"]["v2_inventory_movement_type"]
+          notes?: string | null
+          organization_id?: string
+          quantity_tonnes?: number
+          reference_id?: string | null
+          reference_type?: string | null
+          variety_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_inventory_movements_batch_id_fkey"
+            columns: ["batch_id"]
+            isOneToOne: false
+            referencedRelation: "v2_raw_material_batches"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_inventory_movements_crop_id_fkey"
+            columns: ["crop_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crops"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_inventory_movements_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processing_facilities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_inventory_movements_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_inventory_movements_variety_id_fkey"
+            columns: ["variety_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crop_varieties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_notification_events: {
+        Row: {
+          channel: string
+          created_at: string
+          event_type: string
+          id: string
+          organization_id: string | null
+          payload: Json
+          read_at: string | null
+          recipient_user_id: string | null
+          supplier_id: string | null
+        }
+        Insert: {
+          channel?: string
+          created_at?: string
+          event_type: string
+          id?: string
+          organization_id?: string | null
+          payload?: Json
+          read_at?: string | null
+          recipient_user_id?: string | null
+          supplier_id?: string | null
+        }
+        Update: {
+          channel?: string
+          created_at?: string
+          event_type?: string
+          id?: string
+          organization_id?: string | null
+          payload?: Json
+          read_at?: string | null
+          recipient_user_id?: string | null
+          supplier_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_notification_events_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_notification_events_supplier_id_fkey"
             columns: ["supplier_id"]
             isOneToOne: false
             referencedRelation: "v2_suppliers"
@@ -1692,6 +2030,369 @@ export type Database = {
           },
         ]
       }
+      v2_procurement_order_lines: {
+        Row: {
+          accepted_tonnes: number
+          agreed_unit_price: number | null
+          commitment_id: string | null
+          created_at: string
+          crop_id: string | null
+          id: string
+          line_amount: number | null
+          notes: string | null
+          order_id: string
+          ordered_quantity: number
+          ordered_tonnes: number
+          price_unit: string | null
+          received_tonnes: number
+          rejected_tonnes: number
+          supply_id: string | null
+          unit_code: string
+          updated_at: string
+          variety_id: string | null
+        }
+        Insert: {
+          accepted_tonnes?: number
+          agreed_unit_price?: number | null
+          commitment_id?: string | null
+          created_at?: string
+          crop_id?: string | null
+          id?: string
+          line_amount?: number | null
+          notes?: string | null
+          order_id: string
+          ordered_quantity: number
+          ordered_tonnes?: number
+          price_unit?: string | null
+          received_tonnes?: number
+          rejected_tonnes?: number
+          supply_id?: string | null
+          unit_code?: string
+          updated_at?: string
+          variety_id?: string | null
+        }
+        Update: {
+          accepted_tonnes?: number
+          agreed_unit_price?: number | null
+          commitment_id?: string | null
+          created_at?: string
+          crop_id?: string | null
+          id?: string
+          line_amount?: number | null
+          notes?: string | null
+          order_id?: string
+          ordered_quantity?: number
+          ordered_tonnes?: number
+          price_unit?: string | null
+          received_tonnes?: number
+          rejected_tonnes?: number
+          supply_id?: string | null
+          unit_code?: string
+          updated_at?: string
+          variety_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_procurement_order_lines_commitment_id_fkey"
+            columns: ["commitment_id"]
+            isOneToOne: false
+            referencedRelation: "v2_supply_commitments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_procurement_order_lines_crop_id_fkey"
+            columns: ["crop_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crops"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_procurement_order_lines_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "v2_procurement_orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_procurement_order_lines_supply_id_fkey"
+            columns: ["supply_id"]
+            isOneToOne: false
+            referencedRelation: "v2_supply_availability"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_procurement_order_lines_variety_id_fkey"
+            columns: ["variety_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crop_varieties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_procurement_orders: {
+        Row: {
+          cancellation_reason: string | null
+          cancelled_at: string | null
+          commercial_notes: string | null
+          commitment_id: string | null
+          created_at: string
+          created_by: string
+          currency: string
+          delivery_location: string | null
+          expected_delivery_end: string | null
+          expected_delivery_start: string | null
+          facility_id: string | null
+          id: string
+          order_number: string
+          organization_id: string
+          packaging_requirement: string | null
+          payment_status: Database["public"]["Enums"]["v2_payment_status"]
+          quality_requirement: string | null
+          sourcing_request_id: string | null
+          status: Database["public"]["Enums"]["v2_procurement_status"]
+          supplier_id: string
+          total_expected_amount: number | null
+          updated_at: string
+        }
+        Insert: {
+          cancellation_reason?: string | null
+          cancelled_at?: string | null
+          commercial_notes?: string | null
+          commitment_id?: string | null
+          created_at?: string
+          created_by: string
+          currency?: string
+          delivery_location?: string | null
+          expected_delivery_end?: string | null
+          expected_delivery_start?: string | null
+          facility_id?: string | null
+          id?: string
+          order_number: string
+          organization_id: string
+          packaging_requirement?: string | null
+          payment_status?: Database["public"]["Enums"]["v2_payment_status"]
+          quality_requirement?: string | null
+          sourcing_request_id?: string | null
+          status?: Database["public"]["Enums"]["v2_procurement_status"]
+          supplier_id: string
+          total_expected_amount?: number | null
+          updated_at?: string
+        }
+        Update: {
+          cancellation_reason?: string | null
+          cancelled_at?: string | null
+          commercial_notes?: string | null
+          commitment_id?: string | null
+          created_at?: string
+          created_by?: string
+          currency?: string
+          delivery_location?: string | null
+          expected_delivery_end?: string | null
+          expected_delivery_start?: string | null
+          facility_id?: string | null
+          id?: string
+          order_number?: string
+          organization_id?: string
+          packaging_requirement?: string | null
+          payment_status?: Database["public"]["Enums"]["v2_payment_status"]
+          quality_requirement?: string | null
+          sourcing_request_id?: string | null
+          status?: Database["public"]["Enums"]["v2_procurement_status"]
+          supplier_id?: string
+          total_expected_amount?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_procurement_orders_commitment_id_fkey"
+            columns: ["commitment_id"]
+            isOneToOne: false
+            referencedRelation: "v2_supply_commitments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_procurement_orders_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processing_facilities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_procurement_orders_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_procurement_orders_sourcing_request_id_fkey"
+            columns: ["sourcing_request_id"]
+            isOneToOne: false
+            referencedRelation: "v2_sourcing_requests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_procurement_orders_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "v2_suppliers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_raw_material_batches: {
+        Row: {
+          batch_reference: string
+          created_at: string
+          crop_cycle_id: string | null
+          crop_id: string | null
+          current_tonnes: number
+          delivery_id: string | null
+          facility_id: string | null
+          farm_id: string | null
+          id: string
+          order_id: string | null
+          organization_id: string
+          quality_grade: string | null
+          quality_status: Database["public"]["Enums"]["v2_receipt_quality"]
+          receipt_date: string
+          receipt_id: string | null
+          received_tonnes: number
+          storage_location: string | null
+          supplier_id: string | null
+          supply_id: string | null
+          unit_code: string
+          updated_at: string
+          variety_id: string | null
+        }
+        Insert: {
+          batch_reference: string
+          created_at?: string
+          crop_cycle_id?: string | null
+          crop_id?: string | null
+          current_tonnes?: number
+          delivery_id?: string | null
+          facility_id?: string | null
+          farm_id?: string | null
+          id?: string
+          order_id?: string | null
+          organization_id: string
+          quality_grade?: string | null
+          quality_status?: Database["public"]["Enums"]["v2_receipt_quality"]
+          receipt_date?: string
+          receipt_id?: string | null
+          received_tonnes?: number
+          storage_location?: string | null
+          supplier_id?: string | null
+          supply_id?: string | null
+          unit_code?: string
+          updated_at?: string
+          variety_id?: string | null
+        }
+        Update: {
+          batch_reference?: string
+          created_at?: string
+          crop_cycle_id?: string | null
+          crop_id?: string | null
+          current_tonnes?: number
+          delivery_id?: string | null
+          facility_id?: string | null
+          farm_id?: string | null
+          id?: string
+          order_id?: string | null
+          organization_id?: string
+          quality_grade?: string | null
+          quality_status?: Database["public"]["Enums"]["v2_receipt_quality"]
+          receipt_date?: string
+          receipt_id?: string | null
+          received_tonnes?: number
+          storage_location?: string | null
+          supplier_id?: string | null
+          supply_id?: string | null
+          unit_code?: string
+          updated_at?: string
+          variety_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_raw_material_batches_crop_cycle_id_fkey"
+            columns: ["crop_cycle_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crop_cycles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_raw_material_batches_crop_id_fkey"
+            columns: ["crop_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crops"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_raw_material_batches_delivery_id_fkey"
+            columns: ["delivery_id"]
+            isOneToOne: false
+            referencedRelation: "v2_deliveries"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_raw_material_batches_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processing_facilities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_raw_material_batches_farm_id_fkey"
+            columns: ["farm_id"]
+            isOneToOne: false
+            referencedRelation: "v2_farms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_raw_material_batches_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "v2_procurement_orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_raw_material_batches_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_raw_material_batches_receipt_id_fkey"
+            columns: ["receipt_id"]
+            isOneToOne: false
+            referencedRelation: "v2_goods_receipts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_raw_material_batches_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "v2_suppliers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_raw_material_batches_supply_id_fkey"
+            columns: ["supply_id"]
+            isOneToOne: false
+            referencedRelation: "v2_supply_availability"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_raw_material_batches_variety_id_fkey"
+            columns: ["variety_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crop_varieties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       v2_raw_material_needs: {
         Row: {
           created_at: string
@@ -1798,6 +2499,7 @@ export type Database = {
       }
       v2_reconfirmation_tasks: {
         Row: {
+          commitment_id: string | null
           completed_at: string | null
           created_at: string
           created_by: string
@@ -1820,9 +2522,11 @@ export type Database = {
           status: Database["public"]["Enums"]["v2_reconfirmation_status"]
           supplier_id: string
           supply_id: string | null
+          task_kind: string
           updated_at: string
         }
         Insert: {
+          commitment_id?: string | null
           completed_at?: string | null
           created_at?: string
           created_by: string
@@ -1845,9 +2549,11 @@ export type Database = {
           status?: Database["public"]["Enums"]["v2_reconfirmation_status"]
           supplier_id: string
           supply_id?: string | null
+          task_kind?: string
           updated_at?: string
         }
         Update: {
+          commitment_id?: string | null
           completed_at?: string | null
           created_at?: string
           created_by?: string
@@ -1870,9 +2576,17 @@ export type Database = {
           status?: Database["public"]["Enums"]["v2_reconfirmation_status"]
           supplier_id?: string
           supply_id?: string | null
+          task_kind?: string
           updated_at?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "v2_reconfirmation_tasks_commitment_id_fkey"
+            columns: ["commitment_id"]
+            isOneToOne: false
+            referencedRelation: "v2_supply_commitments"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "v2_reconfirmation_tasks_crop_cycle_id_fkey"
             columns: ["crop_cycle_id"]
@@ -2395,6 +3109,170 @@ export type Database = {
           },
         ]
       }
+      v2_supply_commitments: {
+        Row: {
+          agreed_unit_price: number | null
+          cancellation_reason: string | null
+          closed_at: string | null
+          confirmation_method:
+            | Database["public"]["Enums"]["v2_confirmation_method"]
+            | null
+          confirmed_at: string | null
+          confirmed_by_user: string | null
+          confirmed_end: string | null
+          confirmed_quantity: number | null
+          confirmed_start: string | null
+          confirmed_tonnes: number
+          contact_released: boolean
+          created_at: string
+          created_by: string
+          crop_id: string | null
+          currency: string
+          decline_reason: string | null
+          expires_at: string | null
+          facility_id: string | null
+          id: string
+          notes: string | null
+          organization_id: string
+          price_unit: string | null
+          proposed_quantity: number
+          proposed_tonnes: number
+          requested_end: string | null
+          requested_start: string | null
+          sourcing_request_id: string | null
+          status: Database["public"]["Enums"]["v2_commitment_status"]
+          supplier_id: string
+          supply_id: string
+          unit_code: string
+          updated_at: string
+          variety_id: string | null
+        }
+        Insert: {
+          agreed_unit_price?: number | null
+          cancellation_reason?: string | null
+          closed_at?: string | null
+          confirmation_method?:
+            | Database["public"]["Enums"]["v2_confirmation_method"]
+            | null
+          confirmed_at?: string | null
+          confirmed_by_user?: string | null
+          confirmed_end?: string | null
+          confirmed_quantity?: number | null
+          confirmed_start?: string | null
+          confirmed_tonnes?: number
+          contact_released?: boolean
+          created_at?: string
+          created_by: string
+          crop_id?: string | null
+          currency?: string
+          decline_reason?: string | null
+          expires_at?: string | null
+          facility_id?: string | null
+          id?: string
+          notes?: string | null
+          organization_id: string
+          price_unit?: string | null
+          proposed_quantity: number
+          proposed_tonnes?: number
+          requested_end?: string | null
+          requested_start?: string | null
+          sourcing_request_id?: string | null
+          status?: Database["public"]["Enums"]["v2_commitment_status"]
+          supplier_id: string
+          supply_id: string
+          unit_code?: string
+          updated_at?: string
+          variety_id?: string | null
+        }
+        Update: {
+          agreed_unit_price?: number | null
+          cancellation_reason?: string | null
+          closed_at?: string | null
+          confirmation_method?:
+            | Database["public"]["Enums"]["v2_confirmation_method"]
+            | null
+          confirmed_at?: string | null
+          confirmed_by_user?: string | null
+          confirmed_end?: string | null
+          confirmed_quantity?: number | null
+          confirmed_start?: string | null
+          confirmed_tonnes?: number
+          contact_released?: boolean
+          created_at?: string
+          created_by?: string
+          crop_id?: string | null
+          currency?: string
+          decline_reason?: string | null
+          expires_at?: string | null
+          facility_id?: string | null
+          id?: string
+          notes?: string | null
+          organization_id?: string
+          price_unit?: string | null
+          proposed_quantity?: number
+          proposed_tonnes?: number
+          requested_end?: string | null
+          requested_start?: string | null
+          sourcing_request_id?: string | null
+          status?: Database["public"]["Enums"]["v2_commitment_status"]
+          supplier_id?: string
+          supply_id?: string
+          unit_code?: string
+          updated_at?: string
+          variety_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_supply_commitments_crop_id_fkey"
+            columns: ["crop_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crops"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_supply_commitments_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processing_facilities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_supply_commitments_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_supply_commitments_sourcing_request_id_fkey"
+            columns: ["sourcing_request_id"]
+            isOneToOne: false
+            referencedRelation: "v2_sourcing_requests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_supply_commitments_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "v2_suppliers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_supply_commitments_supply_id_fkey"
+            columns: ["supply_id"]
+            isOneToOne: false
+            referencedRelation: "v2_supply_availability"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_supply_commitments_variety_id_fkey"
+            columns: ["variety_id"]
+            isOneToOne: false
+            referencedRelation: "v2_crop_varieties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       v2_units: {
         Row: {
           code: string
@@ -2572,6 +3450,37 @@ export type Database = {
         Args: { _user_id: string }
         Returns: boolean
       }
+      v2_cancel_procurement_order: {
+        Args: { _order_id: string; _reason?: string }
+        Returns: undefined
+      }
+      v2_commercial_confirmation_feed: {
+        Args: never
+        Returns: {
+          commitment_id: string
+          commune: string
+          created_at: string
+          crop_name_en: string
+          crop_name_fr: string
+          currency: string
+          expires_at: string
+          phone: string
+          processor_name: string
+          proposed_quantity: number
+          proposed_tonnes: number
+          requested_end: string
+          requested_start: string
+          status: string
+          supplier_code: string
+          supplier_id: string
+          supplier_name: string
+          target_price: number
+          task_id: string
+          unit_code: string
+          variety_name_en: string
+          variety_name_fr: string
+        }[]
+      }
       v2_commercial_supply: {
         Args: {
           _available_from?: string
@@ -2634,6 +3543,76 @@ export type Database = {
           unit_code: string
         }[]
       }
+      v2_committed_tonnes: { Args: { _supply_id: string }; Returns: number }
+      v2_confirm_commitment: {
+        Args: {
+          _accepted: boolean
+          _commitment_id: string
+          _confirmed_quantity?: number
+          _end?: string
+          _notes?: string
+          _start?: string
+          _unit_code?: string
+          _unit_price?: number
+        }
+        Returns: {
+          agreed_unit_price: number | null
+          cancellation_reason: string | null
+          closed_at: string | null
+          confirmation_method:
+            | Database["public"]["Enums"]["v2_confirmation_method"]
+            | null
+          confirmed_at: string | null
+          confirmed_by_user: string | null
+          confirmed_end: string | null
+          confirmed_quantity: number | null
+          confirmed_start: string | null
+          confirmed_tonnes: number
+          contact_released: boolean
+          created_at: string
+          created_by: string
+          crop_id: string | null
+          currency: string
+          decline_reason: string | null
+          expires_at: string | null
+          facility_id: string | null
+          id: string
+          notes: string | null
+          organization_id: string
+          price_unit: string | null
+          proposed_quantity: number
+          proposed_tonnes: number
+          requested_end: string | null
+          requested_start: string | null
+          sourcing_request_id: string | null
+          status: Database["public"]["Enums"]["v2_commitment_status"]
+          supplier_id: string
+          supply_id: string
+          unit_code: string
+          updated_at: string
+          variety_id: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "v2_supply_commitments"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      v2_create_procurement_order: {
+        Args: {
+          _commitment_id: string
+          _delivery_location?: string
+          _expected_end?: string
+          _expected_start?: string
+          _notes?: string
+          _packaging_requirement?: string
+          _price_unit?: string
+          _quality_requirement?: string
+          _unit_price?: number
+        }
+        Returns: string
+      }
       v2_data_quality_summary: {
         Args: never
         Returns: {
@@ -2645,6 +3624,7 @@ export type Database = {
         Args: { _lat1: number; _lat2: number; _lng1: number; _lng2: number }
         Returns: number
       }
+      v2_expire_commitments: { Args: never; Returns: number }
       v2_freshness_status: { Args: { _reference: string }; Returns: string }
       v2_has_org_role: {
         Args: {
@@ -2653,6 +3633,20 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      v2_inventory_balance: {
+        Args: { _facility_id?: string; _organization_id: string }
+        Returns: {
+          balance_tonnes: number
+          batch_count: number
+          crop_id: string
+          crop_name_en: string
+          crop_name_fr: string
+          last_movement_at: string
+          variety_id: string
+          variety_name_en: string
+          variety_name_fr: string
+        }[]
       }
       v2_is_agrigrid_admin: { Args: { _user_id: string }; Returns: boolean }
       v2_is_field_agent: { Args: { _user_id: string }; Returns: boolean }
@@ -2664,9 +3658,53 @@ export type Database = {
         Args: { _org_id: string; _user_id: string }
         Returns: boolean
       }
+      v2_procurement_summary: {
+        Args: { _organization_id: string }
+        Returns: {
+          confirmed_tonnes: number
+          expected_deliveries: number
+          inventory_tonnes: number
+          open_orders: number
+          open_requests: number
+          ordered_tonnes: number
+          pending_confirmations: number
+          received_tonnes_30d: number
+        }[]
+      }
+      v2_propose_commitment: {
+        Args: {
+          _end?: string
+          _notes?: string
+          _quantity: number
+          _request_id: string
+          _start?: string
+          _supply_id: string
+          _target_price?: number
+          _unit_code?: string
+        }
+        Returns: string
+      }
+      v2_receive_goods: {
+        Args: {
+          _accept_over_delivery?: boolean
+          _accepted_quantity: number
+          _condition_notes?: string
+          _delivered_quantity: number
+          _delivery_id: string
+          _photos?: Json
+          _quality_grade?: string
+          _quality_result?: string
+          _receiving_notes?: string
+          _rejected_quantity?: number
+          _storage_location?: string
+          _unit_code?: string
+        }
+        Returns: string
+      }
       v2_reconfirmation_task_feed: {
         Args: never
         Returns: {
+          commitment_id: string
           commune: string
           created_at: string
           crop_id: string
@@ -2678,6 +3716,7 @@ export type Database = {
           last_confirmed_at: string
           needed_by: string
           priority: string
+          proposed_tonnes: number
           reason: string
           status: string
           supplier_code: string
@@ -2685,6 +3724,49 @@ export type Database = {
           supplier_name: string
           supply_id: string
           task_id: string
+          task_kind: string
+        }[]
+      }
+      v2_release_commitment: {
+        Args: { _cancel?: boolean; _commitment_id: string; _reason?: string }
+        Returns: undefined
+      }
+      v2_request_commitments: {
+        Args: { _request_id: string }
+        Returns: {
+          accepted_tonnes: number
+          agreed_unit_price: number
+          commitment_id: string
+          confirmation_method: string
+          confirmed_at: string
+          confirmed_end: string
+          confirmed_start: string
+          confirmed_tonnes: number
+          contact_name: string
+          contact_phone: string
+          contact_released: boolean
+          created_at: string
+          crop_name_en: string
+          crop_name_fr: string
+          currency: string
+          expires_at: string
+          notes: string
+          order_id: string
+          order_number: string
+          order_status: string
+          ordered_tonnes: number
+          proposed_tonnes: number
+          requested_end: string
+          requested_start: string
+          status: string
+          supplier_code: string
+          supplier_id: string
+          supplier_ref: string
+          supply_id: string
+          task_status: string
+          unit_code: string
+          variety_name_en: string
+          variety_name_fr: string
         }[]
       }
       v2_request_supply_reconfirmation: {
@@ -2709,6 +3791,19 @@ export type Database = {
           identified_tonnes: number
           period_month: string
           request_count: number
+        }[]
+      }
+      v2_sourcing_funnel: {
+        Args: { _request_id: string }
+        Returns: {
+          accepted_tonnes: number
+          confirmed_tonnes: number
+          identified_tonnes: number
+          ordered_tonnes: number
+          received_tonnes: number
+          remaining_to_confirm: number
+          remaining_to_receive: number
+          requested_tonnes: number
         }[]
       }
       v2_sourcing_matches: {
@@ -2760,6 +3855,19 @@ export type Database = {
           task_id: string
         }[]
       }
+      v2_supplier_commercial_contact: {
+        Args: { _organization_id: string; _supplier_id: string }
+        Returns: {
+          commune: string
+          department: string
+          display_name: string
+          phone: string
+          released: boolean
+          supplier_code: string
+          supplier_id: string
+          supplier_type: string
+        }[]
+      }
       v2_supply_confidence: {
         Args: {
           _confirmed_at: string
@@ -2804,6 +3912,10 @@ export type Database = {
           supplier_count: number
         }[]
       }
+      v2_supply_remaining_tonnes: {
+        Args: { _supply_id: string }
+        Returns: number
+      }
       v2_to_tonnes: {
         Args: { _quantity: number; _unit_code: string }
         Returns: number
@@ -2828,7 +3940,21 @@ export type Database = {
         | "transport"
         | "job"
         | "processing"
+      v2_commitment_status:
+        | "proposed"
+        | "pending_confirmation"
+        | "confirmed"
+        | "partially_confirmed"
+        | "declined"
+        | "released"
+        | "expired"
+        | "cancelled"
+        | "fulfilled"
       v2_confidence: "low" | "medium" | "high"
+      v2_confirmation_method:
+        | "supplier_self_service"
+        | "field_agent"
+        | "agrigrid_admin"
       v2_crop_cycle_status:
         | "planned"
         | "growing"
@@ -2836,6 +3962,15 @@ export type Database = {
         | "harvesting"
         | "completed"
         | "cancelled"
+      v2_delivery_status:
+        | "scheduled"
+        | "in_transit"
+        | "arrived"
+        | "received"
+        | "partially_accepted"
+        | "rejected"
+        | "cancelled"
+      v2_inventory_movement_type: "receipt" | "adjustment_in" | "adjustment_out"
       v2_org_role:
         | "processor_admin"
         | "processor_employee"
@@ -2846,6 +3981,21 @@ export type Database = {
         | "compliance_advisor"
         | "financial_partner"
       v2_org_type: "processor" | "cooperative" | "field_network" | "agrigrid"
+      v2_payment_status: "not_recorded" | "unpaid" | "partially_paid" | "paid"
+      v2_procurement_status:
+        | "draft"
+        | "pending_supplier_confirmation"
+        | "confirmed"
+        | "ready_for_delivery"
+        | "partially_delivered"
+        | "delivered"
+        | "cancelled"
+        | "expired"
+      v2_receipt_quality:
+        | "accepted"
+        | "accepted_with_reservation"
+        | "partially_accepted"
+        | "rejected"
       v2_reconfirmation_status:
         | "open"
         | "assigned"
@@ -3037,7 +4187,23 @@ export const Constants = {
         "job",
         "processing",
       ],
+      v2_commitment_status: [
+        "proposed",
+        "pending_confirmation",
+        "confirmed",
+        "partially_confirmed",
+        "declined",
+        "released",
+        "expired",
+        "cancelled",
+        "fulfilled",
+      ],
       v2_confidence: ["low", "medium", "high"],
+      v2_confirmation_method: [
+        "supplier_self_service",
+        "field_agent",
+        "agrigrid_admin",
+      ],
       v2_crop_cycle_status: [
         "planned",
         "growing",
@@ -3045,6 +4211,20 @@ export const Constants = {
         "harvesting",
         "completed",
         "cancelled",
+      ],
+      v2_delivery_status: [
+        "scheduled",
+        "in_transit",
+        "arrived",
+        "received",
+        "partially_accepted",
+        "rejected",
+        "cancelled",
+      ],
+      v2_inventory_movement_type: [
+        "receipt",
+        "adjustment_in",
+        "adjustment_out",
       ],
       v2_org_role: [
         "processor_admin",
@@ -3057,6 +4237,23 @@ export const Constants = {
         "financial_partner",
       ],
       v2_org_type: ["processor", "cooperative", "field_network", "agrigrid"],
+      v2_payment_status: ["not_recorded", "unpaid", "partially_paid", "paid"],
+      v2_procurement_status: [
+        "draft",
+        "pending_supplier_confirmation",
+        "confirmed",
+        "ready_for_delivery",
+        "partially_delivered",
+        "delivered",
+        "cancelled",
+        "expired",
+      ],
+      v2_receipt_quality: [
+        "accepted",
+        "accepted_with_reservation",
+        "partially_accepted",
+        "rejected",
+      ],
       v2_reconfirmation_status: [
         "open",
         "assigned",
