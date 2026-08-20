@@ -226,6 +226,10 @@ const V2FieldAdmin = () => {
             {staleSuppliers.length === 0 && <p className="text-sm text-muted-foreground">{t("v2.field.sections.allFresh")}</p>}
           </CardContent>
         </Card>
+
+        <div className="lg:col-span-2">
+          <DemandIntelligence />
+        </div>
       </div>
     </div>
   );
