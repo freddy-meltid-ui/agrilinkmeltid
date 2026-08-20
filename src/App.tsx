@@ -55,6 +55,12 @@ import V2ProductionNew from "./pages/v2/operations/V2ProductionNew";
 import V2ProductionDetail from "./pages/v2/operations/V2ProductionDetail";
 import V2FinishedGoods from "./pages/v2/operations/V2FinishedGoods";
 import V2Traceability from "./pages/v2/operations/V2Traceability";
+import V2Customers from "./pages/v2/operations/V2Customers";
+import V2Sales from "./pages/v2/operations/V2Sales";
+import V2SalesNew from "./pages/v2/operations/V2SalesNew";
+import V2SaleDetail from "./pages/v2/operations/V2SaleDetail";
+import V2Expenses from "./pages/v2/operations/V2Expenses";
+import V2Performance from "./pages/v2/operations/V2Performance";
 
 const queryClient = new QueryClient();
 
