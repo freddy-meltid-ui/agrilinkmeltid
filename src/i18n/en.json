@@ -546,7 +546,7 @@
         "freshness_aging": "Data needs a refresh",
         "freshness_needs_verification": "Stale data — confirmation required",
         "freshness_unknown": "Unknown freshness",
-        "confidence": "{{value}} confidence",
+        "confidence": "{{value}}",
         "quantity": "Can supply {{value}} t",
         "quality": "Quality {{value}}",
         "qualityUnknown": "Quality not recorded",

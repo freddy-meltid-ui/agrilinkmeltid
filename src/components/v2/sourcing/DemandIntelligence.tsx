@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { BarChart3, Loader2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { fetchDemandIntelligence, fetchTaskFeed, type DemandRow, type TaskFeedRow } from "@/lib/v2/sourcing";
+import { localeTag } from "@/lib/v2/locale";
 
 const DemandIntelligence = () => {
   const { t, i18n } = useTranslation();
@@ -46,7 +47,7 @@ const DemandIntelligence = () => {
                     {r.department ? ` · ${r.department}` : ""}
                   </span>
                   <span className="text-xs text-muted-foreground">
-                    {new Date(r.period_month).toLocaleDateString(i18n.language, { month: "long", year: "numeric" })}
+                    {new Date(r.period_month).toLocaleDateString(localeTag(i18n.language), { month: "long", year: "numeric" })}
                   </span>
                 </div>
                 <p className="mt-1 text-xs text-muted-foreground">

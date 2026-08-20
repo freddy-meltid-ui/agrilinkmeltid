@@ -4,11 +4,12 @@ import { AlertTriangle, CalendarRange, Check, MapPin, RefreshCw, Scale, X } from
 import { Button } from "@/components/ui/button";
 import { ConfidenceBadge, FreshnessBadge, SupplyStatusBadge } from "@/components/v2/supply/SupplyBadges";
 import type { MatchRow } from "@/lib/v2/sourcing";
+import { localeTag } from "@/lib/v2/locale";
 
 type Reason = { code: string; ok: boolean; value: unknown; confirmed_at?: string | null };
 
 const fmtDate = (d: string | null, lang: string) =>
-  d ? new Date(d).toLocaleDateString(lang, { day: "2-digit", month: "short" }) : "—";
+  d ? new Date(d).toLocaleDateString(localeTag(lang), { day: "2-digit", month: "short" }) : "—";
 
 const MatchCard = ({
   row,
@@ -57,7 +58,9 @@ const MatchCard = ({
       case "quality":
         return r.value ? t("v2.sourcing.reason.quality", { value: r.value }) : t("v2.sourcing.reason.qualityUnknown");
       case "certification":
-        return r.value ? t("v2.sourcing.reason.certification", { value: r.value }) : t("v2.sourcing.reason.certificationNone");
+        return r.value && !["none", "aucune", "unknown"].includes(String(r.value).toLowerCase())
+          ? t("v2.sourcing.reason.certification", { value: r.value })
+          : t("v2.sourcing.reason.certificationNone");
       default:
         return r.code;
     }
