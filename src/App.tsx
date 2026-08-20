@@ -67,6 +67,12 @@ import V2ComplianceAssessment from "./pages/v2/compliance/V2ComplianceAssessment
 import V2ComplianceActions from "./pages/v2/compliance/V2ComplianceActions";
 import V2ComplianceDocuments from "./pages/v2/compliance/V2ComplianceDocuments";
 import V2ComplianceAuditPack from "./pages/v2/compliance/V2ComplianceAuditPack";
+import V2FinanceLayout from "./pages/v2/finance/V2FinanceLayout";
+import V2FinanceOverview from "./pages/v2/finance/V2FinanceOverview";
+import V2FinanceRequest from "./pages/v2/finance/V2FinanceRequest";
+import V2FinanceDocuments from "./pages/v2/finance/V2FinanceDocuments";
+import V2FinanceDossier from "./pages/v2/finance/V2FinanceDossier";
+import V2FinanceSharing from "./pages/v2/finance/V2FinanceSharing";
 
 const queryClient = new QueryClient();
 
@@ -147,10 +153,14 @@ const App = () => (
               </Route>
               <Route path="compliance/programs/:orgProgramId" element={<V2ComplianceAssessment />} />
               <Route path="compliance/programs/:orgProgramId/audit-pack" element={<V2ComplianceAuditPack />} />
-              <Route
-                path="finance"
-                element={<ModulePlaceholder titleKey="v2.finance.title" descriptionKey="v2.finance.description" phaseKey="v2.phase.p4" />}
-              />
+              <Route path="finance" element={<V2FinanceLayout />}>
+                <Route index element={<V2FinanceOverview />} />
+                <Route path="request" element={<V2FinanceRequest />} />
+                <Route path="documents" element={<V2FinanceDocuments />} />
+                <Route path="dossier" element={<V2FinanceDossier />} />
+                <Route path="sharing" element={<V2FinanceSharing />} />
+              </Route>
+
               <Route
                 path="documents"
                 element={<ModulePlaceholder titleKey="v2.documents.title" descriptionKey="v2.documents.description" phaseKey="v2.phase.p3" />}
