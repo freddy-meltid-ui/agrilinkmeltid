@@ -1836,44 +1836,62 @@ export type Database = {
       }
       v2_processed_products: {
         Row: {
+          category: string | null
           created_at: string
           created_by: string
+          default_inventory_unit: string
+          default_production_unit: string
           facility_id: string | null
           id: string
+          is_active: boolean
           notes: string | null
           organization_id: string
+          product_code: string | null
           product_name: string
           production_capacity_period: string | null
           production_capacity_unit: string | null
           production_capacity_value: number | null
+          shelf_life_days: number | null
           updated_at: string
           value_chain: string | null
         }
         Insert: {
+          category?: string | null
           created_at?: string
           created_by?: string
+          default_inventory_unit?: string
+          default_production_unit?: string
           facility_id?: string | null
           id?: string
+          is_active?: boolean
           notes?: string | null
           organization_id: string
+          product_code?: string | null
           product_name: string
           production_capacity_period?: string | null
           production_capacity_unit?: string | null
           production_capacity_value?: number | null
+          shelf_life_days?: number | null
           updated_at?: string
           value_chain?: string | null
         }
         Update: {
+          category?: string | null
           created_at?: string
           created_by?: string
+          default_inventory_unit?: string
+          default_production_unit?: string
           facility_id?: string | null
           id?: string
+          is_active?: boolean
           notes?: string | null
           organization_id?: string
+          product_code?: string | null
           product_name?: string
           production_capacity_period?: string | null
           production_capacity_unit?: string | null
           production_capacity_value?: number | null
+          shelf_life_days?: number | null
           updated_at?: string
           value_chain?: string | null
         }
@@ -3970,7 +3988,16 @@ export type Database = {
         | "partially_accepted"
         | "rejected"
         | "cancelled"
-      v2_inventory_movement_type: "receipt" | "adjustment_in" | "adjustment_out"
+      v2_fg_movement_type:
+        | "production_output"
+        | "adjustment_in"
+        | "adjustment_out"
+        | "production_void"
+      v2_inventory_movement_type:
+        | "receipt"
+        | "adjustment_in"
+        | "adjustment_out"
+        | "production_consumption"
       v2_org_role:
         | "processor_admin"
         | "processor_employee"
@@ -3991,6 +4018,19 @@ export type Database = {
         | "delivered"
         | "cancelled"
         | "expired"
+      v2_production_loss_category:
+        | "process_loss"
+        | "rejected_raw_material"
+        | "peel_or_husk"
+        | "damaged_output"
+        | "quality_rejection"
+        | "other"
+      v2_production_output_type:
+        | "finished_product"
+        | "by_product"
+        | "waste"
+        | "rejected_output"
+      v2_production_status: "draft" | "ready" | "completed" | "voided"
       v2_receipt_quality:
         | "accepted"
         | "accepted_with_reservation"
@@ -4221,10 +4261,17 @@ export const Constants = {
         "rejected",
         "cancelled",
       ],
+      v2_fg_movement_type: [
+        "production_output",
+        "adjustment_in",
+        "adjustment_out",
+        "production_void",
+      ],
       v2_inventory_movement_type: [
         "receipt",
         "adjustment_in",
         "adjustment_out",
+        "production_consumption",
       ],
       v2_org_role: [
         "processor_admin",
@@ -4248,6 +4295,21 @@ export const Constants = {
         "cancelled",
         "expired",
       ],
+      v2_production_loss_category: [
+        "process_loss",
+        "rejected_raw_material",
+        "peel_or_husk",
+        "damaged_output",
+        "quality_rejection",
+        "other",
+      ],
+      v2_production_output_type: [
+        "finished_product",
+        "by_product",
+        "waste",
+        "rejected_output",
+      ],
+      v2_production_status: ["draft", "ready", "completed", "voided"],
       v2_receipt_quality: [
         "accepted",
         "accepted_with_reservation",
