@@ -62,10 +62,13 @@ const V2FinanceDossier = () => {
   if (!activeOrg || !dossier) return <EmptyState icon={Wallet} title={t("v2.finance.noData")} />;
 
   const lang = i18n.language;
-  const cur = dossier.snapshot?.currency ?? "XOF";
-  const org = dossier.organization ?? {};
-  const req = dossier.financing_request;
-  const s = dossier.snapshot ?? ({} as FinanceDossier["snapshot"]);
+  const s = (dossier.snapshot ?? {}) as FinanceDossier["snapshot"];
+  const cur = s.currency ?? "XOF";
+  const org = (s.business ?? {}) as Record<string, any>;
+  const req = s.financing_request as Record<string, any> | null;
+  const history = dossier.readiness?.history ?? s.history;
+  const useOfFunds = (req?.use_of_funds ?? []) as Record<string, any>[];
+
 
   return (
     <div>
