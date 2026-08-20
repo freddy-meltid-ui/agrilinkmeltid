@@ -67,6 +67,12 @@ import V2ComplianceAssessment from "./pages/v2/compliance/V2ComplianceAssessment
 import V2ComplianceActions from "./pages/v2/compliance/V2ComplianceActions";
 import V2ComplianceDocuments from "./pages/v2/compliance/V2ComplianceDocuments";
 import V2ComplianceAuditPack from "./pages/v2/compliance/V2ComplianceAuditPack";
+import V2FinanceLayout from "./pages/v2/finance/V2FinanceLayout";
+import V2FinanceOverview from "./pages/v2/finance/V2FinanceOverview";
+import V2FinanceRequest from "./pages/v2/finance/V2FinanceRequest";
+import V2FinanceDocuments from "./pages/v2/finance/V2FinanceDocuments";
+import V2FinanceDossier from "./pages/v2/finance/V2FinanceDossier";
+import V2FinanceSharing from "./pages/v2/finance/V2FinanceSharing";
 
 const queryClient = new QueryClient();
 
