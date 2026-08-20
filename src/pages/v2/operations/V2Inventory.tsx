@@ -146,6 +146,38 @@ const V2Inventory = () => {
           )}
         </TabsContent>
       </Tabs>
+
+      <Dialog open={traceOpen} onOpenChange={setTraceOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{t("v2.production.trace.forwardTitle")}</DialogTitle>
+            <DialogDescription>{t("v2.production.trace.forwardDescription")}</DialogDescription>
+          </DialogHeader>
+          {!forward ? (
+            <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
+          ) : forward.productions.length === 0 ? (
+            <p className="text-sm text-muted-foreground">{t("v2.production.trace.forwardEmpty")}</p>
+          ) : (
+            <div className="space-y-3">
+              {forward.productions.map((p) => (
+                <div key={p.production_batch_id} className="rounded-md border border-border p-3 text-sm">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="font-mono text-xs">{p.production_reference}</span>
+                    <span>{Number(p.quantity_tonnes).toFixed(3)} t</span>
+                  </div>
+                  <ul className="mt-2 space-y-1 text-xs text-muted-foreground">
+                    {p.finished_batches.map((f) => (
+                      <li key={f.id}>
+                        {f.reference} — {f.product ?? "—"} · {Number(f.quantity).toFixed(2)} {f.unit_code}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
