@@ -85,6 +85,61 @@ const V2Traceability = () => {
           </p>
         </div>
 
+        {/* Phase 2B — recall readiness: where did this lot go? */}
+        {downstream && (
+          <div className="rounded-lg border border-border bg-card p-4">
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">{t("v2.sales.trace.destinationsTitle")}</p>
+            <p className="mt-1 text-sm">
+              {t("v2.sales.trace.stockLine", {
+                remaining: Number(downstream.remaining_physical).toFixed(2),
+                reserved: Number(downstream.reserved).toFixed(2),
+                available: Number(downstream.available).toFixed(2),
+                unit: downstream.finished_batch.unit_code,
+              })}
+            </p>
+            {downstream.destinations.length === 0 ? (
+              <p className="mt-2 text-xs text-muted-foreground">{t("v2.sales.trace.noDestinations")}</p>
+            ) : (
+              <ul className="mt-3 space-y-2">
+                {downstream.destinations.map((d) => (
+                  <li key={`${d.dispatch_id}-${d.customer_id}`} className="flex flex-wrap items-center justify-between gap-2 text-sm">
+                    <span>
+                      {d.customer_name}
+                      <span className="ml-2 font-mono text-xs text-muted-foreground">
+                        {d.dispatch_reference} · {d.sales_reference}
+                      </span>
+                    </span>
+                    <span className={d.dispatch_status === "reversed" ? "text-muted-foreground line-through" : "font-medium"}>
+                      {Number(d.quantity).toFixed(2)} {d.unit_code}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
+
+        {/* Direct raw-material cost only — never "total production cost". */}
+        {cost && cost.priced_tonnes > 0 && (
+          <div className="rounded-lg border border-border bg-card p-4">
+            <p className="text-xs uppercase tracking-wide text-muted-foreground">{t("v2.sales.trace.directCostTitle")}</p>
+            <p className="mt-1 text-lg font-semibold text-primary">
+              {formatMoney(cost.direct_material_cost, cost.currency, locale)}
+            </p>
+            <p className="text-xs text-muted-foreground">
+              {t("v2.sales.trace.directCostPerUnit", {
+                amount: formatMoney(cost.cost_per_output_unit ?? 0, cost.currency, locale),
+                unit: cost.unit_code,
+              })}
+            </p>
+            <p className="mt-2 text-xs text-muted-foreground">
+              {cost.complete ? t("v2.sales.trace.directCostNote") : t("v2.sales.trace.directCostPartial", { tonnes: Number(cost.unpriced_tonnes).toFixed(3) })}
+            </p>
+          </div>
+        )}
+
+
+
         <p className="text-xs uppercase tracking-wide text-muted-foreground">
           {t("v2.production.trace.originSteps", { count: trace.inputs.length })}
         </p>
