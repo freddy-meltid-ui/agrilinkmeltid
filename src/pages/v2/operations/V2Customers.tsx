@@ -83,7 +83,7 @@ const V2Customers = () => {
         address: form.address || null,
         tax_reference: form.tax_reference || null,
         notes: form.notes || null,
-      });
+      } as Parameters<typeof createCustomer>[0]);
       toast({ title: t("v2.sales.customers.created") });
       setOpen(false);
       setForm({ ...form, display_name: "", contact_person: "", phone: "", email: "", address: "", tax_reference: "", notes: "" });
