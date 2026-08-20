@@ -67,7 +67,20 @@ const V2Operations = () => {
               <Factory className="mr-2 h-4 w-4" />
               {t("v2.production.title")}
             </Button>
+            <Button variant="outline" onClick={() => navigate("/app/operations/sales")}>
+              <ShoppingCart className="mr-2 h-4 w-4" />
+              {t("v2.sales.list.title")}
+            </Button>
+            <Button variant="outline" onClick={() => navigate("/app/operations/expenses")}>
+              <Receipt className="mr-2 h-4 w-4" />
+              {t("v2.expenses.title")}
+            </Button>
+            <Button variant="outline" onClick={() => navigate("/app/operations/performance")}>
+              <TrendingUp className="mr-2 h-4 w-4" />
+              {t("v2.performance.title")}
+            </Button>
           </>
+
         }
       />
 
