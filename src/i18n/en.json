@@ -1412,7 +1412,8 @@
         "posted": "Production {{reference}} posted.",
         "incomplete": "Add at least one input and one output.",
         "noStockTitle": "No raw material in stock",
-        "noStockDescription": "Receive goods first — production can only consume batches that exist in the raw-material ledger."
+        "noStockDescription": "Receive goods first — production can only consume batches that exist in the raw-material ledger.",
+        "yieldRatio": "Estimated yield: {{value}} {{unit}} per kg of raw material"
       },
       "error": {
         "INSUFFICIENT_RAW_MATERIAL_STOCK": "Not enough raw material in stock ({{value}}). Nothing was posted.",

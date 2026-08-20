@@ -1412,7 +1412,8 @@
         "posted": "Production {{reference}} enregistrée.",
         "incomplete": "Ajoutez au moins une entrée et une sortie.",
         "noStockTitle": "Aucune matière première en stock",
-        "noStockDescription": "Réceptionnez d'abord des marchandises : la production ne peut consommer que des lots présents dans le registre."
+        "noStockDescription": "Réceptionnez d'abord des marchandises : la production ne peut consommer que des lots présents dans le registre.",
+        "yieldRatio": "Rendement estimé : {{value}} {{unit}} par kg de matière première"
       },
       "error": {
         "INSUFFICIENT_RAW_MATERIAL_STOCK": "Stock de matière première insuffisant ({{value}}). Rien n'a été enregistré.",

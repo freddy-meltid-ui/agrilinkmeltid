@@ -387,7 +387,9 @@ const V2ProductionNew = () => {
                 <Input id="storage" className="mt-1" value={storage} onChange={(e) => setStorage(e.target.value)} />
               </div>
               <div className="self-end text-sm text-muted-foreground">
-                {t("v2.production.form.yield", { value: (yieldRatio * 100).toFixed(1) })}
+                {yieldIsMass
+                  ? t("v2.production.form.yield", { value: (yieldRatio * 100).toFixed(1) })
+                  : t("v2.production.form.yieldRatio", { value: yieldRatio.toFixed(3), unit: finishedUnit })}
               </div>
             </div>
           </section>
