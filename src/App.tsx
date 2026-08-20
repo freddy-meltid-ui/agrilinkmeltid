@@ -116,6 +116,11 @@ const App = () => (
               <Route path="operations" element={<V2Operations />} />
               <Route path="operations/orders/:orderId" element={<V2OrderDetail />} />
               <Route path="operations/inventory" element={<V2Inventory />} />
+              <Route path="operations/production" element={<V2Production />} />
+              <Route path="operations/production/new" element={<V2ProductionNew />} />
+              <Route path="operations/production/:batchId" element={<V2ProductionDetail />} />
+              <Route path="operations/finished-goods" element={<V2FinishedGoods />} />
+              <Route path="operations/finished-goods/:finishedBatchId" element={<V2Traceability />} />
               <Route path="atlas" element={<V2Atlas />} />
               <Route
                 path="compliance"

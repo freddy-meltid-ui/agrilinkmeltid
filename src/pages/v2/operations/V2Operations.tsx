@@ -58,10 +58,16 @@ const V2Operations = () => {
         title={t("v2.procurement.operations.title")}
         description={t("v2.procurement.operations.description")}
         actions={
-          <Button variant="outline" onClick={() => navigate("/app/operations/inventory")}>
-            <Boxes className="mr-2 h-4 w-4" />
-            {t("v2.procurement.operations.inventoryCta")}
-          </Button>
+          <>
+            <Button variant="outline" onClick={() => navigate("/app/operations/inventory")}>
+              <Boxes className="mr-2 h-4 w-4" />
+              {t("v2.procurement.operations.inventoryCta")}
+            </Button>
+            <Button variant="outline" onClick={() => navigate("/app/operations/production")}>
+              <Factory className="mr-2 h-4 w-4" />
+              {t("v2.production.title")}
+            </Button>
+          </>
         }
       />
 
