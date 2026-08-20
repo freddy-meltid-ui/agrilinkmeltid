@@ -85,6 +85,12 @@ const V2FinanceOverview = () => {
     <div>
       <PageHeader title={t("v2.finance.title")} description={t("v2.finance.overviewDescription")} />
 
+      {snapshot?.multi_currency && (
+        <p className="mb-4 rounded-lg border border-border bg-muted/40 p-3 text-xs text-muted-foreground">
+          {t("v2.finance.multiCurrencyNotice")}
+        </p>
+      )}
+
       {/* headline readiness */}
       <div className="rounded-lg border border-border bg-card p-5">
         <div className="flex flex-wrap items-end justify-between gap-3">

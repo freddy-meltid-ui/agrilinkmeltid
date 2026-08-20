@@ -813,7 +813,13 @@
         "no_sales_records": "Aucune vente enregistrée.",
         "incomplete_cash_data": "Les données de trésorerie et de charges sont incomplètes.",
         "no_financing_request": "Aucune demande de financement préparée.",
-        "low_compliance": "Le niveau de conformité reste faible."
+        "low_compliance": "Le niveau de conformité reste faible.",
+        "short_operating_history": "Historique d'activité court — la complétude ne remplace pas le temps.",
+        "required_documents_missing": "Des documents légaux ou d'entreprise requis sont manquants.",
+        "no_recorded_customer_payments": "Aucun paiement client enregistré pour l'instant.",
+        "no_recorded_sales": "Aucune vente enregistrée pour l'instant.",
+        "cash_data_incomplete": "Les données de trésorerie et de charges sont incomplètes.",
+        "no_compliance_programme": "Aucun programme de conformité démarré."
       },
       "kpi": {
         "history": "Historique d'activité",
@@ -906,7 +912,10 @@
         "expenses": "Charges d'exploitation",
         "inventory_value": "Valeur des stocks",
         "compliance_readiness": "Niveau de conformité",
-        "critical_gaps": "Écarts critiques"
+        "critical_gaps": "Écarts critiques",
+        "procurement_expenditure": "Dépenses d'approvisionnement",
+        "raw_material_stock": "Stock matière première (t)",
+        "active_programs": "Programmes de conformité actifs"
       },
       "requestTitle": "Demande de financement",
       "requestDescription": "Décrivez ce que vous préparez. Rien n'est transmis à une institution.",
@@ -938,7 +947,15 @@
         "recipientType": "Type de destinataire",
         "recipientName": "Nom du destinataire",
         "recipientEmail": "E-mail du destinataire",
-        "expiresIn": "Expire dans (jours)"
+        "expiresIn": "Expire dans (jours)",
+        "legalName": "Dénomination légale",
+        "legalForm": "Forme juridique",
+        "rccm": "RCCM",
+        "ifu": "IFU",
+        "yearEstablished": "Année de création",
+        "employees": "Employés",
+        "facilities": "Sites",
+        "products": "Produits"
       },
       "purposes": {
         "working_capital": "Fonds de roulement",
@@ -1039,6 +1056,29 @@
         "profile_updated": "Demande mise à jour",
         "document_linked": "Document rattaché",
         "document_unlinked": "Document détaché"
+      },
+      "multiCurrencyNotice": "Plusieurs devises figurent dans ce dossier. Agri-Grid n'applique aucun taux de change : les montants ne sont jamais additionnés entre devises, chaque devise est présentée séparément.",
+      "expiredBadge": "Document expiré",
+      "expiry": {
+        "no_expiry": "Sans échéance",
+        "valid": "Valable jusqu'au",
+        "expiring_soon": "Expire bientôt",
+        "expired": "Expiré"
+      },
+      "shared": {
+        "kicker": "Dossier d'entreprise partagé",
+        "sharedWith": "Partagé avec {{name}}",
+        "validUntil": "Valable jusqu'au {{date}}",
+        "scopesShared": "Informations partagées",
+        "disclaimer": "Ce dossier est généré à partir des données saisies par l'entreprise dans Agri-Grid. Il n'est ni audité, ni certifié ; ce n'est pas un score de crédit ni une recommandation de financement. Toute décision de financement reste la vôtre.",
+        "documentsNotice": "Disponibilité des documents uniquement. Les fichiers ne sont pas partagés via ce lien.",
+        "footer": "Généré par Agri-Grid. Les accès sont journalisés et peuvent être révoqués à tout moment par l'entreprise.",
+        "notFoundTitle": "Lien introuvable",
+        "notFoundBody": "Ce lien de partage n'est pas valide. Demandez un nouveau lien à l'entreprise.",
+        "expiredTitle": "Lien expiré",
+        "expiredBody": "Ce lien de partage a expiré. Demandez un nouveau lien à l'entreprise.",
+        "revokedTitle": "Accès révoqué",
+        "revokedBody": "L'entreprise a révoqué l'accès à ce dossier."
       }
     },
     "documents": {

@@ -6345,6 +6345,10 @@ export type Database = {
         Args: { _expiry: string; _threshold_days?: number }
         Returns: string
       }
+      v2_finance_can_read: {
+        Args: { _organization_id: string }
+        Returns: boolean
+      }
       v2_finance_documents_status: {
         Args: { _organization_id: string }
         Returns: Json

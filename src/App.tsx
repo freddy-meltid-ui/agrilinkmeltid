@@ -73,6 +73,7 @@ import V2FinanceRequest from "./pages/v2/finance/V2FinanceRequest";
 import V2FinanceDocuments from "./pages/v2/finance/V2FinanceDocuments";
 import V2FinanceDossier from "./pages/v2/finance/V2FinanceDossier";
 import V2FinanceSharing from "./pages/v2/finance/V2FinanceSharing";
+import V2FinanceSharedDossier from "./pages/v2/finance/V2FinanceSharedDossier";
 
 const queryClient = new QueryClient();
 
@@ -161,6 +162,7 @@ const App = () => (
                 <Route path="sharing" element={<V2FinanceSharing />} />
               </Route>
 
+
               <Route
                 path="documents"
                 element={<ModulePlaceholder titleKey="v2.documents.title" descriptionKey="v2.documents.description" phaseKey="v2.phase.p3" />}
@@ -169,6 +171,9 @@ const App = () => (
               <Route path="settings" element={<V2Settings />} />
             </Route>
             <Route path="/legacy" element={<Navigate to="/dashboard" replace />} />
+
+            {/* Consent-based lender pack: public, token-only, no session required. */}
+            <Route path="/finance-pack/:token" element={<V2FinanceSharedDossier />} />
 
             <Route path="*" element={<NotFound />} />
             </Routes>

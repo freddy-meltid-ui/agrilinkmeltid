@@ -63,7 +63,8 @@ const V2FinanceDossier = () => {
 
   const lang = i18n.language;
   const s = (dossier.snapshot ?? {}) as FinanceDossier["snapshot"];
-  const cur = s.currency ?? "XOF";
+  const cur = s.currency ?? null;
+  const multiCurrency = Boolean(s.multi_currency);
   const org = (s.business ?? {}) as Record<string, any>;
   const req = s.financing_request as Record<string, any> | null;
   const history = dossier.readiness?.history ?? s.history;
@@ -87,13 +88,22 @@ const V2FinanceDossier = () => {
         {t("v2.finance.generatedAt")}: {new Date(dossier.generated_at).toLocaleString(lang)}
       </p>
 
+      {multiCurrency && (
+        <p className="mt-3 rounded-lg border border-border bg-muted/40 p-3 text-xs text-muted-foreground">
+          {t("v2.finance.multiCurrencyNotice")}
+        </p>
+      )}
+
       <Section title={t("v2.finance.sections.identity")}>
         <Row label={t("v2.finance.fields.orgName")} value={org.name} />
-        <Row label={t("v2.finance.fields.orgType")} value={org.org_type} />
+        <Row label={t("v2.finance.fields.legalName")} value={org.legal_name ?? org.trade_name} />
+        <Row label={t("v2.finance.fields.legalForm")} value={org.legal_form} />
         <Row label={t("v2.finance.fields.country")} value={org.country} />
         <Row label={t("v2.finance.fields.city")} value={org.city} />
-        <Row label={t("v2.finance.fields.registration")} value={org.registration_number} />
-        <Row label={t("v2.finance.fields.taxId")} value={org.tax_id} />
+        <Row label={t("v2.finance.fields.rccm")} value={org.rccm} />
+        <Row label={t("v2.finance.fields.ifu")} value={org.ifu} />
+        <Row label={t("v2.finance.fields.yearEstablished")} value={org.year_established} />
+        <Row label={t("v2.finance.fields.employees")} value={org.employees_count} />
       </Section>
 
       <Section title={t("v2.finance.sections.request")}>
@@ -101,7 +111,7 @@ const V2FinanceDossier = () => {
           <>
             <Row
               label={t("v2.finance.fields.purpose")}
-              value={req.financing_purpose ? t(`v2.finance.purposes.${req.financing_purpose}`) : "—"}
+              value={req.purpose ? t(`v2.finance.purposes.${req.purpose}`) : "—"}
             />
             <Row
               label={t("v2.finance.fields.type")}
@@ -158,10 +168,17 @@ const V2FinanceDossier = () => {
           value={formatAmount(s.collections?.outstanding_receivables, cur, lang)}
         />
         <Row label={t("v2.finance.facts.collection_ratio")} value={s.collections?.collection_ratio} />
-        <Row label={t("v2.finance.facts.expenses")} value={formatAmount(s.expenses?.total, cur, lang)} />
+        <Row
+          label={t("v2.finance.facts.expenses")}
+          value={formatAmount(s.expenses?.other_operating_expenses, cur, lang)}
+        />
+        <Row
+          label={t("v2.finance.facts.procurement_expenditure")}
+          value={formatAmount(s.expenses?.procurement_expenditure, cur, lang)}
+        />
         <Row
           label={t("v2.finance.facts.inventory_value")}
-          value={formatAmount(s.inventory?.value, cur, lang)}
+          value={formatAmount(s.inventory?.raw_material_value, cur, lang)}
         />
       </Section>
 

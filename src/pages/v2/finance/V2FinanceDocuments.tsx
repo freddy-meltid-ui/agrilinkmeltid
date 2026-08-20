@@ -116,6 +116,9 @@ const V2FinanceDocuments = () => {
                         {d.available && (
                           <StatusBadge label={t("v2.finance.availableBadge")} tone="success" />
                         )}
+                        {!d.available && d.linked_but_expired && (
+                          <StatusBadge label={t("v2.finance.expiredBadge")} tone="danger" />
+                        )}
                       </p>
                       <p className="mt-0.5 text-xs text-muted-foreground">{docDescription(d, i18n.language)}</p>
                     </div>
@@ -155,6 +158,21 @@ const V2FinanceDocuments = () => {
                           <span className="flex items-center gap-2 text-muted-foreground">
                             <Link2 className="h-3.5 w-3.5" />
                             {ld.title ?? "—"}
+                            {ld.current_version ? (
+                              <span className="text-muted-foreground/70">· v{ld.current_version}</span>
+                            ) : null}
+                            {ld.expiry_date ? (
+                              <span
+                                className={
+                                  ld.expiry_status === "expired"
+                                    ? "text-destructive"
+                                    : "text-muted-foreground/70"
+                                }
+                              >
+                                · {t(`v2.finance.expiry.${ld.expiry_status ?? "no_expiry"}`)} (
+                                {new Date(ld.expiry_date).toLocaleDateString(i18n.language)})
+                              </span>
+                            ) : null}
                             <span className="text-muted-foreground/70">
                               · {t("v2.finance.source.compliance_document_library")}
                             </span>

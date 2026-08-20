@@ -103,13 +103,20 @@ export type FinanceDocumentStatus = {
   description_en: string | null;
   suggested_document_category: string | null;
   sort_order: number;
+  /** EXISTS over non-archived, non-expired linked documents — never a count. */
   available: boolean;
+  /** True when the requirement is only covered by an expired document. */
+  linked_but_expired?: boolean;
   linked_documents: {
     link_id: string;
     document_id: string | null;
     title: string | null;
     category: string | null;
     current_version: number | null;
+    issue_date?: string | null;
+    expiry_date?: string | null;
+    expiry_status?: "no_expiry" | "valid" | "expiring_soon" | "expired";
+    is_archived?: boolean;
     source: string;
   }[];
 };
@@ -159,7 +166,11 @@ export type FinanceSnapshot = {
   generated_at: string;
   period_from: string;
   period_to: string;
-  currency: string;
+  /** NULL when several currencies are recorded: no FX rate is ever applied. */
+  currency: string | null;
+  currencies: string[];
+  multi_currency: boolean;
+  aggregation_note: string;
   history: FinanceHistory;
   business: Record<string, any> | null;
   facilities: Record<string, any>[];
@@ -246,6 +257,26 @@ export async function fetchFinanceDossier(orgId: string): Promise<FinanceDossier
   if (error) throw error;
   return data as unknown as FinanceDossier;
 }
+
+/**
+ * Consent-based lender pack. Called WITHOUT a session: the hashed token alone
+ * authorises a scoped, read-only projection of a single business record.
+ */
+export async function fetchSharedFinanceDossier(token: string): Promise<SharedFinanceDossier> {
+  const { data, error } = await supabase.rpc("v2_finance_shared_dossier", { _token: token });
+  if (error) throw error;
+  return data as unknown as SharedFinanceDossier;
+}
+
+export type SharedFinanceDossier = {
+  shared_at: string;
+  scopes: FinanceShareScope[];
+  recipient: string | null;
+  expires_at: string | null;
+  organization: string | null;
+  dossier?: Partial<FinanceDossier> & Record<string, any>;
+  disclaimer?: string;
+} & Record<string, any>;
 
 export async function fetchFinanceShares(orgId: string): Promise<FinanceShare[]> {
   const { data, error } = await supabase
@@ -381,9 +412,15 @@ export function docDescription(doc: FinanceDocumentStatus, lang: string) {
   return lang?.startsWith("fr") ? doc.description_fr : doc.description_en;
 }
 
-export function formatAmount(value: number | null | undefined, currency = "XOF", lang = "fr") {
+export function formatAmount(
+  value: number | null | undefined,
+  currency: string | null | undefined = "XOF",
+  lang = "fr",
+) {
+  // A null value means "not aggregatable" (several currencies) or "not recorded".
   if (value === null || value === undefined) return "—";
-  return `${new Intl.NumberFormat(lang.startsWith("fr") ? "fr-FR" : "en-US").format(Math.round(value))} ${currency}`;
+  const n = new Intl.NumberFormat(lang.startsWith("fr") ? "fr-FR" : "en-US").format(Math.round(value));
+  return currency ? `${n} ${currency}` : n;
 }
 
 export function sumLines(lines: { amount: number | string }[]) {
