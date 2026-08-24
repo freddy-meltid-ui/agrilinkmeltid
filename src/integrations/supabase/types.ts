@@ -920,13 +920,95 @@ export type Database = {
         }
         Relationships: []
       }
+      v2_ai_analysis_reviews: {
+        Row: {
+          analysis_id: string
+          decision: Database["public"]["Enums"]["v2_ai_review_status"]
+          id: string
+          observation_id: string
+          organization_id: string
+          previous_decision:
+            | Database["public"]["Enums"]["v2_ai_review_status"]
+            | null
+          review_comment: string | null
+          reviewed_at: string
+          reviewed_by: string | null
+          reviewed_description: string | null
+          reviewed_severity:
+            | Database["public"]["Enums"]["v2_compliance_severity"]
+            | null
+          reviewed_title: string | null
+        }
+        Insert: {
+          analysis_id: string
+          decision: Database["public"]["Enums"]["v2_ai_review_status"]
+          id?: string
+          observation_id: string
+          organization_id: string
+          previous_decision?:
+            | Database["public"]["Enums"]["v2_ai_review_status"]
+            | null
+          review_comment?: string | null
+          reviewed_at?: string
+          reviewed_by?: string | null
+          reviewed_description?: string | null
+          reviewed_severity?:
+            | Database["public"]["Enums"]["v2_compliance_severity"]
+            | null
+          reviewed_title?: string | null
+        }
+        Update: {
+          analysis_id?: string
+          decision?: Database["public"]["Enums"]["v2_ai_review_status"]
+          id?: string
+          observation_id?: string
+          organization_id?: string
+          previous_decision?:
+            | Database["public"]["Enums"]["v2_ai_review_status"]
+            | null
+          review_comment?: string | null
+          reviewed_at?: string
+          reviewed_by?: string | null
+          reviewed_description?: string | null
+          reviewed_severity?:
+            | Database["public"]["Enums"]["v2_compliance_severity"]
+            | null
+          reviewed_title?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_ai_analysis_reviews_analysis_id_fkey"
+            columns: ["analysis_id"]
+            isOneToOne: false
+            referencedRelation: "v2_ai_compliance_analyses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_ai_analysis_reviews_observation_id_fkey"
+            columns: ["observation_id"]
+            isOneToOne: false
+            referencedRelation: "v2_ai_compliance_observations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_ai_analysis_reviews_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       v2_ai_compliance_analyses: {
         Row: {
           analysed_at: string | null
+          analysis_schema_version: string
           analysis_type: Database["public"]["Enums"]["v2_ai_analysis_type"]
+          cancelled_at: string | null
           completed_at: string | null
           compliance_program_id: string | null
           confidence: string | null
+          consent_record_id: string | null
           created_at: string
           created_by: string | null
           document_version_id: string | null
@@ -936,6 +1018,7 @@ export type Database = {
           facility_id: string | null
           file_bytes: number | null
           id: string
+          is_demo: boolean
           is_latest: boolean
           mime_type: string | null
           model: string
@@ -958,10 +1041,13 @@ export type Database = {
         }
         Insert: {
           analysed_at?: string | null
+          analysis_schema_version?: string
           analysis_type: Database["public"]["Enums"]["v2_ai_analysis_type"]
+          cancelled_at?: string | null
           completed_at?: string | null
           compliance_program_id?: string | null
           confidence?: string | null
+          consent_record_id?: string | null
           created_at?: string
           created_by?: string | null
           document_version_id?: string | null
@@ -971,6 +1057,7 @@ export type Database = {
           facility_id?: string | null
           file_bytes?: number | null
           id?: string
+          is_demo?: boolean
           is_latest?: boolean
           mime_type?: string | null
           model: string
@@ -993,10 +1080,13 @@ export type Database = {
         }
         Update: {
           analysed_at?: string | null
+          analysis_schema_version?: string
           analysis_type?: Database["public"]["Enums"]["v2_ai_analysis_type"]
+          cancelled_at?: string | null
           completed_at?: string | null
           compliance_program_id?: string | null
           confidence?: string | null
+          consent_record_id?: string | null
           created_at?: string
           created_by?: string | null
           document_version_id?: string | null
@@ -1006,6 +1096,7 @@ export type Database = {
           facility_id?: string | null
           file_bytes?: number | null
           id?: string
+          is_demo?: boolean
           is_latest?: boolean
           mime_type?: string | null
           model?: string
@@ -1032,6 +1123,13 @@ export type Database = {
             columns: ["compliance_program_id"]
             isOneToOne: false
             referencedRelation: "v2_compliance_programs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_ai_compliance_analyses_consent_record_id_fkey"
+            columns: ["consent_record_id"]
+            isOneToOne: false
+            referencedRelation: "v2_ai_consents"
             referencedColumns: ["id"]
           },
           {
@@ -1139,20 +1237,27 @@ export type Database = {
             | Database["public"]["Enums"]["v2_compliance_category"]
             | null
           ai_confidence: string | null
+          ai_confidence_score: number | null
           ai_description: string | null
+          ai_limitation: string | null
           ai_rationale: string | null
           ai_raw: Json
           ai_requirement_id: string | null
           ai_severity:
             | Database["public"]["Enums"]["v2_compliance_severity"]
             | null
+          ai_suggested_next_action: string | null
           ai_title: string
           analysis_id: string
           created_at: string
+          evidence_reference: string | null
           finding_id: string | null
           id: string
+          observation_code: string | null
           observation_kind: string
+          observation_type: Database["public"]["Enums"]["v2_ai_observation_type"]
           organization_id: string
+          requires_human_verification: boolean
           review_status: Database["public"]["Enums"]["v2_ai_review_status"]
           reviewed_at: string | null
           reviewed_by: string | null
@@ -1171,20 +1276,27 @@ export type Database = {
             | Database["public"]["Enums"]["v2_compliance_category"]
             | null
           ai_confidence?: string | null
+          ai_confidence_score?: number | null
           ai_description?: string | null
+          ai_limitation?: string | null
           ai_rationale?: string | null
           ai_raw?: Json
           ai_requirement_id?: string | null
           ai_severity?:
             | Database["public"]["Enums"]["v2_compliance_severity"]
             | null
+          ai_suggested_next_action?: string | null
           ai_title: string
           analysis_id: string
           created_at?: string
+          evidence_reference?: string | null
           finding_id?: string | null
           id?: string
+          observation_code?: string | null
           observation_kind?: string
+          observation_type?: Database["public"]["Enums"]["v2_ai_observation_type"]
           organization_id: string
+          requires_human_verification?: boolean
           review_status?: Database["public"]["Enums"]["v2_ai_review_status"]
           reviewed_at?: string | null
           reviewed_by?: string | null
@@ -1203,20 +1315,27 @@ export type Database = {
             | Database["public"]["Enums"]["v2_compliance_category"]
             | null
           ai_confidence?: string | null
+          ai_confidence_score?: number | null
           ai_description?: string | null
+          ai_limitation?: string | null
           ai_rationale?: string | null
           ai_raw?: Json
           ai_requirement_id?: string | null
           ai_severity?:
             | Database["public"]["Enums"]["v2_compliance_severity"]
             | null
+          ai_suggested_next_action?: string | null
           ai_title?: string
           analysis_id?: string
           created_at?: string
+          evidence_reference?: string | null
           finding_id?: string | null
           id?: string
+          observation_code?: string | null
           observation_kind?: string
+          observation_type?: Database["public"]["Enums"]["v2_ai_observation_type"]
           organization_id?: string
+          requires_human_verification?: boolean
           review_status?: Database["public"]["Enums"]["v2_ai_review_status"]
           reviewed_at?: string | null
           reviewed_by?: string | null
@@ -6592,6 +6711,10 @@ export type Database = {
         }
         Returns: Json
       }
+      v2_ai_cancel_analysis: {
+        Args: { _analysis_id: string; _reason?: string }
+        Returns: Json
+      }
       v2_ai_create_analysis: {
         Args: {
           _analysis_type: Database["public"]["Enums"]["v2_ai_analysis_type"]
@@ -6635,6 +6758,10 @@ export type Database = {
       v2_ai_safe_category: {
         Args: { _v: string }
         Returns: Database["public"]["Enums"]["v2_compliance_category"]
+      }
+      v2_ai_safe_observation_type: {
+        Args: { _v: string }
+        Returns: Database["public"]["Enums"]["v2_ai_observation_type"]
       }
       v2_ai_safe_severity: {
         Args: { _v: string }
@@ -7420,6 +7547,13 @@ export type Database = {
         | "document_requirement"
         | "product_label"
         | "facility_photo"
+      v2_ai_observation_type:
+        | "positive_evidence"
+        | "potential_gap"
+        | "missing_visible_evidence"
+        | "uncertain"
+        | "not_assessable"
+        | "suggested_action"
       v2_ai_relevance:
         | "relevant_evidence_detected"
         | "potentially_relevant"
@@ -7886,6 +8020,14 @@ export const Constants = {
         "document_requirement",
         "product_label",
         "facility_photo",
+      ],
+      v2_ai_observation_type: [
+        "positive_evidence",
+        "potential_gap",
+        "missing_visible_evidence",
+        "uncertain",
+        "not_assessable",
+        "suggested_action",
       ],
       v2_ai_relevance: [
         "relevant_evidence_detected",
