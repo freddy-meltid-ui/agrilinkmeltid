@@ -7408,12 +7408,14 @@ export type Database = {
         | "verified"
         | "cancelled"
       v2_ai_analysis_status:
+        | "draft"
         | "queued"
         | "processing"
         | "completed"
         | "failed"
         | "reviewed"
         | "archived"
+        | "cancelled"
       v2_ai_analysis_type:
         | "document_requirement"
         | "product_label"
@@ -7871,12 +7873,14 @@ export const Constants = {
         "cancelled",
       ],
       v2_ai_analysis_status: [
+        "draft",
         "queued",
         "processing",
         "completed",
         "failed",
         "reviewed",
         "archived",
+        "cancelled",
       ],
       v2_ai_analysis_type: [
         "document_requirement",
