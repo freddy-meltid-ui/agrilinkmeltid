@@ -2876,6 +2876,24 @@ export type Database = {
           },
         ]
       }
+      v2_finance_share_probes: {
+        Row: {
+          attempted_at: string
+          hash_prefix: string
+          id: string
+        }
+        Insert: {
+          attempted_at?: string
+          hash_prefix: string
+          id?: string
+        }
+        Update: {
+          attempted_at?: string
+          hash_prefix?: string
+          id?: string
+        }
+        Relationships: []
+      }
       v2_finance_shares: {
         Row: {
           access_count: number
