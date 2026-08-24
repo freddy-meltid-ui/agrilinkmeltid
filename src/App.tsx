@@ -149,11 +149,14 @@ const App = () => (
               <Route path="atlas" element={<V2Atlas />} />
               <Route path="compliance" element={<V2ComplianceLayout />}>
                 <Route index element={<V2ComplianceOverview />} />
+                <Route path="copilot" element={<V2ComplianceCopilot />} />
+                <Route path="copilot/:analysisId" element={<V2CopilotAnalysis />} />
                 <Route path="actions" element={<V2ComplianceActions />} />
                 <Route path="documents" element={<V2ComplianceDocuments />} />
               </Route>
               <Route path="compliance/programs/:orgProgramId" element={<V2ComplianceAssessment />} />
               <Route path="compliance/programs/:orgProgramId/audit-pack" element={<V2ComplianceAuditPack />} />
+
               <Route path="finance" element={<V2FinanceLayout />}>
                 <Route index element={<V2FinanceOverview />} />
                 <Route path="request" element={<V2FinanceRequest />} />
