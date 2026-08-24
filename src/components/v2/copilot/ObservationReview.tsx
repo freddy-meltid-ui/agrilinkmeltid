@@ -43,7 +43,7 @@ const SEVERITIES: Severity[] = ["low", "medium", "high", "critical"];
 
 
 const ObservationReview = ({ observation, onChanged }: { observation: AiObservation; onChanged: () => void }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { toast } = useToast();
   const o = observation;
   const [busy, setBusy] = useState<string | null>(null);
@@ -56,6 +56,16 @@ const ObservationReview = ({ observation, onChanged }: { observation: AiObservat
   });
   const [actionForm, setActionForm] = useState({ due_date: "", responsible_name: "" });
   const [showAction, setShowAction] = useState(false);
+  const [history, setHistory] = useState<AiReview[] | null>(null);
+
+  const loadHistory = async () => {
+    try {
+      setHistory(await fetchReviewHistory(o.id));
+    } catch {
+      setHistory([]);
+    }
+  };
+
 
   const guard = async (key: string, fn: () => Promise<void>) => {
     setBusy(key);
