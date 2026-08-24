@@ -87,60 +87,67 @@ Return ONLY a JSON object matching the provided schema. No markdown, no commenta
 
 const TEMPLATES: Record<AnalysisType, { version: string; body: string }> = {
   document_requirement: {
-    version: "DOCUMENT_REQUIREMENT_V1",
+    version: "DOCUMENT_REQUIREMENT_V2",
     body: `${COMMON_RULES}
 TASK — DOCUMENT REVIEW AGAINST A REQUIREMENT
 Analyse the attached document as possible audit-preparation evidence.
 
-Address, in this order:
+Address, in this order, expressing each point as an observation:
 A. REQUIREMENT RELEVANCE — does the document appear to contain evidence relevant to the requirement?
    Set "requirement_relevance" to exactly one of:
      "relevant_evidence_detected" | "potentially_relevant" | "insufficient_evidence" | "unable_to_determine"
    This is advisory only and is NOT an assessment of compliance.
-B. MISSING INFORMATION — information a reviewer would expect but that is not evident
-   (e.g. a cleaning procedure with no cleaning frequency stated).
-C. DOCUMENT CONSISTENCY — title, version, date, author, approval, scope: note what appears incomplete.
-D. DATES — you MAY propose issue/expiry dates you can read, inside "extracted_dates".
+B. PRESENT ELEMENTS — expected elements you can actually read ("positive_evidence").
+C. MISSING INFORMATION — information a reviewer would expect but that is not evident, e.g. a cleaning
+   procedure with no cleaning frequency stated ("missing_visible_evidence").
+D. DOCUMENT CONSISTENCY — title, version, date, author, approval, scope: what appears incomplete
+   ("potential_gap", hedged), or unreadable ("uncertain").
+E. DATES — you MAY propose issue/expiry dates you can read, inside "extracted_dates".
    These are PROPOSALS ONLY; a human must confirm them. Never assert an official expiry date.
-E. SUGGESTED ACTIONS — concrete preparation steps.`,
+F. PREPARATION STEPS — concrete steps as "suggested_action" observations.
+If the document is unrelated to the requirement, say so plainly with "not_assessable" and a low confidence.`,
   },
   product_label: {
-    version: "LABEL_REVIEW_V1",
+    version: "LABEL_REVIEW_V2",
     body: `${COMMON_RULES}
 TASK — PRODUCT LABEL REVIEW (PREPARATION CHECKLIST)
 Analyse the attached product label artwork or photo.
 
-List which of these elements are VISIBLE, and which appear MISSING or unreadable:
-product name; ingredients list; net quantity; producer/manufacturer identity; address or contact
-information; lot / batch information; production date; expiry or best-before date; storage
-instructions; usage instructions; allergen information; origin; barcode; nutrition information.
+Check these elements: product name; ingredients list; net quantity; producer/manufacturer identity;
+address or contact information; lot / batch information; production date; expiry or best-before date;
+storage instructions; usage instructions; allergen information; origin; barcode; nutrition information.
 
+Each element you can read becomes a "positive_evidence" observation; each element you cannot see
+becomes a "missing_visible_evidence" observation; anything printed but unreadable becomes "uncertain".
 Use the wording "elements detected" / "elements potentially missing" / "points to verify".
 NEVER write that the label is approved, compliant or non compliant — Agri-Grid does not approve labels.
-Put each visible element in "observations" (kind "observation") and each element you cannot see in
-"missing_information". Add verification questions for the operator in "questions_for_operator".`,
+Add verification questions for the operator in "questions_for_operator".`,
   },
   facility_photo: {
-    version: "FACILITY_PHOTO_V1",
+    version: "FACILITY_PHOTO_V2",
     body: `${COMMON_RULES}
 TASK — FACILITY PHOTO REVIEW (SINGLE PHOTO)
 Describe observable conditions in the attached photo of a food-processing facility area
 (handwashing area, storage room, production area, cleaning-product storage, waste area, equipment,
 raw-material reception, personal protective equipment...).
 
-Return:
-- observations: observable elements, including POSITIVE observations (set "is_positive": true for those)
-- potential_gaps: potential concerns visible in the frame, always hedged
-- missing_information: visual evidence that is absent from the frame (not proof of absence in reality)
+Return, all inside "observations":
+- what IS visible and expected → "positive_evidence"
+- potential concerns visible in the frame, always hedged → "potential_gap"
+- expected visual evidence absent from the frame (NOT proof of absence in reality)
+  → "missing_visible_evidence"
+- anything you cannot read or judge from a single frame → "uncertain" or "not_assessable"
+- concrete preparation steps → "suggested_action"
+Also return:
 - questions_for_operator: e.g. "Is another hand-drying system available outside the photographed frame?"
 - suggested_next_evidence: e.g. "Take a wider photo of the handwashing station."
-- suggested_actions: concrete preparation steps
 - limitations: what a single photo cannot show (microbiological safety, water quality, actual practice,
   frequency, records, anything outside the frame)
 
 Never conclude that the facility violates any regulation.`,
   },
 };
+
 
 export function promptFor(
   analysisType: AnalysisType,
