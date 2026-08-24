@@ -881,6 +881,479 @@ export type Database = {
         }
         Relationships: []
       }
+      v2_ai_analysis_config: {
+        Row: {
+          analysis_type: Database["public"]["Enums"]["v2_ai_analysis_type"]
+          consent_version: string
+          is_enabled: boolean
+          max_analyses_per_hour: number
+          max_file_bytes: number
+          model: string
+          prompt_version: string
+          provider: string
+          supported_mime_types: string[]
+          updated_at: string
+        }
+        Insert: {
+          analysis_type: Database["public"]["Enums"]["v2_ai_analysis_type"]
+          consent_version?: string
+          is_enabled?: boolean
+          max_analyses_per_hour?: number
+          max_file_bytes?: number
+          model?: string
+          prompt_version: string
+          provider?: string
+          supported_mime_types: string[]
+          updated_at?: string
+        }
+        Update: {
+          analysis_type?: Database["public"]["Enums"]["v2_ai_analysis_type"]
+          consent_version?: string
+          is_enabled?: boolean
+          max_analyses_per_hour?: number
+          max_file_bytes?: number
+          model?: string
+          prompt_version?: string
+          provider?: string
+          supported_mime_types?: string[]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      v2_ai_compliance_analyses: {
+        Row: {
+          analysed_at: string | null
+          analysis_type: Database["public"]["Enums"]["v2_ai_analysis_type"]
+          completed_at: string | null
+          compliance_program_id: string | null
+          confidence: string | null
+          created_at: string
+          created_by: string | null
+          document_version_id: string | null
+          error_code: string | null
+          error_message: string | null
+          evidence_id: string
+          facility_id: string | null
+          file_bytes: number | null
+          id: string
+          is_latest: boolean
+          mime_type: string | null
+          model: string
+          org_program_id: string | null
+          organization_id: string
+          prompt_version: string
+          provider: string
+          relevance: Database["public"]["Enums"]["v2_ai_relevance"] | null
+          requested_at: string
+          requirement_id: string | null
+          result: Json | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: Database["public"]["Enums"]["v2_ai_analysis_status"]
+          storage_path: string | null
+          supersedes_id: string | null
+          updated_at: string
+          usage: Json | null
+          user_context: string | null
+        }
+        Insert: {
+          analysed_at?: string | null
+          analysis_type: Database["public"]["Enums"]["v2_ai_analysis_type"]
+          completed_at?: string | null
+          compliance_program_id?: string | null
+          confidence?: string | null
+          created_at?: string
+          created_by?: string | null
+          document_version_id?: string | null
+          error_code?: string | null
+          error_message?: string | null
+          evidence_id: string
+          facility_id?: string | null
+          file_bytes?: number | null
+          id?: string
+          is_latest?: boolean
+          mime_type?: string | null
+          model: string
+          org_program_id?: string | null
+          organization_id: string
+          prompt_version: string
+          provider?: string
+          relevance?: Database["public"]["Enums"]["v2_ai_relevance"] | null
+          requested_at?: string
+          requirement_id?: string | null
+          result?: Json | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: Database["public"]["Enums"]["v2_ai_analysis_status"]
+          storage_path?: string | null
+          supersedes_id?: string | null
+          updated_at?: string
+          usage?: Json | null
+          user_context?: string | null
+        }
+        Update: {
+          analysed_at?: string | null
+          analysis_type?: Database["public"]["Enums"]["v2_ai_analysis_type"]
+          completed_at?: string | null
+          compliance_program_id?: string | null
+          confidence?: string | null
+          created_at?: string
+          created_by?: string | null
+          document_version_id?: string | null
+          error_code?: string | null
+          error_message?: string | null
+          evidence_id?: string
+          facility_id?: string | null
+          file_bytes?: number | null
+          id?: string
+          is_latest?: boolean
+          mime_type?: string | null
+          model?: string
+          org_program_id?: string | null
+          organization_id?: string
+          prompt_version?: string
+          provider?: string
+          relevance?: Database["public"]["Enums"]["v2_ai_relevance"] | null
+          requested_at?: string
+          requirement_id?: string | null
+          result?: Json | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: Database["public"]["Enums"]["v2_ai_analysis_status"]
+          storage_path?: string | null
+          supersedes_id?: string | null
+          updated_at?: string
+          usage?: Json | null
+          user_context?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_ai_compliance_analyses_compliance_program_id_fkey"
+            columns: ["compliance_program_id"]
+            isOneToOne: false
+            referencedRelation: "v2_compliance_programs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_ai_compliance_analyses_document_version_id_fkey"
+            columns: ["document_version_id"]
+            isOneToOne: false
+            referencedRelation: "v2_compliance_document_versions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_ai_compliance_analyses_evidence_id_fkey"
+            columns: ["evidence_id"]
+            isOneToOne: false
+            referencedRelation: "v2_compliance_evidence"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_ai_compliance_analyses_facility_id_fkey"
+            columns: ["facility_id"]
+            isOneToOne: false
+            referencedRelation: "v2_processing_facilities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_ai_compliance_analyses_org_program_id_fkey"
+            columns: ["org_program_id"]
+            isOneToOne: false
+            referencedRelation: "v2_org_compliance_programs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_ai_compliance_analyses_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_ai_compliance_analyses_requirement_id_fkey"
+            columns: ["requirement_id"]
+            isOneToOne: false
+            referencedRelation: "v2_compliance_requirements"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_ai_compliance_analyses_supersedes_id_fkey"
+            columns: ["supersedes_id"]
+            isOneToOne: false
+            referencedRelation: "v2_ai_compliance_analyses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_ai_compliance_events: {
+        Row: {
+          actor_id: string | null
+          analysis_id: string | null
+          created_at: string
+          entity_id: string | null
+          entity_type: string | null
+          event_type: string
+          id: string
+          observation_id: string | null
+          organization_id: string
+          payload: Json
+        }
+        Insert: {
+          actor_id?: string | null
+          analysis_id?: string | null
+          created_at?: string
+          entity_id?: string | null
+          entity_type?: string | null
+          event_type: string
+          id?: string
+          observation_id?: string | null
+          organization_id: string
+          payload?: Json
+        }
+        Update: {
+          actor_id?: string | null
+          analysis_id?: string | null
+          created_at?: string
+          entity_id?: string | null
+          entity_type?: string | null
+          event_type?: string
+          id?: string
+          observation_id?: string | null
+          organization_id?: string
+          payload?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_ai_compliance_events_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_ai_compliance_observations: {
+        Row: {
+          action_id: string | null
+          ai_category:
+            | Database["public"]["Enums"]["v2_compliance_category"]
+            | null
+          ai_confidence: string | null
+          ai_description: string | null
+          ai_rationale: string | null
+          ai_raw: Json
+          ai_requirement_id: string | null
+          ai_severity:
+            | Database["public"]["Enums"]["v2_compliance_severity"]
+            | null
+          ai_title: string
+          analysis_id: string
+          created_at: string
+          finding_id: string | null
+          id: string
+          observation_kind: string
+          organization_id: string
+          review_status: Database["public"]["Enums"]["v2_ai_review_status"]
+          reviewed_at: string | null
+          reviewed_by: string | null
+          reviewed_description: string | null
+          reviewed_requirement_id: string | null
+          reviewed_severity:
+            | Database["public"]["Enums"]["v2_compliance_severity"]
+            | null
+          reviewed_title: string | null
+          reviewer_comment: string | null
+          sort_order: number
+        }
+        Insert: {
+          action_id?: string | null
+          ai_category?:
+            | Database["public"]["Enums"]["v2_compliance_category"]
+            | null
+          ai_confidence?: string | null
+          ai_description?: string | null
+          ai_rationale?: string | null
+          ai_raw?: Json
+          ai_requirement_id?: string | null
+          ai_severity?:
+            | Database["public"]["Enums"]["v2_compliance_severity"]
+            | null
+          ai_title: string
+          analysis_id: string
+          created_at?: string
+          finding_id?: string | null
+          id?: string
+          observation_kind?: string
+          organization_id: string
+          review_status?: Database["public"]["Enums"]["v2_ai_review_status"]
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          reviewed_description?: string | null
+          reviewed_requirement_id?: string | null
+          reviewed_severity?:
+            | Database["public"]["Enums"]["v2_compliance_severity"]
+            | null
+          reviewed_title?: string | null
+          reviewer_comment?: string | null
+          sort_order?: number
+        }
+        Update: {
+          action_id?: string | null
+          ai_category?:
+            | Database["public"]["Enums"]["v2_compliance_category"]
+            | null
+          ai_confidence?: string | null
+          ai_description?: string | null
+          ai_rationale?: string | null
+          ai_raw?: Json
+          ai_requirement_id?: string | null
+          ai_severity?:
+            | Database["public"]["Enums"]["v2_compliance_severity"]
+            | null
+          ai_title?: string
+          analysis_id?: string
+          created_at?: string
+          finding_id?: string | null
+          id?: string
+          observation_kind?: string
+          organization_id?: string
+          review_status?: Database["public"]["Enums"]["v2_ai_review_status"]
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          reviewed_description?: string | null
+          reviewed_requirement_id?: string | null
+          reviewed_severity?:
+            | Database["public"]["Enums"]["v2_compliance_severity"]
+            | null
+          reviewed_title?: string | null
+          reviewer_comment?: string | null
+          sort_order?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_ai_compliance_observations_action_id_fkey"
+            columns: ["action_id"]
+            isOneToOne: false
+            referencedRelation: "v2_compliance_actions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_ai_compliance_observations_ai_requirement_id_fkey"
+            columns: ["ai_requirement_id"]
+            isOneToOne: false
+            referencedRelation: "v2_compliance_requirements"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_ai_compliance_observations_analysis_id_fkey"
+            columns: ["analysis_id"]
+            isOneToOne: false
+            referencedRelation: "v2_ai_compliance_analyses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_ai_compliance_observations_finding_id_fkey"
+            columns: ["finding_id"]
+            isOneToOne: false
+            referencedRelation: "v2_compliance_findings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_ai_compliance_observations_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "v2_ai_compliance_observations_reviewed_requirement_id_fkey"
+            columns: ["reviewed_requirement_id"]
+            isOneToOne: false
+            referencedRelation: "v2_compliance_requirements"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_ai_consents: {
+        Row: {
+          accepted_at: string
+          consent_version: string
+          id: string
+          organization_id: string
+          user_id: string
+        }
+        Insert: {
+          accepted_at?: string
+          consent_version: string
+          id?: string
+          organization_id: string
+          user_id: string
+        }
+        Update: {
+          accepted_at?: string
+          consent_version?: string
+          id?: string
+          organization_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "v2_ai_consents_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "v2_organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      v2_ai_usage_events: {
+        Row: {
+          analysis_id: string | null
+          analysis_type: Database["public"]["Enums"]["v2_ai_analysis_type"]
+          cost_estimate: number | null
+          created_at: string
+          id: string
+          input_tokens: number | null
+          latency_ms: number | null
+          model: string
+          organization_id: string
+          output_tokens: number | null
+          provider: string
+          status: string
+          total_tokens: number | null
+        }
+        Insert: {
+          analysis_id?: string | null
+          analysis_type: Database["public"]["Enums"]["v2_ai_analysis_type"]
+          cost_estimate?: number | null
+          created_at?: string
+          id?: string
+          input_tokens?: number | null
+          latency_ms?: number | null
+          model: string
+          organization_id: string
+          output_tokens?: number | null
+          provider: string
+          status: string
+          total_tokens?: number | null
+        }
+        Update: {
+          analysis_id?: string | null
+          analysis_type?: Database["public"]["Enums"]["v2_ai_analysis_type"]
+          cost_estimate?: number | null
+          created_at?: string
+          id?: string
+          input_tokens?: number | null
+          latency_ms?: number | null
+          model?: string
+          organization_id?: string
+          output_tokens?: number | null
+          provider?: string
+          status?: string
+          total_tokens?: number | null
+        }
+        Relationships: []
+      }
       v2_business_documents: {
         Row: {
           created_at: string
@@ -1031,6 +1504,7 @@ export type Database = {
       }
       v2_compliance_actions: {
         Row: {
+          ai_observation_id: string | null
           completed_at: string | null
           completion_evidence_id: string | null
           completion_note: string | null
@@ -1044,6 +1518,7 @@ export type Database = {
           priority: Database["public"]["Enums"]["v2_compliance_severity"]
           responsible_name: string | null
           responsible_user_id: string | null
+          source: string
           status: Database["public"]["Enums"]["v2_action_status"]
           title: string
           updated_at: string
@@ -1051,6 +1526,7 @@ export type Database = {
           verified_by: string | null
         }
         Insert: {
+          ai_observation_id?: string | null
           completed_at?: string | null
           completion_evidence_id?: string | null
           completion_note?: string | null
@@ -1064,6 +1540,7 @@ export type Database = {
           priority?: Database["public"]["Enums"]["v2_compliance_severity"]
           responsible_name?: string | null
           responsible_user_id?: string | null
+          source?: string
           status?: Database["public"]["Enums"]["v2_action_status"]
           title: string
           updated_at?: string
@@ -1071,6 +1548,7 @@ export type Database = {
           verified_by?: string | null
         }
         Update: {
+          ai_observation_id?: string | null
           completed_at?: string | null
           completion_evidence_id?: string | null
           completion_note?: string | null
@@ -1084,6 +1562,7 @@ export type Database = {
           priority?: Database["public"]["Enums"]["v2_compliance_severity"]
           responsible_name?: string | null
           responsible_user_id?: string | null
+          source?: string
           status?: Database["public"]["Enums"]["v2_action_status"]
           title?: string
           updated_at?: string
@@ -1538,6 +2017,8 @@ export type Database = {
       }
       v2_compliance_findings: {
         Row: {
+          ai_analysis_id: string | null
+          ai_observation_id: string | null
           assessment_id: string | null
           created_at: string
           created_by: string | null
@@ -1549,11 +2030,14 @@ export type Database = {
           requirement_id: string | null
           resolved_at: string | null
           severity: Database["public"]["Enums"]["v2_compliance_severity"]
+          source: string
           status: Database["public"]["Enums"]["v2_finding_status"]
           title: string
           updated_at: string
         }
         Insert: {
+          ai_analysis_id?: string | null
+          ai_observation_id?: string | null
           assessment_id?: string | null
           created_at?: string
           created_by?: string | null
@@ -1565,11 +2049,14 @@ export type Database = {
           requirement_id?: string | null
           resolved_at?: string | null
           severity?: Database["public"]["Enums"]["v2_compliance_severity"]
+          source?: string
           status?: Database["public"]["Enums"]["v2_finding_status"]
           title: string
           updated_at?: string
         }
         Update: {
+          ai_analysis_id?: string | null
+          ai_observation_id?: string | null
           assessment_id?: string | null
           created_at?: string
           created_by?: string | null
@@ -1581,6 +2068,7 @@ export type Database = {
           requirement_id?: string | null
           resolved_at?: string | null
           severity?: Database["public"]["Enums"]["v2_compliance_severity"]
+          source?: string
           status?: Database["public"]["Enums"]["v2_finding_status"]
           title?: string
           updated_at?: string
@@ -6846,6 +7334,27 @@ export type Database = {
         | "completed"
         | "verified"
         | "cancelled"
+      v2_ai_analysis_status:
+        | "queued"
+        | "processing"
+        | "completed"
+        | "failed"
+        | "reviewed"
+        | "archived"
+      v2_ai_analysis_type:
+        | "document_requirement"
+        | "product_label"
+        | "facility_photo"
+      v2_ai_relevance:
+        | "relevant_evidence_detected"
+        | "potentially_relevant"
+        | "insufficient_evidence"
+        | "unable_to_determine"
+      v2_ai_review_status:
+        | "pending_review"
+        | "accepted"
+        | "rejected"
+        | "modified"
       v2_allocation_status:
         | "reserved"
         | "partially_dispatched"
@@ -7287,6 +7796,31 @@ export const Constants = {
         "completed",
         "verified",
         "cancelled",
+      ],
+      v2_ai_analysis_status: [
+        "queued",
+        "processing",
+        "completed",
+        "failed",
+        "reviewed",
+        "archived",
+      ],
+      v2_ai_analysis_type: [
+        "document_requirement",
+        "product_label",
+        "facility_photo",
+      ],
+      v2_ai_relevance: [
+        "relevant_evidence_detected",
+        "potentially_relevant",
+        "insufficient_evidence",
+        "unable_to_determine",
+      ],
+      v2_ai_review_status: [
+        "pending_review",
+        "accepted",
+        "rejected",
+        "modified",
       ],
       v2_allocation_status: [
         "reserved",
