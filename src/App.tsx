@@ -67,6 +67,9 @@ import V2ComplianceAssessment from "./pages/v2/compliance/V2ComplianceAssessment
 import V2ComplianceActions from "./pages/v2/compliance/V2ComplianceActions";
 import V2ComplianceDocuments from "./pages/v2/compliance/V2ComplianceDocuments";
 import V2ComplianceAuditPack from "./pages/v2/compliance/V2ComplianceAuditPack";
+import V2ComplianceCopilot from "./pages/v2/compliance/V2ComplianceCopilot";
+import V2CopilotAnalysis from "./pages/v2/compliance/V2CopilotAnalysis";
+
 import V2FinanceLayout from "./pages/v2/finance/V2FinanceLayout";
 import V2FinanceOverview from "./pages/v2/finance/V2FinanceOverview";
 import V2FinanceRequest from "./pages/v2/finance/V2FinanceRequest";
