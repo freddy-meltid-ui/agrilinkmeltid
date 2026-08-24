@@ -1,4 +1,4 @@
-// AGRI-GRID V2 — Phase 3C.1: Compliance Copilot prompt templates (versioned).
+// AGRI-GRID V2 — Phase 3C.1B: Compliance Copilot prompt templates (versioned).
 //
 // RULES BAKED INTO EVERY PROMPT
 // * The Copilot is an assistant preparing an audit, never a regulator,
@@ -9,11 +9,15 @@
 //   VERIFIABLE from it, and use hedged wording.
 // * It must only reason against the requirement context Agri-Grid supplies —
 //   it must never invent regulatory requirements.
+// * Phase 3C.1B: every finding-like statement is an OBSERVATION carrying an
+//   observation_type, a numeric confidence, a limitation and a suggested next
+//   action. Human validation is required before anything enters compliance.
 //
 // Prompt versions are stored on each analysis for reproducibility:
-//   DOCUMENT_REQUIREMENT_V1 / LABEL_REVIEW_V1 / FACILITY_PHOTO_V1
+//   DOCUMENT_REQUIREMENT_V2 / LABEL_REVIEW_V2 / FACILITY_PHOTO_V2
 
 export type AnalysisType = "document_requirement" | "product_label" | "facility_photo";
+
 
 export type RequirementContext = {
   id: string;
