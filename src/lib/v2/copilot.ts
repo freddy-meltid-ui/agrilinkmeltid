@@ -20,14 +20,18 @@ export type AiObservation = Tables["v2_ai_compliance_observations"]["Row"];
 export type AiConfig = Tables["v2_ai_analysis_config"]["Row"];
 export type AiConsent = Tables["v2_ai_consents"]["Row"];
 export type AiEvent = Tables["v2_ai_compliance_events"]["Row"];
+export type AiReview = Tables["v2_ai_analysis_reviews"]["Row"];
 
 export type AnalysisType = Enums["v2_ai_analysis_type"];
 export type AnalysisStatus = Enums["v2_ai_analysis_status"];
 export type ReviewStatus = Enums["v2_ai_review_status"];
 export type Relevance = Enums["v2_ai_relevance"];
 export type Severity = Enums["v2_compliance_severity"];
+/** Phase 3C.1B: never "compliant"/"non compliant" — observations only. */
+export type ObservationType = Enums["v2_ai_observation_type"];
 
 export const ANALYSIS_TYPES: AnalysisType[] = ["document_requirement", "product_label", "facility_photo"];
+
 
 /** Guided capture steps per requirement family — no AI involved, pure UX. */
 export const GUIDED_PHOTO_STEPS: Record<string, string[]> = {
