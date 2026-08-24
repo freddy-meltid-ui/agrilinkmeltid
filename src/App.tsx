@@ -67,6 +67,9 @@ import V2ComplianceAssessment from "./pages/v2/compliance/V2ComplianceAssessment
 import V2ComplianceActions from "./pages/v2/compliance/V2ComplianceActions";
 import V2ComplianceDocuments from "./pages/v2/compliance/V2ComplianceDocuments";
 import V2ComplianceAuditPack from "./pages/v2/compliance/V2ComplianceAuditPack";
+import V2ComplianceCopilot from "./pages/v2/compliance/V2ComplianceCopilot";
+import V2CopilotAnalysis from "./pages/v2/compliance/V2CopilotAnalysis";
+
 import V2FinanceLayout from "./pages/v2/finance/V2FinanceLayout";
 import V2FinanceOverview from "./pages/v2/finance/V2FinanceOverview";
 import V2FinanceRequest from "./pages/v2/finance/V2FinanceRequest";
@@ -149,11 +152,14 @@ const App = () => (
               <Route path="atlas" element={<V2Atlas />} />
               <Route path="compliance" element={<V2ComplianceLayout />}>
                 <Route index element={<V2ComplianceOverview />} />
+                <Route path="copilot" element={<V2ComplianceCopilot />} />
+                <Route path="copilot/:analysisId" element={<V2CopilotAnalysis />} />
                 <Route path="actions" element={<V2ComplianceActions />} />
                 <Route path="documents" element={<V2ComplianceDocuments />} />
               </Route>
               <Route path="compliance/programs/:orgProgramId" element={<V2ComplianceAssessment />} />
               <Route path="compliance/programs/:orgProgramId/audit-pack" element={<V2ComplianceAuditPack />} />
+
               <Route path="finance" element={<V2FinanceLayout />}>
                 <Route index element={<V2FinanceOverview />} />
                 <Route path="request" element={<V2FinanceRequest />} />

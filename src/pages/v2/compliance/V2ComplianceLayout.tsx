@@ -6,9 +6,11 @@ import { cn } from "@/lib/utils";
 
 const TABS = [
   { to: "/app/compliance", end: true, labelKey: "v2.compliance.tabs.overview" },
+  { to: "/app/compliance/copilot", end: false, labelKey: "v2.compliance.tabs.copilot" },
   { to: "/app/compliance/actions", end: false, labelKey: "v2.compliance.tabs.actions" },
   { to: "/app/compliance/documents", end: false, labelKey: "v2.compliance.tabs.documents" },
 ];
+
 
 const V2ComplianceLayout = () => {
   const { t } = useTranslation();
