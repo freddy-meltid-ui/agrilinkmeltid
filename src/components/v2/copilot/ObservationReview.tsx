@@ -7,32 +7,40 @@
 //   confirmation, and a reassessment always stays required.
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Check, ChevronDown, Loader2, Pencil, Sparkles, Wrench, X } from "lucide-react";
+import { Check, ChevronDown, History, Loader2, Pencil, Sparkles, Wrench, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Progress } from "@/components/ui/progress";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import StatusBadge from "@/components/v2/ui-kit/StatusBadge";
 import { useToast } from "@/hooks/use-toast";
 import { severityTone } from "@/lib/v2/compliance";
+import { formatDate } from "@/lib/v2/finance";
 import {
+  canBecomeFinding,
+  confidenceBand,
+  confidencePercent,
   createActionFromObservation,
   createFindingFromObservation,
   effectiveDescription,
   effectiveSeverity,
   effectiveTitle,
-  observationKindTone,
+  fetchReviewHistory,
+  observationTypeTone,
   reviewObservation,
   reviewTone,
   wasModifiedByHuman,
   type AiObservation,
+  type AiReview,
   type Severity,
 } from "@/lib/v2/copilot";
 
 const SEVERITIES: Severity[] = ["low", "medium", "high", "critical"];
+
 
 const ObservationReview = ({ observation, onChanged }: { observation: AiObservation; onChanged: () => void }) => {
   const { t } = useTranslation();
