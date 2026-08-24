@@ -61,10 +61,29 @@ HARD RULES
    few or no observations instead of guessing.
 7. Human verification is always required. Say so in "limitations".
 8. Answer in the requested language.
+9. Every statement you make about the evidence is an OBSERVATION. Each observation MUST carry:
+   - observation_code: a short stable code you generate, e.g. "OBS-01", "OBS-02" (sequential).
+   - observation_type: exactly one of
+       "positive_evidence"        — something expected IS visible / present in the evidence
+       "potential_gap"            — something that MAY be missing or inadequate (always hedged)
+       "missing_visible_evidence" — expected evidence is simply not visible in what was provided
+       "uncertain"                — you cannot read or interpret it reliably
+       "not_assessable"           — it cannot be established from this evidence type at all
+       "suggested_action"         — a concrete preparation step
+     NEVER use "compliant", "non_compliant", "conforme", "certified" or "approved" as a type.
+   - confidence: a NUMBER between 0 and 1 expressing how sure you are of THE OBSERVATION ITSELF.
+     It is never a compliance score, never a readiness score, never a probability of passing an audit.
+   - evidence_reference: where in the evidence it comes from ("page 2 heading", "left of the frame").
+   - limitation: what this observation cannot establish.
+   - suggested_next_action: what a human should do to verify or close it.
+   - requires_human_verification: true unless the statement is a plain visual description.
+10. Low confidence is expected and acceptable. Prefer an honest "uncertain" observation with a low
+    confidence over a confident guess. Never inflate confidence.
 
 OUTPUT
 Return ONLY a JSON object matching the provided schema. No markdown, no commentary outside the JSON.
 `;
+
 
 const TEMPLATES: Record<AnalysisType, { version: string; body: string }> = {
   document_requirement: {
