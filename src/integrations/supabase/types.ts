@@ -6577,6 +6577,79 @@ export type Database = {
         }
         Returns: Json
       }
+      v2_ai_accept_consent: {
+        Args: { _consent_version: string; _organization_id: string }
+        Returns: Json
+      }
+      v2_ai_action_from_observation: {
+        Args: {
+          _description?: string
+          _due_date?: string
+          _observation_id: string
+          _priority?: Database["public"]["Enums"]["v2_compliance_severity"]
+          _responsible_name?: string
+          _title?: string
+        }
+        Returns: Json
+      }
+      v2_ai_create_analysis: {
+        Args: {
+          _analysis_type: Database["public"]["Enums"]["v2_ai_analysis_type"]
+          _document_version_id?: string
+          _evidence_id: string
+          _org_program_id?: string
+          _organization_id: string
+          _requirement_id?: string
+          _user_context?: string
+        }
+        Returns: Json
+      }
+      v2_ai_fail_analysis: {
+        Args: { _analysis_id: string; _code: string; _message: string }
+        Returns: undefined
+      }
+      v2_ai_finding_from_observation: {
+        Args: { _observation_id: string }
+        Returns: Json
+      }
+      v2_ai_mark_processing: {
+        Args: { _analysis_id: string; _file_bytes: number; _mime_type: string }
+        Returns: undefined
+      }
+      v2_ai_relevance_of: {
+        Args: { _v: string }
+        Returns: Database["public"]["Enums"]["v2_ai_relevance"]
+      }
+      v2_ai_review_observation: {
+        Args: {
+          _comment?: string
+          _decision: Database["public"]["Enums"]["v2_ai_review_status"]
+          _description?: string
+          _observation_id: string
+          _requirement_id?: string
+          _severity?: Database["public"]["Enums"]["v2_compliance_severity"]
+          _title?: string
+        }
+        Returns: Json
+      }
+      v2_ai_safe_category: {
+        Args: { _v: string }
+        Returns: Database["public"]["Enums"]["v2_compliance_category"]
+      }
+      v2_ai_safe_severity: {
+        Args: { _v: string }
+        Returns: Database["public"]["Enums"]["v2_compliance_severity"]
+      }
+      v2_ai_store_result: {
+        Args: {
+          _analysis_id: string
+          _model?: string
+          _result: Json
+          _usage?: Json
+        }
+        Returns: Json
+      }
+      v2_ai_validate_result: { Args: { _result: Json }; Returns: undefined }
       v2_approx_coord: { Args: { _value: number }; Returns: number }
       v2_business_completeness: {
         Args: { _organization_id: string }
