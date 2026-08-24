@@ -114,15 +114,18 @@ const ObservationReview = ({ observation, onChanged }: { observation: AiObservat
       <CardContent className="space-y-3 p-4">
         <div className="flex flex-wrap items-start justify-between gap-2">
           <div className="min-w-0">
-            <p className="text-sm font-medium">{effectiveTitle(o)}</p>
+            <p className="text-sm font-medium">
+              {o.observation_code && <span className="mr-1.5 text-muted-foreground">{o.observation_code}</span>}
+              {effectiveTitle(o)}
+            </p>
             <p className="mt-0.5 text-xs text-muted-foreground">{t("v2.copilot.aiObservationLabel")}</p>
           </div>
           <div className="flex flex-wrap items-center gap-1.5">
             <StatusBadge
-              label={t(`v2.copilot.kinds.${o.observation_kind}`, { defaultValue: o.observation_kind })}
-              tone={observationKindTone(o.observation_kind)}
+              label={t(`v2.copilot.obsTypes.${o.observation_type}`, { defaultValue: o.observation_type })}
+              tone={observationTypeTone(o.observation_type)}
             />
-            {severity && (
+            {severity && o.observation_type !== "positive_evidence" && (
               <StatusBadge
                 label={t("v2.copilot.potentialSeverity", { value: t(`v2.compliance.severity.${severity}`) })}
                 tone={severityTone(severity)}
@@ -134,11 +137,42 @@ const ObservationReview = ({ observation, onChanged }: { observation: AiObservat
 
         {effectiveDescription(o) && <p className="text-sm text-muted-foreground">{effectiveDescription(o)}</p>}
 
-        {o.ai_confidence && (
+        {o.evidence_reference && (
           <p className="text-xs text-muted-foreground">
-            {t("v2.copilot.confidenceLabel", { value: t(`v2.copilot.confidence.${o.ai_confidence}`, { defaultValue: o.ai_confidence }) })}
+            {t("v2.copilot.evidenceReference")}: {o.evidence_reference}
           </p>
         )}
+
+        {/* Confidence in the OBSERVATION — explicitly not a compliance score. */}
+        {confidencePercent(o) !== null && (
+          <div className="space-y-1">
+            <div className="flex items-center justify-between text-xs text-muted-foreground">
+              <span>
+                {t("v2.copilot.observationConfidence")} · {t(`v2.copilot.confidence.${confidenceBand(o)}`)}
+              </span>
+              <span>{confidencePercent(o)}%</span>
+            </div>
+            <Progress value={confidencePercent(o) ?? 0} className="h-1.5" />
+            <p className="text-[11px] text-muted-foreground">{t("v2.copilot.confidenceNotScore")}</p>
+          </div>
+        )}
+
+        {o.ai_limitation && (
+          <p className="text-xs text-muted-foreground">
+            {t("v2.copilot.limitation")}: {o.ai_limitation}
+          </p>
+        )}
+
+        {o.ai_suggested_next_action && (
+          <p className="text-xs text-muted-foreground">
+            {t("v2.copilot.suggestedNextAction")}: {o.ai_suggested_next_action}
+          </p>
+        )}
+
+        {o.requires_human_verification && pending && (
+          <StatusBadge label={t("v2.copilot.requiresHumanVerification")} tone="warning" />
+        )}
+
 
         {/* The AI text always remains available, even after a human edit. */}
         {wasModifiedByHuman(o) && (
