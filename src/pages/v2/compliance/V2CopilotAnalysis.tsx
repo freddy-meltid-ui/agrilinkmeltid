@@ -20,6 +20,7 @@ import { requirementTitle, type ComplianceRequirement } from "@/lib/v2/complianc
 import { supabase } from "@/integrations/supabase/client";
 import {
   analysisStatusTone,
+  cancelAnalysis,
   fetchAnalysis,
   fetchObservations,
   relevanceTone,
@@ -27,6 +28,7 @@ import {
   type AiObservation,
   type CopilotResult,
 } from "@/lib/v2/copilot";
+
 
 const List = ({ title, items }: { title: string; items: string[] }) =>
   items.length === 0 ? null : (
@@ -52,6 +54,8 @@ const V2CopilotAnalysis = () => {
   const [requirement, setRequirement] = useState<ComplianceRequirement | null>(null);
   const [loading, setLoading] = useState(true);
   const [retryOpen, setRetryOpen] = useState(false);
+  const [cancelling, setCancelling] = useState(false);
+
 
   const load = useCallback(async () => {
     if (!analysisId) return;
@@ -117,9 +121,32 @@ const V2CopilotAnalysis = () => {
               <RefreshCw className="mr-1.5 h-4 w-4" />
               {t("v2.copilot.retry")}
             </Button>
+          ) : ["draft", "queued", "processing"].includes(analysis.status) ? (
+            // An unfinished analysis is cancellable and never shown as successful.
+            <Button
+              size="sm"
+              variant="outline"
+              disabled={cancelling}
+              onClick={async () => {
+                setCancelling(true);
+                try {
+                  await cancelAnalysis(analysis.id);
+                  toast({ title: t("v2.copilot.cancelled") });
+                  await load();
+                } catch (e) {
+                  toast({ title: t("v2.common.error"), description: (e as Error).message, variant: "destructive" });
+                } finally {
+                  setCancelling(false);
+                }
+              }}
+            >
+              {cancelling && <Loader2 className="mr-1.5 h-4 w-4 animate-spin" />}
+              {t("v2.copilot.cancel")}
+            </Button>
           ) : undefined
         }
       />
+
 
       <CopilotDisclaimer className="mb-5" />
 
@@ -219,6 +246,10 @@ const V2CopilotAnalysis = () => {
           prompt: analysis.prompt_version,
         })}
       </p>
+      <p className="text-xs text-muted-foreground">
+        {t("v2.copilot.schemaVersion", { version: analysis.analysis_schema_version })}
+      </p>
+
       <p className="text-xs text-muted-foreground">
         {t("v2.copilot.assessmentUnchanged")}{" "}
         {analysis.org_program_id && (

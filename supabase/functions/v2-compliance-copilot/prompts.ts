@@ -1,4 +1,4 @@
-// AGRI-GRID V2 — Phase 3C.1: Compliance Copilot prompt templates (versioned).
+// AGRI-GRID V2 — Phase 3C.1B: Compliance Copilot prompt templates (versioned).
 //
 // RULES BAKED INTO EVERY PROMPT
 // * The Copilot is an assistant preparing an audit, never a regulator,
@@ -9,11 +9,15 @@
 //   VERIFIABLE from it, and use hedged wording.
 // * It must only reason against the requirement context Agri-Grid supplies —
 //   it must never invent regulatory requirements.
+// * Phase 3C.1B: every finding-like statement is an OBSERVATION carrying an
+//   observation_type, a numeric confidence, a limitation and a suggested next
+//   action. Human validation is required before anything enters compliance.
 //
 // Prompt versions are stored on each analysis for reproducibility:
-//   DOCUMENT_REQUIREMENT_V1 / LABEL_REVIEW_V1 / FACILITY_PHOTO_V1
+//   DOCUMENT_REQUIREMENT_V2 / LABEL_REVIEW_V2 / FACILITY_PHOTO_V2
 
 export type AnalysisType = "document_requirement" | "product_label" | "facility_photo";
+
 
 export type RequirementContext = {
   id: string;
@@ -57,67 +61,93 @@ HARD RULES
    few or no observations instead of guessing.
 7. Human verification is always required. Say so in "limitations".
 8. Answer in the requested language.
+9. Every statement you make about the evidence is an OBSERVATION. Each observation MUST carry:
+   - observation_code: a short stable code you generate, e.g. "OBS-01", "OBS-02" (sequential).
+   - observation_type: exactly one of
+       "positive_evidence"        — something expected IS visible / present in the evidence
+       "potential_gap"            — something that MAY be missing or inadequate (always hedged)
+       "missing_visible_evidence" — expected evidence is simply not visible in what was provided
+       "uncertain"                — you cannot read or interpret it reliably
+       "not_assessable"           — it cannot be established from this evidence type at all
+       "suggested_action"         — a concrete preparation step
+     NEVER use "compliant", "non_compliant", "conforme", "certified" or "approved" as a type.
+   - confidence: a NUMBER between 0 and 1 expressing how sure you are of THE OBSERVATION ITSELF.
+     It is never a compliance score, never a readiness score, never a probability of passing an audit.
+   - evidence_reference: where in the evidence it comes from ("page 2 heading", "left of the frame").
+   - limitation: what this observation cannot establish.
+   - suggested_next_action: what a human should do to verify or close it.
+   - requires_human_verification: true unless the statement is a plain visual description.
+10. Low confidence is expected and acceptable. Prefer an honest "uncertain" observation with a low
+    confidence over a confident guess. Never inflate confidence.
 
 OUTPUT
 Return ONLY a JSON object matching the provided schema. No markdown, no commentary outside the JSON.
 `;
 
+
 const TEMPLATES: Record<AnalysisType, { version: string; body: string }> = {
   document_requirement: {
-    version: "DOCUMENT_REQUIREMENT_V1",
+    version: "DOCUMENT_REQUIREMENT_V2",
     body: `${COMMON_RULES}
 TASK — DOCUMENT REVIEW AGAINST A REQUIREMENT
 Analyse the attached document as possible audit-preparation evidence.
 
-Address, in this order:
+Address, in this order, expressing each point as an observation:
 A. REQUIREMENT RELEVANCE — does the document appear to contain evidence relevant to the requirement?
    Set "requirement_relevance" to exactly one of:
      "relevant_evidence_detected" | "potentially_relevant" | "insufficient_evidence" | "unable_to_determine"
    This is advisory only and is NOT an assessment of compliance.
-B. MISSING INFORMATION — information a reviewer would expect but that is not evident
-   (e.g. a cleaning procedure with no cleaning frequency stated).
-C. DOCUMENT CONSISTENCY — title, version, date, author, approval, scope: note what appears incomplete.
-D. DATES — you MAY propose issue/expiry dates you can read, inside "extracted_dates".
+B. PRESENT ELEMENTS — expected elements you can actually read ("positive_evidence").
+C. MISSING INFORMATION — information a reviewer would expect but that is not evident, e.g. a cleaning
+   procedure with no cleaning frequency stated ("missing_visible_evidence").
+D. DOCUMENT CONSISTENCY — title, version, date, author, approval, scope: what appears incomplete
+   ("potential_gap", hedged), or unreadable ("uncertain").
+E. DATES — you MAY propose issue/expiry dates you can read, inside "extracted_dates".
    These are PROPOSALS ONLY; a human must confirm them. Never assert an official expiry date.
-E. SUGGESTED ACTIONS — concrete preparation steps.`,
+F. PREPARATION STEPS — concrete steps as "suggested_action" observations.
+If the document is unrelated to the requirement, say so plainly with "not_assessable" and a low confidence.`,
   },
   product_label: {
-    version: "LABEL_REVIEW_V1",
+    version: "LABEL_REVIEW_V2",
     body: `${COMMON_RULES}
 TASK — PRODUCT LABEL REVIEW (PREPARATION CHECKLIST)
 Analyse the attached product label artwork or photo.
 
-List which of these elements are VISIBLE, and which appear MISSING or unreadable:
-product name; ingredients list; net quantity; producer/manufacturer identity; address or contact
-information; lot / batch information; production date; expiry or best-before date; storage
-instructions; usage instructions; allergen information; origin; barcode; nutrition information.
+Check these elements: product name; ingredients list; net quantity; producer/manufacturer identity;
+address or contact information; lot / batch information; production date; expiry or best-before date;
+storage instructions; usage instructions; allergen information; origin; barcode; nutrition information.
 
+Each element you can read becomes a "positive_evidence" observation; each element you cannot see
+becomes a "missing_visible_evidence" observation; anything printed but unreadable becomes "uncertain".
 Use the wording "elements detected" / "elements potentially missing" / "points to verify".
 NEVER write that the label is approved, compliant or non compliant — Agri-Grid does not approve labels.
-Put each visible element in "observations" (kind "observation") and each element you cannot see in
-"missing_information". Add verification questions for the operator in "questions_for_operator".`,
+Add verification questions for the operator in "questions_for_operator".`,
   },
   facility_photo: {
-    version: "FACILITY_PHOTO_V1",
+    version: "FACILITY_PHOTO_V2",
     body: `${COMMON_RULES}
 TASK — FACILITY PHOTO REVIEW (SINGLE PHOTO)
 Describe observable conditions in the attached photo of a food-processing facility area
 (handwashing area, storage room, production area, cleaning-product storage, waste area, equipment,
 raw-material reception, personal protective equipment...).
 
-Return:
-- observations: observable elements, including POSITIVE observations (set "is_positive": true for those)
-- potential_gaps: potential concerns visible in the frame, always hedged
-- missing_information: visual evidence that is absent from the frame (not proof of absence in reality)
+Return, all inside "observations":
+- what IS visible and expected → "positive_evidence"
+- potential concerns visible in the frame, always hedged → "potential_gap"
+- expected visual evidence absent from the frame (NOT proof of absence in reality)
+  → "missing_visible_evidence"
+- anything you cannot read or judge from a single frame → "uncertain" or "not_assessable"
+- concrete preparation steps → "suggested_action"
+Also return:
 - questions_for_operator: e.g. "Is another hand-drying system available outside the photographed frame?"
 - suggested_next_evidence: e.g. "Take a wider photo of the handwashing station."
-- suggested_actions: concrete preparation steps
 - limitations: what a single photo cannot show (microbiological safety, water quality, actual practice,
   frequency, records, anything outside the frame)
 
 Never conclude that the facility violates any regulation.`,
   },
 };
+
 
 export function promptFor(
   analysisType: AnalysisType,
@@ -158,7 +188,11 @@ export function promptFor(
   return { version: tpl.version, system: tpl.body, user: lines.join("\n") };
 }
 
-/** Strict JSON schema — the model output is validated against this before storage. */
+/**
+ * Strict JSON schema — Phase 3C.1B structured observation contract.
+ * The model output is validated against this by the provider, then again
+ * deterministically by v2_ai_validate_result before anything is stored.
+ */
 export const RESULT_SCHEMA = {
   type: "object",
   additionalProperties: false,
@@ -166,11 +200,8 @@ export const RESULT_SCHEMA = {
     "summary",
     "requirement_relevance",
     "observations",
-    "potential_gaps",
-    "missing_information",
     "questions_for_operator",
     "suggested_next_evidence",
-    "suggested_actions",
     "extracted_dates",
     "confidence",
     "limitations",
@@ -186,52 +217,50 @@ export const RESULT_SCHEMA = {
       items: {
         type: "object",
         additionalProperties: false,
-        required: ["title", "description", "category", "potential_severity", "confidence", "rationale", "is_positive", "observable"],
+        required: [
+          "observation_code",
+          "observation_type",
+          "title",
+          "description",
+          "category",
+          "evidence_reference",
+          "confidence",
+          "suggested_severity",
+          "requires_human_verification",
+          "limitation",
+          "suggested_next_action",
+          "rationale",
+        ],
         properties: {
+          observation_code: { type: "string" },
+          observation_type: {
+            type: "string",
+            enum: [
+              "positive_evidence",
+              "potential_gap",
+              "missing_visible_evidence",
+              "uncertain",
+              "not_assessable",
+              "suggested_action",
+            ],
+          },
           title: { type: "string" },
           description: { type: "string" },
           category: { type: "string" },
-          potential_severity: { type: "string", enum: ["low", "medium", "high", "critical", "unknown"] },
-          confidence: { type: "string", enum: ["low", "medium", "high", "unknown"] },
+          evidence_reference: { type: "string" },
+          // Confidence in the observation itself — never a compliance score.
+          confidence: { type: "number", minimum: 0, maximum: 1 },
+          suggested_severity: { type: "string", enum: ["low", "medium", "high", "critical", "unknown"] },
+          requires_human_verification: { type: "boolean" },
+          limitation: { type: "string" },
+          suggested_next_action: { type: "string" },
           rationale: { type: "string" },
-          is_positive: { type: "boolean" },
-          observable: { type: "boolean" },
         },
-      },
-    },
-    potential_gaps: {
-      type: "array",
-      items: {
-        type: "object",
-        additionalProperties: false,
-        required: ["title", "description", "potential_severity"],
-        properties: {
-          title: { type: "string" },
-          description: { type: "string" },
-          potential_severity: { type: "string", enum: ["low", "medium", "high", "critical", "unknown"] },
-        },
-      },
-    },
-    missing_information: {
-      type: "array",
-      items: {
-        type: "object",
-        additionalProperties: false,
-        required: ["title", "description"],
-        properties: { title: { type: "string" }, description: { type: "string" } },
       },
     },
     questions_for_operator: { type: "array", items: { type: "string" } },
     suggested_next_evidence: { type: "array", items: { type: "string" } },
-    suggested_actions: {
-      type: "array",
-      items: {
-        type: "object",
-        additionalProperties: false,
-        required: ["title", "description"],
-        properties: { title: { type: "string" }, description: { type: "string" } },
-      },
-    },
+
     extracted_dates: {
       type: "array",
       items: {

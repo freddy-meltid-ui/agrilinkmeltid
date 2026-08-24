@@ -152,12 +152,18 @@ Deno.serve(async (req) => {
 
     // 3. Build the versioned prompt from the requirement context only.
     const c = ctx as Record<string, unknown>;
-    const { system, user } = promptFor(analysisType, {
+    const { system, user, version } = promptFor(analysisType, {
       language,
       requirement: c.requirement as never,
       program: c.program as never,
       userContext,
     });
+    // Reproducibility: record the exact prompt template + output contract used.
+    await admin
+      .from("v2_ai_compliance_analyses")
+      .update({ prompt_version: version, analysis_schema_version: "AI_OBS_SCHEMA_V2" })
+      .eq("id", analysisId);
+
 
     const dataUrl = `data:${mime};base64,${toBase64(bytes)}`;
     const filePart =
@@ -200,22 +206,39 @@ Deno.serve(async (req) => {
       return await fail("AI_INVALID_JSON", raw.slice(0, 500));
     }
 
-    // 4. Post-generation guard: soften any verdict wording that slipped through.
+    // 4. Post-generation guard: soften any verdict wording that slipped through,
+    //    and enforce the Phase 3C.1B observation contract server-side.
     result.summary = scrubVerdicts(result.summary as string, language) ?? "";
     for (const key of ["observations", "potential_gaps", "missing_information", "suggested_actions"]) {
       const arr = result[key];
       if (Array.isArray(arr)) {
-        result[key] = arr.map((item) =>
-          item && typeof item === "object"
-            ? {
-                ...item,
-                title: scrubVerdicts((item as Record<string, string>).title, language),
-                description: scrubVerdicts((item as Record<string, string>).description, language),
-              }
-            : item,
-        );
+        result[key] = arr.map((item, i) => {
+          if (!item || typeof item !== "object") return item;
+          const o = item as Record<string, unknown>;
+          const conf = typeof o.confidence === "number" ? Math.min(1, Math.max(0, o.confidence)) : undefined;
+          return {
+            ...o,
+            observation_code: (o.observation_code as string) || `OBS-${String(i + 1).padStart(2, "0")}`,
+            title: scrubVerdicts(o.title as string, language),
+            description: scrubVerdicts(o.description as string, language),
+            limitation: scrubVerdicts(o.limitation as string, language),
+            suggested_next_action: scrubVerdicts(o.suggested_next_action as string, language),
+            ...(conf === undefined ? {} : { confidence: conf }),
+            // Human validation is never optional for anything but a plain description.
+            requires_human_verification: o.requires_human_verification === false ? false : true,
+          };
+        });
       }
     }
+    // The contract requires the model to state what it could not establish.
+    if (!Array.isArray(result.limitations) || result.limitations.length === 0) {
+      result.limitations = [
+        language === "fr"
+          ? "Analyse indicative : une vérification humaine est requise, aucune conclusion de conformité n'est produite."
+          : "Advisory analysis only: human verification is required and no compliance conclusion is produced.",
+      ];
+    }
+
 
     const usage = payload?.usage ?? null;
     // 5. Deterministic schema validation happens inside v2_ai_store_result.

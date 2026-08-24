@@ -7,35 +7,43 @@
 //   confirmation, and a reassessment always stays required.
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Check, ChevronDown, Loader2, Pencil, Sparkles, Wrench, X } from "lucide-react";
+import { Check, ChevronDown, History, Loader2, Pencil, Sparkles, Wrench, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Progress } from "@/components/ui/progress";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import StatusBadge from "@/components/v2/ui-kit/StatusBadge";
 import { useToast } from "@/hooks/use-toast";
 import { severityTone } from "@/lib/v2/compliance";
+import { formatDate } from "@/lib/v2/finance";
 import {
+  canBecomeFinding,
+  confidenceBand,
+  confidencePercent,
   createActionFromObservation,
   createFindingFromObservation,
   effectiveDescription,
   effectiveSeverity,
   effectiveTitle,
-  observationKindTone,
+  fetchReviewHistory,
+  observationTypeTone,
   reviewObservation,
   reviewTone,
   wasModifiedByHuman,
   type AiObservation,
+  type AiReview,
   type Severity,
 } from "@/lib/v2/copilot";
 
 const SEVERITIES: Severity[] = ["low", "medium", "high", "critical"];
 
+
 const ObservationReview = ({ observation, onChanged }: { observation: AiObservation; onChanged: () => void }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { toast } = useToast();
   const o = observation;
   const [busy, setBusy] = useState<string | null>(null);
@@ -48,6 +56,16 @@ const ObservationReview = ({ observation, onChanged }: { observation: AiObservat
   });
   const [actionForm, setActionForm] = useState({ due_date: "", responsible_name: "" });
   const [showAction, setShowAction] = useState(false);
+  const [history, setHistory] = useState<AiReview[] | null>(null);
+
+  const loadHistory = async () => {
+    try {
+      setHistory(await fetchReviewHistory(o.id));
+    } catch {
+      setHistory([]);
+    }
+  };
+
 
   const guard = async (key: string, fn: () => Promise<void>) => {
     setBusy(key);
@@ -106,15 +124,18 @@ const ObservationReview = ({ observation, onChanged }: { observation: AiObservat
       <CardContent className="space-y-3 p-4">
         <div className="flex flex-wrap items-start justify-between gap-2">
           <div className="min-w-0">
-            <p className="text-sm font-medium">{effectiveTitle(o)}</p>
+            <p className="text-sm font-medium">
+              {o.observation_code && <span className="mr-1.5 text-muted-foreground">{o.observation_code}</span>}
+              {effectiveTitle(o)}
+            </p>
             <p className="mt-0.5 text-xs text-muted-foreground">{t("v2.copilot.aiObservationLabel")}</p>
           </div>
           <div className="flex flex-wrap items-center gap-1.5">
             <StatusBadge
-              label={t(`v2.copilot.kinds.${o.observation_kind}`, { defaultValue: o.observation_kind })}
-              tone={observationKindTone(o.observation_kind)}
+              label={t(`v2.copilot.obsTypes.${o.observation_type}`, { defaultValue: o.observation_type })}
+              tone={observationTypeTone(o.observation_type)}
             />
-            {severity && (
+            {severity && o.observation_type !== "positive_evidence" && (
               <StatusBadge
                 label={t("v2.copilot.potentialSeverity", { value: t(`v2.compliance.severity.${severity}`) })}
                 tone={severityTone(severity)}
@@ -126,11 +147,42 @@ const ObservationReview = ({ observation, onChanged }: { observation: AiObservat
 
         {effectiveDescription(o) && <p className="text-sm text-muted-foreground">{effectiveDescription(o)}</p>}
 
-        {o.ai_confidence && (
+        {o.evidence_reference && (
           <p className="text-xs text-muted-foreground">
-            {t("v2.copilot.confidenceLabel", { value: t(`v2.copilot.confidence.${o.ai_confidence}`, { defaultValue: o.ai_confidence }) })}
+            {t("v2.copilot.evidenceReference")}: {o.evidence_reference}
           </p>
         )}
+
+        {/* Confidence in the OBSERVATION — explicitly not a compliance score. */}
+        {confidencePercent(o) !== null && (
+          <div className="space-y-1">
+            <div className="flex items-center justify-between text-xs text-muted-foreground">
+              <span>
+                {t("v2.copilot.observationConfidence")} · {t(`v2.copilot.confidence.${confidenceBand(o)}`)}
+              </span>
+              <span>{confidencePercent(o)}%</span>
+            </div>
+            <Progress value={confidencePercent(o) ?? 0} className="h-1.5" />
+            <p className="text-[11px] text-muted-foreground">{t("v2.copilot.confidenceNotScore")}</p>
+          </div>
+        )}
+
+        {o.ai_limitation && (
+          <p className="text-xs text-muted-foreground">
+            {t("v2.copilot.limitation")}: {o.ai_limitation}
+          </p>
+        )}
+
+        {o.ai_suggested_next_action && (
+          <p className="text-xs text-muted-foreground">
+            {t("v2.copilot.suggestedNextAction")}: {o.ai_suggested_next_action}
+          </p>
+        )}
+
+        {o.requires_human_verification && pending && (
+          <StatusBadge label={t("v2.copilot.requiresHumanVerification")} tone="warning" />
+        )}
+
 
         {/* The AI text always remains available, even after a human edit. */}
         {wasModifiedByHuman(o) && (
@@ -227,13 +279,16 @@ const ObservationReview = ({ observation, onChanged }: { observation: AiObservat
 
           {!pending && o.review_status !== "rejected" && (
             <>
-              {!o.finding_id ? (
+              {/* A positive observation is never a finding. */}
+              {o.finding_id ? (
+                <StatusBadge label={t("v2.copilot.findingLinked")} tone="danger" />
+              ) : canBecomeFinding(o) ? (
                 <Button size="sm" variant="outline" onClick={makeFinding} disabled={busy !== null}>
                   {busy === "finding" && <Loader2 className="mr-1.5 h-4 w-4 animate-spin" />}
                   {t("v2.copilot.createFinding")}
                 </Button>
               ) : (
-                <StatusBadge label={t("v2.copilot.findingLinked")} tone="danger" />
+                <StatusBadge label={t("v2.copilot.positiveNoFinding")} tone="success" />
               )}
               {!o.action_id ? (
                 <Button size="sm" variant="outline" onClick={() => setShowAction((v) => !v)} disabled={busy !== null}>
@@ -245,6 +300,7 @@ const ObservationReview = ({ observation, onChanged }: { observation: AiObservat
               )}
             </>
           )}
+
         </div>
 
         {showAction && (
@@ -273,9 +329,36 @@ const ObservationReview = ({ observation, onChanged }: { observation: AiObservat
             </Button>
           </div>
         )}
+
+        {/* Append-only audit trail: who decided what, when. */}
+        {!pending && (
+          <Collapsible onOpenChange={(open) => open && loadHistory()}>
+            <CollapsibleTrigger className="flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground">
+              <History className="h-3.5 w-3.5" />
+              {t("v2.copilot.reviewHistory")}
+              <ChevronDown className="h-3.5 w-3.5" />
+            </CollapsibleTrigger>
+            <CollapsibleContent className="mt-2 space-y-1.5 rounded-md border border-dashed border-border p-2 text-xs text-muted-foreground">
+              {history === null ? (
+                <Loader2 className="h-3.5 w-3.5 animate-spin" />
+              ) : history.length === 0 ? (
+                <p>{t("v2.copilot.noReviewHistory")}</p>
+              ) : (
+                history.map((h) => (
+                  <div key={h.id}>
+                    <span className="font-medium">{t(`v2.copilot.review.${h.decision}`)}</span> ·{" "}
+                    {formatDate(h.reviewed_at, i18n.language)}
+                    {h.review_comment && <span> · {h.review_comment}</span>}
+                  </div>
+                ))
+              )}
+            </CollapsibleContent>
+          </Collapsible>
+        )}
       </CardContent>
     </Card>
   );
 };
+
 
 export default ObservationReview;

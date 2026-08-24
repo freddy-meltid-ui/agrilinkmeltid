@@ -20,14 +20,18 @@ export type AiObservation = Tables["v2_ai_compliance_observations"]["Row"];
 export type AiConfig = Tables["v2_ai_analysis_config"]["Row"];
 export type AiConsent = Tables["v2_ai_consents"]["Row"];
 export type AiEvent = Tables["v2_ai_compliance_events"]["Row"];
+export type AiReview = Tables["v2_ai_analysis_reviews"]["Row"];
 
 export type AnalysisType = Enums["v2_ai_analysis_type"];
 export type AnalysisStatus = Enums["v2_ai_analysis_status"];
 export type ReviewStatus = Enums["v2_ai_review_status"];
 export type Relevance = Enums["v2_ai_relevance"];
 export type Severity = Enums["v2_compliance_severity"];
+/** Phase 3C.1B: never "compliant"/"non compliant" — observations only. */
+export type ObservationType = Enums["v2_ai_observation_type"];
 
 export const ANALYSIS_TYPES: AnalysisType[] = ["document_requirement", "product_label", "facility_photo"];
+
 
 /** Guided capture steps per requirement family — no AI involved, pure UX. */
 export const GUIDED_PHOTO_STEPS: Record<string, string[]> = {
@@ -38,10 +42,26 @@ export const GUIDED_PHOTO_STEPS: Record<string, string[]> = {
   default: ["wholeArea", "closeUp", "context"],
 };
 
+export type CopilotObservationPayload = {
+  observation_code?: string;
+  observation_type?: ObservationType;
+  title?: string;
+  description?: string;
+  category?: string;
+  evidence_reference?: string;
+  /** Confidence in the observation, 0–1. Never a compliance or readiness score. */
+  confidence?: number;
+  suggested_severity?: string;
+  requires_human_verification?: boolean;
+  limitation?: string;
+  suggested_next_action?: string;
+  rationale?: string;
+};
+
 export type CopilotResult = {
   summary?: string;
   requirement_relevance?: Relevance;
-  observations?: Record<string, unknown>[];
+  observations?: CopilotObservationPayload[];
   potential_gaps?: Record<string, unknown>[];
   missing_information?: Record<string, unknown>[];
   questions_for_operator?: string[];
@@ -51,6 +71,7 @@ export type CopilotResult = {
   confidence?: string;
   limitations?: string[];
 };
+
 
 /* -------------------------------------------------------------- consent */
 
@@ -327,3 +348,58 @@ export const ACCEPTED_MIME: Record<AnalysisType, string> = {
   product_label: "application/pdf,image/jpeg,image/png,image/webp",
   facility_photo: "image/jpeg,image/png,image/webp",
 };
+
+/* ------------------------------------------ Phase 3C.1B additions */
+
+/** Append-only human-review trail for one observation. */
+export async function fetchReviewHistory(observationId: string): Promise<AiReview[]> {
+  const { data, error } = await supabase
+    .from("v2_ai_analysis_reviews")
+    .select("*")
+    .eq("observation_id", observationId)
+    .order("reviewed_at", { ascending: false });
+  if (error) throw error;
+  return data ?? [];
+}
+
+/** An analysis the operator stops is marked cancelled, never "successful". */
+export async function cancelAnalysis(analysisId: string, reason?: string | null) {
+  const { data, error } = await supabase.rpc("v2_ai_cancel_analysis", {
+    _analysis_id: analysisId,
+    _reason: reason ?? null,
+  });
+  if (error) throw error;
+  return data as unknown as { analysis_id: string; status: string };
+}
+
+export function observationTypeTone(t: ObservationType): StatusTone {
+  switch (t) {
+    case "positive_evidence":
+      return "success";
+    case "potential_gap":
+      return "warning";
+    case "missing_visible_evidence":
+      return "info";
+    case "suggested_action":
+      return "info";
+    default:
+      return "neutral";
+  }
+}
+
+/** Confidence in the OBSERVATION only. Displayed as a percentage, never as a score. */
+export function confidencePercent(o: AiObservation): number | null {
+  if (o.ai_confidence_score === null || o.ai_confidence_score === undefined) return null;
+  return Math.round(Number(o.ai_confidence_score) * 100);
+}
+
+export function confidenceBand(o: AiObservation): "low" | "medium" | "high" | null {
+  const p = confidencePercent(o);
+  if (p === null) return null;
+  return p < 40 ? "low" : p < 75 ? "medium" : "high";
+}
+
+/** A positive observation can never become a compliance finding. */
+export function canBecomeFinding(o: AiObservation): boolean {
+  return o.observation_type !== "positive_evidence" && (o.review_status === "accepted" || o.review_status === "modified");
+}

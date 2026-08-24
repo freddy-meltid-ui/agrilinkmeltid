@@ -2276,7 +2276,9 @@
         "completed": "Analysis complete",
         "failed": "Failed",
         "reviewed": "Reviewed",
-        "archived": "Archived"
+        "archived": "Archived",
+        "draft": "Draft",
+        "cancelled": "Cancelled"
       },
       "review": {
         "pending_review": "Review required",
@@ -2378,8 +2380,35 @@
         "AI_INVALID_JSON": "Unusable AI response.",
         "AI_EMPTY_RESPONSE": "Empty AI response.",
         "RESULT_REJECTED": "Result rejected by schema validation.",
-        "UNEXPECTED_ERROR": "Unexpected error."
-      }
+        "UNEXPECTED_ERROR": "Unexpected error.",
+        "POSITIVE_OBSERVATION_NOT_A_FINDING": "A positive observation cannot become a finding.",
+        "ANALYSIS_ALREADY_COMPLETED": "This analysis is already complete and cannot be rewritten.",
+        "ANALYSIS_CANCELLED": "This analysis was cancelled.",
+        "ANALYSIS_NOT_CANCELLABLE": "This analysis can no longer be cancelled.",
+        "CANCELLED_BY_USER": "Analysis cancelled by the user.",
+        "HUMAN_VALIDATION_REQUIRED": "Human validation is required before anything is created."
+      },
+      "obsTypes": {
+        "positive_evidence": "Evidence observed",
+        "potential_gap": "Potential gap",
+        "missing_visible_evidence": "Evidence not visible",
+        "uncertain": "Uncertain",
+        "not_assessable": "Not assessable",
+        "suggested_action": "Suggested action"
+      },
+      "evidenceReference": "Reference in the evidence",
+      "observationConfidence": "Confidence in the observation",
+      "confidenceNotScore": "The AI's confidence in its own observation only. It is not a compliance score and not a readiness score.",
+      "limitation": "Limitation of this observation",
+      "suggestedNextAction": "Suggested next step",
+      "requiresHumanVerification": "Human verification required",
+      "positiveNoFinding": "Positive evidence: no finding to create",
+      "reviewHistory": "Review history",
+      "noReviewHistory": "No decision recorded",
+      "cancel": "Cancel analysis",
+      "cancelled": "Analysis cancelled",
+      "statusDraftHint": "Analysis prepared but not sent.",
+      "schemaVersion": "Output contract: {{version}}"
     }
   },
   "language": {

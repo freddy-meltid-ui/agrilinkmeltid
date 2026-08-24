@@ -2276,7 +2276,9 @@
         "completed": "Analyse terminée",
         "failed": "Échec",
         "reviewed": "Revue effectuée",
-        "archived": "Archivée"
+        "archived": "Archivée",
+        "draft": "Brouillon",
+        "cancelled": "Annulée"
       },
       "review": {
         "pending_review": "Validation requise",
@@ -2378,8 +2380,35 @@
         "AI_INVALID_JSON": "Réponse de l'IA inexploitable.",
         "AI_EMPTY_RESPONSE": "Réponse vide de l'IA.",
         "RESULT_REJECTED": "Résultat refusé par la validation de schéma.",
-        "UNEXPECTED_ERROR": "Erreur inattendue."
-      }
+        "UNEXPECTED_ERROR": "Erreur inattendue.",
+        "POSITIVE_OBSERVATION_NOT_A_FINDING": "Une observation positive ne peut pas devenir une non-conformité.",
+        "ANALYSIS_ALREADY_COMPLETED": "Cette analyse est déjà terminée : elle ne peut pas être réécrite.",
+        "ANALYSIS_CANCELLED": "Cette analyse a été annulée.",
+        "ANALYSIS_NOT_CANCELLABLE": "Cette analyse ne peut plus être annulée.",
+        "CANCELLED_BY_USER": "Analyse annulée par l'utilisateur.",
+        "HUMAN_VALIDATION_REQUIRED": "Une validation humaine est requise avant toute création."
+      },
+      "obsTypes": {
+        "positive_evidence": "Élément constaté",
+        "potential_gap": "Écart potentiel",
+        "missing_visible_evidence": "Preuve non visible",
+        "uncertain": "Incertain",
+        "not_assessable": "Non évaluable",
+        "suggested_action": "Action suggérée"
+      },
+      "evidenceReference": "Référence dans la preuve",
+      "observationConfidence": "Confiance dans l'observation",
+      "confidenceNotScore": "Confiance de l'IA dans son observation uniquement. Ce n'est ni un score de conformité, ni un score de préparation.",
+      "limitation": "Limite de cette observation",
+      "suggestedNextAction": "Prochaine étape suggérée",
+      "requiresHumanVerification": "Vérification humaine requise",
+      "positiveNoFinding": "Élément positif : aucune non-conformité à créer",
+      "reviewHistory": "Historique de revue",
+      "noReviewHistory": "Aucune décision enregistrée",
+      "cancel": "Annuler l'analyse",
+      "cancelled": "Analyse annulée",
+      "statusDraftHint": "Analyse préparée mais non envoyée.",
+      "schemaVersion": "Contrat de sortie : {{version}}"
     }
   },
   "language": {
