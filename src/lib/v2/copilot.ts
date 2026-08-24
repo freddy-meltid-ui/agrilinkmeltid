@@ -42,10 +42,26 @@ export const GUIDED_PHOTO_STEPS: Record<string, string[]> = {
   default: ["wholeArea", "closeUp", "context"],
 };
 
+export type CopilotObservationPayload = {
+  observation_code?: string;
+  observation_type?: ObservationType;
+  title?: string;
+  description?: string;
+  category?: string;
+  evidence_reference?: string;
+  /** Confidence in the observation, 0–1. Never a compliance or readiness score. */
+  confidence?: number;
+  suggested_severity?: string;
+  requires_human_verification?: boolean;
+  limitation?: string;
+  suggested_next_action?: string;
+  rationale?: string;
+};
+
 export type CopilotResult = {
   summary?: string;
   requirement_relevance?: Relevance;
-  observations?: Record<string, unknown>[];
+  observations?: CopilotObservationPayload[];
   potential_gaps?: Record<string, unknown>[];
   missing_information?: Record<string, unknown>[];
   questions_for_operator?: string[];
@@ -55,6 +71,7 @@ export type CopilotResult = {
   confidence?: string;
   limitations?: string[];
 };
+
 
 /* -------------------------------------------------------------- consent */
 
