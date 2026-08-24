@@ -20,6 +20,7 @@ import { requirementTitle, type ComplianceRequirement } from "@/lib/v2/complianc
 import { supabase } from "@/integrations/supabase/client";
 import {
   analysisStatusTone,
+  cancelAnalysis,
   fetchAnalysis,
   fetchObservations,
   relevanceTone,
@@ -27,6 +28,7 @@ import {
   type AiObservation,
   type CopilotResult,
 } from "@/lib/v2/copilot";
+
 
 const List = ({ title, items }: { title: string; items: string[] }) =>
   items.length === 0 ? null : (
