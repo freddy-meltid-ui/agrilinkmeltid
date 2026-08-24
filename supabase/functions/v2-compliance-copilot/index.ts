@@ -266,7 +266,8 @@ Deno.serve(async (req) => {
     return json({
       analysis_id: analysisId,
       items: (stored as Record<string, unknown> | null)?.items ?? 0,
-      prompt_version: cfg.prompt_version,
+      prompt_version: version,
+      analysis_schema_version: "AI_OBS_SCHEMA_V2",
       model: payload?.model ?? cfg.model,
       mime_type: mime,
       result,
