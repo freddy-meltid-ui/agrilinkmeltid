@@ -258,18 +258,9 @@ export const RESULT_SCHEMA = {
         },
       },
     },
-
     questions_for_operator: { type: "array", items: { type: "string" } },
     suggested_next_evidence: { type: "array", items: { type: "string" } },
-    suggested_actions: {
-      type: "array",
-      items: {
-        type: "object",
-        additionalProperties: false,
-        required: ["title", "description"],
-        properties: { title: { type: "string" }, description: { type: "string" } },
-      },
-    },
+
     extracted_dates: {
       type: "array",
       items: {
