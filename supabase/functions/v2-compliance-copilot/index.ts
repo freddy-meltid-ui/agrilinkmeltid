@@ -152,12 +152,18 @@ Deno.serve(async (req) => {
 
     // 3. Build the versioned prompt from the requirement context only.
     const c = ctx as Record<string, unknown>;
-    const { system, user } = promptFor(analysisType, {
+    const { system, user, version } = promptFor(analysisType, {
       language,
       requirement: c.requirement as never,
       program: c.program as never,
       userContext,
     });
+    // Reproducibility: record the exact prompt template + output contract used.
+    await admin
+      .from("v2_ai_compliance_analyses")
+      .update({ prompt_version: version, analysis_schema_version: "AI_OBS_SCHEMA_V2" })
+      .eq("id", analysisId);
+
 
     const dataUrl = `data:${mime};base64,${toBase64(bytes)}`;
     const filePart =
