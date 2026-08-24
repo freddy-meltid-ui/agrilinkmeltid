@@ -117,9 +117,32 @@ const V2CopilotAnalysis = () => {
               <RefreshCw className="mr-1.5 h-4 w-4" />
               {t("v2.copilot.retry")}
             </Button>
+          ) : ["draft", "queued", "processing"].includes(analysis.status) ? (
+            // An unfinished analysis is cancellable and never shown as successful.
+            <Button
+              size="sm"
+              variant="outline"
+              disabled={cancelling}
+              onClick={async () => {
+                setCancelling(true);
+                try {
+                  await cancelAnalysis(analysis.id);
+                  toast({ title: t("v2.copilot.cancelled") });
+                  await load();
+                } catch (e) {
+                  toast({ title: t("v2.common.error"), description: (e as Error).message, variant: "destructive" });
+                } finally {
+                  setCancelling(false);
+                }
+              }}
+            >
+              {cancelling && <Loader2 className="mr-1.5 h-4 w-4 animate-spin" />}
+              {t("v2.copilot.cancel")}
+            </Button>
           ) : undefined
         }
       />
+
 
       <CopilotDisclaimer className="mb-5" />
 
