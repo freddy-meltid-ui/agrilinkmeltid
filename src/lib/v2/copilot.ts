@@ -348,3 +348,58 @@ export const ACCEPTED_MIME: Record<AnalysisType, string> = {
   product_label: "application/pdf,image/jpeg,image/png,image/webp",
   facility_photo: "image/jpeg,image/png,image/webp",
 };
+
+/* ------------------------------------------ Phase 3C.1B additions */
+
+/** Append-only human-review trail for one observation. */
+export async function fetchReviewHistory(observationId: string): Promise<AiReview[]> {
+  const { data, error } = await supabase
+    .from("v2_ai_analysis_reviews")
+    .select("*")
+    .eq("observation_id", observationId)
+    .order("reviewed_at", { ascending: false });
+  if (error) throw error;
+  return data ?? [];
+}
+
+/** An analysis the operator stops is marked cancelled, never "successful". */
+export async function cancelAnalysis(analysisId: string, reason?: string | null) {
+  const { data, error } = await supabase.rpc("v2_ai_cancel_analysis", {
+    _analysis_id: analysisId,
+    _reason: reason ?? null,
+  });
+  if (error) throw error;
+  return data as unknown as { analysis_id: string; status: string };
+}
+
+export function observationTypeTone(t: ObservationType): StatusTone {
+  switch (t) {
+    case "positive_evidence":
+      return "success";
+    case "potential_gap":
+      return "warning";
+    case "missing_visible_evidence":
+      return "info";
+    case "suggested_action":
+      return "info";
+    default:
+      return "neutral";
+  }
+}
+
+/** Confidence in the OBSERVATION only. Displayed as a percentage, never as a score. */
+export function confidencePercent(o: AiObservation): number | null {
+  if (o.ai_confidence_score === null || o.ai_confidence_score === undefined) return null;
+  return Math.round(Number(o.ai_confidence_score) * 100);
+}
+
+export function confidenceBand(o: AiObservation): "low" | "medium" | "high" | null {
+  const p = confidencePercent(o);
+  if (p === null) return null;
+  return p < 40 ? "low" : p < 75 ? "medium" : "high";
+}
+
+/** A positive observation can never become a compliance finding. */
+export function canBecomeFinding(o: AiObservation): boolean {
+  return o.observation_type !== "positive_evidence" && (o.review_status === "accepted" || o.review_status === "modified");
+}
