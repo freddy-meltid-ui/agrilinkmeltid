@@ -54,6 +54,8 @@ const V2CopilotAnalysis = () => {
   const [requirement, setRequirement] = useState<ComplianceRequirement | null>(null);
   const [loading, setLoading] = useState(true);
   const [retryOpen, setRetryOpen] = useState(false);
+  const [cancelling, setCancelling] = useState(false);
+
 
   const load = useCallback(async () => {
     if (!analysisId) return;
