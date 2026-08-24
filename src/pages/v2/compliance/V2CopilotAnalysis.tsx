@@ -247,6 +247,10 @@ const V2CopilotAnalysis = () => {
         })}
       </p>
       <p className="text-xs text-muted-foreground">
+        {t("v2.copilot.schemaVersion", { version: analysis.analysis_schema_version })}
+      </p>
+
+      <p className="text-xs text-muted-foreground">
         {t("v2.copilot.assessmentUnchanged")}{" "}
         {analysis.org_program_id && (
           <Link className="underline" to={`/app/compliance/programs/${analysis.org_program_id}`}>
