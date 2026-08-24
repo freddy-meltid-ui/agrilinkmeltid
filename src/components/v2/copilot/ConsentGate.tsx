@@ -64,10 +64,11 @@ const ConsentGate = ({
           <Button onClick={accept} disabled={saving}>
             {saving && <Loader2 className="mr-1.5 h-4 w-4 animate-spin" />}
             {t("v2.copilot.consentAccept")}
+          </Button>
         </DialogFooter>
       </DialogContent>
-
     </Dialog>
+
   );
 };
 
