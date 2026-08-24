@@ -319,9 +319,36 @@ const ObservationReview = ({ observation, onChanged }: { observation: AiObservat
             </Button>
           </div>
         )}
+
+        {/* Append-only audit trail: who decided what, when. */}
+        {!pending && (
+          <Collapsible onOpenChange={(open) => open && loadHistory()}>
+            <CollapsibleTrigger className="flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground">
+              <History className="h-3.5 w-3.5" />
+              {t("v2.copilot.reviewHistory")}
+              <ChevronDown className="h-3.5 w-3.5" />
+            </CollapsibleTrigger>
+            <CollapsibleContent className="mt-2 space-y-1.5 rounded-md border border-dashed border-border p-2 text-xs text-muted-foreground">
+              {history === null ? (
+                <Loader2 className="h-3.5 w-3.5 animate-spin" />
+              ) : history.length === 0 ? (
+                <p>{t("v2.copilot.noReviewHistory")}</p>
+              ) : (
+                history.map((h) => (
+                  <div key={h.id}>
+                    <span className="font-medium">{t(`v2.copilot.review.${h.decision}`)}</span> ·{" "}
+                    {formatDate(h.reviewed_at, i18n.language)}
+                    {h.review_comment && <span> · {h.review_comment}</span>}
+                  </div>
+                ))
+              )}
+            </CollapsibleContent>
+          </Collapsible>
+        )}
       </CardContent>
     </Card>
   );
 };
+
 
 export default ObservationReview;
