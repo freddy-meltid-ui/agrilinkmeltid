@@ -188,7 +188,11 @@ export function promptFor(
   return { version: tpl.version, system: tpl.body, user: lines.join("\n") };
 }
 
-/** Strict JSON schema — the model output is validated against this before storage. */
+/**
+ * Strict JSON schema — Phase 3C.1B structured observation contract.
+ * The model output is validated against this by the provider, then again
+ * deterministically by v2_ai_validate_result before anything is stored.
+ */
 export const RESULT_SCHEMA = {
   type: "object",
   additionalProperties: false,
@@ -196,11 +200,8 @@ export const RESULT_SCHEMA = {
     "summary",
     "requirement_relevance",
     "observations",
-    "potential_gaps",
-    "missing_information",
     "questions_for_operator",
     "suggested_next_evidence",
-    "suggested_actions",
     "extracted_dates",
     "confidence",
     "limitations",
@@ -216,41 +217,48 @@ export const RESULT_SCHEMA = {
       items: {
         type: "object",
         additionalProperties: false,
-        required: ["title", "description", "category", "potential_severity", "confidence", "rationale", "is_positive", "observable"],
+        required: [
+          "observation_code",
+          "observation_type",
+          "title",
+          "description",
+          "category",
+          "evidence_reference",
+          "confidence",
+          "suggested_severity",
+          "requires_human_verification",
+          "limitation",
+          "suggested_next_action",
+          "rationale",
+        ],
         properties: {
+          observation_code: { type: "string" },
+          observation_type: {
+            type: "string",
+            enum: [
+              "positive_evidence",
+              "potential_gap",
+              "missing_visible_evidence",
+              "uncertain",
+              "not_assessable",
+              "suggested_action",
+            ],
+          },
           title: { type: "string" },
           description: { type: "string" },
           category: { type: "string" },
-          potential_severity: { type: "string", enum: ["low", "medium", "high", "critical", "unknown"] },
-          confidence: { type: "string", enum: ["low", "medium", "high", "unknown"] },
+          evidence_reference: { type: "string" },
+          // Confidence in the observation itself — never a compliance score.
+          confidence: { type: "number", minimum: 0, maximum: 1 },
+          suggested_severity: { type: "string", enum: ["low", "medium", "high", "critical", "unknown"] },
+          requires_human_verification: { type: "boolean" },
+          limitation: { type: "string" },
+          suggested_next_action: { type: "string" },
           rationale: { type: "string" },
-          is_positive: { type: "boolean" },
-          observable: { type: "boolean" },
         },
       },
     },
-    potential_gaps: {
-      type: "array",
-      items: {
-        type: "object",
-        additionalProperties: false,
-        required: ["title", "description", "potential_severity"],
-        properties: {
-          title: { type: "string" },
-          description: { type: "string" },
-          potential_severity: { type: "string", enum: ["low", "medium", "high", "critical", "unknown"] },
-        },
-      },
-    },
-    missing_information: {
-      type: "array",
-      items: {
-        type: "object",
-        additionalProperties: false,
-        required: ["title", "description"],
-        properties: { title: { type: "string" }, description: { type: "string" } },
-      },
-    },
+
     questions_for_operator: { type: "array", items: { type: "string" } },
     suggested_next_evidence: { type: "array", items: { type: "string" } },
     suggested_actions: {
