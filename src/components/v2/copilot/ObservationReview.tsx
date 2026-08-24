@@ -269,13 +269,16 @@ const ObservationReview = ({ observation, onChanged }: { observation: AiObservat
 
           {!pending && o.review_status !== "rejected" && (
             <>
-              {!o.finding_id ? (
+              {/* A positive observation is never a finding. */}
+              {o.finding_id ? (
+                <StatusBadge label={t("v2.copilot.findingLinked")} tone="danger" />
+              ) : canBecomeFinding(o) ? (
                 <Button size="sm" variant="outline" onClick={makeFinding} disabled={busy !== null}>
                   {busy === "finding" && <Loader2 className="mr-1.5 h-4 w-4 animate-spin" />}
                   {t("v2.copilot.createFinding")}
                 </Button>
               ) : (
-                <StatusBadge label={t("v2.copilot.findingLinked")} tone="danger" />
+                <StatusBadge label={t("v2.copilot.positiveNoFinding")} tone="success" />
               )}
               {!o.action_id ? (
                 <Button size="sm" variant="outline" onClick={() => setShowAction((v) => !v)} disabled={busy !== null}>
@@ -287,6 +290,7 @@ const ObservationReview = ({ observation, onChanged }: { observation: AiObservat
               )}
             </>
           )}
+
         </div>
 
         {showAction && (
